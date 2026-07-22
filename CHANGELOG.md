@@ -20,3 +20,9 @@
 - Hardened legal move and turn handling.
 - Added user-only Undo and rules self-tests.
 - Improved iPhone status and dice layout.
+
+
+## v1.8.1 - Immersive Play
+- Compact sticky header
+- More board space
+- Larger Roll Dice button
