@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v1.3</title>
+  <title>Backgammon Coach iPhone v1.4</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -43,7 +43,7 @@ button.wide { width: 100%; margin-top: 10px; }
 .game-layout { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 18px; align-items: start; }
 .board-wrap { position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 18px 50px rgba(0,0,0,.38); background: #3d291d; }
 canvas { width: 100%; height: auto; display: block; touch-action: manipulation; }
-.turn-banner { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); padding: 8px 18px; border-radius: 999px; background: rgba(19,25,21,.86); border: 1px solid rgba(255,255,255,.25); font-weight: 800; backdrop-filter: blur(8px); }
+.turn-banner { padding: 8px 14px; border-radius: 999px; background: #294f42; color: white; border: 1px solid rgba(255,255,255,.25); font-weight: 900; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,.18); }
 .sidebar { display: grid; gap: 14px; }
 .panel { background: var(--panel); color: var(--ink); border-radius: 18px; padding: 16px; box-shadow: 0 12px 28px rgba(0,0,0,.24); }
 .panel h2 { margin: 0 0 12px; font-family: Georgia, serif; font-size: 1.25rem; }
@@ -59,6 +59,7 @@ canvas { width: 100%; height: auto; display: block; touch-action: manipulation; 
 .play-controls button { min-height:52px; padding:10px 18px; }
 .play-controls #endTurnBtn { display:none; }
 .play-controls #endTurnBtn.available { display:block; }
+.play-controls #undoBtn { background:#fff; color:var(--ink); border:1px solid #cdbda9; box-shadow:none; }
 .panel-heading { display:flex; justify-content:space-between; align-items:center; }
 .switch-label { display:flex; gap:7px; align-items:center; color:var(--muted); font-size:.9rem; }
 .coach-panel p, .lesson-panel p { line-height:1.45; color:#51473e; }
@@ -68,7 +69,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 .dialog-content { position:relative; width:min(560px,100%); max-height:85vh; overflow:auto; border-radius:18px; padding:28px; color:var(--ink); background:var(--panel); line-height:1.6; box-shadow:0 25px 80px rgba(0,0,0,.45); }
 .dialog-close { position:absolute; right:12px; top:10px; background:transparent; box-shadow:none; font-size:1.7rem; }
 @media (max-width: 980px) { .game-layout { grid-template-columns:1fr; } .sidebar { grid-template-columns:repeat(2, minmax(0,1fr)); } }
-@media (max-width: 620px) { .app-shell{padding:8px}.topbar{align-items:flex-start; flex-direction:column;gap:10px;margin-bottom:10px}.topbar p{display:none}.topbar h1{font-size:2rem}.sidebar{grid-template-columns:1fr}.top-actions{width:100%}.top-actions button{flex:1;padding:10px}.turn-banner{font-size:.8rem;top:10px}.play-controls{position:sticky;top:0;z-index:20;gap:7px;padding:8px;margin-bottom:9px}.play-controls .control-label{display:none}.die{width:46px;height:46px;font-size:1.65rem}.play-controls button{min-height:46px;padding:8px 12px;flex:1}.board-wrap{border-radius:16px} }
+@media (max-width: 620px) { .app-shell{padding:8px}.topbar{align-items:flex-start; flex-direction:column;gap:10px;margin-bottom:10px}.topbar p{display:none}.topbar h1{font-size:2rem}.sidebar{grid-template-columns:1fr}.top-actions{width:100%}.top-actions button{flex:1;padding:10px}.turn-banner{font-size:.76rem;padding:7px 10px}.play-controls{position:sticky;top:0;z-index:20;gap:7px;padding:8px;margin-bottom:9px;flex-wrap:wrap}.play-controls .control-label{display:none}.die{width:46px;height:46px;font-size:1.65rem}.play-controls button{min-height:46px;padding:8px 12px;flex:1}.play-controls .turn-banner{flex:1 1 100%;text-align:center;order:-1}.board-wrap{border-radius:16px} }
 @media (display-mode: standalone) { #launchNote { display:none !important; } }
 
   </style>
@@ -95,19 +96,20 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     </section>
 
     <section class="play-controls" aria-label="Dice and turn controls">
+      <div id="turnBanner" class="turn-banner">Your turn</div>
       <span class="control-label">Dice</span>
       <div class="dice-row">
         <div id="die1" class="die">–</div>
         <div id="die2" class="die">–</div>
       </div>
       <button id="rollBtn" class="primary">Roll dice</button>
+      <button id="undoBtn" disabled>Undo</button>
       <button id="endTurnBtn" class="secondary" disabled>Finish turn</button>
     </section>
 
     <section class="game-layout">
       <div class="board-wrap">
         <canvas id="board" width="1120" height="720" aria-label="Backgammon board"></canvas>
-        <div id="turnBanner" class="turn-banner">Your turn</div>
       </div>
 
       <aside class="sidebar">
@@ -168,7 +170,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
   const canvas = document.getElementById('board');
   const ctx = canvas.getContext('2d');
   const UI = Object.fromEntries([
-    'rollBtn','endTurnBtn','newGameBtn','rulesBtn','closeRulesBtn','rulesDialog','die1','die2',
+    'rollBtn','undoBtn','endTurnBtn','newGameBtn','rulesBtn','closeRulesBtn','rulesDialog','die1','die2',
     'humanPips','aiPips','humanBar','aiBar','humanOff','aiOff','turnBanner','coachText','hintBtn',
     'coachToggle','lessonSelect','lessonText'
   ].map(id => [id, document.getElementById(id)]));
@@ -186,6 +188,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
   let legalTargets = [];
   let hintMove = null;
   let aiTimer = null;
+  let humanMoveHistory = [];
 
   const lessons = {
     general: 'Keep checkers connected, avoid unnecessary blots, and fight for useful points.',
@@ -212,6 +215,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     state.points[23] = 2; state.points[12] = 5; state.points[7] = 3; state.points[5] = 5;
     state.points[0] = -2; state.points[11] = -5; state.points[16] = -3; state.points[18] = -5;
     selected = null; legalTargets = []; hintMove = null;
+    humanMoveHistory = [];
     setCoach('Roll the dice. I’ll highlight legal checkers and explain useful ideas.');
     updateUI(); draw();
   }
@@ -332,6 +336,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     if (state.winner || state.rolled || state.turn!==HUMAN) return;
     const a = 1 + Math.floor(Math.random()*6), b = 1 + Math.floor(Math.random()*6);
     state.dice=[a,b]; state.remaining = a===b ? [a,a,a,a] : [a,b]; state.rolled=true;
+    humanMoveHistory=[];
     selected=null; legalTargets=[]; hintMove=null;
     const moves=availableMovesNow();
     setCoach(moves.length ? explainPosition(state, HUMAN) : 'No legal move is available. Your turn will pass automatically.');
@@ -340,6 +345,8 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
   }
 
   function doHumanMove(move) {
+    clearTimeout(aiTimer);
+    humanMoveHistory.push(cloneState(state));
     state = applyMove(state, HUMAN, move);
     const idx = state.remaining.indexOf(move.die);
     if (idx>=0) state.remaining.splice(idx,1);
@@ -357,7 +364,16 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     if (aiTimer) clearTimeout(aiTimer);
     aiTimer = setTimeout(() => {
       if (state.turn === HUMAN && state.rolled && !state.winner && availableMovesNow().length === 0) endTurn();
-    }, 500);
+    }, 1400);
+  }
+
+  function undoHumanMove() {
+    if (state.turn !== HUMAN || !state.rolled || state.winner || !humanMoveHistory.length) return;
+    clearTimeout(aiTimer);
+    state = humanMoveHistory.pop();
+    selected = null; legalTargets = []; hintMove = null;
+    setCoach('Move undone. Choose a different legal move, or tap the hint button for a suggestion.');
+    updateUI(); draw();
   }
 
   function endTurn() {
@@ -366,6 +382,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
       setCoach('You still have a legal move. Backgammon requires using as many dice as possible.');
       return;
     }
+    humanMoveHistory=[];
     state.turn=AI; state.rolled=false; state.dice=[]; state.remaining=[]; selected=null; legalTargets=[];
     updateUI(); draw();
     aiTimer=setTimeout(aiTurn, 650);
@@ -535,6 +552,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     UI.humanOff.textContent=state.off[HUMAN]; UI.aiOff.textContent=state.off[AI];
     UI.die1.textContent=state.dice[0]??'–'; UI.die2.textContent=state.dice[1]??'–';
     UI.rollBtn.disabled=state.turn!==HUMAN||state.rolled||!!state.winner;
+    UI.undoBtn.disabled=state.turn!==HUMAN||!state.rolled||!!state.winner||humanMoveHistory.length===0;
     const canFinish = state.turn===HUMAN && state.rolled && !state.winner && availableMovesNow().length===0;
     UI.endTurnBtn.disabled=!canFinish;
     UI.endTurnBtn.classList.toggle('available', canFinish);
@@ -633,6 +651,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
   }
 
   UI.rollBtn.addEventListener('click',rollDice);
+  UI.undoBtn.addEventListener('click',undoHumanMove);
   UI.endTurnBtn.addEventListener('click',endTurn);
   UI.newGameBtn.addEventListener('click',newGame);
   UI.hintBtn.addEventListener('click',showHint);

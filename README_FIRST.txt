@@ -20,3 +20,9 @@ its files so it can ordinarily reopen without an internet connection.
 UPDATING
 Edit or replace the files, then deploy the folder again in Netlify. The service
 worker cache name may be increased when releasing a changed version.
+
+
+VERSION 1.4 CHANGES
+- Added Undo for the human player during the current turn.
+- Undo is disabled during computer play.
+- Moved the turn-status banner above the board so it no longer covers pip/checker areas.
