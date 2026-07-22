@@ -1,16 +1,16 @@
-Backgammon Coach v2.0.1.1.3 Doubles Gameplay Repair
-================================================================
-PASS — Version
-PASS — JS syntax
-PASS — Unique identical-die recursion
-PASS — Sequence cache
-PASS — Opening 5-5 legal starts
-PASS — Opening 5-5 four moves
-PASS — Tree controlled
-PASS — Cache version
-PASS — Flat paths
+Backgammon Coach v2.0.1.1.4 Safe Defaults Reset
+==============================================================
+PASS — Version updated
+PASS — JavaScript syntax
+PASS — Coaching defaults on
+PASS — Explain every move defaults on
+PASS — Auto-watch defaults off
+PASS — Old auto-watch reset once
+PASS — Cache updated
+PASS — Flat paths retained
 
-Opening 5-5 unique complete sequences tested: 15
-Legal opening source indices: [7, 12]
 Automated result: PASS
-Manual iPad validation remains required.
+Coaching default: ON
+Automatic Watch the Coach default: OFF
+Prior saved automatic-watch ON is reset once.
+Manual iPad gameplay validation remains required.
