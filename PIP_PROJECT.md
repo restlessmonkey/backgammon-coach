@@ -1,7 +1,7 @@
 # Pip — Your Backgammon Coach
 ## Project File
 Version 1.0
-Backgammon Coach package version: v2.0.4.1
+Backgammon Coach package version: v2.0.5.0
 
 ---
 
@@ -695,3 +695,22 @@ The defining product principles are:
 and, in the appropriate optional personality:
 
 > Great expectations.
+
+
+---
+
+## 20. Character Studio and Asset Catalog — v2.0.5.0
+
+The first reusable Pip character system is now defined.
+
+Added:
+
+- `PIP_ASSET_CATALOG.md`
+- `pip-studio.html`
+- twelve expression states
+- eight pose states
+- live Boy Pip / Girl Pip selection
+- all six approved skin tones
+- accessible live labels
+
+This is a design and preview release. Gameplay event integration remains intentionally deferred until the expressions and poses are visually reviewed and approved.

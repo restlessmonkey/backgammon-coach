@@ -1,5 +1,5 @@
 {
-  "version": "2.0.4.1",
+  "version": "2.0.5.0",
   "package_type": "GITHUB_IPHONE_FLAT_UPLOAD",
   "upload_location": "repository root",
   "required_app_files": [
@@ -16,8 +16,8 @@
     "VALIDATION_REPORT.txt",
     "SHA256SUMS.txt"
   ],
-  "created_utc": "2026-07-22T19:06:23.035383+00:00",
-  "package_name": "v2.0.4.1_Backgammon_Coach_iPhone_GitHub_FLAT_PIP_PROJECT_DOCUMENTED.zip",
+  "created_utc": "2026-07-22T19:20:00.388982+00:00",
+  "package_name": "v2.0.5.0_BackgamMON_Coach_iPhone_GitHub_FLAT_PIP_CHARACTER_STUDIO.zip",
   "default_settings": {
     "coaching_enabled": true,
     "explain_every_move": true,
@@ -101,5 +101,17 @@
       "immediate next steps"
     ],
     "runtime_changes": "None"
+  },
+  "pip_character_studio": {
+    "preview_file": "pip-studio.html",
+    "catalog_file": "PIP_ASSET_CATALOG.md",
+    "expressions": 12,
+    "poses": 8,
+    "styles": [
+      "boy",
+      "girl"
+    ],
+    "skin_tones": 6,
+    "gameplay_integration": "Deferred pending visual approval"
   }
 }

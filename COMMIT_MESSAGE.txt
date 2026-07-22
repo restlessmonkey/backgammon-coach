@@ -1,1 +1,1 @@
-Backgammon Coach v2.0.4.1 — Add canonical Pip project file
+Backgammon Coach v2.0.5.0 — Add Pip Character Studio and asset catalog
