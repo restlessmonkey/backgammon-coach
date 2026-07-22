@@ -1,1 +1,1 @@
-Backgammon Coach v2.0.5.0 — Add Pip Character Studio and asset catalog
+Backgammon Coach v2.0.5.1 — Link Pip Character Studio from Settings

@@ -1,7 +1,7 @@
 # Pip — Your Backgammon Coach
 ## Project File
 Version 1.0
-Backgammon Coach package version: v2.0.5.0
+Backgammon Coach package version: v2.0.5.1
 
 ---
 
@@ -699,7 +699,7 @@ and, in the appropriate optional personality:
 
 ---
 
-## 20. Character Studio and Asset Catalog — v2.0.5.0
+## 20. Character Studio and Asset Catalog — v2.0.5.1
 
 The first reusable Pip character system is now defined.
 
@@ -714,3 +714,19 @@ Added:
 - accessible live labels
 
 This is a design and preview release. Gameplay event integration remains intentionally deferred until the expressions and poses are visually reviewed and approved.
+
+
+---
+
+## 21. Character Studio Navigation — v2.0.5.1
+
+The Pip Character Studio is now directly accessible from the main app.
+
+Navigation path:
+
+1. Open `index.html`.
+2. Select the gear icon.
+3. Select **Open Pip Character Studio**.
+4. Use **Back to Backgammon Coach** to return.
+
+This is a navigation-only update. Gameplay and Pip behavior are unchanged.

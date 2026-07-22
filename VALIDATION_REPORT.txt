@@ -1,4 +1,4 @@
-Backgammon Coach v2.0.5.0 Pip Settings and Helpful Mode Validation
+Backgammon Coach v2.0.5.1 Pip Settings and Helpful Mode Validation
 ================================================================================
 PASS — Version updated
 PASS — JavaScript syntax
@@ -41,7 +41,7 @@ PASS — Project file includes playback and local-coach backlogs.
 PASS — Documentation-only update; runtime behavior unchanged.
 
 
-v2.0.5.0 Pip Character Studio Validation
+v2.0.5.1 Pip Character Studio Validation
 ============================================================
 PASS — Character studio exists
 PASS — Asset catalog exists
@@ -55,3 +55,15 @@ PASS — Main app preserved
 Automated result: PASS
 Runtime gameplay changes: none.
 Manual next step: open pip-studio.html and visually review every expression, pose, style, and tone.
+
+
+v2.0.5.1 Pip Character Studio Navigation Validation
+============================================================
+PASS — Studio button in index
+PASS — Studio target linked
+PASS — Return link present
+PASS — Studio file retained
+PASS — Project file updated
+PASS — Main app retained
+Automated result: PASS
+Runtime gameplay changes: none.
