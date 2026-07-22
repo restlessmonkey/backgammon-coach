@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v2.0.1.1.2</title>
+  <title>Backgammon Coach iPhone v2.0.1.1.3</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -103,7 +103,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 @media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
 
 
-/* v2.0.1.1.2 Immersive Play */
+/* v2.0.1.1.3 Immersive Play */
 .topbar,.play-controls,.coach-panel{transition:all .22s ease}
 body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
 body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
@@ -154,7 +154,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   
 
-/* v2.0.1.1.2 Victory Celebration */
+/* v2.0.1.1.3 Victory Celebration */
 .victory-celebration{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden;background:rgba(8,12,10,.08);opacity:0;transition:opacity .18s ease}
 .victory-celebration.active{opacity:1}
 .victory-canvas{width:100%;height:100%;display:block}
@@ -164,7 +164,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media (prefers-reduced-motion:reduce){.victory-celebration,.victory-banner{transition:none}}
 
 
-/* v2.0.1.1.2 Explain Every Move */
+/* v2.0.1.1.3 Explain Every Move */
 .coach-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
 .coach-settings label{display:grid;gap:4px;color:var(--muted);font-size:.76rem;font-weight:800}
 .move-rating{margin:10px 0;padding:11px;border-radius:12px;border:1px solid #d6c4ae;background:#fffaf2}
@@ -192,7 +192,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.coach-settings{grid-template-columns:1fr}.risk-row{grid-template-columns:64px 1fr 30px}}
 
 
-/* v2.0.1.1.2 Animated Board Hints */
+/* v2.0.1.1.3 Animated Board Hints */
 .visual-hint-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .visual-hint-controls button{margin:0;box-shadow:none}
 .visual-hint-status{margin-top:8px;padding:8px 10px;border-radius:10px;background:#e7f0eb;color:#294f42;font-weight:800;font-size:.8rem}
@@ -200,7 +200,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.visual-hint-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.1.1.2 Watch the Coach Think */
+/* v2.0.1.1.3 Watch the Coach Think */
 .think-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .think-controls button{margin:0;box-shadow:none}
 .think-panel{margin-top:9px;padding:10px;border-radius:12px;background:#f6ead8;border:1px solid #d8c5ab}
@@ -215,7 +215,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.think-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.1.1.2 verified engine controls */
+/* v2.0.1.1.3 verified engine controls */
 .engine-panel{margin:10px 0;padding:10px;border-radius:12px;border:1px solid #d8c5ab;background:#fffaf2}
 .engine-panel h3{margin:0 0 8px;font-size:.95rem}
 .engine-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -246,10 +246,10 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v2.0.1.1.2</span>
+          <span class="version-badge" id="versionBadge">v2.0.1.1.3</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v2.0.1.1.2</div>
+        <div class="version-note">v2.0.1.1.3</div>
       </div>
       <div class="top-actions">
         <button id="newGameBtn">New game</button>
@@ -360,7 +360,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
             <div id="favoriteLessons" class="favorite-list"></div>
           </details>
           <div id="coachReport" class="coach-report" hidden></div>
-          <div class="coach-disclaimer">v2.0.1.1.2 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. The local evaluator remains available solely as a clearly marked teaching fallback.</div>
+          <div class="coach-disclaimer">v2.0.1.1.3 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. The local evaluator remains available solely as a clearly marked teaching fallback.</div>
           </div>
         </section>
 
@@ -493,6 +493,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   };
 
   function newGame() {
+    legalSequenceCache.clear();
     clearTimeout(aiTimer);
     stopVictoryCelebration();
     celebrationShownForGame=false;
@@ -593,29 +594,82 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     return n;
   }
 
+  const legalSequenceCache = new Map();
+  const LEGAL_SEQUENCE_CACHE_LIMIT = 250;
+
+  function legalSequenceCacheKey(s, player, dice) {
+    return [
+      player,
+      dice.slice().sort((a,b)=>a-b).join(','),
+      s.points.join(','),
+      s.bar[HUMAN], s.bar[AI],
+      s.off[HUMAN], s.off[AI]
+    ].join('|');
+  }
+
+  function cloneSequenceList(seqs) {
+    return seqs.map(seq=>seq.map(move=>({...move})));
+  }
+
   function allSequences(s, player, dice) {
+    const cacheKey=legalSequenceCacheKey(s,player,dice);
+    const cached=legalSequenceCache.get(cacheKey);
+    if(cached) return cloneSequenceList(cached);
+
     const results = [];
     function walk(cur, left, seq) {
       if (!left.length) { results.push(seq); return; }
+
       let progressed = false;
+      const triedDice = new Set();
+
+      // Identical dice are indistinguishable. Processing every copy separately
+      // creates factorial duplicate branches (especially for 5-5 and 6-6),
+      // which can freeze Safari before the player can tap a checker.
       for (let i=0;i<left.length;i++) {
         const die = left[i];
+        if(triedDice.has(die)) continue;
+        triedDice.add(die);
+
         const moves = legalSingleMoves(cur, player, die);
+        const nextLeft=[...left];
+        nextLeft.splice(i,1);
+
         for (const move of moves) {
           progressed = true;
-          walk(applyMove(cur, player, move), left.filter((_,idx)=>idx!==i), [...seq, move]);
+          walk(applyMove(cur, player, move), nextLeft, [...seq, move]);
         }
       }
       if (!progressed) results.push(seq);
     }
+
     walk(s, dice, []);
+
     const maxLen = Math.max(0, ...results.map(r=>r.length));
     let filtered = results.filter(r=>r.length===maxLen);
+
     if (dice.length===2 && dice[0]!==dice[1] && maxLen===1) {
       const high = Math.max(...dice);
       if (filtered.some(seq=>seq[0]?.die===high)) filtered = filtered.filter(seq=>seq[0]?.die===high);
     }
-    return filtered;
+
+    // Remove paths that are textually identical. This also prevents the coach
+    // from evaluating the same complete turn repeatedly.
+    const unique = [];
+    const seen = new Set();
+    for(const seq of filtered){
+      const key=seq.map(m=>`${m.from}>${m.to}:${m.die}`).join('|');
+      if(seen.has(key)) continue;
+      seen.add(key);
+      unique.push(seq);
+    }
+
+    if(legalSequenceCache.size>=LEGAL_SEQUENCE_CACHE_LIMIT){
+      const oldest=legalSequenceCache.keys().next().value;
+      legalSequenceCache.delete(oldest);
+    }
+    legalSequenceCache.set(cacheKey,cloneSequenceList(unique));
+    return unique;
   }
 
   function runCoreRulesTests() {
@@ -654,6 +708,22 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       const s={points:Array(24).fill(0),bar:{[HUMAN]:0,[AI]:0},off:{[HUMAN]:14,[AI]:0},turn:HUMAN,dice:[],remaining:[],rolled:true,winner:null};
       s.points[5]=1; return Math.max(...allSequences(s,HUMAN,[1,1,1,1]).map(x=>x.length))===4;
     });
+    test('Opening 5-5 exposes legal starting checkers',()=>{
+      const s={points:Array(24).fill(0),bar:{[HUMAN]:0,[AI]:0},off:{[HUMAN]:0,[AI]:0},turn:HUMAN,dice:[5,5],remaining:[5,5,5,5],rolled:true,winner:null};
+      s.points[23]=2;s.points[12]=5;s.points[7]=3;s.points[5]=5;
+      s.points[0]=-2;s.points[11]=-5;s.points[16]=-3;s.points[18]=-5;
+      const seqs=allSequences(s,HUMAN,[5,5,5,5]);
+      const starts=new Set(seqs.filter(q=>q.length===4).map(q=>q[0]?.from));
+      return seqs.length>0 && starts.has(12) && starts.has(7);
+    });
+    test('Opening 5-5 duplicate paths are controlled',()=>{
+      const s={points:Array(24).fill(0),bar:{[HUMAN]:0,[AI]:0},off:{[HUMAN]:0,[AI]:0},turn:HUMAN,dice:[5,5],remaining:[5,5,5,5],rolled:true,winner:null};
+      s.points[23]=2;s.points[12]=5;s.points[7]=3;s.points[5]=5;
+      s.points[0]=-2;s.points[11]=-5;s.points[16]=-3;s.points[18]=-5;
+      const seqs=allSequences(s,HUMAN,[5,5,5,5]);
+      const keys=seqs.map(q=>q.map(m=>`${m.from}>${m.to}:${m.die}`).join('|'));
+      return keys.length===new Set(keys).size && keys.length<500;
+    });
     test('Only playable die is retained when the other is blocked',()=>{
       const s={points:Array(24).fill(0),bar:{[HUMAN]:1,[AI]:0},off:{[HUMAN]:14,[AI]:0},turn:HUMAN,dice:[],remaining:[],rolled:true,winner:null};
       s.points[18]=-2; // blocks die 6 entry; die 5 enters point 20
@@ -661,7 +731,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v2.0.1.1.2 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v2.0.1.1.3 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -1040,7 +1110,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     if(base.length<=1) return base;
     // Full opponent-response expectation for the most plausible candidates.
     // The cap protects iPhone responsiveness in unusually large move trees.
-    const cap=Math.min(base.length, dice.length>2?6:10);
+    const cap=Math.min(base.length, dice.length>2?3:10);
     for(let i=0;i<cap;i++){
       const reply=expectedOpponentReplyValue(base[i].state,player);
       base[i].replyAdjustedScore=reply.value;
@@ -1640,7 +1710,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     }
     if(Number.isInteger(target) && owner(state.points[target])===HUMAN) {
       const options=moves.filter(m=>m.from===target);
-      if(options.length){ selected=target; legalTargets=options; draw(); }
+      if(options.length){ selected=target; legalTargets=options; setCoach(`Selected point ${pointNumber(target,HUMAN)}. Tap a yellow destination to move.`); draw(); }
       else setCoach('That checker has no legal move with the remaining dice.');
     }
   }
@@ -1717,7 +1787,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
         coachThink.timers.push(t2);
       });
       coachThink.timers.push(t2);
-    },450);
+    },1100);
     coachThink.timers.push(t);
   }
 

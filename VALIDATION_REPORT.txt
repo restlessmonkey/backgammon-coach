@@ -1,12 +1,16 @@
-Backgammon Coach v2.0.1.1.2 Default Coaching Validation
-==================================================================
-PASS — Version updated
-PASS — Cache updated
-PASS — JavaScript syntax
-PASS — Coach-related checkboxes found
-PASS — Coach-related checkboxes default checked
-PASS — Flat icon paths retained
+Backgammon Coach v2.0.1.1.3 Doubles Gameplay Repair
+================================================================
+PASS — Version
+PASS — JS syntax
+PASS — Unique identical-die recursion
+PASS — Sequence cache
+PASS — Opening 5-5 legal starts
+PASS — Opening 5-5 four moves
+PASS — Tree controlled
+PASS — Cache version
+PASS — Flat paths
 
+Opening 5-5 unique complete sequences tested: 15
+Legal opening source indices: [7, 12]
 Automated result: PASS
-Fresh-install defaults: coaching ON; automatic Watch the Coach ON.
-Existing localStorage preferences remain authoritative when present.
+Manual iPad validation remains required.

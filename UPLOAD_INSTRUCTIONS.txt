@@ -1,4 +1,4 @@
-BACKGAMMON COACH v2.0.1.1.2
+BACKGAMMON COACH v2.0.1.1.3
 IPHONE GITHUB FLAT-UPLOAD DEPLOYMENT PACKAGE
 
 WHY THIS PACKAGE EXISTS
@@ -32,7 +32,7 @@ Because the prior service worker may remain cached:
 5. Reopen the Pages address and add it to the Home Screen again.
 
 EXPECTED VERSION
-v2.0.1.1.2
+v2.0.1.1.3
 
 COACH MODE
 Select:
@@ -42,7 +42,15 @@ WINDOWS
 No Windows computer is required for this local coach mode.
 
 
-DEFAULT BEHAVIOR IN v2.0.1.1.2
+DEFAULT BEHAVIOR IN v2.0.1.1.3
 - Coaching is ON for a fresh install.
 - Automatically Watch the Coach every turn is ON for a fresh install.
 - A user's previously saved choices are preserved.
+
+
+v2.0.1.1.3 GAMEPLAY REPAIR
+- Prevents duplicate factorial expansion for doubles.
+- Adds legal sequence caching.
+- Keeps opening 5-5 responsive.
+- Delays automatic coach analysis long enough for immediate board input.
+- Reduces advanced doubles lookahead candidates from 6 to 3.
