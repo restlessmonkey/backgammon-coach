@@ -1,16 +1,16 @@
-Backgammon Coach v2.0.1.1.4 Safe Defaults Reset
-==============================================================
+Backgammon Coach v2.0.1.1.6 Stack and Tap Repair
+================================================================
 PASS — Version updated
 PASS — JavaScript syntax
-PASS — Coaching defaults on
-PASS — Explain every move defaults on
-PASS — Auto-watch defaults off
-PASS — Old auto-watch reset once
+PASS — Score comparison is nonrecursive
+PASS — Analysis depth guard
+PASS — Safe static fallback
+PASS — Direct yellow target handler
+PASS — Generous iPad radius
 PASS — Cache updated
+PASS — Safe defaults retained
 PASS — Flat paths retained
 
 Automated result: PASS
-Coaching default: ON
-Automatic Watch the Coach default: OFF
-Prior saved automatic-watch ON is reset once.
-Manual iPad gameplay validation remains required.
+Automatic Watch the Coach remains OFF by default.
+Manual iPad move validation remains required.

@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v2.0.1.1.4</title>
+  <title>Backgammon Coach iPhone v2.0.1.1.6</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -103,7 +103,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 @media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
 
 
-/* v2.0.1.1.4 Immersive Play */
+/* v2.0.1.1.6 Immersive Play */
 .topbar,.play-controls,.coach-panel{transition:all .22s ease}
 body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
 body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
@@ -154,7 +154,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   
 
-/* v2.0.1.1.4 Victory Celebration */
+/* v2.0.1.1.6 Victory Celebration */
 .victory-celebration{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden;background:rgba(8,12,10,.08);opacity:0;transition:opacity .18s ease}
 .victory-celebration.active{opacity:1}
 .victory-canvas{width:100%;height:100%;display:block}
@@ -164,7 +164,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media (prefers-reduced-motion:reduce){.victory-celebration,.victory-banner{transition:none}}
 
 
-/* v2.0.1.1.4 Explain Every Move */
+/* v2.0.1.1.6 Explain Every Move */
 .coach-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
 .coach-settings label{display:grid;gap:4px;color:var(--muted);font-size:.76rem;font-weight:800}
 .move-rating{margin:10px 0;padding:11px;border-radius:12px;border:1px solid #d6c4ae;background:#fffaf2}
@@ -192,7 +192,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.coach-settings{grid-template-columns:1fr}.risk-row{grid-template-columns:64px 1fr 30px}}
 
 
-/* v2.0.1.1.4 Animated Board Hints */
+/* v2.0.1.1.6 Animated Board Hints */
 .visual-hint-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .visual-hint-controls button{margin:0;box-shadow:none}
 .visual-hint-status{margin-top:8px;padding:8px 10px;border-radius:10px;background:#e7f0eb;color:#294f42;font-weight:800;font-size:.8rem}
@@ -200,7 +200,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.visual-hint-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.1.1.4 Watch the Coach Think */
+/* v2.0.1.1.6 Watch the Coach Think */
 .think-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .think-controls button{margin:0;box-shadow:none}
 .think-panel{margin-top:9px;padding:10px;border-radius:12px;background:#f6ead8;border:1px solid #d8c5ab}
@@ -215,7 +215,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.think-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.1.1.4 verified engine controls */
+/* v2.0.1.1.6 verified engine controls */
 .engine-panel{margin:10px 0;padding:10px;border-radius:12px;border:1px solid #d8c5ab;background:#fffaf2}
 .engine-panel h3{margin:0 0 8px;font-size:.95rem}
 .engine-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -246,10 +246,10 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v2.0.1.1.4</span>
+          <span class="version-badge" id="versionBadge">v2.0.1.1.6</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v2.0.1.1.4</div>
+        <div class="version-note">v2.0.1.1.6</div>
       </div>
       <div class="top-actions">
         <button id="newGameBtn">New game</button>
@@ -360,7 +360,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
             <div id="favoriteLessons" class="favorite-list"></div>
           </details>
           <div id="coachReport" class="coach-report" hidden></div>
-          <div class="coach-disclaimer">v2.0.1.1.4 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. The local evaluator remains available solely as a clearly marked teaching fallback.</div>
+          <div class="coach-disclaimer">v2.0.1.1.6 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. The local evaluator remains available solely as a clearly marked teaching fallback.</div>
           </div>
         </section>
 
@@ -738,7 +738,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v2.0.1.1.4 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v2.0.1.1.6 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -1112,32 +1112,63 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     return {value:weightTotal?total/weightTotal:advancedStaticEvaluate(after,player),replySamples};
   }
 
+  let localCoachAnalysisDepth=0;
+  const MAX_LOCAL_COACH_ANALYSIS_DEPTH=1;
+
   function rankSequences(s, player, dice) {
     const base=rankSequencesStatic(s,player,dice);
     if(base.length<=1) return base;
-    // Full opponent-response expectation for the most plausible candidates.
-    // The cap protects iPhone responsiveness in unusually large move trees.
-    const cap=Math.min(base.length, dice.length>2?3:10);
-    for(let i=0;i<cap;i++){
-      const reply=expectedOpponentReplyValue(base[i].state,player);
-      base[i].replyAdjustedScore=reply.value;
-      base[i].replySamples=reply.replySamples;
-      base[i].score=base[i].staticScore*.30+reply.value*.70;
-      base[i].features.lookahead=true;
+
+    // Guard against accidental nested coach analysis. Gameplay must remain
+    // authoritative even if an explanation or comparison requests another
+    // ranking while a ranking is already in progress.
+    if(localCoachAnalysisDepth>=MAX_LOCAL_COACH_ANALYSIS_DEPTH){
+      base.forEach((r,i)=>{
+        r.score=r.staticScore;
+        r.replyAdjustedScore=null;
+        r.features.lookahead=false;
+        r.engineRank=i+1;
+        r.engineExplanation='Static local evaluation used to protect gameplay responsiveness.';
+      });
+      return base;
     }
-    // Candidates outside the cap receive a conservative penalty so a superficially
-    // attractive but unexamined move cannot leapfrog a fully analyzed move.
-    for(let i=cap;i<base.length;i++){
-      base[i].replyAdjustedScore=null;
-      base[i].score=base[i].staticScore-18;
-      base[i].features.lookahead=false;
+
+    localCoachAnalysisDepth++;
+    try{
+      const cap=Math.min(base.length, dice.length>2?2:6);
+      for(let i=0;i<cap;i++){
+        const reply=expectedOpponentReplyValue(base[i].state,player);
+        base[i].replyAdjustedScore=reply.value;
+        base[i].replySamples=reply.replySamples;
+        base[i].score=base[i].staticScore*.35+reply.value*.65;
+        base[i].features.lookahead=true;
+      }
+      for(let i=cap;i<base.length;i++){
+        base[i].replyAdjustedScore=null;
+        base[i].score=base[i].staticScore-18;
+        base[i].features.lookahead=false;
+      }
+      base.sort((a,b)=>b.score-a.score || b.staticScore-a.staticScore || sequenceNotation(a.seq).localeCompare(sequenceNotation(b.seq)));
+      return base;
+    } catch(error){
+      console.error('Advanced local coach lookahead failed; using static fallback.',error);
+      base.forEach((r,i)=>{
+        r.score=r.staticScore;
+        r.replyAdjustedScore=null;
+        r.features.lookahead=false;
+        r.engineRank=i+1;
+        r.engineExplanation='Advanced lookahead was unavailable, so gameplay continued with the safe local evaluator.';
+      });
+      return base;
+    } finally {
+      localCoachAnalysisDepth=Math.max(0,localCoachAnalysisDepth-1);
     }
-    base.sort((a,b)=>b.score-a.score || b.staticScore-a.staticScore || sequenceNotation(a.seq).localeCompare(sequenceNotation(b.seq)));
-    return base;
   }
 
   function scoreSequence(s,player,seq) {
-    return rankSequences(s,player,seq.map(m=>m.die)).find(r=>sequenceNotation(r.seq)===sequenceNotation(seq)) || scoreSequenceStatic(s,player,seq);
+    // Comparisons and move ratings must never recursively launch the complete
+    // opponent-response analyzer. Use the deterministic static scorer here.
+    return scoreSequenceStatic(s,player,seq);
   }
 
   function bestSequence(s, player, dice) {
@@ -1532,8 +1563,8 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       UI.animateBestHintBtn.disabled=true;
       UI.watchCoachThinkBtn.disabled=true;
       UI.hintResults.innerHTML='';
-      setCoach(`Grandmaster analysis unavailable: ${error.message} Connect a GNU Backgammon service, or deliberately choose the clearly labeled advanced local coach.`);
-      updateEngineStatus(`Grandmaster analysis unavailable: ${error.message}`,'bad');
+      setCoach(`Coach analysis unavailable: ${error.message}. Gameplay remains available. Connect a GNU Backgammon service, or deliberately choose the clearly labeled advanced local coach.`);
+      updateEngineStatus(`Coach analysis unavailable: ${error.message}. Gameplay remains available.`,'bad');
       return [];
     }
     if (!ranked.length || !ranked[0].seq.length) { setCoach('There is no legal move with the remaining dice.'); UI.hintResults.innerHTML=''; return []; }
@@ -1703,29 +1734,74 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   }
 
   let lastTouchAt = 0;
+
+  function boardCoordinates(clientX,clientY){
+    const r=canvas.getBoundingClientRect();
+    return {
+      x:(clientX-r.left)*W/r.width,
+      y:(clientY-r.top)*H/r.height
+    };
+  }
+
+  function directLegalTargetAt(x,y){
+    if(selected===null || !legalTargets.length) return null;
+    let best=null, bestDistance=Infinity;
+    for(const move of legalTargets){
+      if(move.to==='off'){
+        if(x>=playRight && y>=H/2-40) return move;
+        continue;
+      }
+      const q=pointCenter(move.to);
+      const cy=q.top?H/2-48:H/2+48;
+      const distance=Math.hypot(x-q.x,y-cy);
+      if(distance<=Math.max(58,checkerR*2.4) && distance<bestDistance){
+        best=move;
+        bestDistance=distance;
+      }
+    }
+    return best;
+  }
+
   function handleBoardInput(clientX, clientY) {
     if(state.turn!==HUMAN || !state.rolled || state.winner) return;
-    const r=canvas.getBoundingClientRect();
-    const x=(clientX-r.left)*W/r.width, y=(clientY-r.top)*H/r.height;
+    const {x,y}=boardCoordinates(clientX,clientY);
+
+    // The visible yellow destination is the primary iPad touch target.
+    const directMove=directLegalTargetAt(x,y);
+    if(directMove){
+      doHumanMove(directMove);
+      return;
+    }
+
     const target=hitTest(x,y), moves=availableMovesNow();
     if(selected!==null) {
       const match=legalTargets.find(m=>m.to===target || (m.to==='off'&&target==='off'));
       if(match){ doHumanMove(match); return; }
     }
     if(target==='bar' && state.bar[HUMAN]>0) {
-      selected='bar'; legalTargets=moves.filter(m=>m.from==='bar'); draw(); return;
+      selected='bar';
+      legalTargets=moves.filter(m=>m.from==='bar');
+      setCoach(legalTargets.length?'Selected the bar checker. Tap a yellow destination.':'No legal bar entry with the remaining dice.');
+      draw();
+      return;
     }
     if(Number.isInteger(target) && owner(state.points[target])===HUMAN) {
       const options=moves.filter(m=>m.from===target);
-      if(options.length){ selected=target; legalTargets=options; setCoach(`Selected point ${pointNumber(target,HUMAN)}. Tap a yellow destination to move.`); draw(); }
-      else setCoach('That checker has no legal move with the remaining dice.');
+      if(options.length){
+        selected=target;
+        legalTargets=options;
+        setCoach(`Selected point ${pointNumber(target,HUMAN)}. Tap a yellow destination to move.`);
+        draw();
+      } else {
+        setCoach('That checker has no legal move with the remaining dice.');
+      }
     }
   }
 
   canvas.addEventListener('touchend', (e)=>{
     if(!e.changedTouches || !e.changedTouches.length) return;
     e.preventDefault();
-    lastTouchAt = Date.now();
+    lastTouchAt=Date.now();
     const t=e.changedTouches[0];
     handleBoardInput(t.clientX,t.clientY);
   }, {passive:false});
@@ -1867,8 +1943,8 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     try{
       ranked=(preRanked || await getCoachRankings(state,HUMAN,state.remaining)).slice(0,3);
     }catch(error){
-      setCoach(`Grandmaster analysis unavailable: ${error.message}`);
-      updateEngineStatus(`Grandmaster analysis unavailable: ${error.message}`,'bad');
+      setCoach(`Coach analysis unavailable: ${error.message}. Gameplay remains available.`);
+      updateEngineStatus(`Coach analysis unavailable: ${error.message}. Gameplay remains available.`,'bad');
       return;
     }
     if(!ranked.length){

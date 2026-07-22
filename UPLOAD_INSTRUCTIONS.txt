@@ -1,4 +1,4 @@
-BACKGAMMON COACH v2.0.1.1.4
+BACKGAMMON COACH v2.0.1.1.6
 IPHONE GITHUB FLAT-UPLOAD DEPLOYMENT PACKAGE
 
 WHY THIS PACKAGE EXISTS
@@ -32,7 +32,7 @@ Because the prior service worker may remain cached:
 5. Reopen the Pages address and add it to the Home Screen again.
 
 EXPECTED VERSION
-v2.0.1.1.4
+v2.0.1.1.6
 
 COACH MODE
 Select:
@@ -42,13 +42,13 @@ WINDOWS
 No Windows computer is required for this local coach mode.
 
 
-DEFAULT BEHAVIOR IN v2.0.1.1.4
+DEFAULT BEHAVIOR IN v2.0.1.1.6
 - Coaching is ON for a fresh install.
 - Automatically Watch the Coach every turn is ON for a fresh install.
 - A user's previously saved choices are preserved.
 
 
-v2.0.1.1.4 GAMEPLAY REPAIR
+v2.0.1.1.6 GAMEPLAY REPAIR
 - Prevents duplicate factorial expansion for doubles.
 - Adds legal sequence caching.
 - Keeps opening 5-5 responsive.
@@ -56,9 +56,17 @@ v2.0.1.1.4 GAMEPLAY REPAIR
 - Reduces advanced doubles lookahead candidates from 6 to 3.
 
 
-v2.0.1.1.4 SAFE DEFAULTS RESET
+v2.0.1.1.6 SAFE DEFAULTS RESET
 - Coaching defaults ON.
 - Explain Every Move defaults ON.
 - Automatically Watch the Coach defaults OFF.
 - The first launch clears the earlier saved auto-watch ON setting once.
 - Automatic analysis cannot begin while a checker or destination is selected.
+
+
+v2.0.1.1.6 STACK AND DESTINATION-TAP REPAIR
+- Prevents move-rating code from recursively launching full coach analysis.
+- Adds a recursion guard and safe static fallback.
+- Reduces mobile lookahead workload.
+- Makes each yellow destination circle a generous direct iPad touch target.
+- Gameplay continues even if advanced coach analysis fails.

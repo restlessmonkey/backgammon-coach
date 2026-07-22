@@ -1,5 +1,5 @@
 {
-  "version": "2.0.1.1.4",
+  "version": "2.0.1.1.6",
   "package_type": "GITHUB_IPHONE_FLAT_UPLOAD",
   "upload_location": "repository root",
   "required_app_files": [
@@ -16,8 +16,8 @@
     "VALIDATION_REPORT.txt",
     "SHA256SUMS.txt"
   ],
-  "created_utc": "2026-07-22T14:18:49.609262+00:00",
-  "package_name": "v2.0.1.1.4_Backgammon_Coach_iPhone_GitHub_FLAT_SAFE_DEFAULTS.zip",
+  "created_utc": "2026-07-22T14:27:24.916895+00:00",
+  "package_name": "v2.0.1.1.6_Backgammon_Coach_iPhone_GitHub_FLAT_STACK_AND_TAP_FIX.zip",
   "default_settings": {
     "coaching_enabled": true,
     "explain_every_move": true,
@@ -25,15 +25,16 @@
     "prior_auto_watch_reset_once": true
   },
   "repair": {
-    "issue": "Opening doubles such as 5-5 could make the iPad appear unresponsive.",
-    "root_cause": "Duplicate identical-die branches plus automatic advanced analysis overloaded the browser main thread.",
+    "reported_errors": [
+      "Maximum call stack exceeded",
+      "yellow destination displayed but move not applied"
+    ],
     "changes": [
-      "unique-die recursion",
-      "sequence deduplication",
-      "legal sequence cache",
-      "reduced doubles lookahead",
-      "longer automatic-analysis delay",
-      "opening 5-5 regression tests"
+      "nonrecursive move scoring",
+      "analysis depth guard",
+      "safe static fallback",
+      "direct yellow-target hit testing",
+      "reduced mobile lookahead"
     ]
   }
 }
