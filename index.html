@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v1.7</title>
+  <title>Backgammon Coach iPhone v1.8</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -87,6 +87,20 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 .coach-disclaimer { margin-top:8px; color:var(--muted); font-size:.7rem; line-height:1.3; }
 @media (max-width:620px){ .hint-card{padding:9px}.hint-card p{font-size:.82rem}.coach-panel{padding:13px} }
 
+
+.board-roll-btn { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:12; min-width:150px; border:2px solid rgba(255,255,255,.5); }
+.board-roll-btn[hidden] { display:none; }
+.settings-grid { display:grid; gap:10px; }
+.settings-grid label { display:grid; gap:5px; color:var(--muted); font-size:.84rem; font-weight:800; }
+.hint-actions { display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:8px; }
+.hint-actions button { margin:0; }
+.hint-actions .make-now { background:var(--gold); color:#241a0e; }
+.hint-actions .guide-me { background:#fff; color:var(--ink); border:1px solid #cdbda9; }
+.move-steps { margin:7px 0 0; padding-left:20px; color:#51473e; font-size:.84rem; }
+.move-steps li { margin:3px 0; }
+.guided-status { margin-top:8px; padding:9px; border-radius:10px; background:#e7f0eb; color:#294f42; font-weight:800; font-size:.84rem; }
+@media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
+
 @media (display-mode: standalone) { #launchNote { display:none !important; } }
 
   </style>
@@ -105,10 +119,10 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v1.7</span>
+          <span class="version-badge" id="versionBadge">v1.8</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v1.7</div>
+        <div class="version-note">v1.8</div>
       </div>
       <div class="top-actions">
         <button id="newGameBtn">New game</button>
@@ -132,6 +146,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     <section class="game-layout">
       <div class="board-wrap">
         <canvas id="board" width="1120" height="720" aria-label="Backgammon board"></canvas>
+        <button id="boardRollBtn" class="board-roll-btn" type="button">Roll dice</button>
       </div>
 
       <aside class="sidebar">
@@ -159,7 +174,28 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
           <p id="coachText">Roll the dice. I’ll highlight legal checkers and explain useful ideas.</p>
           <button id="hintBtn" class="secondary wide">Rank my moves</button>
           <div id="hintResults" class="hint-results" aria-live="polite"></div>
-          <div class="coach-disclaimer">v1.7 uses a transparent local teaching heuristic. Engine-grade GNU Backgammon analysis is planned, but is not yet embedded.</div>
+          <div class="coach-disclaimer">v1.8 ranks complete legal turn sequences with a transparent local teaching heuristic. Engine-grade analysis remains planned.</div>
+        </section>
+
+        <section class="panel settings-panel">
+          <h2>Board & notation</h2>
+          <div class="settings-grid">
+            <label>Point labels
+              <select id="pointLabelMode">
+                <option value="off">Off</option>
+                <option value="human">My numbers</option>
+                <option value="ai">Computer numbers</option>
+                <option value="both">Both</option>
+              </select>
+            </label>
+            <label>Move directions
+              <select id="notationMode">
+                <option value="both">Plain English + notation</option>
+                <option value="plain">Plain English only</option>
+                <option value="standard">Standard notation only</option>
+              </select>
+            </label>
+          </div>
         </section>
 
         <section class="panel lesson-panel">
@@ -184,7 +220,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
       <h2 id="rulesTitle">Backgammon basics</h2>
       <p>You move your checkers in opposite directions around the board. Use both dice when legally possible. A single opposing checker is a blot and may be hit. Two or more opposing checkers make a closed point.</p>
       <p>Checkers on the bar must re-enter before any other checker can move. Once all 15 checkers are in your home board, you may bear them off.</p>
-      <p>This trainer highlights legal starting points. Click a checker, then click a highlighted destination.</p>
+      <p>This trainer highlights legal starting points. You can optionally show your point numbers, the computer’s numbers, or both. A hint can execute the complete recommended turn or guide you through each linked move.</p>
     </div>
   </div>
 
@@ -197,7 +233,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
   const UI = Object.fromEntries([
     'rollBtn','undoBtn','endTurnBtn','newGameBtn','rulesBtn','closeRulesBtn','rulesDialog','die1','die2',
     'humanPips','aiPips','humanBar','aiBar','humanOff','aiOff','turnBanner','coachText','hintBtn',
-    'coachToggle','lessonSelect','lessonText','remainingNote','hintResults'
+    'coachToggle','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode'
   ].map(id => [id, document.getElementById(id)]));
 
   const W = canvas.width, H = canvas.height;
@@ -214,6 +250,9 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
   let hintMove = null;
   let aiTimer = null;
   let humanMoveHistory = [];
+  let guidedSequence = [];
+  let guidedStep = 0;
+  let executingSequence = false;
 
   const lessons = {
     general: 'Keep checkers connected, avoid unnecessary blots, and fight for useful points.',
@@ -240,7 +279,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     state.points[23] = 2; state.points[12] = 5; state.points[7] = 3; state.points[5] = 5;
     state.points[0] = -2; state.points[11] = -5; state.points[16] = -3; state.points[18] = -5;
     selected = null; legalTargets = []; hintMove = null;
-    humanMoveHistory = [];
+    humanMoveHistory = []; guidedSequence=[]; guidedStep=0; executingSequence=false;
     UI.hintResults.innerHTML='';
     setCoach('Roll the dice. I’ll highlight legal checkers and explain useful ideas.');
     updateUI(); draw();
@@ -390,7 +429,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v1.7 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v1.8 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -419,20 +458,30 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     if (!moves.length) scheduleHumanTurnFinish();
   }
 
-  function doHumanMove(move) {
+  function doHumanMove(move, options={}) {
     clearTimeout(aiTimer);
     humanMoveHistory.push(cloneState(state));
     state = applyMove(state, HUMAN, move);
     const idx = state.remaining.indexOf(move.die);
     if (idx>=0) state.remaining.splice(idx,1);
-    selected=null; legalTargets=[]; hintMove=null; UI.hintResults.innerHTML='';
+    selected=null; legalTargets=[]; hintMove=null;
+    if(guidedSequence.length && guidedStep<guidedSequence.length){
+      const g=guidedSequence[guidedStep];
+      if(g.from===move.from&&g.to===move.to&&g.die===move.die){ guidedStep++; hintMove=guidedSequence[guidedStep]||null; updateGuidedStatus(); }
+      else { guidedSequence=[]; guidedStep=0; UI.hintResults.innerHTML=''; setCoach('You chose a different legal move, so guided mode has ended.'); }
+    } else if(!executingSequence) UI.hintResults.innerHTML='';
     checkWinner();
     const moves=availableMovesNow();
-    if (!state.winner && state.remaining.length && !moves.length) setCoach('No more legal moves. The computer will play next.');
+    if (!state.winner && guidedSequence.length && guidedStep<guidedSequence.length) {
+      const next=guidedSequence[guidedStep];
+      setCoach(`Good. Next, ${movePlain(next,null,HUMAN)} ${UI.notationMode.value!=='plain'?`(${moveNotation(next,HUMAN)})`:''}`);
+    } else if (!state.winner && guidedSequence.length && guidedStep>=guidedSequence.length) {
+      setCoach('Guided full turn complete. Undo remains available briefly before the computer begins.');
+    } else if (!state.winner && state.remaining.length && !moves.length) setCoach('No more legal moves. The computer will play next.');
     else if (!state.winner && state.remaining.length) setCoach(explainMove(move, state, HUMAN));
     else if (!state.winner) setCoach('Turn complete. Undo is available briefly before the computer begins.');
     updateUI(); draw();
-    if (!state.winner && (!state.remaining.length || !moves.length)) scheduleHumanTurnFinish();
+    if (!state.winner && (!state.remaining.length || !moves.length) && !options.suppressAutoFinish && !executingSequence) scheduleHumanTurnFinish();
   }
 
   function scheduleHumanTurnFinish() {
@@ -495,13 +544,32 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     return best;
   }
 
-  function moveNotation(move) {
-    const from = move.from === 'bar' ? 'bar' : String(move.from + 1);
-    const to = move.to === 'off' ? 'off' : String(move.to + 1);
+  function pointNumber(index, perspective=HUMAN) { return perspective===HUMAN ? index+1 : 24-index; }
+
+  function moveNotation(move, perspective=HUMAN) {
+    const from = move.from === 'bar' ? 'bar' : String(pointNumber(move.from,perspective));
+    const to = move.to === 'off' ? 'off' : String(pointNumber(move.to,perspective));
     return `${from}/${to}`;
   }
 
-  function sequenceNotation(seq) { return seq.map(moveNotation).join(' '); }
+  function sequenceNotation(seq, perspective=HUMAN) { return seq.map(m=>moveNotation(m,perspective)).join(' '); }
+
+  function movePlain(move, stepNumber=null, perspective=HUMAN) {
+    const who = perspective===HUMAN ? '' : "Computer: ";
+    const prefix = stepNumber ? `Move ${stepNumber}: ` : '';
+    const from = move.from==='bar' ? 'the bar' : `point ${pointNumber(move.from,perspective)}`;
+    const to = move.to==='off' ? 'off the board' : `point ${pointNumber(move.to,perspective)}`;
+    return `${prefix}${who}move a checker from ${from} to ${to}.`;
+  }
+
+  function sequenceDirections(seq, perspective=HUMAN) {
+    const mode=UI.notationMode?.value||'both';
+    const plain=seq.map((m,i)=>movePlain(m,i+1,perspective));
+    const notation=sequenceNotation(seq,perspective);
+    if(mode==='standard') return {summary:`Standard notation: ${notation}`,steps:[]};
+    if(mode==='plain') return {summary:`${seq.length} linked move${seq.length===1?'':'s'}`,steps:plain};
+    return {summary:`Standard notation: ${notation}`,steps:plain};
+  }
 
   function madePoints(s, player) {
     return s.points.reduce((n,v)=>n+(owner(v)===player&&count(v)>=2?1:0),0);
@@ -596,8 +664,13 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
       if (i>=seq.length) {
         checkWinner();
         if (!state.winner) {
+          const aiNotation=sequenceNotation(seq,AI);
+          const yourView=sequenceNotation(seq,HUMAN);
           state.turn=HUMAN; state.rolled=false; state.dice=[]; state.remaining=[];
-          setCoach('Your turn. Roll the dice and look for a move that improves safety, structure, or the race.');
+          const mode=UI.notationMode.value;
+          const plain=seq.map((m,j)=>movePlain(m,j+1,AI)).join(' ');
+          const notation=mode==='plain'?'':` Computer notation: ${aiNotation}. Your-board equivalent: ${yourView}.`;
+          setCoach(`Computer turn: ${mode==='standard'?'':plain}${notation} Your turn—roll the dice.`);
         }
         updateUI(); draw(); return;
       }
@@ -633,30 +706,79 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     return 'Solid move. Continue looking for connected checkers and useful made points.';
   }
 
-  function showHint() {
-    if (state.turn!==HUMAN || !state.rolled) { setCoach('Roll the dice first, then I can rank your legal choices.'); return; }
-    const ranked=rankSequences(state,HUMAN,state.remaining);
-    if (!ranked.length || !ranked[0].seq.length) { setCoach('There is no legal move with the remaining dice.'); UI.hintResults.innerHTML=''; return; }
-    hintMove=ranked[0].seq[0];
-    setCoach(`Best current sequence: ${sequenceNotation(ranked[0].seq)}. Tap a choice below to highlight its first move.`);
+  function renderHintCards(ranked) {
     const labels=['Best move','Strong alternative','Another legal choice'];
     UI.hintResults.innerHTML=ranked.slice(0,3).map((r,i)=>{
       const reasons=teachingReasons(r,state,HUMAN);
       const gap=i===0?'Top local score':`${Math.max(0,ranked[0].score-r.score).toFixed(1)} points behind`;
+      const d=sequenceDirections(r.seq,HUMAN);
+      const steps=d.steps.length?`<ol class="move-steps">${d.steps.map(x=>`<li>${x}</li>`).join('')}</ol>`:'';
       return `<div class="hint-card ${i===0?'best':''}">
-        <div class="hint-head"><span class="hint-rank">${labels[i]||`Choice ${i+1}`}</span><span class="hint-move">${sequenceNotation(r.seq)}</span></div>
+        <div class="hint-head"><span class="hint-rank">${labels[i]||`Choice ${i+1}`}</span><span class="hint-move">${d.summary}</span></div>
+        ${steps}
         <p>${reasons.length?reasons.join('; '):'Plays the maximum legal dice with a balanced result.'}.</p>
         <p><strong>${gap}</strong></p>
-        <button type="button" data-hint-index="${i}">Highlight first move</button>
+        <div class="hint-actions">
+          <button type="button" class="make-now" data-make-index="${i}">Make this move now!</button>
+          <button type="button" class="guide-me" data-guide-index="${i}">Show me, I’ll move</button>
+        </div>
       </div>`;
     }).join('');
-    UI.hintResults.querySelectorAll('[data-hint-index]').forEach(btn=>btn.addEventListener('click',()=>{
-      const r=ranked[Number(btn.dataset.hintIndex)];
-      hintMove=r?.seq?.[0]||null;
-      selected=null;legalTargets=[];draw();
-      if(r) setCoach(`${sequenceNotation(r.seq)}: ${teachingReasons(r,state,HUMAN).join('; ') || 'a balanced legal sequence'}.`);
+    UI.hintResults.querySelectorAll('[data-make-index]').forEach(btn=>btn.addEventListener('click',()=>{
+      const r=ranked[Number(btn.dataset.makeIndex)]; if(r) executeRecommendedSequence(r.seq);
     }));
+    UI.hintResults.querySelectorAll('[data-guide-index]').forEach(btn=>btn.addEventListener('click',()=>{
+      const r=ranked[Number(btn.dataset.guideIndex)]; if(r) beginGuidedSequence(r.seq);
+    }));
+  }
+
+  function showHint() {
+    if (state.turn!==HUMAN || !state.rolled) { setCoach('Roll the dice first, then I can rank your complete legal turn.'); return; }
+    const ranked=rankSequences(state,HUMAN,state.remaining);
+    if (!ranked.length || !ranked[0].seq.length) { setCoach('There is no legal move with the remaining dice.'); UI.hintResults.innerHTML=''; return; }
+    hintMove=ranked[0].seq[0];
+    const d=sequenceDirections(ranked[0].seq,HUMAN);
+    setCoach(`Best complete turn: ${d.summary}. Choose “Make this move now!” or let me guide you one step at a time.`);
+    renderHintCards(ranked);
     draw();
+  }
+
+  function beginGuidedSequence(seq) {
+    guidedSequence=seq.map(m=>({...m})); guidedStep=0; executingSequence=false;
+    hintMove=guidedSequence[0]||null; selected=null; legalTargets=[];
+    UI.hintResults.insertAdjacentHTML('afterbegin',`<div class="guided-status" id="guidedStatus"></div>`);
+    updateGuidedStatus(); draw();
+  }
+
+  function updateGuidedStatus() {
+    const el=document.getElementById('guidedStatus');
+    if(!el || !guidedSequence.length) return;
+    if(guidedStep>=guidedSequence.length){ el.textContent='Guided turn complete.'; return; }
+    const m=guidedSequence[guidedStep];
+    el.textContent=`Step ${guidedStep+1} of ${guidedSequence.length}: ${movePlain(m,null,HUMAN)} ${UI.notationMode.value!=='plain'?`(${moveNotation(m,HUMAN)})`:''}`;
+  }
+
+  function executeRecommendedSequence(seq) {
+    if(executingSequence || state.turn!==HUMAN || !state.rolled) return;
+    executingSequence=true; guidedSequence=[]; guidedStep=0; UI.hintResults.innerHTML='';
+    const moves=seq.map(m=>({...m})); let i=0;
+    function step(){
+      if(i>=moves.length){ executingSequence=false; hintMove=null; setCoach('Recommended full turn completed. Undo remains available briefly before the computer begins.'); updateUI(); draw(); return; }
+      const expected=moves[i++];
+      const legal=availableMovesNow();
+      const match=legal.find(m=>m.from===expected.from&&m.to===expected.to&&m.die===expected.die);
+      if(!match){ executingSequence=false; setCoach('The position changed, so that full recommendation is no longer legal. Ask for a fresh hint.'); updateUI(); draw(); return; }
+      doHumanMove(match,{suppressAutoFinish:true});
+      if(i<moves.length) aiTimer=setTimeout(step,420);
+      else {
+        executingSequence=false;
+        hintMove=null;
+        setCoach('Recommended full turn completed. Undo remains available briefly before the computer begins.');
+        updateUI(); draw();
+        if(!state.winner && availableMovesNow().length===0) scheduleHumanTurnFinish();
+      }
+    }
+    step();
   }
 
   function setCoach(text) { if (UI.coachToggle.checked) UI.coachText.textContent=text; }
@@ -729,7 +851,8 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     } else {
       UI.die1.classList.remove('used'); UI.die2.classList.remove('used'); UI.remainingNote.textContent='';
     }
-    UI.rollBtn.disabled=state.turn!==HUMAN||state.rolled||!!state.winner;
+    const rollDisabled=state.turn!==HUMAN||state.rolled||!!state.winner;
+    UI.rollBtn.disabled=rollDisabled; UI.boardRollBtn.disabled=rollDisabled; UI.boardRollBtn.hidden=rollDisabled;
     UI.undoBtn.disabled=state.turn!==HUMAN||!state.rolled||!!state.winner||humanMoveHistory.length===0;
     const canFinish = state.turn===HUMAN && state.rolled && !state.winner && availableMovesNow().length===0;
     UI.endTurnBtn.disabled=!canFinish;
@@ -765,8 +888,20 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     ctx.strokeStyle='rgba(255,255,255,.12)'; ctx.lineWidth=2; ctx.strokeRect(playRight+20,H/2-4,trayW-38,8);
 
     for(let i=0;i<24;i++) drawPoint(i);
+    drawPointLabels();
     for(let i=0;i<24;i++) drawStack(i,state.points[i]);
     drawBarCheckers(); drawOffCheckers(); drawHighlights();
+  }
+
+
+  function drawPointLabels() {
+    const mode=UI.pointLabelMode?.value||'off'; if(mode==='off') return;
+    ctx.textAlign='center'; ctx.font='bold 15px sans-serif';
+    for(let i=0;i<24;i++){
+      const p=pointCenter(i); const baseY=p.top?margin+8:H-margin-4;
+      if(mode==='human'||mode==='both'){ ctx.fillStyle='#fff7df'; ctx.fillText(String(pointNumber(i,HUMAN)),p.x,baseY); }
+      if(mode==='ai'||mode==='both'){ ctx.fillStyle='#f2b5aa'; const y=mode==='both'?(p.top?baseY+17:baseY-17):baseY; ctx.fillText(String(pointNumber(i,AI)),p.x,y); }
+    }
   }
 
   function drawPoint(i) {
@@ -829,6 +964,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
   }
 
   UI.rollBtn.addEventListener('click',rollDice);
+  UI.boardRollBtn.addEventListener('click',rollDice);
   UI.undoBtn.addEventListener('click',undoHumanMove);
   UI.endTurnBtn.addEventListener('click',endTurn);
   UI.newGameBtn.addEventListener('click',newGame);
@@ -837,8 +973,12 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
   UI.closeRulesBtn.addEventListener('click',()=>{ UI.rulesDialog.classList.remove('open'); document.body.style.overflow=''; });
   UI.rulesDialog.addEventListener('click',(e)=>{ if(e.target===UI.rulesDialog){ UI.rulesDialog.classList.remove('open'); document.body.style.overflow=''; } });
   UI.lessonSelect.addEventListener('change',()=>UI.lessonText.textContent=lessons[UI.lessonSelect.value]);
+  UI.pointLabelMode.addEventListener('change',()=>{localStorage.setItem('bg-point-label-mode',UI.pointLabelMode.value);draw();});
+  UI.notationMode.addEventListener('change',()=>{localStorage.setItem('bg-notation-mode',UI.notationMode.value); if(state.rolled&&state.turn===HUMAN) showHint();});
   UI.coachToggle.addEventListener('change',()=>{ if(UI.coachToggle.checked) UI.coachText.textContent=explainPosition(state,HUMAN); else UI.coachText.textContent='Hints are off.'; });
   window.addEventListener('resize',draw);
+  UI.pointLabelMode.value=localStorage.getItem('bg-point-label-mode')||'off';
+  UI.notationMode.value=localStorage.getItem('bg-notation-mode')||'both';
   newGame();
   runCoreRulesTests();
 })();

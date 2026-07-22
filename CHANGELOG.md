@@ -1,16 +1,22 @@
 # Changelog
 
+## v1.8 — Guided Full-Turn Hints
+- Added a prominent **Make this move now!** action that executes the complete recommended legal sequence.
+- Added **Show me, I’ll move** guided mode with step-by-step highlighting.
+- Added plain-English instructions for every checker step.
+- Added optional standard notation and point-number overlays: Off, My numbers, Computer numbers, or Both.
+- Added computer-turn summaries using the computer’s notation and the equivalent notation from the user’s perspective.
+- Added a second synchronized **Roll dice** control in the middle of the board while retaining the top control.
+- Preserved complete legal-sequence handling for both dice and four plays on doubles.
+- Updated offline cache to v1.8.
+
 ## v1.7 — Hint Foundation
-- Added `Rank my moves` to enumerate and rank complete legal move sequences.
-- Shows up to three choices: best move, strong alternative, and another legal choice.
-- Added standard-style move notation such as `13/7 8/5`, `bar/22`, and `6/off`.
-- Added short explanations based on hits, made points, home-board strength, primes, blot changes, back-checker escape, racing efficiency, and bearing off.
-- Added source-and-destination highlighting for a selected hint.
-- Added an explicit notice that v1.7 uses a local teaching heuristic rather than embedded GNU Backgammon analysis.
-- Added project backlog, changelog, release checklist, and design record.
+- Ranked complete legal move sequences.
+- Added top-three local heuristic choices and strategic explanations.
+- Added first-move highlighting.
+- Added project backlog, release checklist, changelog, and design record.
 
 ## v1.6 — Core Game Stabilization
-- Stabilized human/computer turn transition.
-- Added human-only Undo.
-- Moved status away from board pips.
-- Added legal-sequence rules tests and compact version display.
+- Hardened legal move and turn handling.
+- Added user-only Undo and rules self-tests.
+- Improved iPhone status and dice layout.

@@ -1,18 +1,27 @@
-BACKGAMMON COACH v1.7 — HINT FOUNDATION
+BACKGAMMON COACH v1.8 — GUIDED FULL-TURN HINTS
 
-UPLOAD TO GITHUB
+UPLOAD
 1. Extract this ZIP.
-2. In the GitHub repository backgammon-coach, upload the CONTENTS of this folder to the repository root.
-3. Replace existing files and commit with: Release v1.7 Hint Foundation
-4. Open the Pages site in Safari, refresh, and confirm the tiny v1.7 label.
-5. Close and reopen the Home Screen app while online.
+2. Upload every extracted file and folder to the ROOT of your GitHub Pages repository.
+3. Replace the existing files.
+4. Commit with: Release v1.8 Guided Full-Turn Hints
+5. Open the site in Safari while online, refresh, then close and reopen the Home Screen app.
+6. Confirm the tiny version label reads v1.8.
 
-WHAT TO TEST
-- Roll dice and tap Rank my moves.
-- Confirm up to three legal sequences appear.
-- Highlight each option and verify its first source and destination.
-- Make a move, undo it, and request hints again.
-- Confirm the computer cannot be undone.
+QUICK VALIDATION
+- Confirm Roll dice appears at both the top and center of the board before rolling.
+- Roll non-doubles, tap Rank my moves, and confirm the best card describes the full turn.
+- Tap Make this move now! and verify every linked move executes.
+- Tap Undo before the computer begins.
+- On another turn, choose Show me, I’ll move and follow each highlighted step.
+- Test doubles and verify a recommendation can contain four linked checker moves.
+- Change Point labels among Off, My numbers, Computer numbers, and Both.
+- Change Move directions among plain English, standard notation, and both.
+- Confirm the computer-turn explanation identifies its perspective.
+- Verify the iPhone and iPad layouts remain usable.
 
-IMPORTANT
-The v1.7 ranking is a transparent local teaching heuristic, not embedded GNU Backgammon neural-network analysis. It emphasizes legal play, pip efficiency, hits, made points, home-board strength, primes, blot reduction, escaping back checkers, and bearing off.
+SAFETY BOUNDARIES
+- v1.8 still uses a transparent local teaching heuristic, not embedded GNU Backgammon analysis.
+- The Make this move now action rechecks legality before each checker step.
+- Undo remains limited to the current human turn.
+- v1.9 will add the complete append-only move journal; v1.8 does not yet claim permanent all-move statistics.
