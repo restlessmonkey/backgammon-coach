@@ -1,0 +1,42 @@
+BACKGAMMON COACH v2.0.1.1.1
+IPHONE GITHUB FLAT-UPLOAD DEPLOYMENT PACKAGE
+
+WHY THIS PACKAGE EXISTS
+GitHub's iPhone file uploader does not preserve folders when selecting files from
+an extracted ZIP. This deployment package is therefore intentionally flat.
+
+UPLOAD ALL 7 APP FILES INTO THE REPOSITORY ROOT:
+- index.html
+- manifest.webmanifest
+- service-worker.js
+- apple-touch-icon.png
+- icon-192.png
+- icon-512.png
+- icon-512-maskable.png
+
+IMPORTANT
+Do not upload this README file to the public app repository unless you want it
+there. It is instructions only.
+
+GITHUB PAGES
+Use:
+- Branch: main
+- Folder: / (root)
+
+AFTER UPLOADING
+Because the prior service worker may remain cached:
+1. Open the GitHub Pages address in Safari.
+2. Refresh it.
+3. If the old version still appears, remove the existing Home Screen app.
+4. In iPhone Settings > Safari, clear website data for the github.io site if needed.
+5. Reopen the Pages address and add it to the Home Screen again.
+
+EXPECTED VERSION
+v2.0.1.1.1
+
+COACH MODE
+Select:
+Advanced local coach — offline, not grandmaster
+
+WINDOWS
+No Windows computer is required for this local coach mode.

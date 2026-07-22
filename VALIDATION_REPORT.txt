@@ -1,16 +1,11 @@
-Backgammon Coach v2.0.1.1 Validation Report
+Backgammon Coach v2.0.1.1.1 Flat Upload Validation
 ============================================================
-PASS — Version identity
+PASS — Flat files present
+PASS — No icons directory references
+PASS — Manifest path remains valid
+PASS — Service worker path remains valid
+PASS — Version updated
+PASS — Cache identity updated
 PASS — JavaScript syntax
-PASS — Advanced local label
-PASS — 21 roll outcomes
-PASS — Opponent response expectation
-PASS — Opening book 15 entries
-PASS — Strategic evaluation
-PASS — Architecture document
-PASS — Updated handoff
-PASS — v2.0.2 preserved
 
-Automated package result: PASS
-Strength claim: ADVANCED LOCAL / NOT GRANDMASTER CERTIFIED
-Manual iPhone gameplay and benchmark comparison remain required.
+Automated result: PASS

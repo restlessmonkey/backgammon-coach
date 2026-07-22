@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v1.1</title>
+  <title>Backgammon Coach iPhone v2.0.1.1.1</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -34,6 +34,9 @@ button { cursor: pointer; }
 .app-shell { max-width: 1500px; margin: 0 auto; padding: 22px; }
 .topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 16px; }
 h1 { margin: 0; font-size: clamp(1.8rem, 3vw, 3rem); font-family: Georgia, serif; }
+.title-row { display:flex; align-items:flex-start; gap:8px; flex-wrap:nowrap; }
+.version-badge { display:inline-block; margin-top:3px; color:#c7d0c9; font-size:.62rem; font-weight:700; letter-spacing:.02em; white-space:nowrap; opacity:.9; }
+.version-note { display:none; }
 .topbar p { margin: 5px 0 0; color: #ced8d0; }
 .top-actions { display: flex; gap: 10px; }
 button { border: 0; border-radius: 12px; padding: 11px 15px; background: var(--gold); color: #241a0e; font-weight: 800; box-shadow: 0 6px 16px var(--shadow); }
@@ -43,7 +46,7 @@ button.wide { width: 100%; margin-top: 10px; }
 .game-layout { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 18px; align-items: start; }
 .board-wrap { position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 18px 50px rgba(0,0,0,.38); background: #3d291d; }
 canvas { width: 100%; height: auto; display: block; touch-action: manipulation; }
-.turn-banner { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); padding: 8px 18px; border-radius: 999px; background: rgba(19,25,21,.86); border: 1px solid rgba(255,255,255,.25); font-weight: 800; backdrop-filter: blur(8px); }
+.turn-banner { padding: 8px 14px; border-radius: 999px; background: #294f42; color: white; border: 1px solid rgba(255,255,255,.25); font-weight: 900; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,.18); }
 .sidebar { display: grid; gap: 14px; }
 .panel { background: var(--panel); color: var(--ink); border-radius: 18px; padding: 16px; box-shadow: 0 12px 28px rgba(0,0,0,.24); }
 .panel h2 { margin: 0 0 12px; font-family: Georgia, serif; font-size: 1.25rem; }
@@ -52,8 +55,16 @@ canvas { width: 100%; height: auto; display: block; touch-action: manipulation; 
 .status-grid div { background: #ede0ce; border-radius: 12px; padding: 10px; }
 .status-grid small { display:block; color: var(--muted); }
 .status-grid strong { font-size: 1.25rem; }
-.dice-row { display:flex; gap:12px; justify-content:center; }
-.die { width:72px; height:72px; border-radius:16px; background:white; display:grid; place-items:center; font-size:2.4rem; font-weight:900; box-shadow: inset 0 0 0 2px #d8c8b6, 0 7px 15px rgba(0,0,0,.15); }
+.play-controls { display:flex; align-items:center; justify-content:center; gap:10px; margin:0 0 12px; padding:10px; border-radius:16px; background:rgba(243,232,213,.96); color:var(--ink); box-shadow:0 10px 24px rgba(0,0,0,.25); }
+.play-controls .control-label { font-weight:900; margin-right:2px; }
+.dice-row { display:flex; gap:8px; justify-content:center; }
+.die { width:52px; height:52px; border-radius:13px; background:white; display:grid; place-items:center; font-size:1.9rem; font-weight:900; box-shadow: inset 0 0 0 2px #d8c8b6, 0 5px 10px rgba(0,0,0,.15); transition:opacity .18s, transform .18s; }
+.die.used { opacity:.28; transform:scale(.9); }
+.remaining-note { color:var(--muted); font-size:.72rem; font-weight:800; min-width:52px; text-align:center; }
+.play-controls button { min-height:52px; padding:10px 18px; }
+.play-controls #endTurnBtn { display:none; }
+.play-controls #endTurnBtn.available { display:block; }
+.play-controls #undoBtn { background:#fff; color:var(--ink); border:1px solid #cdbda9; box-shadow:none; }
 .panel-heading { display:flex; justify-content:space-between; align-items:center; }
 .switch-label { display:flex; gap:7px; align-items:center; color:var(--muted); font-size:.9rem; }
 .coach-panel p, .lesson-panel p { line-height:1.45; color:#51473e; }
@@ -63,9 +74,163 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 .dialog-content { position:relative; width:min(560px,100%); max-height:85vh; overflow:auto; border-radius:18px; padding:28px; color:var(--ink); background:var(--panel); line-height:1.6; box-shadow:0 25px 80px rgba(0,0,0,.45); }
 .dialog-close { position:absolute; right:12px; top:10px; background:transparent; box-shadow:none; font-size:1.7rem; }
 @media (max-width: 980px) { .game-layout { grid-template-columns:1fr; } .sidebar { grid-template-columns:repeat(2, minmax(0,1fr)); } }
-@media (max-width: 620px) { .app-shell{padding:10px}.topbar{align-items:flex-start; flex-direction:column}.sidebar{grid-template-columns:1fr}.top-actions{width:100%}.top-actions button{flex:1}.turn-banner{font-size:.8rem} }
+@media (max-width: 620px) { .version-badge{font-size:.55rem;margin-top:2px}.version-note{display:none}.app-shell{padding:8px}.topbar{align-items:flex-start; flex-direction:column;gap:10px;margin-bottom:10px}.topbar p{display:none}.topbar h1{font-size:2rem}.sidebar{grid-template-columns:1fr}.top-actions{width:100%}.top-actions button{flex:1;padding:10px}.turn-banner{font-size:.76rem;padding:7px 10px}.play-controls{position:sticky;top:0;z-index:20;gap:7px;padding:8px;margin-bottom:9px;flex-wrap:wrap}.play-controls .control-label{display:none}.die{width:46px;height:46px;font-size:1.65rem}.play-controls button{min-height:46px;padding:8px 12px;flex:1}.play-controls .turn-banner{flex:1 1 100%;text-align:center;order:-1}.board-wrap{border-radius:16px} }
 
-  </style>
+.hint-results { display:grid; gap:8px; margin-top:10px; }
+.hint-card { border:1px solid #d7c7b3; border-radius:12px; padding:10px; background:#fffaf2; }
+.hint-card.best { border:2px solid #c48b21; background:#fff4d8; }
+.hint-card .hint-head { display:flex; justify-content:space-between; gap:8px; align-items:center; font-weight:900; }
+.hint-card .hint-rank { color:#8a5b14; font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; }
+.hint-card .hint-move { font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:.93rem; }
+.hint-card p { margin:6px 0 0; font-size:.88rem; line-height:1.35; }
+.hint-card button { width:100%; margin-top:8px; padding:8px 10px; box-shadow:none; }
+.coach-disclaimer { margin-top:8px; color:var(--muted); font-size:.7rem; line-height:1.3; }
+@media (max-width:620px){ .hint-card{padding:9px}.hint-card p{font-size:.82rem}.coach-panel{padding:13px} }
+
+
+.board-roll-btn { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:12; min-width:150px; border:2px solid rgba(255,255,255,.5); }
+.board-roll-btn[hidden] { display:none; }
+.settings-grid { display:grid; gap:10px; }
+.settings-grid label { display:grid; gap:5px; color:var(--muted); font-size:.84rem; font-weight:800; }
+.setting-help{margin-top:-3px;color:var(--muted);font-size:.76rem;line-height:1.35;text-align:center}
+.hint-actions { display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:8px; }
+.hint-actions button { margin:0; }
+.hint-actions .make-now { background:var(--gold); color:#241a0e; }
+.hint-actions .guide-me { background:#fff; color:var(--ink); border:1px solid #cdbda9; }
+.move-steps { margin:7px 0 0; padding-left:20px; color:#51473e; font-size:.84rem; }
+.move-steps li { margin:3px 0; }
+.guided-status { margin-top:8px; padding:9px; border-radius:10px; background:#e7f0eb; color:#294f42; font-weight:800; font-size:.84rem; }
+@media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
+
+
+/* v2.0.1.1.1 Immersive Play */
+.topbar,.play-controls,.coach-panel{transition:all .22s ease}
+body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
+body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
+body.game-active .topbar p{display:none}
+body.game-active .version-badge{font-size:.52rem;margin-top:0}
+body.game-active .top-actions button{padding:7px 10px;font-size:.78rem}
+.roll-primary{font-size:1.05rem;letter-spacing:.025em;min-width:164px;min-height:58px;padding:13px 22px;transform:translateX(-10px);touch-action:none;user-select:none}
+.roll-primary.floating:disabled{display:none}
+.roll-primary.dragging{transform:none;opacity:.96;box-shadow:0 12px 28px rgba(0,0,0,.42);z-index:900}
+.coach-drawer-toggle{display:none;background:transparent;color:var(--ink);box-shadow:none;padding:0;width:100%;justify-content:space-between;align-items:center;text-align:left}
+.coach-drawer-body{display:block}
+.experience-switch{justify-content:space-between;padding:7px 0}
+body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .experience-panel,body.focus-mode .lesson-panel{display:none}
+@media (max-width:980px){
+ body{padding-bottom:62px}
+ .app-shell{padding-top:max(6px,env(safe-area-inset-top))}
+ .topbar{position:sticky;top:0;z-index:35;background:rgba(27,33,28,.94);backdrop-filter:blur(12px);padding:7px 2px;border-radius:0 0 12px 12px}
+ .game-layout{gap:8px}
+ .sidebar{display:block}
+ .sidebar>.panel:not(.coach-panel){margin-top:10px}
+ .coach-panel{position:fixed;left:8px;right:8px;bottom:max(8px,env(safe-area-inset-bottom));z-index:80;max-height:min(58vh,480px);overflow:auto;padding:12px;border:1px solid rgba(0,0,0,.12)}
+ .coach-panel.collapsed{max-height:52px;overflow:hidden}
+ .coach-panel.collapsed .coach-drawer-body,.coach-panel.collapsed .switch-label{display:none}
+ .coach-panel.collapsed .panel-heading{margin:0}
+ .coach-panel .coach-heading{display:none}
+ .coach-drawer-toggle{display:flex}
+ .coach-panel:not(.collapsed) .coach-chevron{transform:rotate(180deg)}
+ .coach-chevron{transition:transform .2s ease}
+ .play-controls{position:sticky;top:47px;z-index:30}
+ .roll-primary.floating{position:fixed;left:18px;bottom:78px;z-index:95;transform:none;margin:0}
+ body.hand-left .roll-primary:not(.floating){transform:translateX(10px)}
+ body.hand-left .play-controls{justify-content:flex-end}
+ body.hand-right .play-controls{justify-content:flex-start}
+}
+@media (max-width:620px){
+ body.game-active .topbar{flex-direction:row;gap:6px}
+ body.game-active .title-row{align-items:center}
+ body.game-active .top-actions{width:auto;margin-left:auto}
+ body.game-active .top-actions button{font-size:0;padding:8px;width:38px;min-width:38px}
+ body.game-active #newGameBtn::after{content:'↻';font-size:1rem}
+ body.game-active #rulesBtn::after{content:'?';font-size:1rem}
+ .roll-primary{font-size:1rem;min-width:156px;min-height:56px}
+ .board-roll-btn{font-weight:900;font-size:1rem;min-width:156px;padding:13px 16px}
+}
+@media (min-width:981px){.coach-panel{position:sticky;top:12px}.coach-drawer-toggle{display:none}}
+
+@media (display-mode: standalone) { #launchNote { display:none !important; } }
+
+  
+
+/* v2.0.1.1.1 Victory Celebration */
+.victory-celebration{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden;background:rgba(8,12,10,.08);opacity:0;transition:opacity .18s ease}
+.victory-celebration.active{opacity:1}
+.victory-canvas{width:100%;height:100%;display:block}
+.victory-banner{position:absolute;top:max(16px,env(safe-area-inset-top));left:50%;transform:translateX(-50%) translateY(-18px);padding:12px 24px;border-radius:999px;background:rgba(247,239,225,.96);color:#2a251f;font-family:Georgia,serif;font-size:clamp(1.25rem,4vw,2.15rem);font-weight:900;box-shadow:0 12px 36px rgba(0,0,0,.35);opacity:0;transition:all .35s ease;white-space:nowrap}
+.victory-celebration.active .victory-banner{opacity:1;transform:translateX(-50%) translateY(0)}
+.stop-celebration{position:absolute;right:max(12px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));pointer-events:auto;background:rgba(247,239,225,.96);color:#2a251f;border:2px solid rgba(42,37,31,.18);box-shadow:0 8px 24px rgba(0,0,0,.35);min-height:48px;padding:10px 16px}
+@media (prefers-reduced-motion:reduce){.victory-celebration,.victory-banner{transition:none}}
+
+
+/* v2.0.1.1.1 Explain Every Move */
+.coach-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.coach-settings label{display:grid;gap:4px;color:var(--muted);font-size:.76rem;font-weight:800}
+.move-rating{margin:10px 0;padding:11px;border-radius:12px;border:1px solid #d6c4ae;background:#fffaf2}
+.move-rating[data-grade="Perfect"],.move-rating[data-grade="Excellent"]{border-left:7px solid #2d7a4d}
+.move-rating[data-grade="Good"]{border-left:7px solid #3978a8}
+.move-rating[data-grade="Playable"]{border-left:7px solid #c9a227}
+.move-rating[data-grade="Dubious"]{border-left:7px solid #d8782f}
+.move-rating[data-grade="Mistake"],.move-rating[data-grade="Blunder"]{border-left:7px solid #a63b35}
+.move-rating h3{margin:0 0 6px;font-family:Georgia,serif;font-size:1rem}
+.move-rating p{margin:4px 0!important}
+.risk-grid{display:grid;gap:7px;margin-top:10px}
+.risk-row{display:grid;grid-template-columns:74px 1fr 34px;align-items:center;gap:7px;font-size:.76rem}
+.risk-track{height:9px;border-radius:999px;background:#e4d7c5;overflow:hidden}
+.risk-fill{height:100%;background:var(--green);border-radius:inherit}
+.why-not{margin-top:8px;padding-top:8px;border-top:1px solid #dfd2bf}
+.why-not summary{cursor:pointer;font-weight:900;color:#5b421e}
+.lesson-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.lesson-actions button{box-shadow:none;padding:7px 9px;font-size:.78rem}
+.favorite-list{display:grid;gap:6px;margin-top:8px}
+.favorite-item{padding:8px;border-radius:10px;background:#ede0ce;font-size:.78rem}
+.coach-report{margin-top:10px;padding:10px;border-radius:12px;background:#e8f0eb}
+.coach-report-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:7px;text-align:center}
+.coach-report-grid div{padding:6px;border-radius:8px;background:white}
+.coach-report-grid strong{display:block;font-size:1.05rem}
+@media(max-width:620px){.coach-settings{grid-template-columns:1fr}.risk-row{grid-template-columns:64px 1fr 30px}}
+
+
+/* v2.0.1.1.1 Animated Board Hints */
+.visual-hint-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+.visual-hint-controls button{margin:0;box-shadow:none}
+.visual-hint-status{margin-top:8px;padding:8px 10px;border-radius:10px;background:#e7f0eb;color:#294f42;font-weight:800;font-size:.8rem}
+.visual-hint-status[hidden]{display:none}
+@media(max-width:620px){.visual-hint-controls{grid-template-columns:1fr}}
+
+
+/* v2.0.1.1.1 Watch the Coach Think */
+.think-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+.think-controls button{margin:0;box-shadow:none}
+.think-panel{margin-top:9px;padding:10px;border-radius:12px;background:#f6ead8;border:1px solid #d8c5ab}
+.think-panel[hidden]{display:none}
+.think-stage{font-weight:900;margin-bottom:5px}
+.think-detail{font-size:.84rem;line-height:1.35;color:#51473e}
+.think-candidates{display:grid;gap:6px;margin-top:8px}
+.think-candidate{padding:8px;border-radius:9px;background:#fffaf2;border:1px solid #decdb7;font-size:.78rem}
+.think-candidate.active{border:2px solid #c48b21;background:#fff1cc}
+.think-candidate.rejected{opacity:.7;text-decoration:none}
+.think-candidate.chosen{border:2px solid #2f6c4f;background:#e8f0eb}
+@media(max-width:620px){.think-controls{grid-template-columns:1fr}}
+
+
+/* v2.0.1.1.1 verified engine controls */
+.engine-panel{margin:10px 0;padding:10px;border-radius:12px;border:1px solid #d8c5ab;background:#fffaf2}
+.engine-panel h3{margin:0 0 8px;font-size:.95rem}
+.engine-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.engine-grid label{font-size:.78rem;font-weight:800}
+.engine-grid select,.engine-grid input{width:100%;margin-top:4px}
+.engine-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+.engine-status{margin-top:8px;padding:8px 10px;border-radius:9px;font-size:.8rem;font-weight:800;background:#eee7dc}
+.engine-status.ok{background:#e7f0eb;color:#294f42}
+.engine-status.bad{background:#f5dfdc;color:#71372f}
+.engine-badge{display:inline-block;padding:3px 7px;border-radius:999px;font-size:.7rem;font-weight:900;background:#eee7dc}
+.engine-badge.verified{background:#dcece3;color:#25543d}
+.engine-badge.fallback{background:#f5e5c6;color:#664911}
+@media(max-width:620px){.engine-grid,.engine-actions{grid-template-columns:1fr}}
+
+</style>
 
   <meta name="theme-color" content="#382719">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -73,14 +238,18 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
   <meta name="apple-mobile-web-app-title" content="Backgammon Coach">
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
   <main class="app-shell">
-    <section class="topbar">
+    <section class="topbar" id="appHeader">
       <div>
-        <h1>Backgammon Coach</h1>
-        <p>Play, learn, and see why a move is strong.</p><p id="launchNote" style="margin-top:7px;font-size:.85rem;color:#f5d889">For full play, open this file in Safari—not the Files preview.</p>
+        <div class="title-row">
+          <h1>Backgammon Coach</h1>
+          <span class="version-badge" id="versionBadge">v2.0.1.1.1</span>
+        </div>
+        <p>Play against the computer and learn why a move is strong.</p>
+        <div class="version-note">v2.0.1.1.1</div>
       </div>
       <div class="top-actions">
         <button id="newGameBtn">New game</button>
@@ -88,10 +257,23 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
       </div>
     </section>
 
+    <section class="play-controls" id="playControls" aria-label="Dice and turn controls">
+      <div id="turnBanner" class="turn-banner">Your turn</div>
+      <span class="control-label">Dice</span>
+      <div class="dice-row">
+        <div id="die1" class="die">–</div>
+        <div id="die2" class="die">–</div>
+      </div>
+      <span id="remainingNote" class="remaining-note"></span>
+      <button id="rollBtn" class="primary roll-primary" type="button" aria-label="Roll dice">🎲 ROLL DICE</button>
+      <button id="undoBtn" disabled>Undo</button>
+      <button id="endTurnBtn" class="secondary" disabled>Finish turn</button>
+    </section>
+
     <section class="game-layout">
       <div class="board-wrap">
         <canvas id="board" width="1120" height="720" aria-label="Backgammon board"></canvas>
-        <div id="turnBanner" class="turn-banner">Your turn</div>
+        <button id="boardRollBtn" class="board-roll-btn" type="button">🎲 ROLL DICE</button>
       </div>
 
       <aside class="sidebar">
@@ -99,6 +281,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
           <h2>Game</h2>
           <div class="score-row"><span>You</span><strong id="humanPips">167 pips</strong></div>
           <div class="score-row"><span>Computer</span><strong id="aiPips">167 pips</strong></div>
+          
           <div class="status-grid">
             <div><small>Your bar</small><strong id="humanBar">0</strong></div>
             <div><small>AI bar</small><strong id="aiBar">0</strong></div>
@@ -107,26 +290,118 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
           </div>
         </section>
 
-        <section class="panel dice-panel">
-          <h2>Dice</h2>
-          <div class="dice-row">
-            <div id="die1" class="die">–</div>
-            <div id="die2" class="die">–</div>
-          </div>
-          <button id="rollBtn" class="primary wide">Roll dice</button>
-          <button id="endTurnBtn" class="secondary wide" disabled>End turn</button>
-        </section>
-
-        <section class="panel coach-panel">
+        <section class="panel coach-panel" id="coachPanel">
           <div class="panel-heading">
-            <h2>Coach</h2>
+            <button id="coachDrawerToggle" class="coach-drawer-toggle" type="button" aria-expanded="false" aria-controls="coachDrawerBody"><span>💡 Coach</span><span class="coach-chevron">▲</span></button>
+            <h2 class="coach-heading">Coach</h2>
             <label class="switch-label">
               <input id="coachToggle" type="checkbox" checked />
               <span>Hints</span>
             </label>
           </div>
+          <div id="coachDrawerBody" class="coach-drawer-body">
           <p id="coachText">Roll the dice. I’ll highlight legal checkers and explain useful ideas.</p>
-          <button id="hintBtn" class="secondary wide">Show best move</button>
+          <div class="coach-settings">
+            <label>Coach level
+              <select id="coachLevel">
+                <option value="beginner">Beginner</option>
+                <option value="intermediate" selected>Intermediate</option>
+                <option value="advanced">Advanced</option>
+              </select>
+            </label>
+            <label>Explanation detail
+              <select id="coachVerbosity">
+                <option value="short">Short</option>
+                <option value="standard" selected>Standard</option>
+                <option value="detailed">Detailed</option>
+              </select>
+            </label>
+          </div>
+          <div class="engine-panel">
+            <h3>Grandmaster analysis engine</h3>
+            <div class="engine-grid">
+              <label>Coach source
+                <select id="engineMode">
+                  <option value="gnubg" selected>GNU Backgammon service — verified</option>
+                  <option value="local">Advanced local coach — offline, not grandmaster</option>
+                </select>
+              </label>
+              <label>Engine endpoint
+                <input id="engineEndpoint" type="url" inputmode="url" placeholder="https://your-engine.example/analyze">
+              </label>
+            </div>
+            <div class="engine-actions">
+              <button id="testEngineBtn" class="secondary" type="button">Test engine connection</button>
+              <button id="clearEngineBtn" class="secondary" type="button">Clear endpoint</button>
+            </div>
+            <div id="engineStatus" class="engine-status bad" aria-live="polite">Grandmaster engine not connected. Recommendations are blocked unless you deliberately select the local fallback.</div>
+          </div>
+          <label class="switch-label experience-switch"><input id="explainEveryMove" type="checkbox" checked><span>Explain after every move</span></label>
+          <label class="switch-label experience-switch"><input id="autoWatchCoach" type="checkbox"><span>Automatically watch the coach every turn</span></label>
+          <button id="hintBtn" class="secondary wide">Rank and explain my moves</button>
+          <div class="visual-hint-controls">
+            <button id="animateBestHintBtn" class="make-now" type="button" disabled>▶ Animate best move</button>
+            <button id="stopHintAnimationBtn" class="secondary" type="button" disabled>■ Stop animation</button>
+          </div>
+          <div class="think-controls">
+            <button id="watchCoachThinkBtn" class="primary" type="button" disabled>🧠 Watch the Coach Think</button>
+            <button id="stopCoachThinkBtn" class="secondary" type="button" disabled>■ Stop thinking</button>
+          </div>
+          <div id="coachThinkPanel" class="think-panel" aria-live="polite" hidden>
+            <div id="coachThinkStage" class="think-stage"></div>
+            <div id="coachThinkDetail" class="think-detail"></div>
+            <div id="coachThinkCandidates" class="think-candidates"></div>
+          </div>
+          <div id="visualHintStatus" class="visual-hint-status" aria-live="polite" hidden></div>
+          <div id="lastMoveRating" aria-live="polite"></div>
+          <div id="hintResults" class="hint-results" aria-live="polite"></div>
+          <details class="why-not" id="favoriteLessonsPanel">
+            <summary>⭐ Favorite lessons</summary>
+            <div id="favoriteLessons" class="favorite-list"></div>
+          </details>
+          <div id="coachReport" class="coach-report" hidden></div>
+          <div class="coach-disclaimer">v2.0.1.1.1 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. The local evaluator remains available solely as a clearly marked teaching fallback.</div>
+          </div>
+        </section>
+
+        <section class="panel settings-panel">
+          <h2>Board & notation</h2>
+          <div class="settings-grid">
+            <label>Point labels
+              <select id="pointLabelMode">
+                <option value="off">Off</option>
+                <option value="human">My numbers</option>
+                <option value="ai">Computer numbers</option>
+                <option value="both">Both</option>
+              </select>
+            </label>
+            <label>Move directions
+              <select id="notationMode">
+                <option value="both">Plain English + notation</option>
+                <option value="plain">Plain English only</option>
+                <option value="standard">Standard notation only</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <section class="panel experience-panel">
+          <h2>Play experience</h2>
+          <div class="settings-grid">
+            <label>Primary-hand layout
+              <select id="handMode">
+                <option value="auto">Auto</option>
+                <option value="right">Right-handed</option>
+                <option value="left">Left-handed</option>
+              </select>
+            </label>
+            <label class="switch-label experience-switch"><input id="floatRollToggle" type="checkbox" checked><span>Floating Roll Dice</span></label>
+            <label class="switch-label experience-switch"><input id="lockRollToggle" type="checkbox"><span>Lock button position</span></label>
+            <button id="resetRollPositionBtn" class="secondary wide" type="button">Reset Roll Dice position</button>
+            <button id="testCelebrationBtn" class="primary wide" type="button">🎉 Test random win celebration</button>
+            <div class="setting-help">Each tap randomly selects one of the five victory finales. Use Stop celebration at any time.</div>
+            <button id="focusModeBtn" class="secondary wide" type="button">Hide extra panels</button>
+          </div>
         </section>
 
         <section class="panel lesson-panel">
@@ -151,8 +426,16 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
       <h2 id="rulesTitle">Backgammon basics</h2>
       <p>You move your checkers in opposite directions around the board. Use both dice when legally possible. A single opposing checker is a blot and may be hit. Two or more opposing checkers make a closed point.</p>
       <p>Checkers on the bar must re-enter before any other checker can move. Once all 15 checkers are in your home board, you may bear them off.</p>
-      <p>This trainer highlights legal starting points. Click a checker, then click a highlighted destination.</p>
+      <p>This trainer highlights legal starting points. You can optionally show your point numbers, the computer’s numbers, or both. A hint can execute the complete recommended turn or guide you through each linked move.</p>
     </div>
+  </div>
+
+
+
+  <div id="victoryCelebration" class="victory-celebration" hidden aria-live="polite" aria-label="Victory celebration">
+    <canvas id="victoryCanvas" class="victory-canvas" aria-hidden="true"></canvas>
+    <div id="victoryBanner" class="victory-banner">🎉 You won!</div>
+    <button id="stopCelebrationBtn" class="stop-celebration" type="button">Stop celebration</button>
   </div>
 
   <script>
@@ -162,9 +445,9 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
   const canvas = document.getElementById('board');
   const ctx = canvas.getContext('2d');
   const UI = Object.fromEntries([
-    'rollBtn','endTurnBtn','newGameBtn','rulesBtn','closeRulesBtn','rulesDialog','die1','die2',
+    'rollBtn','undoBtn','endTurnBtn','newGameBtn','rulesBtn','closeRulesBtn','rulesDialog','die1','die2',
     'humanPips','aiPips','humanBar','aiBar','humanOff','aiOff','turnBanner','coachText','hintBtn',
-    'coachToggle','lessonSelect','lessonText'
+    'coachToggle','coachLevel','coachVerbosity','engineMode','engineEndpoint','testEngineBtn','clearEngineBtn','engineStatus','explainEveryMove','autoWatchCoach','animateBestHintBtn','stopHintAnimationBtn','watchCoachThinkBtn','stopCoachThinkBtn','coachThinkPanel','coachThinkStage','coachThinkDetail','coachThinkCandidates','visualHintStatus','lastMoveRating','favoriteLessonsPanel','favoriteLessons','coachReport','victoryCelebration','victoryCanvas','victoryBanner','stopCelebrationBtn','testCelebrationBtn','coachDrawerToggle','coachDrawerBody','coachPanel','appHeader','playControls','handMode','floatRollToggle','lockRollToggle','resetRollPositionBtn','focusModeBtn','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode'
   ].map(id => [id, document.getElementById(id)]));
 
   const W = canvas.width, H = canvas.height;
@@ -180,6 +463,25 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
   let legalTargets = [];
   let hintMove = null;
   let aiTimer = null;
+  let humanMoveHistory = [];
+  let guidedSequence = [];
+  let guidedStep = 0;
+  let moveGrades = [];
+  let favoriteLessons = JSON.parse(localStorage.getItem('bg-favorite-lessons') || '[]');
+  let autoWatchCoachEnabled = localStorage.getItem('bg-auto-watch-coach') === 'true';
+  let engineMode = localStorage.getItem('bg-engine-mode') || 'gnubg';
+  let engineEndpoint = localStorage.getItem('bg-engine-endpoint') || '';
+  let engineVerified = false;
+  let lastCoachSource = 'none';
+  let bestHintSequence = [];
+  let visualHint = {active:false, step:0, progress:0, timer:null, previewState:null, move:null};
+  let coachThink = {active:false, timers:[], ranked:[], candidateIndex:0};
+  let executingSequence = false;
+  let rollDrag = {active:false, moved:false, dx:0, dy:0};
+  let focusMode = false;
+  let celebrationRun = null;
+  let celebrationShownForGame = false;
+
 
   const lessons = {
     general: 'Keep checkers connected, avoid unnecessary blots, and fight for useful points.',
@@ -192,6 +494,8 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 
   function newGame() {
     clearTimeout(aiTimer);
+    stopVictoryCelebration();
+    celebrationShownForGame=false;
     state = {
       points: Array(24).fill(0),
       bar: { [HUMAN]: 0, [AI]: 0 },
@@ -206,6 +510,9 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     state.points[23] = 2; state.points[12] = 5; state.points[7] = 3; state.points[5] = 5;
     state.points[0] = -2; state.points[11] = -5; state.points[16] = -3; state.points[18] = -5;
     selected = null; legalTargets = []; hintMove = null;
+    humanMoveHistory = []; guidedSequence=[]; guidedStep=0; executingSequence=false;
+    UI.hintResults.innerHTML='';
+    document.body.classList.remove('game-active');
     setCoach('Roll the dice. I’ll highlight legal checkers and explain useful ideas.');
     updateUI(); draw();
   }
@@ -311,6 +618,54 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     return filtered;
   }
 
+  function runCoreRulesTests() {
+    const results=[];
+    const test=(name,fn)=>{try{results.push([name,!!fn()]);}catch(e){results.push([name,false]);console.error(name,e);}};
+    test('Starting checker totals',()=>{
+      const h=state.points.filter(v=>v>0).reduce((a,v)=>a+v,0);
+      const a=state.points.filter(v=>v<0).reduce((x,v)=>x-v,0);
+      return h===15&&a===15;
+    });
+    test('Bar entry has priority',()=>{
+      const s=cloneState(state); s.bar[HUMAN]=1;
+      return legalSingleMoves(s,HUMAN,1).every(m=>m.from==='bar');
+    });
+    test('Blocked bar entry rejected',()=>{
+      const s={points:Array(24).fill(0),bar:{[HUMAN]:1,[AI]:0},off:{[HUMAN]:0,[AI]:0},turn:HUMAN,dice:[],remaining:[],rolled:true,winner:null};
+      s.points[23]=-2; return legalSingleMoves(s,HUMAN,1).length===0;
+    });
+    test('Single blot can be hit',()=>{
+      const s={points:Array(24).fill(0),bar:{[HUMAN]:0,[AI]:0},off:{[HUMAN]:0,[AI]:0},turn:HUMAN,dice:[],remaining:[],rolled:true,winner:null};
+      s.points[5]=1;s.points[4]=-1; const m=legalSingleMoves(s,HUMAN,1)[0]; const n=applyMove(s,HUMAN,m); return n.bar[AI]===1&&n.points[4]===1;
+    });
+    test('Made point blocks landing',()=>{
+      const s={points:Array(24).fill(0),bar:{[HUMAN]:0,[AI]:0},off:{[HUMAN]:0,[AI]:0},turn:HUMAN,dice:[],remaining:[],rolled:true,winner:null};
+      s.points[5]=1;s.points[4]=-2; return legalSingleMoves(s,HUMAN,1).length===0;
+    });
+    test('Exact bear off allowed',()=>{
+      const s={points:Array(24).fill(0),bar:{[HUMAN]:0,[AI]:0},off:{[HUMAN]:14,[AI]:0},turn:HUMAN,dice:[],remaining:[],rolled:true,winner:null};
+      s.points[2]=1; return legalSingleMoves(s,HUMAN,3).some(m=>m.to==='off');
+    });
+    test('Oversized bear off obeys farther-checker rule',()=>{
+      const s={points:Array(24).fill(0),bar:{[HUMAN]:0,[AI]:0},off:{[HUMAN]:13,[AI]:0},turn:HUMAN,dice:[],remaining:[],rolled:true,winner:null};
+      s.points[2]=1;s.points[4]=1; return !legalSingleMoves(s,HUMAN,4).some(m=>m.from===2&&m.to==='off');
+    });
+    test('Doubles permit four plays when available',()=>{
+      const s={points:Array(24).fill(0),bar:{[HUMAN]:0,[AI]:0},off:{[HUMAN]:14,[AI]:0},turn:HUMAN,dice:[],remaining:[],rolled:true,winner:null};
+      s.points[5]=1; return Math.max(...allSequences(s,HUMAN,[1,1,1,1]).map(x=>x.length))===4;
+    });
+    test('Only playable die is retained when the other is blocked',()=>{
+      const s={points:Array(24).fill(0),bar:{[HUMAN]:1,[AI]:0},off:{[HUMAN]:14,[AI]:0},turn:HUMAN,dice:[],remaining:[],rolled:true,winner:null};
+      s.points[18]=-2; // blocks die 6 entry; die 5 enters point 20
+      const seqs=allSequences(s,HUMAN,[5,6]);
+      return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
+    });
+    const passed=results.filter(([,ok])=>ok).length;
+    console.info(`Backgammon Coach v2.0.1.1.1 rules self-test: ${passed}/${results.length} PASS`,results);
+    document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
+    return passed===results.length;
+  }
+
   function availableMovesNow() {
     if (!state.rolled || !state.remaining.length) return [];
     const seqs = allSequences(state, state.turn, state.remaining);
@@ -326,21 +681,65 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     if (state.winner || state.rolled || state.turn!==HUMAN) return;
     const a = 1 + Math.floor(Math.random()*6), b = 1 + Math.floor(Math.random()*6);
     state.dice=[a,b]; state.remaining = a===b ? [a,a,a,a] : [a,b]; state.rolled=true;
+    document.body.classList.add('game-active');
+    humanMoveHistory=[];
+    UI.hintResults.innerHTML='';
+    stopCoachThink('');
+    stopVisualHintAnimation('');
+    bestHintSequence=[];
     selected=null; legalTargets=[]; hintMove=null;
     const moves=availableMovesNow();
-    setCoach(moves.length ? explainPosition(state, HUMAN) : 'No legal move is available. End your turn.');
+    setCoach(moves.length ? explainPosition(state, HUMAN) : 'No legal move is available. Your turn will pass automatically.');
     updateUI(); draw();
+    if (!moves.length) scheduleHumanTurnFinish();
+    else scheduleAutomaticCoachWatch();
   }
 
-  function doHumanMove(move) {
+  function doHumanMove(move, options={}) {
+    stopCoachThink('');
+    stopVisualHintAnimation('');
+    bestHintSequence=[];
+    clearTimeout(aiTimer);
+    const beforeMove=cloneState(state);
+    const comparison=firstMoveComparison(beforeMove,move);
+    humanMoveHistory.push(cloneState(state));
     state = applyMove(state, HUMAN, move);
+    if(UI.explainEveryMove.checked && !executingSequence) renderMoveRating(beforeMove,move,comparison);
     const idx = state.remaining.indexOf(move.die);
     if (idx>=0) state.remaining.splice(idx,1);
     selected=null; legalTargets=[]; hintMove=null;
+    if(guidedSequence.length && guidedStep<guidedSequence.length){
+      const g=guidedSequence[guidedStep];
+      if(g.from===move.from&&g.to===move.to&&g.die===move.die){ guidedStep++; hintMove=guidedSequence[guidedStep]||null; updateGuidedStatus(); }
+      else { guidedSequence=[]; guidedStep=0; UI.hintResults.innerHTML=''; setCoach('You chose a different legal move, so guided mode has ended.'); }
+    } else if(!executingSequence) UI.hintResults.innerHTML='';
     checkWinner();
     const moves=availableMovesNow();
-    if (!state.winner && state.remaining.length && !moves.length) setCoach('No more legal moves. End your turn.');
+    if (!state.winner && guidedSequence.length && guidedStep<guidedSequence.length) {
+      const next=guidedSequence[guidedStep];
+      setCoach(`Good. Next, ${movePlain(next,null,HUMAN)} ${UI.notationMode.value!=='plain'?`(${moveNotation(next,HUMAN)})`:''}`);
+    } else if (!state.winner && guidedSequence.length && guidedStep>=guidedSequence.length) {
+      setCoach('Guided full turn complete. Undo remains available briefly before the computer begins.');
+    } else if (!state.winner && state.remaining.length && !moves.length) setCoach('No more legal moves. The computer will play next.');
     else if (!state.winner && state.remaining.length) setCoach(explainMove(move, state, HUMAN));
+    else if (!state.winner) setCoach('Turn complete. Undo is available briefly before the computer begins.');
+    updateUI(); draw();
+    if (!state.winner && (!state.remaining.length || !moves.length) && !options.suppressAutoFinish && !executingSequence) scheduleHumanTurnFinish();
+  }
+
+  function scheduleHumanTurnFinish() {
+    if (aiTimer) clearTimeout(aiTimer);
+    aiTimer = setTimeout(() => {
+      if (state.turn === HUMAN && state.rolled && !state.winner && availableMovesNow().length === 0) endTurn();
+    }, 2200);
+  }
+
+  function undoHumanMove() {
+    if (state.turn !== HUMAN || !state.rolled || state.winner || !humanMoveHistory.length) return;
+    clearTimeout(aiTimer);
+    state = humanMoveHistory.pop();
+    selected = null; legalTargets = []; hintMove = null; UI.hintResults.innerHTML='';
+    setCoach('Move undone. Choose a different legal move, or tap the hint button for a suggestion.');
     updateUI(); draw();
   }
 
@@ -350,53 +749,470 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
       setCoach('You still have a legal move. Backgammon requires using as many dice as possible.');
       return;
     }
+    humanMoveHistory=[];
     state.turn=AI; state.rolled=false; state.dice=[]; state.remaining=[]; selected=null; legalTargets=[];
     updateUI(); draw();
     aiTimer=setTimeout(aiTurn, 650);
   }
 
-  function evaluate(s, player) {
-    if (s.off[player]===15) return 100000;
-    if (s.off[-player]===15) return -100000;
-    let score = (pipCount(s,-player)-pipCount(s,player))*1.15;
-    score += (s.off[player]-s.off[-player])*45;
-    score += (s.bar[-player]-s.bar[player])*18;
-    for (let i=0;i<24;i++) {
-      const v=s.points[i];
-      if (owner(v)===player) {
-        if (count(v)>=2) score += 4 + Math.min(3,count(v)-2);
-        if (count(v)===1) score -= blotRisk(s,player,i)*2.2;
-      }
-      if (owner(v)===-player && count(v)===1) score += blotRisk(s,-player,i)*.8;
+  const LOCAL_COACH_VERSION='ALC-2.0.1.1';
+  const DICE_OUTCOMES=(()=>{
+    const rows=[];
+    for(let a=1;a<=6;a++) for(let b=a;b<=6;b++) rows.push({a,b,weight:a===b?1:2,dice:a===b?[a,a,a,a]:[a,b]});
+    return rows;
+  })();
+
+  function pointNumber(index, perspective=HUMAN) { return perspective===HUMAN ? index+1 : 24-index; }
+
+  function moveNotation(move, perspective=HUMAN) {
+    const from = move.from === 'bar' ? 'bar' : String(pointNumber(move.from,perspective));
+    const to = move.to === 'off' ? 'off' : String(pointNumber(move.to,perspective));
+    return `${from}/${to}`;
+  }
+
+  function sequenceNotation(seq, perspective=HUMAN) { return seq.map(m=>moveNotation(m,perspective)).join(' '); }
+
+  function movePlain(move, stepNumber=null, perspective=HUMAN) {
+    const who = perspective===HUMAN ? '' : "Computer: ";
+    const prefix = stepNumber ? `Move ${stepNumber}: ` : '';
+    const from = move.from==='bar' ? 'the bar' : `point ${pointNumber(move.from,perspective)}`;
+    const to = move.to==='off' ? 'off the board' : `point ${pointNumber(move.to,perspective)}`;
+    return `${prefix}${who}move a checker from ${from} to ${to}.`;
+  }
+
+  function sequenceDirections(seq, perspective=HUMAN) {
+    const mode=UI.notationMode?.value||'both';
+    const plain=seq.map((m,i)=>movePlain(m,i+1,perspective));
+    const notation=sequenceNotation(seq,perspective);
+    if(mode==='standard') return {summary:`Standard notation: ${notation}`,steps:[]};
+    if(mode==='plain') return {summary:`${seq.length} linked move${seq.length===1?'':'s'}`,steps:plain};
+    return {summary:`Standard notation: ${notation}`,steps:plain};
+  }
+
+  function madePoints(s, player) {
+    return s.points.reduce((n,v)=>n+(owner(v)===player&&count(v)>=2?1:0),0);
+  }
+
+  function blotCount(s, player) {
+    return s.points.reduce((n,v)=>n+(owner(v)===player&&count(v)===1?1:0),0);
+  }
+
+  function homeBoardPoints(s, player) {
+    const [a,b]=homeRange(player); let n=0;
+    for(let i=a;i<=b;i++) if(owner(s.points[i])===player&&count(s.points[i])>=2)n++;
+    return n;
+  }
+
+  function backCheckerDistance(s, player) {
+    if (s.bar[player]) return 25;
+    if (player===HUMAN) {
+      for(let i=23;i>=0;i--) if(owner(s.points[i])===player) return i+1;
+    } else {
+      for(let i=0;i<24;i++) if(owner(s.points[i])===player) return 24-i;
     }
-    score += primeScore(s,player)*4 - primeScore(s,-player)*4;
+    return 0;
+  }
+
+  function primeScore(s,player) {
+    let best=0, run=0;
+    for (let i=0;i<24;i++) {
+      if (owner(s.points[i])===player && count(s.points[i])>=2) { run++; best=Math.max(best,run); }
+      else run=0;
+    }
+    return best;
+  }
+
+  function isStartingPosition(s) {
+    if(s.bar[HUMAN]||s.bar[AI]||s.off[HUMAN]||s.off[AI]) return false;
+    const expected=Array(24).fill(0);
+    expected[23]=2; expected[12]=5; expected[7]=3; expected[5]=5;
+    expected[0]=-2; expected[11]=-5; expected[16]=-3; expected[18]=-5;
+    return expected.every((v,i)=>s.points[i]===v);
+  }
+
+  const OPENING_BOOK={
+    '1-2':['13/11','6/5'],
+    '1-3':['8/5','6/5'],
+    '1-4':['24/23','13/9'],
+    '1-5':['24/23','13/8'],
+    '1-6':['13/7','8/7'],
+    '2-3':['24/21','13/11'],
+    '2-4':['8/4','6/4'],
+    '2-5':['24/22','13/8'],
+    '2-6':['24/18','13/11'],
+    '3-4':['24/21','13/9'],
+    '3-5':['8/3','6/3'],
+    '3-6':['24/18','13/10'],
+    '4-5':['24/20','13/8'],
+    '4-6':['24/18','13/9'],
+    '5-6':['24/13']
+  };
+
+  function openingBookBonus(s,player,seq) {
+    if(player!==HUMAN || !isStartingPosition(s) || !state.dice || state.dice.length!==2 || state.dice[0]===state.dice[1]) return 0;
+    const key=[...state.dice].sort((a,b)=>a-b).join('-');
+    const target=OPENING_BOOK[key];
+    if(!target) return 0;
+    const actual=seq.map(m=>moveNotation(m,HUMAN)).sort();
+    const wanted=[...target].sort();
+    return actual.length===wanted.length && actual.every((v,i)=>v===wanted[i]) ? 500 : 0;
+  }
+
+  function pointStrategicValue(index, player) {
+    const p=pointNumber(index,player);
+    if(p===5) return 13;
+    if(p===7) return 9;
+    if(p===4) return 8;
+    if(p===3) return 6;
+    if(p===2) return 4;
+    if(p===1) return 3;
+    if(p===20) return 10; // advanced anchor
+    if(p===21) return 8;
+    if(p===18) return 7;  // opponent bar point / escape structure
+    if(p===13) return 5;
+    return 2.5;
+  }
+
+  function anchorValue(s,player) {
+    let score=0;
+    for(let i=0;i<24;i++){
+      if(owner(s.points[i])!==player || count(s.points[i])<2) continue;
+      const p=pointNumber(i,player);
+      if(p>=18) score += p===20?12:p===21?9:p===22?5:3;
+    }
     return score;
   }
 
-  function blotRisk(s, player, idx) {
-    let hits=0;
-    for (let die=1;die<=6;die++) {
-      const from = player===HUMAN ? idx-die : idx+die;
-      if (from>=0&&from<24&&owner(s.points[from])===-player) hits++;
+  function stackPenalty(s,player) {
+    let penalty=0;
+    for(let i=0;i<24;i++) if(owner(s.points[i])===player){
+      const n=count(s.points[i]);
+      if(n>5) penalty += (n-5)*5;
+      else if(n>3) penalty += (n-3)*1.8;
     }
-    return hits;
+    return penalty;
   }
-  function primeScore(s,player) {
-    let best=0, run=0;
-    for (let i=0;i<24;i++) { if (owner(s.points[i])===player && count(s.points[i])>=2) { run++; best=Math.max(best,run); } else run=0; }
-    return best;
+
+  function distributionScore(s,player) {
+    let builders=0, stripped=0;
+    for(let i=0;i<24;i++) if(owner(s.points[i])===player){
+      const n=count(s.points[i]);
+      if(n===2 || n===3) builders += 1;
+      if(n===1) stripped += .35;
+    }
+    return builders*1.8-stripped;
+  }
+
+  function contactExists(s) {
+    let humanBack=-1, aiBack=24;
+    for(let i=23;i>=0;i--) if(owner(s.points[i])===HUMAN){humanBack=i;break;}
+    for(let i=0;i<24;i++) if(owner(s.points[i])===AI){aiBack=i;break;}
+    return humanBack>=aiBack;
+  }
+
+  function homeBoardStrength(s,player) {
+    const [a,b]=homeRange(player); let score=0;
+    for(let i=a;i<=b;i++) if(owner(s.points[i])===player && count(s.points[i])>=2){
+      score += pointStrategicValue(i,player);
+    }
+    return score;
+  }
+
+  function blotExposureEstimate(s,player) {
+    let danger=0;
+    const opp=-player;
+    for(let i=0;i<24;i++){
+      if(owner(s.points[i])!==player || count(s.points[i])!==1) continue;
+      let direct=0, indirect=0;
+      for(let die=1;die<=6;die++){
+        const from=opp===HUMAN?i+die:i-die;
+        if(from>=0&&from<24&&owner(s.points[from])===opp) direct++;
+      }
+      for(let a=1;a<=6;a++) for(let b=a;b<=6;b++){
+        const total=a+b;
+        const from=opp===HUMAN?i+total:i-total;
+        if(from>=0&&from<24&&owner(s.points[from])===opp) indirect += a===b?.35:.18;
+      }
+      const depth=pointNumber(i,player);
+      const cost=depth>=18?1.6:depth<=6?1.25:1;
+      danger += (direct*2.4+indirect)*cost;
+    }
+    return danger;
+  }
+
+  function bearoffWastage(s,player) {
+    if(!allInHome(s,player)) return 0;
+    let waste=0, gaps=0;
+    const [a,b]=homeRange(player);
+    for(let i=a;i<=b;i++){
+      const n=owner(s.points[i])===player?count(s.points[i]):0;
+      const dist=player===HUMAN?i+1:24-i;
+      if(!n) gaps++;
+      if(n>3) waste+=(n-3)*dist*.45;
+    }
+    return waste+gaps*.35;
+  }
+
+  function advancedStaticEvaluate(s,player) {
+    if (s.off[player]===15) return 100000;
+    if (s.off[-player]===15) return -100000;
+    const opp=-player;
+    const raceOnly=!contactExists(s) && !s.bar[player] && !s.bar[opp];
+    const pipEdge=pipCount(s,opp)-pipCount(s,player);
+    let score=pipEdge*(raceOnly?1.65:.72);
+    score+=(s.off[player]-s.off[opp])*(raceOnly?58:42);
+    score+=(s.bar[opp]-s.bar[player])*(18+homeBoardPoints(s,player)*4);
+    score+=homeBoardStrength(s,player)-homeBoardStrength(s,opp);
+    score+=(primeScore(s,player)**2-primeScore(s,opp)**2)*4.3;
+    score+=anchorValue(s,player)-anchorValue(s,opp);
+    score+=distributionScore(s,player)-distributionScore(s,opp);
+    score-=stackPenalty(s,player)-stackPenalty(s,opp);
+    score-=blotExposureEstimate(s,player)*2.7;
+    score+=blotExposureEstimate(s,opp)*2.15;
+    score-=bearoffWastage(s,player)*3;
+    score+=bearoffWastage(s,opp)*2.5;
+    if(!raceOnly){
+      const behind=pipCount(s,player)-pipCount(s,opp);
+      if(behind>18) score += primeScore(s,player)*5 + anchorValue(s,player)*.7;
+      if(behind<-18) score -= blotCount(s,player)*4.5;
+    }
+    return score;
+  }
+
+  function evaluate(s,player) { return advancedStaticEvaluate(s,player); }
+
+  function scoreSequenceStatic(s, player, seq) {
+    let cur=s, hits=0, bears=0;
+    for(const m of seq){
+      const oppBarBefore=cur.bar[-player];
+      const offBefore=cur.off[player];
+      cur=applyMove(cur,player,m);
+      hits += cur.bar[-player]-oppBarBefore;
+      bears += cur.off[player]-offBefore;
+    }
+    const features={
+      pipGain:pipCount(s,player)-pipCount(cur,player),
+      opponentPipAdded:pipCount(cur,-player)-pipCount(s,-player),
+      hits,
+      bears,
+      madeDelta:madePoints(cur,player)-madePoints(s,player),
+      homeDelta:homeBoardPoints(cur,player)-homeBoardPoints(s,player),
+      primeDelta:primeScore(cur,player)-primeScore(s,player),
+      blotDelta:blotCount(cur,player)-blotCount(s,player),
+      barRisk:cur.bar[player]-s.bar[player],
+      escapeGain:backCheckerDistance(s,player)-backCheckerDistance(cur,player),
+      exposure:blotExposureEstimate(cur,player),
+      anchorDelta:anchorValue(cur,player)-anchorValue(s,player),
+      stackDelta:stackPenalty(cur,player)-stackPenalty(s,player)
+    };
+    let score=advancedStaticEvaluate(cur,player);
+    score += features.hits*(11+homeBoardPoints(cur,player)*2.5);
+    score += features.bears*28 + features.madeDelta*8 + features.homeDelta*10;
+    score += features.primeDelta*11 + features.anchorDelta*4;
+    score -= Math.max(0,features.stackDelta)*4;
+    score += openingBookBonus(s,player,seq);
+    return {seq,state:cur,score,staticScore:score,features,source:'advanced-local'};
+  }
+
+  function rankSequencesStatic(s, player, dice) {
+    const seqs=allSequences(s,player,dice);
+    const ranked=seqs.map(seq=>scoreSequenceStatic(s,player,seq));
+    ranked.sort((a,b)=>b.score-a.score || sequenceNotation(a.seq).localeCompare(sequenceNotation(b.seq)));
+    const seen=new Set();
+    return ranked.filter(r=>{const k=sequenceNotation(r.seq);if(seen.has(k))return false;seen.add(k);return true;});
+  }
+
+  function expectedOpponentReplyValue(after, player) {
+    let total=0, weightTotal=0, replySamples=0;
+    for(const outcome of DICE_OUTCOMES){
+      const replies=rankSequencesStatic(after,-player,outcome.dice);
+      let resulting=after;
+      if(replies.length) resulting=replies[0].state;
+      total += advancedStaticEvaluate(resulting,player)*outcome.weight;
+      weightTotal += outcome.weight;
+      replySamples += replies.length;
+    }
+    return {value:weightTotal?total/weightTotal:advancedStaticEvaluate(after,player),replySamples};
+  }
+
+  function rankSequences(s, player, dice) {
+    const base=rankSequencesStatic(s,player,dice);
+    if(base.length<=1) return base;
+    // Full opponent-response expectation for the most plausible candidates.
+    // The cap protects iPhone responsiveness in unusually large move trees.
+    const cap=Math.min(base.length, dice.length>2?6:10);
+    for(let i=0;i<cap;i++){
+      const reply=expectedOpponentReplyValue(base[i].state,player);
+      base[i].replyAdjustedScore=reply.value;
+      base[i].replySamples=reply.replySamples;
+      base[i].score=base[i].staticScore*.30+reply.value*.70;
+      base[i].features.lookahead=true;
+    }
+    // Candidates outside the cap receive a conservative penalty so a superficially
+    // attractive but unexamined move cannot leapfrog a fully analyzed move.
+    for(let i=cap;i<base.length;i++){
+      base[i].replyAdjustedScore=null;
+      base[i].score=base[i].staticScore-18;
+      base[i].features.lookahead=false;
+    }
+    base.sort((a,b)=>b.score-a.score || b.staticScore-a.staticScore || sequenceNotation(a.seq).localeCompare(sequenceNotation(b.seq)));
+    return base;
+  }
+
+  function scoreSequence(s,player,seq) {
+    return rankSequences(s,player,seq.map(m=>m.die)).find(r=>sequenceNotation(r.seq)===sequenceNotation(seq)) || scoreSequenceStatic(s,player,seq);
   }
 
   function bestSequence(s, player, dice) {
-    const seqs=allSequences(s,player,dice);
-    let best=seqs[0]||[], bestScore=-Infinity;
-    for (const seq of seqs) {
-      let cur=s;
-      for (const m of seq) cur=applyMove(cur,player,m);
-      const score=evaluate(cur,player)+Math.random()*.25;
-      if (score>bestScore) {bestScore=score;best=seq;}
+    return rankSequences(s,player,dice)[0]?.seq || [];
+  }
+
+  function teachingReasons(ranked, before, player) {
+    const f=ranked.features, reasons=[];
+    if(f.lookahead) reasons.push('holds up best after checking the opponent’s likely replies');
+    if(f.bears) reasons.push(`bears off ${f.bears} checker${f.bears===1?'':'s'}`);
+    if(f.hits) reasons.push(`hits ${f.hits} opposing blot${f.hits===1?'':'s'}`);
+    if(f.homeDelta>0) reasons.push('strengthens your home board');
+    if(f.primeDelta>0) reasons.push('extends your longest prime');
+    if(f.anchorDelta>0) reasons.push('improves your anchor');
+    if(f.blotDelta<0) reasons.push(`removes ${Math.abs(f.blotDelta)} blot${f.blotDelta===-1?'':'s'}`);
+    if(f.escapeGain>=6) reasons.push('advances a back checker');
+    if(f.exposure>8) reasons.push('accepts some calculated shot risk');
+    if(!reasons.length && f.pipGain>0) reasons.push(`uses ${f.pipGain} racing pips efficiently`);
+    return reasons.slice(0,3);
+  }
+
+  function serializeCoachPosition(s, player, dice, rankedLocal) {
+    return {
+      protocol: 'backgammon-coach-engine-v1',
+      game: {
+        points: s.points,
+        bar: s.bar,
+        off: s.off,
+        turn: player,
+        dice: [...dice],
+        cube: s.cube || 1,
+        cubeOwner: s.cubeOwner || 0,
+        matchLength: s.matchLength || 0,
+        score: s.score || [0,0],
+        crawford: !!s.crawford
+      },
+      candidates: rankedLocal.map((r,index)=>({
+        id: `candidate-${index}`,
+        index,
+        notation: sequenceNotation(r.seq),
+        moves: r.seq.map(m=>({from:m.from,to:m.to,die:m.die}))
+      })),
+      requestedAnalysis: {
+        engine: 'GNU Backgammon',
+        strength: 'grandmaster',
+        includeEquity: true,
+        includeErrors: true
+      }
+    };
+  }
+
+  function updateEngineStatus(message, kind='bad') {
+    UI.engineStatus.textContent=message;
+    UI.engineStatus.classList.remove('ok','bad');
+    UI.engineStatus.classList.add(kind);
+  }
+
+  async function testEngineConnection() {
+    engineEndpoint=UI.engineEndpoint.value.trim();
+    if(!engineEndpoint){
+      engineVerified=false;
+      updateEngineStatus('Enter an HTTPS GNU Backgammon analysis endpoint first.','bad');
+      return false;
     }
-    return best;
+    updateEngineStatus('Testing GNU Backgammon service…','');
+    try{
+      const base=engineEndpoint.replace(/\/analyze\/?$/,'');
+      const response=await fetch(base+'/health',{headers:{'Accept':'application/json'}});
+      if(!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data=await response.json();
+      if(data.engine!=='GNU Backgammon' || data.status!=='ok') throw new Error('Service did not identify itself as GNU Backgammon');
+      engineVerified=true;
+      localStorage.setItem('bg-engine-endpoint',engineEndpoint);
+      updateEngineStatus(`Verified: ${data.engine}${data.version?' '+data.version:''}. Grandmaster recommendations are enabled.`,'ok');
+      return true;
+    }catch(error){
+      engineVerified=false;
+      updateEngineStatus(`Grandmaster engine unavailable: ${error.message}. No engine move will be presented as verified.`,'bad');
+      return false;
+    }
+  }
+
+  async function getCoachRankings(s, player, dice) {
+    const localRanked=rankSequences(s,player,dice);
+    if(engineMode==='local'){
+      lastCoachSource='local';
+      updateEngineStatus('Advanced local coach active — stronger offline analysis, but not verified grandmaster.','bad');
+      localRanked.forEach((r,i)=>{r.engineRank=i+1;r.engineExplanation=teachingReasons(r,s,player).join('; ');r.source='advanced-local';});
+      return localRanked;
+    }
+    if(!engineEndpoint) throw new Error('GNU Backgammon endpoint is not configured.');
+    const payload=serializeCoachPosition(s,player,dice,localRanked);
+    const response=await fetch(engineEndpoint,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    if(!response.ok) throw new Error(`GNU Backgammon service returned HTTP ${response.status}.`);
+    const data=await response.json();
+    if(data.engine!=='GNU Backgammon') throw new Error('The service response was not identified as GNU Backgammon.');
+    if(!Array.isArray(data.rankings) || !data.rankings.length) throw new Error('The engine returned no ranked candidates.');
+    const mapped=[];
+    for(const item of data.rankings){
+      const idx=Number.isInteger(item.index)?item.index:
+        localRanked.findIndex(r=>sequenceNotation(r.seq)===item.notation);
+      if(idx<0 || !localRanked[idx]) continue;
+      mapped.push({
+        ...localRanked[idx],
+        engineScore:Number(item.equity),
+        equity:Number(item.equity),
+        error:Number(item.error || 0),
+        engineRank:Number(item.rank || mapped.length+1),
+        engineExplanation:item.explanation || '',
+        source:'gnubg'
+      });
+    }
+    if(!mapped.length) throw new Error('The engine rankings could not be matched to legal moves.');
+    mapped.sort((a,b)=>(a.engineRank||99)-(b.engineRank||99));
+    engineVerified=true;
+    lastCoachSource='gnubg';
+    updateEngineStatus(`Verified GNU Backgammon analysis received for ${mapped.length} legal candidate${mapped.length===1?'':'s'}.`,'ok');
+    return mapped;
+  }
+
+  function rankSequences(s, player, dice) {
+    const seqs=allSequences(s,player,dice);
+    const ranked=seqs.map(seq=>scoreSequence(s,player,seq));
+    ranked.sort((a,b)=>b.score-a.score || sequenceNotation(a.seq).localeCompare(sequenceNotation(b.seq)));
+    // Deduplicate equivalent textual sequences caused by identical dice permutations.
+    const seen=new Set();
+    return ranked.filter(r=>{const k=sequenceNotation(r.seq);if(seen.has(k))return false;seen.add(k);return true;});
+  }
+
+  function bestSequence(s, player, dice) {
+    return rankSequences(s,player,dice)[0]?.seq || [];
+  }
+
+  function teachingReasons(ranked, before, player) {
+    const f=ranked.features, reasons=[];
+    if(f.bears) reasons.push(`bears off ${f.bears} checker${f.bears===1?'':'s'}`);
+    if(f.hits) reasons.push(`hits ${f.hits} opposing blot${f.hits===1?'':'s'}`);
+    if(f.madeDelta>0) reasons.push(`makes ${f.madeDelta} new point${f.madeDelta===1?'':'s'}`);
+    if(f.homeDelta>0) reasons.push('strengthens your home board');
+    if(f.primeDelta>0) reasons.push('extends your longest prime');
+    if(f.blotDelta<0) reasons.push(`removes ${Math.abs(f.blotDelta)} blot${f.blotDelta===-1?'':'s'}`);
+    if(f.escapeGain>=6) reasons.push('advances a back checker');
+    if(f.blotDelta>0) reasons.push(`leaves ${f.blotDelta} extra blot${f.blotDelta===1?'':'s'}`);
+    if(!reasons.length && f.pipGain>0) reasons.push(`uses ${f.pipGain} racing pips efficiently`);
+    const race=pipCount(before,player)-pipCount(before,-player);
+    if(race<-20 && f.blotDelta<=0) reasons.push('protects a racing lead');
+    if(race>20 && (f.hits||f.primeDelta>0)) reasons.push('keeps useful contact while behind');
+    return reasons.slice(0,3);
   }
 
   function aiTurn() {
@@ -410,8 +1226,13 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
       if (i>=seq.length) {
         checkWinner();
         if (!state.winner) {
+          const aiNotation=sequenceNotation(seq,AI);
+          const yourView=sequenceNotation(seq,HUMAN);
           state.turn=HUMAN; state.rolled=false; state.dice=[]; state.remaining=[];
-          setCoach('Your turn. Roll the dice and look for a move that improves safety, structure, or the race.');
+          const mode=UI.notationMode.value;
+          const plain=seq.map((m,j)=>movePlain(m,j+1,AI)).join(' ');
+          const notation=mode==='plain'?'':` Computer notation: ${aiNotation}. Your-board equivalent: ${yourView}.`;
+          setCoach(`Computer turn: ${mode==='standard'?'':plain}${notation} Your turn—roll the dice.`);
         }
         updateUI(); draw(); return;
       }
@@ -425,8 +1246,152 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
   }
 
   function checkWinner() {
-    if (state.off[HUMAN]===15) {state.winner=HUMAN; setCoach('You won! Review which made points and safe moves created the advantage.');}
+    if (state.off[HUMAN]===15) {
+      state.winner=HUMAN;
+      setCoach('You won! Enjoy the celebration — then review the Coach Report for your strongest moves and improvement areas.');
+      renderCoachReport();
+      if(!celebrationShownForGame){celebrationShownForGame=true;startVictoryCelebration();}
+    }
     if (state.off[AI]===15) {state.winner=AI; setCoach('The computer won. Try again and focus on reducing exposed blots and building connected points.');}
+  }
+
+
+  function coachTerm(text) {
+    if (UI.coachLevel.value==='beginner') {
+      return text.replace(/prime/gi,'wall of points').replace(/builder/gi,'checker ready to help make a point').replace(/tempo/gi,'extra time').replace(/contact/gi,'chances to interact or hit');
+    }
+    if (UI.coachLevel.value==='advanced') return text;
+    return text.replace(/tempo/gi,'time advantage');
+  }
+
+  function positionMetrics(s, player) {
+    let blots=0, made=0, homeMade=0, builders=0;
+    for(let i=0;i<24;i++){
+      if(owner(s.points[i])===player){
+        const n=count(s.points[i]);
+        if(n===1) blots++;
+        if(n>=2){made++; if((player===HUMAN&&i<=5)||(player===AI&&i>=18)) homeMade++;}
+        if(n===1||n===2) builders++;
+      }
+    }
+    return {pips:pipCount(s,player),blots,made,homeMade,builders,bar:s.bar[player],off:s.off[player]};
+  }
+
+  function moveImpact(before, after, player) {
+    const a=positionMetrics(before,player), b=positionMetrics(after,player);
+    const oppA=positionMetrics(before,-player), oppB=positionMetrics(after,-player);
+    return {
+      pipGain:a.pips-b.pips,
+      blotChange:b.blots-a.blots,
+      pointChange:b.made-a.made,
+      homePointChange:b.homeMade-a.homeMade,
+      hitGain:oppB.bar-oppA.bar,
+      borneOff:b.off-a.off,
+      builderChange:b.builders-a.builders
+    };
+  }
+
+  function riskScores(before, after, player) {
+    const m=positionMetrics(after,player), opp=positionMetrics(after,-player);
+    const safety=Math.max(5,Math.min(100,88-m.blots*17-m.bar*20+m.made*3));
+    const attack=Math.max(5,Math.min(100,35+opp.bar*22+m.homeMade*9));
+    const flexibility=Math.max(5,Math.min(100,45+m.builders*7-Math.max(0,m.blots-2)*5));
+    const race=Math.max(5,Math.min(100,50+(opp.pips-m.pips)*1.2));
+    return {Safety:Math.round(safety),Attack:Math.round(attack),Flexibility:Math.round(flexibility),Race:Math.round(race)};
+  }
+
+  function explainSequence(seq, before, player) {
+    let after=cloneState(before);
+    seq.forEach(m=>after=applyMove(after,player,m));
+    const impact=moveImpact(before,after,player);
+    const reasons=[];
+    if(impact.hitGain>0) reasons.push(`hits ${impact.hitGain} opposing blot${impact.hitGain===1?'':'s'} and gains time`);
+    if(impact.homePointChange>0) reasons.push('strengthens your home board');
+    else if(impact.pointChange>0) reasons.push(`makes ${impact.pointChange} new point${impact.pointChange===1?'':'s'}`);
+    if(impact.borneOff>0) reasons.push(`bears off ${impact.borneOff} checker${impact.borneOff===1?'':'s'}`);
+    if(impact.blotChange<0) reasons.push(`reduces exposed blots by ${Math.abs(impact.blotChange)}`);
+    if(impact.blotChange>0) reasons.push(`creates ${impact.blotChange} additional exposed blot${impact.blotChange===1?'':'s'}`);
+    if(impact.builderChange>0) reasons.push('creates more useful builders');
+    if(!reasons.length) reasons.push('uses the dice efficiently while keeping the position balanced');
+    if(UI.coachVerbosity.value==='short') return coachTerm(reasons[0]+'.');
+    if(UI.coachVerbosity.value==='detailed') reasons.push(`advances ${impact.pipGain} pips this turn`);
+    return coachTerm(reasons.map((x,i)=>`${i===0?'It':'It also'} ${x}`).join('. ')+'.');
+  }
+
+  function gradeGap(gap) {
+    if(gap<=0.25) return 'Perfect';
+    if(gap<=1.25) return 'Excellent';
+    if(gap<=3.5) return 'Good';
+    if(gap<=7) return 'Playable';
+    if(gap<=12) return 'Dubious';
+    if(gap<=22) return 'Mistake';
+    return 'Blunder';
+  }
+
+  function firstMoveComparison(before, move) {
+    const ranked=rankSequences(before,HUMAN,before.remaining);
+    if(!ranked.length) return null;
+    const choices=ranked.filter(r=>r.seq[0] && r.seq[0].from===move.from && r.seq[0].to===move.to && r.seq[0].die===move.die);
+    const chosen=choices[0] || {score:evaluate(applyMove(before,HUMAN,move),HUMAN),seq:[move]};
+    const gap=Math.max(0,ranked[0].score-chosen.score);
+    return {best:ranked[0],chosen,gap,grade:gradeGap(gap)};
+  }
+
+  function riskHTML(scores) {
+    return `<div class="risk-grid">${Object.entries(scores).map(([k,v])=>`<div class="risk-row"><span>${k}</span><div class="risk-track"><div class="risk-fill" style="width:${v}%"></div></div><strong>${v}</strong></div>`).join('')}</div>`;
+  }
+
+  function saveFavoriteLesson(textValue) {
+    if(!textValue) return;
+    favoriteLessons.unshift({text:textValue,when:new Date().toLocaleDateString()});
+    favoriteLessons=favoriteLessons.slice(0,20);
+    localStorage.setItem('bg-favorite-lessons',JSON.stringify(favoriteLessons));
+    renderFavoriteLessons();
+  }
+
+  function renderFavoriteLessons() {
+    UI.favoriteLessons.innerHTML=favoriteLessons.length
+      ? favoriteLessons.map(x=>`<div class="favorite-item"><strong>${x.when}</strong><br>${x.text}</div>`).join('')
+      : '<div class="favorite-item">No saved lessons yet. Tap ⭐ Save lesson after a move explanation.</div>';
+  }
+
+  function renderMoveRating(before, move, comparison) {
+    if(!comparison) return;
+    let after=applyMove(before,HUMAN,move);
+    const explanation=explainSequence([move],before,HUMAN);
+    const bestSummary=sequenceDirections(comparison.best.seq,HUMAN).summary;
+    const chosenSummary=sequenceDirections(comparison.chosen.seq,HUMAN).summary;
+    const why=explainSequence(comparison.best.seq,before,HUMAN);
+    const risks=riskScores(before,after,HUMAN);
+    const id=`lesson-${Date.now()}`;
+    UI.lastMoveRating.innerHTML=`<section class="move-rating" data-grade="${comparison.grade}">
+      <h3>${comparison.grade}: ${chosenSummary}</h3>
+      <p>${explanation}</p>
+      ${riskHTML(risks)}
+      <details class="why-not"><summary>Why not another move?</summary>
+        <p><strong>Coach choice:</strong> ${bestSummary}</p>
+        <p>${comparison.gap<.3?'Your move matched the coach choice.':`The coach choice scored ${comparison.gap.toFixed(1)} teaching points better because ${why.toLowerCase()}`}</p>
+      </details>
+      <div class="lesson-actions"><button type="button" class="secondary" data-favorite="${id}">⭐ Save lesson</button></div>
+    </section>`;
+    const btn=UI.lastMoveRating.querySelector('[data-favorite]');
+    if(btn) btn.addEventListener('click',()=>{saveFavoriteLesson(`${comparison.grade}: ${chosenSummary}. ${explanation}`);btn.textContent='★ Saved';btn.disabled=true;});
+    moveGrades.push(comparison.grade);
+  }
+
+  function renderCoachReport() {
+    const names=['Perfect','Excellent','Good','Playable','Dubious','Mistake','Blunder'];
+    const counts=Object.fromEntries(names.map(n=>[n,moveGrades.filter(x=>x===n).length]));
+    const strong=counts.Perfect+counts.Excellent+counts.Good;
+    const needs=counts.Mistake+counts.Blunder;
+    UI.coachReport.hidden=false;
+    UI.coachReport.innerHTML=`<strong>Game Coach Report</strong>
+      <div class="coach-report-grid">
+        <div><strong>${moveGrades.length}</strong><small>rated moves</small></div>
+        <div><strong>${strong}</strong><small>strong moves</small></div>
+        <div><strong>${needs}</strong><small>mistakes</small></div>
+      </div>
+      <p>${needs===0?'Excellent control: no moves were rated as mistakes or blunders.':'Best next focus: review the orange and red move explanations saved during the game.'}</p>`;
   }
 
   function explainPosition(s, player) {
@@ -447,15 +1412,196 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     return 'Solid move. Continue looking for connected checkers and useful made points.';
   }
 
-  function showHint() {
-    if (state.turn!==HUMAN || !state.rolled) { setCoach('Roll the dice first, then I can suggest a move.'); return; }
-    const seq=bestSequence(state,HUMAN,state.remaining);
-    if (!seq.length) { setCoach('There is no legal move with the remaining dice.'); return; }
-    hintMove=seq[0];
-    const fromText=hintMove.from==='bar'?'the bar':`point ${hintMove.from+1}`;
-    const toText=hintMove.to==='off'?'bear off':`point ${hintMove.to+1}`;
-    setCoach(`Suggested move: ${fromText} → ${toText} using ${hintMove.die}. It scores best for race, safety, made points, and hitting chances.`);
+  function renderHintCards(ranked) {
+    const labels=['Best move','Strong alternative','Another legal choice'];
+    UI.hintResults.innerHTML=ranked.slice(0,3).map((r,i)=>{
+      const reasons=teachingReasons(r,state,HUMAN);
+      const scoreGap=Math.max(0,ranked[0].score-r.score);
+      const gap=i===0?'Top local score':`${scoreGap.toFixed(1)} points behind`;
+      const d=sequenceDirections(r.seq,HUMAN);
+      const steps=d.steps.length?`<ol class="move-steps">${d.steps.map(x=>`<li>${x}</li>`).join('')}</ol>`:'';
+      let after=cloneState(state); r.seq.forEach(m=>after=applyMove(after,HUMAN,m));
+      const explanation=explainSequence(r.seq,state,HUMAN);
+      const risks=riskScores(state,after,HUMAN);
+      const whyNot=i===0?'This is the coach baseline.':`Compared with ${sequenceDirections(ranked[0].seq,HUMAN).summary}, this option gives up ${scoreGap.toFixed(1)} teaching points.`;
+      return `<div class="hint-card ${i===0?'best':''}">
+        <div class="hint-head"><span class="hint-rank">${labels[i]||`Choice ${i+1}`}</span><span class="hint-move">${d.summary}</span></div>
+        ${steps}
+        <p>${explanation}</p>
+        ${riskHTML(risks)}
+        <details class="why-not"><summary>${i===0?'Why this move?':'Why not this move?'}</summary><p>${whyNot}</p></details>
+        <p><strong>${gap} • ${gradeGap(scoreGap)}</strong></p>
+        <div class="hint-actions">
+          <button type="button" class="make-now" data-make-index="${i}">Make this move now!</button>
+          <button type="button" class="guide-me" data-guide-index="${i}">Show me, I’ll move</button>
+        </div>
+      </div>`;
+    }).join('');
+    UI.hintResults.querySelectorAll('[data-make-index]').forEach(btn=>btn.addEventListener('click',()=>{
+      const r=ranked[Number(btn.dataset.makeIndex)]; if(r) executeRecommendedSequence(r.seq);
+    }));
+    UI.hintResults.querySelectorAll('[data-guide-index]').forEach(btn=>btn.addEventListener('click',()=>{
+      const r=ranked[Number(btn.dataset.guideIndex)]; if(r) beginGuidedSequence(r.seq);
+    }));
+  }
+
+  async function showHint() {
+    if (state.turn!==HUMAN || !state.rolled) { setCoach('Roll the dice first, then I can rank your complete legal turn.'); return []; }
+    let ranked;
+    try{
+      ranked=await getCoachRankings(state,HUMAN,state.remaining);
+    }catch(error){
+      hintMove=null; bestHintSequence=[];
+      UI.animateBestHintBtn.disabled=true;
+      UI.watchCoachThinkBtn.disabled=true;
+      UI.hintResults.innerHTML='';
+      setCoach(`Grandmaster analysis unavailable: ${error.message} Connect a GNU Backgammon service, or deliberately choose the clearly labeled advanced local coach.`);
+      updateEngineStatus(`Grandmaster analysis unavailable: ${error.message}`,'bad');
+      return [];
+    }
+    if (!ranked.length || !ranked[0].seq.length) { setCoach('There is no legal move with the remaining dice.'); UI.hintResults.innerHTML=''; return []; }
+    hintMove=ranked[0].seq[0];
+    bestHintSequence=ranked[0].seq.map(m=>({...m}));
+    UI.animateBestHintBtn.disabled=false;
+    UI.watchCoachThinkBtn.disabled=false;
+    UI.visualHintStatus.hidden=false;
+    const verified=lastCoachSource==='gnubg';
+    UI.visualHintStatus.textContent=verified?'Verified GNU Backgammon move is ready to animate.':'Advanced local coach is ready to animate — offline analysis, not verified grandmaster.';
+    const d=sequenceDirections(ranked[0].seq,HUMAN);
+    setCoach(`${verified?'Verified GNU Backgammon':'Advanced local coach'} complete turn: ${d.summary}. ${ranked[0].engineExplanation||''}`);
+    renderHintCards(ranked);
     draw();
+    return ranked;
+  }
+
+  function beginGuidedSequence(seq) {
+    guidedSequence=seq.map(m=>({...m})); guidedStep=0; executingSequence=false;
+    hintMove=guidedSequence[0]||null; selected=null; legalTargets=[];
+    UI.hintResults.insertAdjacentHTML('afterbegin',`<div class="guided-status" id="guidedStatus"></div>`);
+    updateGuidedStatus(); draw();
+  }
+
+  function updateGuidedStatus() {
+    const el=document.getElementById('guidedStatus');
+    if(!el || !guidedSequence.length) return;
+    if(guidedStep>=guidedSequence.length){ el.textContent='Guided turn complete.'; return; }
+    const m=guidedSequence[guidedStep];
+    el.textContent=`Step ${guidedStep+1} of ${guidedSequence.length}: ${movePlain(m,null,HUMAN)} ${UI.notationMode.value!=='plain'?`(${moveNotation(m,HUMAN)})`:''}`;
+  }
+
+  function executeRecommendedSequence(seq) {
+    if(executingSequence || state.turn!==HUMAN || !state.rolled) return;
+    executingSequence=true; guidedSequence=[]; guidedStep=0; UI.hintResults.innerHTML='';
+    const moves=seq.map(m=>({...m})); let i=0;
+    function step(){
+      if(i>=moves.length){ executingSequence=false; hintMove=null; setCoach('Recommended full turn completed. Undo remains available briefly before the computer begins.'); updateUI(); draw(); return; }
+      const expected=moves[i++];
+      const legal=availableMovesNow();
+      const match=legal.find(m=>m.from===expected.from&&m.to===expected.to&&m.die===expected.die);
+      if(!match){ executingSequence=false; setCoach('The position changed, so that full recommendation is no longer legal. Ask for a fresh hint.'); updateUI(); draw(); return; }
+      doHumanMove(match,{suppressAutoFinish:true});
+      if(i<moves.length) aiTimer=setTimeout(step,420);
+      else {
+        executingSequence=false;
+        hintMove=null;
+        setCoach('Recommended full turn completed. Undo remains available briefly before the computer begins.');
+        updateUI(); draw();
+        if(!state.winner && availableMovesNow().length===0) scheduleHumanTurnFinish();
+      }
+    }
+    step();
+  }
+
+
+  function startVictoryCelebration() {
+    stopVictoryCelebration();
+    const overlay=UI.victoryCelebration, c=UI.victoryCanvas, x=c.getContext('2d');
+    overlay.hidden=false;
+    requestAnimationFrame(()=>overlay.classList.add('active'));
+    const dpr=Math.min(2,window.devicePixelRatio||1);
+    const resize=()=>{c.width=Math.round(innerWidth*dpr);c.height=Math.round(innerHeight*dpr);c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';x.setTransform(dpr,0,0,dpr,0,0)};
+    resize();
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const effectNames=['Rocket Checkers','Checker Hill','Classic Bounce','Victory Vortex','Checker Fountain'];
+    const effect=Math.floor(Math.random()*effectNames.length);
+    UI.victoryBanner.textContent=`🎉 You won! • ${effectNames[effect]}`;
+    const particles=[]; const sparks=[]; const started=performance.now();
+    const boardRect=canvas.getBoundingClientRect();
+    const origin={x:Math.min(innerWidth-40,Math.max(40,boardRect.right-48)),y:Math.min(innerHeight-40,Math.max(40,boardRect.bottom-46))};
+    const rand=(a,b)=>a+Math.random()*(b-a);
+    const colors=['#f7efe1','#d9a441','#9e3f37','#e8c78f','#294f42'];
+    function checker(i){return {i,x:origin.x+rand(-24,24),y:origin.y+rand(-18,18),vx:0,vy:0,r:Math.max(11,Math.min(22,innerWidth/30)),rot:rand(0,Math.PI*2),spin:rand(-.12,.12),trail:[],phase:rand(0,Math.PI*2),landed:false};}
+    for(let i=0;i<15;i++)particles.push(checker(i));
+    function firework(cx,cy,color,count=34){for(let i=0;i<count;i++){const a=Math.PI*2*i/count+rand(-.05,.05),sp=rand(2.2,6.2);sparks.push({x:cx,y:cy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:rand(42,72),max:72,color,size:rand(1.5,3.5)})}}
+    for(let i=0;i<(reduced?2:6);i++)setTimeout(()=>{if(celebrationRun)firework(rand(innerWidth*.14,innerWidth*.86),rand(innerHeight*.12,innerHeight*.48),colors[i%colors.length],reduced?18:40)},i*230);
+    function drawChecker(p,alpha=1){x.save();x.globalAlpha=alpha;x.translate(p.x,p.y);x.rotate(p.rot);x.beginPath();x.arc(0,0,p.r,0,Math.PI*2);x.fillStyle=p.i%2?'#d8c6a4':'#3a211b';x.fill();x.lineWidth=2;x.strokeStyle=p.i%2?'#6a4b2e':'#e8c78f';x.stroke();x.beginPath();x.arc(-p.r*.25,-p.r*.28,p.r*.19,0,Math.PI*2);x.fillStyle='rgba(255,255,255,.22)';x.fill();x.restore()}
+    function updateSparks(){for(let i=sparks.length-1;i>=0;i--){const p=sparks[i];p.x+=p.vx;p.y+=p.vy;p.vy+=.055;p.vx*=.992;p.life--;x.globalAlpha=Math.max(0,p.life/p.max);x.fillStyle=p.color;x.beginPath();x.arc(p.x,p.y,p.size,0,Math.PI*2);x.fill();if(p.life<=0)sparks.splice(i,1)}x.globalAlpha=1}
+    function rocket(p,t){const delay=p.i*105,lt=t-delay;if(lt<0)return;if(lt<1500){p.x=origin.x+Math.sin(lt*.018+p.i)*18;p.y=origin.y-lt*.42-p.i*2;p.trail.push({x:p.x,y:p.y,a:1});if(p.trail.length>12)p.trail.shift();p.trail.forEach((q,j)=>{x.globalAlpha=(j/p.trail.length)*.35;x.fillStyle=p.i%2?'#e8c78f':'#9e3f37';x.beginPath();x.arc(q.x,q.y,Math.max(1,p.r*j/p.trail.length*.45),0,Math.PI*2);x.fill()});x.globalAlpha=1;drawChecker(p)}else if(!p.landed){p.landed=true;firework(p.x,p.y,colors[p.i%colors.length],20)}}
+    function hill(p,t){const targetRow=Math.floor((Math.sqrt(8*p.i+1)-1)/2),first=targetRow*(targetRow+1)/2,pos=p.i-first;const tx=innerWidth/2+(pos-targetRow/2)*(p.r*2.05),ty=innerHeight*.78-targetRow*(p.r*1.72);if(t<2200){const q=Math.min(1,(t-p.i*55)/1100);if(q>0){p.x+=(tx-p.x)*.075;p.y+=(ty-p.y)*.075;p.rot+=p.spin;drawChecker(p)}}else{const roll=t-2200;p.vx=p.vx||((p.i%2?1:-1)*rand(3.2,6.2));p.x+=p.vx;p.y=ty+Math.abs(Math.sin(roll*.012+p.phase))*22;p.rot+=p.vx/p.r;drawChecker(p)}}
+    function classicBounce(p,t){if(!p.landed){p.x=rand(40,innerWidth-40);p.y=rand(40,innerHeight*.38);p.vx=rand(3,8)*(p.i%2?1:-1);p.vy=rand(-2,3);p.landed=true}p.trail.push({x:p.x,y:p.y});if(p.trail.length>18)p.trail.shift();p.trail.forEach((q,j)=>{const ghost={...p,x:q.x,y:q.y};drawChecker(ghost,(j/p.trail.length)*.20)});p.x+=p.vx;p.y+=p.vy;p.vy+=.28;if(p.x<p.r||p.x>innerWidth-p.r)p.vx*=-1;if(p.y>innerHeight-p.r){p.y=innerHeight-p.r;p.vy=-Math.abs(p.vy)*.86}p.rot+=p.vx/p.r;drawChecker(p)}
+    function vortex(p,t){const q=Math.min(1,t/3000),rad=(1-q)*Math.max(innerWidth,innerHeight)*.48+24,ang=p.phase+t*.0026*(p.i%2?1:-1)+p.i*.42;p.x=innerWidth/2+Math.cos(ang)*rad;p.y=innerHeight/2+Math.sin(ang)*rad*.58;p.rot+=.08;drawChecker(p);if(q>=1&&!p.landed){p.landed=true;p.vx=Math.cos(ang)*rand(4,9);p.vy=Math.sin(ang)*rand(4,9)}if(t>3000){p.x+=p.vx;p.y+=p.vy;p.vy+=.08;drawChecker(p,.9)}}
+    function fountain(p,t){const delay=p.i*90,lt=t-delay;if(lt<0)return;if(!p.landed){p.x=innerWidth/2+rand(-35,35);p.y=innerHeight+30;p.vx=rand(-5.5,5.5);p.vy=rand(-15,-10);p.landed=true}p.x+=p.vx;p.y+=p.vy;p.vy+=.34;if(p.y>innerHeight-p.r){p.y=innerHeight-p.r;p.vy=-Math.abs(p.vy)*.68;p.vx*=.92}if(p.x<p.r||p.x>innerWidth-p.r)p.vx*=-1;p.rot+=p.spin;drawChecker(p)}
+    function frame(now){if(!celebrationRun)return;const t=now-started;x.clearRect(0,0,innerWidth,innerHeight);updateSparks();if(!reduced&&t>900){for(const p of particles){if(effect===0)rocket(p,t-900);else if(effect===1)hill(p,t-900);else if(effect===2)classicBounce(p,t-900);else if(effect===3)vortex(p,t-900);else fountain(p,t-900)}}if(reduced&&t>1100){particles.slice(0,5).forEach((p,i)=>{p.x=innerWidth/2+(i-2)*50;p.y=innerHeight*.68;drawChecker(p)})}if(t<9000)celebrationRun.raf=requestAnimationFrame(frame);else stopVictoryCelebration()}
+    celebrationRun={raf:requestAnimationFrame(frame),resize};
+    addEventListener('resize',resize);
+  }
+  function stopVictoryCelebration(){
+    if(celebrationRun){cancelAnimationFrame(celebrationRun.raf);removeEventListener('resize',celebrationRun.resize);celebrationRun=null;}
+    if(UI.victoryCelebration){UI.victoryCelebration.classList.remove('active');setTimeout(()=>{if(!celebrationRun)UI.victoryCelebration.hidden=true},190);}
+  }
+
+  function setCoachDrawer(collapsed){
+    UI.coachPanel.classList.toggle('collapsed', collapsed);
+    UI.coachDrawerToggle.setAttribute('aria-expanded', String(!collapsed));
+    localStorage.setItem('bg-coach-collapsed', collapsed?'1':'0');
+  }
+  function applyHandMode(){
+    const mode=UI.handMode.value;
+    document.body.classList.toggle('hand-left',mode==='left');
+    document.body.classList.toggle('hand-right',mode==='right'||mode==='auto');
+    localStorage.setItem('bg-hand-mode',mode);
+    if(!UI.rollBtn.classList.contains('floating')) UI.rollBtn.style.cssText='';
+  }
+  function saveRollPosition(){
+    if(!UI.rollBtn.classList.contains('floating')) return;
+    localStorage.setItem('bg-roll-position',JSON.stringify({left:UI.rollBtn.style.left,top:UI.rollBtn.style.top}));
+  }
+  function applyRollPreference(){
+    const floating=UI.floatRollToggle.checked && window.innerWidth<=980;
+    UI.rollBtn.classList.toggle('floating',floating);
+    localStorage.setItem('bg-floating-roll',UI.floatRollToggle.checked?'1':'0');
+    if(floating){
+      const saved=JSON.parse(localStorage.getItem('bg-roll-position')||'null');
+      if(saved){UI.rollBtn.style.left=saved.left;UI.rollBtn.style.top=saved.top;UI.rollBtn.style.bottom='auto';}
+      else resetRollPosition(false);
+    } else UI.rollBtn.style.cssText='';
+  }
+  function resetRollPosition(save=true){
+    if(UI.rollBtn.classList.contains('floating')){
+      const left=UI.handMode.value==='left'?Math.max(10,window.innerWidth-190):18;
+      const top=Math.max(70,window.innerHeight-150);
+      UI.rollBtn.style.left=left+'px';UI.rollBtn.style.top=top+'px';UI.rollBtn.style.bottom='auto';
+      if(save) saveRollPosition();
+    }
+  }
+  function beginRollDrag(e){
+    if(!UI.rollBtn.classList.contains('floating')||UI.lockRollToggle.checked||UI.rollBtn.disabled)return;
+    const r=UI.rollBtn.getBoundingClientRect();
+    rollDrag={active:true,moved:false,dx:e.clientX-r.left,dy:e.clientY-r.top};
+    UI.rollBtn.classList.add('dragging');UI.rollBtn.setPointerCapture?.(e.pointerId);e.preventDefault();
+  }
+  function moveRollDrag(e){
+    if(!rollDrag.active)return;
+    rollDrag.moved=true;
+    const r=UI.rollBtn.getBoundingClientRect();
+    const left=Math.min(window.innerWidth-r.width-8,Math.max(8,e.clientX-rollDrag.dx));
+    const top=Math.min(window.innerHeight-r.height-8,Math.max(8,e.clientY-rollDrag.dy));
+    UI.rollBtn.style.left=left+'px';UI.rollBtn.style.top=top+'px';UI.rollBtn.style.bottom='auto';e.preventDefault();
+  }
+  function endRollDrag(e){
+    if(!rollDrag.active)return;
+    rollDrag.active=false;UI.rollBtn.classList.remove('dragging');saveRollPosition();
+    setTimeout(()=>{rollDrag.moved=false},40);e.preventDefault();
   }
 
   function setCoach(text) { if (UI.coachToggle.checked) UI.coachText.textContent=text; }
@@ -518,9 +1664,23 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     UI.humanBar.textContent=state.bar[HUMAN]; UI.aiBar.textContent=state.bar[AI];
     UI.humanOff.textContent=state.off[HUMAN]; UI.aiOff.textContent=state.off[AI];
     UI.die1.textContent=state.dice[0]??'–'; UI.die2.textContent=state.dice[1]??'–';
-    UI.rollBtn.disabled=state.turn!==HUMAN||state.rolled||!!state.winner;
-    UI.endTurnBtn.disabled=state.turn!==HUMAN||!state.rolled||!!state.winner;
-    UI.turnBanner.textContent=state.winner ? (state.winner===HUMAN?'You win!':'Computer wins') : (state.turn===HUMAN?'Your turn':'Computer thinking…');
+    if (state.rolled && state.dice.length) {
+      const original = [...state.dice];
+      const remainingCopy = [...state.remaining];
+      const used = original.map(d => { const i=remainingCopy.indexOf(d); if(i>=0){remainingCopy.splice(i,1);return false;} return true; });
+      UI.die1.classList.toggle('used', !!used[0]);
+      UI.die2.classList.toggle('used', !!used[1] && state.dice[0]!==state.dice[1]);
+      UI.remainingNote.textContent = state.remaining.length ? `${state.remaining.length} move${state.remaining.length===1?'':'s'} left` : 'turn complete';
+    } else {
+      UI.die1.classList.remove('used'); UI.die2.classList.remove('used'); UI.remainingNote.textContent='';
+    }
+    const rollDisabled=state.turn!==HUMAN||state.rolled||!!state.winner;
+    UI.rollBtn.disabled=rollDisabled; UI.boardRollBtn.disabled=rollDisabled; UI.boardRollBtn.hidden=rollDisabled;
+    UI.undoBtn.disabled=state.turn!==HUMAN||!state.rolled||!!state.winner||humanMoveHistory.length===0;
+    const canFinish = state.turn===HUMAN && state.rolled && !state.winner && availableMovesNow().length===0;
+    UI.endTurnBtn.disabled=!canFinish;
+    UI.endTurnBtn.classList.toggle('available', canFinish);
+    UI.turnBanner.textContent=state.winner ? (state.winner===HUMAN?'You win!':'Computer wins') : (state.turn===HUMAN?(state.rolled?(state.remaining.length?`Your move • ${state.remaining.length} left`:'Turn complete • Undo now'):'Your turn — roll dice'):'Computer thinking…');
   }
 
   function roundedRectPath(x,y,w,h,r) {
@@ -540,6 +1700,267 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     if(stroke){ctx.strokeStyle=stroke;ctx.stroke();}
   }
 
+
+
+
+  function scheduleAutomaticCoachWatch() {
+    if(!autoWatchCoachEnabled || state.turn!==HUMAN || !state.rolled || !state.remaining.length) return;
+    if(!availableMovesNow().length) return;
+    const t=setTimeout(()=>{
+      if(!autoWatchCoachEnabled || state.turn!==HUMAN || !state.rolled || coachThink.active || visualHint.active) return;
+      showHint().then(ranked=>{
+        const t2=setTimeout(()=>{
+          if(ranked.length && autoWatchCoachEnabled && state.turn===HUMAN && state.rolled && !coachThink.active && !visualHint.active) {
+            watchCoachThink(ranked);
+          }
+        },300);
+        coachThink.timers.push(t2);
+      });
+      coachThink.timers.push(t2);
+    },450);
+    coachThink.timers.push(t);
+  }
+
+  function clearCoachThinkTimers() {
+    coachThink.timers.forEach(t=>clearTimeout(t));
+    coachThink.timers=[];
+  }
+
+  function stopCoachThink(message='Thinking sequence stopped.') {
+    clearCoachThinkTimers();
+    coachThink.active=false;
+    UI.stopCoachThinkBtn.disabled=true;
+    UI.watchCoachThinkBtn.disabled=!bestHintSequence.length;
+    if(message){
+      UI.coachThinkPanel.hidden=false;
+      UI.coachThinkStage.textContent='Coach paused';
+      UI.coachThinkDetail.textContent=message;
+    }
+    stopVisualHintAnimation('');
+  }
+
+  function candidateRejectionReason(candidate, best, before) {
+    let after=cloneState(before);
+    candidate.seq.forEach(m=>after=applyMove(after,HUMAN,m));
+    let bestAfter=cloneState(before);
+    best.seq.forEach(m=>bestAfter=applyMove(bestAfter,HUMAN,m));
+
+    const a=positionMetrics(after,HUMAN);
+    const b=positionMetrics(bestAfter,HUMAN);
+    const reasons=[];
+    if(a.blots>b.blots) reasons.push(`leaves ${a.blots-b.blots} more exposed blot${a.blots-b.blots===1?'':'s'}`);
+    if(a.made<b.made) reasons.push('makes fewer useful points');
+    if(a.homeMade<b.homeMade) reasons.push('builds a weaker home board');
+    if(a.pips>b.pips+4) reasons.push('is less efficient in the race');
+    if(a.builders<b.builders) reasons.push('creates fewer flexible builders');
+    if(!reasons.length) reasons.push('produces a less balanced overall position');
+    return coachTerm(reasons.slice(0,2).join(' and '));
+  }
+
+  function renderThinkCandidates(ranked, activeIndex=-1, chosenIndex=-1) {
+    UI.coachThinkCandidates.innerHTML=ranked.slice(0,3).map((r,i)=>{
+      const d=sequenceDirections(r.seq,HUMAN).summary;
+      const gap=Math.max(0,ranked[0].score-r.score);
+      const cls=i===chosenIndex?'chosen':(i<activeIndex?'rejected':(i===activeIndex?'active':''));
+      const label=i===0?'Candidate A':i===1?'Candidate B':'Candidate C';
+      return `<div class="think-candidate ${cls}">
+        <strong>${label}</strong> — ${d}<br>
+        <span>${i===0?'Top local score':`${gap.toFixed(1)} teaching points behind`}</span>
+      </div>`;
+    }).join('');
+  }
+
+  function previewCandidatePulse(candidate, duration=1150) {
+    return new Promise(resolve=>{
+      if(!coachThink.active){resolve();return;}
+      bestHintSequence=candidate.seq.map(m=>({...m}));
+      hintMove=bestHintSequence[0]||null;
+      draw();
+      const t=setTimeout(()=>resolve(),duration);
+      coachThink.timers.push(t);
+    });
+  }
+
+  async function watchCoachThink(preRanked=null) {
+    if(state.turn!==HUMAN || !state.rolled){
+      setCoach('Roll the dice first, then ask me to rank the legal turns.');
+      return;
+    }
+    let ranked;
+    try{
+      ranked=(preRanked || await getCoachRankings(state,HUMAN,state.remaining)).slice(0,3);
+    }catch(error){
+      setCoach(`Grandmaster analysis unavailable: ${error.message}`);
+      updateEngineStatus(`Grandmaster analysis unavailable: ${error.message}`,'bad');
+      return;
+    }
+    if(!ranked.length){
+      setCoach('There is no legal move to analyze.');
+      return;
+    }
+
+    stopCoachThink('');
+    coachThink.active=true;
+    coachThink.ranked=ranked;
+    UI.watchCoachThinkBtn.disabled=true;
+    UI.stopCoachThinkBtn.disabled=false;
+    UI.coachThinkPanel.hidden=false;
+    UI.visualHintStatus.hidden=true;
+    renderThinkCandidates(ranked,-1,-1);
+
+    UI.coachThinkStage.textContent='Step 1: Scan the legal candidates';
+    UI.coachThinkDetail.textContent=lastCoachSource==='gnubg'?'Verified GNU Backgammon rankings received. The teaching layer will now explain the engine’s ordering.':'Advanced local coach selected. This offline analysis checks strategic structure and the opponent’s best replies across all 21 dice combinations. It is much stronger than the old heuristic, but it is not a verified grandmaster engine.';
+    await new Promise(resolve=>{const t=setTimeout(resolve,900);coachThink.timers.push(t);});
+    if(!coachThink.active)return;
+
+    for(let i=0;i<ranked.length;i++){
+      UI.coachThinkStage.textContent=`Step ${i+2}: Examine Candidate ${String.fromCharCode(65+i)}`;
+      UI.coachThinkDetail.textContent=explainSequence(ranked[i].seq,state,HUMAN);
+      renderThinkCandidates(ranked,i,-1);
+      await previewCandidatePulse(ranked[i],1100);
+      if(!coachThink.active)return;
+
+      if(i>0){
+        UI.coachThinkStage.textContent=`Reject Candidate ${String.fromCharCode(65+i)}`;
+        UI.coachThinkDetail.textContent=`This option ${candidateRejectionReason(ranked[i],ranked[0],state)}.`;
+        renderThinkCandidates(ranked,i+1,-1);
+        await new Promise(resolve=>{const t=setTimeout(resolve,1050);coachThink.timers.push(t);});
+        if(!coachThink.active)return;
+      }
+    }
+
+    bestHintSequence=ranked[0].seq.map(m=>({...m}));
+    hintMove=bestHintSequence[0]||null;
+    UI.coachThinkStage.textContent='Final decision';
+    UI.coachThinkDetail.textContent=`${lastCoachSource==='gnubg'?'GNU Backgammon selects':'The advanced local coach selects'} ${sequenceDirections(ranked[0].seq,HUMAN).summary}. ${ranked[0].engineExplanation||explainSequence(ranked[0].seq,state,HUMAN)}`;
+    renderThinkCandidates(ranked,-1,0);
+    await new Promise(resolve=>{const t=setTimeout(resolve,900);coachThink.timers.push(t);});
+    if(!coachThink.active)return;
+
+    UI.coachThinkStage.textContent='Demonstrating the final recommendation';
+    UI.coachThinkDetail.textContent='Now watch the chosen sequence animate directly on the board.';
+    coachThink.active=false;
+    UI.stopCoachThinkBtn.disabled=true;
+    UI.watchCoachThinkBtn.disabled=false;
+    animateBestHint();
+  }
+
+  function moveScreenPosition(move, previewState, atDestination=false) {
+    const source = move.from;
+    const target = move.to;
+    if(!atDestination) {
+      if(source==='bar') return {x:midX,y:H-margin-checkerR-(Math.max(1,previewState.bar[HUMAN]))*checkerR*1.25+checkerR*1.25};
+      return checkerTopPositionForState(source, previewState);
+    }
+    if(target==='off') return {x:playRight+trayW/2,y:H-margin-30};
+    const p=pointCenter(target);
+    const n=count(previewState.points[target]);
+    const dir=p.top?1:-1;
+    const start=p.top?margin+checkerR:H-margin-checkerR;
+    const spacing=Math.min(checkerR*1.72,(H/2-margin-40)/(Math.max(1,Math.min(n+1,5)-1)||1));
+    return {x:p.x,y:start+dir*Math.min(n,4)*spacing};
+  }
+
+  function checkerTopPositionForState(from, s) {
+    if(from==='bar') return {x:midX,y:H-margin-checkerR-(Math.max(1,s.bar[HUMAN])-1)*checkerR*1.25};
+    const p=pointCenter(from),n=count(s.points[from]),dir=p.top?1:-1,start=p.top?margin+checkerR:H-margin-checkerR;
+    const spacing=Math.min(checkerR*1.72,(H/2-margin-40)/(Math.max(1,Math.min(n,5)-1)||1));
+    return {x:p.x,y:start+dir*(Math.min(n,5)-1)*spacing};
+  }
+
+  function drawAnimatedHintOverlay() {
+    if(!visualHint.active || !visualHint.move || !visualHint.previewState) return;
+    const from=moveScreenPosition(visualHint.move,visualHint.previewState,false);
+    const to=moveScreenPosition(visualHint.move,visualHint.previewState,true);
+    const t=Math.max(0,Math.min(1,visualHint.progress));
+    const lift=Math.sin(Math.PI*t)*Math.min(72,Math.abs(to.x-from.x)*.18+34);
+    const x=from.x+(to.x-from.x)*t;
+    const y=from.y+(to.y-from.y)*t-lift;
+
+    ctx.save();
+    ctx.setLineDash([16,10]);
+    ctx.lineWidth=8;
+    ctx.strokeStyle='rgba(255,224,109,.95)';
+    ctx.beginPath();
+    ctx.moveTo(from.x,from.y);
+    ctx.quadraticCurveTo((from.x+to.x)/2,(from.y+to.y)/2-70,to.x,to.y);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.beginPath();
+    ctx.arc(from.x,from.y,checkerR+11,0,Math.PI*2);
+    ctx.lineWidth=7;
+    ctx.strokeStyle='#ffe06d';
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(to.x,to.y,checkerR+14+Math.sin(Date.now()/100)*4,0,Math.PI*2);
+    ctx.lineWidth=6;
+    ctx.strokeStyle='rgba(255,255,255,.95)';
+    ctx.stroke();
+
+    drawChecker(x,y,HUMAN,true);
+    ctx.globalAlpha=1;
+    ctx.fillStyle='#241a0e';
+    ctx.font='bold 22px sans-serif';
+    ctx.textAlign='center';
+    ctx.fillText(String(visualHint.move.die),x,y+7);
+    ctx.restore();
+  }
+
+  function stopVisualHintAnimation(message='Animation stopped.') {
+    if(visualHint.timer) cancelAnimationFrame(visualHint.timer);
+    visualHint={active:false,step:0,progress:0,timer:null,previewState:null,move:null};
+    UI.stopHintAnimationBtn.disabled=true;
+    UI.animateBestHintBtn.disabled=!bestHintSequence.length;
+    UI.visualHintStatus.hidden=!message;
+    UI.visualHintStatus.textContent=message;
+    draw();
+  }
+
+  function animateBestHint() {
+    if(!bestHintSequence.length || state.turn!==HUMAN || !state.rolled) {
+      setCoach('Roll first and ask me to rank the legal turns before starting the board animation.');
+      return;
+    }
+    stopVisualHintAnimation('');
+    visualHint.active=true;
+    visualHint.step=0;
+    visualHint.previewState=cloneState(state);
+    UI.animateBestHintBtn.disabled=true;
+    UI.stopHintAnimationBtn.disabled=false;
+    UI.visualHintStatus.hidden=false;
+
+    const runStep=()=>{
+      if(!visualHint.active) return;
+      if(visualHint.step>=bestHintSequence.length){
+        const notation=sequenceDirections(bestHintSequence,HUMAN).summary;
+        stopVisualHintAnimation(`Preview complete: ${notation}. The real board has not changed.`);
+        return;
+      }
+      visualHint.move=bestHintSequence[visualHint.step];
+      const started=performance.now();
+      const duration=900;
+      UI.visualHintStatus.textContent=`Step ${visualHint.step+1} of ${bestHintSequence.length}: ${movePlain(visualHint.move,null,HUMAN)}`;
+
+      const frame=(now)=>{
+        if(!visualHint.active) return;
+        visualHint.progress=Math.min(1,(now-started)/duration);
+        draw();
+        if(visualHint.progress<1){
+          visualHint.timer=requestAnimationFrame(frame);
+        } else {
+          visualHint.previewState=applyMove(visualHint.previewState,HUMAN,visualHint.move);
+          visualHint.step++;
+          visualHint.progress=0;
+          setTimeout(runStep,280);
+        }
+      };
+      visualHint.timer=requestAnimationFrame(frame);
+    };
+    runStep();
+  }
+
   function draw() {
     ctx.clearRect(0,0,W,H);
     const grd=ctx.createLinearGradient(0,0,W,H); grd.addColorStop(0,'#9a6840'); grd.addColorStop(1,'#5d3822');
@@ -551,8 +1972,20 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     ctx.strokeStyle='rgba(255,255,255,.12)'; ctx.lineWidth=2; ctx.strokeRect(playRight+20,H/2-4,trayW-38,8);
 
     for(let i=0;i<24;i++) drawPoint(i);
+    drawPointLabels();
     for(let i=0;i<24;i++) drawStack(i,state.points[i]);
-    drawBarCheckers(); drawOffCheckers(); drawHighlights();
+    drawBarCheckers(); drawOffCheckers(); drawHighlights(); drawAnimatedHintOverlay();
+  }
+
+
+  function drawPointLabels() {
+    const mode=UI.pointLabelMode?.value||'off'; if(mode==='off') return;
+    ctx.textAlign='center'; ctx.font='bold 15px sans-serif';
+    for(let i=0;i<24;i++){
+      const p=pointCenter(i); const baseY=p.top?margin+8:H-margin-4;
+      if(mode==='human'||mode==='both'){ ctx.fillStyle='#fff7df'; ctx.fillText(String(pointNumber(i,HUMAN)),p.x,baseY); }
+      if(mode==='ai'||mode==='both'){ ctx.fillStyle='#f2b5aa'; const y=mode==='both'?(p.top?baseY+17:baseY-17):baseY; ctx.fillText(String(pointNumber(i,AI)),p.x,y); }
+    }
   }
 
   function drawPoint(i) {
@@ -611,20 +2044,89 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
         else {const q=pointCenter(m.to); const y=q.top?H/2-48:H/2+48; highlightCircle(q.x,y,'hint'); ctx.fillStyle='#241a0e';ctx.font='bold 18px sans-serif';ctx.textAlign='center';ctx.fillText(m.die,q.x,y+6);}
       }
     }
-    if(hintMove){ const p=checkerTopPosition(hintMove.from);highlightCircle(p.x,p.y,'hint'); }
+    if(hintMove){ const p=checkerTopPosition(hintMove.from);highlightCircle(p.x,p.y,'hint'); if(hintMove.to==='off'){drawRoundedRect(playRight+22,H/2+30,40,100,12,'rgba(255,224,109,.42)','#ffe06d');} else {const q=pointCenter(hintMove.to); const y=q.top?H/2-48:H/2+48; highlightCircle(q.x,y,'hint');} }
   }
 
-  UI.rollBtn.addEventListener('click',rollDice);
+  UI.stopCelebrationBtn.addEventListener('click',stopVictoryCelebration);
+  UI.testCelebrationBtn.addEventListener('click',startVictoryCelebration);
+  document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){stopVictoryCelebration();stopCoachThink();stopVisualHintAnimation();}});
+  UI.rollBtn.addEventListener('click',(e)=>{if(!rollDrag.moved)rollDice();});
+  UI.rollBtn.addEventListener('pointerdown',beginRollDrag);
+  UI.rollBtn.addEventListener('pointermove',moveRollDrag);
+  UI.rollBtn.addEventListener('pointerup',endRollDrag);
+  UI.rollBtn.addEventListener('pointercancel',endRollDrag);
+  UI.boardRollBtn.addEventListener('click',rollDice);
+  UI.undoBtn.addEventListener('click',undoHumanMove);
   UI.endTurnBtn.addEventListener('click',endTurn);
   UI.newGameBtn.addEventListener('click',newGame);
-  UI.hintBtn.addEventListener('click',showHint);
+  UI.hintBtn.addEventListener('click',()=>{showHint();setCoachDrawer(false);});
+  UI.animateBestHintBtn.addEventListener('click',animateBestHint);
+  UI.watchCoachThinkBtn.addEventListener('click',watchCoachThink);
+  UI.testEngineBtn.addEventListener('click',testEngineConnection);
+  UI.clearEngineBtn.addEventListener('click',()=>{
+    engineEndpoint=''; engineVerified=false; UI.engineEndpoint.value='';
+    localStorage.removeItem('bg-engine-endpoint');
+    updateEngineStatus('Grandmaster engine endpoint cleared. Verified recommendations are unavailable.','bad');
+  });
+  UI.engineMode.addEventListener('change',()=>{
+    engineMode=UI.engineMode.value;
+    localStorage.setItem('bg-engine-mode',engineMode);
+    engineVerified=false;
+    if(engineMode==='local'){
+      updateEngineStatus('Advanced local coach active — stronger offline analysis, but not verified grandmaster.','bad');
+    }else{
+      updateEngineStatus(engineEndpoint?'GNU Backgammon endpoint configured but not yet verified.':'Grandmaster engine not connected. Recommendations are blocked.','bad');
+    }
+  });
+  UI.stopCoachThinkBtn.addEventListener('click',()=>stopCoachThink());
+
+  UI.stopHintAnimationBtn.addEventListener('click',()=>stopVisualHintAnimation());
+
+  UI.coachDrawerToggle.addEventListener('click',()=>setCoachDrawer(!UI.coachPanel.classList.contains('collapsed')));
+  UI.handMode.addEventListener('change',()=>{applyHandMode();resetRollPosition();});
+  UI.floatRollToggle.addEventListener('change',applyRollPreference);
+  UI.lockRollToggle.addEventListener('change',()=>localStorage.setItem('bg-lock-roll',UI.lockRollToggle.checked?'1':'0'));
+  UI.resetRollPositionBtn.addEventListener('click',()=>resetRollPosition());
+  UI.focusModeBtn.addEventListener('click',()=>{focusMode=!focusMode;document.body.classList.toggle('focus-mode',focusMode);UI.focusModeBtn.textContent=focusMode?'Show extra panels':'Hide extra panels';});
   UI.rulesBtn.addEventListener('click',()=>{ UI.rulesDialog.classList.add('open'); document.body.style.overflow='hidden'; });
   UI.closeRulesBtn.addEventListener('click',()=>{ UI.rulesDialog.classList.remove('open'); document.body.style.overflow=''; });
   UI.rulesDialog.addEventListener('click',(e)=>{ if(e.target===UI.rulesDialog){ UI.rulesDialog.classList.remove('open'); document.body.style.overflow=''; } });
   UI.lessonSelect.addEventListener('change',()=>UI.lessonText.textContent=lessons[UI.lessonSelect.value]);
+  UI.coachLevel.addEventListener('change',()=>localStorage.setItem('bg-coach-level',UI.coachLevel.value));
+  UI.coachVerbosity.addEventListener('change',()=>localStorage.setItem('bg-coach-verbosity',UI.coachVerbosity.value));
+  UI.explainEveryMove.addEventListener('change',()=>localStorage.setItem('bg-explain-every-move',UI.explainEveryMove.checked?'1':'0'));
+  UI.autoWatchCoach.addEventListener('change',()=>{
+    autoWatchCoachEnabled=UI.autoWatchCoach.checked;
+    localStorage.setItem('bg-auto-watch-coach',String(autoWatchCoachEnabled));
+    if(autoWatchCoachEnabled){
+      setCoach('Automatic Coach Think is on. After each of your rolls, I will compare the legal turns and demonstrate the best one.');
+      scheduleAutomaticCoachWatch();
+    } else {
+      stopCoachThink('');
+      setCoach('Automatic Coach Think is off. You can still start it manually whenever you want.');
+    }
+  });
+  UI.pointLabelMode.addEventListener('change',()=>{localStorage.setItem('bg-point-label-mode',UI.pointLabelMode.value);draw();});
+  UI.notationMode.addEventListener('change',()=>{localStorage.setItem('bg-notation-mode',UI.notationMode.value); if(state.rolled&&state.turn===HUMAN) showHint();});
   UI.coachToggle.addEventListener('change',()=>{ if(UI.coachToggle.checked) UI.coachText.textContent=explainPosition(state,HUMAN); else UI.coachText.textContent='Hints are off.'; });
-  window.addEventListener('resize',draw);
+  window.addEventListener('resize',()=>{draw();applyRollPreference();});
+  UI.engineMode.value=engineMode;
+  UI.engineEndpoint.value=engineEndpoint;
+  updateEngineStatus(engineMode==='local'?'Advanced local coach active — stronger offline analysis, but not verified grandmaster.':(engineEndpoint?'GNU Backgammon endpoint configured; tap Test engine connection.':'Grandmaster engine not connected. Recommendations are blocked unless the local fallback is deliberately selected.'),'bad');
+  UI.coachLevel.value=localStorage.getItem('bg-coach-level')||'intermediate';
+  UI.coachVerbosity.value=localStorage.getItem('bg-coach-verbosity')||'standard';
+  UI.explainEveryMove.checked=localStorage.getItem('bg-explain-every-move')!=='0';
+  UI.autoWatchCoach.checked=autoWatchCoachEnabled;
+  renderFavoriteLessons();
+  UI.pointLabelMode.value=localStorage.getItem('bg-point-label-mode')||'off';
+  UI.notationMode.value=localStorage.getItem('bg-notation-mode')||'both';
+  UI.handMode.value=localStorage.getItem('bg-hand-mode')||'auto';
+  UI.floatRollToggle.checked=localStorage.getItem('bg-floating-roll')!=='0';
+  UI.lockRollToggle.checked=localStorage.getItem('bg-lock-roll')==='1';
+  applyHandMode();applyRollPreference();
+  setCoachDrawer(localStorage.getItem('bg-coach-collapsed')!=='0');
   newGame();
+  runCoreRulesTests();
 })();
 
   </script>

@@ -1,12 +1,12 @@
-const CACHE_NAME = 'backgammon-coach-v1-2';
+const CACHE_NAME = 'backgammon-coach-v2-0-1-1-1';
 const APP_FILES = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './icons/apple-touch-icon.png',
-  './icons/icon-192.png',
-  './icons/icon-512.png',
-  './icons/icon-512-maskable.png'
+  './apple-touch-icon.png',
+  './icon-192.png',
+  './icon-512.png',
+  './icon-512-maskable.png'
 ];
 
 self.addEventListener('install', event => {
