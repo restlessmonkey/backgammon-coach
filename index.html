@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v2.0.2.0</title>
+  <title>Backgammon Coach iPhone v2.0.2.1</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -103,7 +103,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 @media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
 
 
-/* v2.0.2.0 Immersive Play */
+/* v2.0.2.1 Immersive Play */
 .topbar,.play-controls,.coach-panel{transition:all .22s ease}
 body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
 body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
@@ -154,7 +154,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   
 
-/* v2.0.2.0 Victory Celebration */
+/* v2.0.2.1 Victory Celebration */
 .victory-celebration{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden;background:rgba(8,12,10,.08);opacity:0;transition:opacity .18s ease}
 .victory-celebration.active{opacity:1}
 .victory-canvas{width:100%;height:100%;display:block}
@@ -164,7 +164,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media (prefers-reduced-motion:reduce){.victory-celebration,.victory-banner{transition:none}}
 
 
-/* v2.0.2.0 Explain Every Move */
+/* v2.0.2.1 Explain Every Move */
 .coach-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
 .coach-settings label{display:grid;gap:4px;color:var(--muted);font-size:.76rem;font-weight:800}
 .move-rating{margin:10px 0;padding:11px;border-radius:12px;border:1px solid #d6c4ae;background:#fffaf2}
@@ -192,7 +192,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.coach-settings{grid-template-columns:1fr}.risk-row{grid-template-columns:64px 1fr 30px}}
 
 
-/* v2.0.2.0 Animated Board Hints */
+/* v2.0.2.1 Animated Board Hints */
 .visual-hint-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .visual-hint-controls button{margin:0;box-shadow:none}
 .visual-hint-status{margin-top:8px;padding:8px 10px;border-radius:10px;background:#e7f0eb;color:#294f42;font-weight:800;font-size:.8rem}
@@ -200,7 +200,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.visual-hint-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.2.0 Watch the Coach Think */
+/* v2.0.2.1 Watch the Coach Think */
 .think-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .think-controls button{margin:0;box-shadow:none}
 .think-panel{margin-top:9px;padding:10px;border-radius:12px;background:#f6ead8;border:1px solid #d8c5ab}
@@ -215,7 +215,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.think-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.2.0 verified engine controls */
+/* v2.0.2.1 verified engine controls */
 .engine-panel{margin:10px 0;padding:10px;border-radius:12px;border:1px solid #d8c5ab;background:#fffaf2}
 .engine-panel h3{margin:0 0 8px;font-size:.95rem}
 .engine-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -257,10 +257,10 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v2.0.2.0</span>
+          <span class="version-badge" id="versionBadge">v2.0.2.1</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v2.0.2.0</div>
+        <div class="version-note">v2.0.2.1</div>
       </div>
       <div class="top-actions">
         <button id="headerCelebrationBtn" class="secondary celebration-header-btn" type="button">🎉 Celebration Vault</button>
@@ -373,7 +373,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
             <div id="favoriteLessons" class="favorite-list"></div>
           </details>
           <div id="coachReport" class="coach-report" hidden></div>
-          <div class="coach-disclaimer">v2.0.2.0 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. The local evaluator remains available solely as a clearly marked teaching fallback.</div>
+          <div class="coach-disclaimer">v2.0.2.1 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. The local evaluator remains available solely as a clearly marked teaching fallback.</div>
           </div>
         </section>
 
@@ -764,7 +764,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v2.0.2.0 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v2.0.2.1 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -1648,36 +1648,52 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
 
   const CELEBRATIONS=[
-    {id:'classic-confetti',icon:'🎉',name:'Classic Confetti',rarity:'classic',weight:18,family:'confetti'},
-    {id:'checker-fountain',icon:'⛲',name:'Checker Fountain',rarity:'classic',weight:14,family:'bounce'},
-    {id:'victory-vortex',icon:'🌀',name:'Victory Vortex',rarity:'classic',weight:12,family:'vortex'},
-    {id:'checker-hill',icon:'⛰️',name:'Checker Hill',rarity:'classic',weight:12,family:'hill'},
-    {id:'rocket-checkers',icon:'🚀',name:'Rocket Checkers',rarity:'classic',weight:12,family:'rocket'},
-    {id:'golden-stars',icon:'⭐',name:'Golden Stars',rarity:'classic',weight:10,family:'rain'},
-    {id:'balloon-parade',icon:'🎈',name:'Balloon Parade',rarity:'classic',weight:10,family:'rise'},
-    {id:'party-streamers',icon:'🎊',name:'Party Streamers',rarity:'classic',weight:10,family:'rain'},
-    {id:'championship-trophy',icon:'🏆',name:'Championship Trophy',rarity:'special',weight:7,family:'center'},
-    {id:'crowned-champion',icon:'👑',name:'Crowned Champion',rarity:'special',weight:7,family:'center'},
-    {id:'fireworks-finale',icon:'🎆',name:'Fireworks Finale',rarity:'special',weight:7,family:'fireworks'},
-    {id:'disco-victory',icon:'🪩',name:'Disco Victory',rarity:'special',weight:6,family:'center'},
-    {id:'diamond-rain',icon:'💎',name:'Diamond Rain',rarity:'special',weight:6,family:'rain'},
-    {id:'champagne-pop',icon:'🍾',name:'Champagne Pop',rarity:'special',weight:6,family:'rise'},
-    {id:'arcade-complete',icon:'🕹️',name:'Level Complete',rarity:'special',weight:6,family:'arcade'},
-    {id:'camera-flashes',icon:'📸',name:'Red Carpet Winner',rarity:'special',weight:5,family:'flash'},
-    {id:'penguin-slide',icon:'🐧',name:'Penguin Slide',rarity:'rare',weight:3,family:'slide'},
-    {id:'rubber-duck-regatta',icon:'🦆',name:'Rubber Duck Regatta',rarity:'rare',weight:3,family:'slide'},
-    {id:'chicken-run',icon:'🐔',name:'Winner Chicken Run',rarity:'rare',weight:3,family:'slide'},
-    {id:'squirrel-heist',icon:'🐿️',name:'Squirrel Checker Heist',rarity:'rare',weight:3,family:'slide'},
-    {id:'ufo-abduction',icon:'🛸',name:'UFO Checker Abduction',rarity:'rare',weight:3,family:'center'},
-    {id:'aurora-victory',icon:'🌌',name:'Aurora Victory',rarity:'rare',weight:3,family:'vortex'},
-    {id:'movie-premiere',icon:'🎬',name:'Victory Premiere',rarity:'rare',weight:3,family:'credits'},
-    {id:'lucky-clover',icon:'🍀',name:'Lucky Escape',rarity:'rare',weight:3,family:'rain'},
-    {id:'golden-dice',icon:'🎲',name:'Golden Dice',rarity:'ultra-rare',weight:1,family:'center'},
-    {id:'galaxy-grandmaster',icon:'🌠',name:'Galaxy Grandmaster',rarity:'ultra-rare',weight:1,family:'vortex'},
-    {id:'jackpot',icon:'🎰',name:'Victory Jackpot',rarity:'ultra-rare',weight:1,family:'rain'},
-    {id:'royal-coronation',icon:'🏰',name:'Royal Coronation',rarity:'ultra-rare',weight:1,family:'center'},
-    {id:'perfect-game',icon:'🌟',name:'Perfect Game',rarity:'ultra-rare',weight:1,family:'center'},
-    {id:'legendary-comeback',icon:'🔥',name:'Legendary Comeback',rarity:'ultra-rare',weight:1,family:'rise'}
+    {id:'rocket-checkers',icon:'🚀',name:'Rocket Checkers',rarity:'classic',weight:14,family:'rocket',text:'The original: all 15 winning checkers launch one by one.'},
+    {id:'checker-hill',icon:'⛰️',name:'Checker Hill',rarity:'classic',weight:14,family:'hill',text:'The original: your checkers assemble into a victory hill.'},
+    {id:'classic-bounce',icon:'⚪',name:'Classic Bounce',rarity:'classic',weight:14,family:'classicBounce',text:'The original: actual checkers bounce wildly around the screen.'},
+    {id:'victory-vortex',icon:'🌀',name:'Victory Vortex',rarity:'classic',weight:14,family:'vortex',text:'The original: checkers spiral into the center, then burst outward.'},
+    {id:'checker-fountain',icon:'⛲',name:'Checker Fountain',rarity:'classic',weight:14,family:'fountain',text:'The original: a fountain made entirely from your checkers.'},
+    {id:'classic-confetti',icon:'🎉',name:'Classic Confetti',rarity:'classic',weight:12,family:'confetti',text:'A timeless shower of victory confetti and checkers.'},
+    {id:'golden-stars',icon:'⭐',name:'Golden Stars',rarity:'classic',weight:10,family:'rain',text:'Golden stars orbit the winning checkers.'},
+    {id:'balloon-parade',icon:'🎈',name:'Balloon Parade',rarity:'classic',weight:10,family:'rise',text:'Balloons lift the checkers into the sky.'},
+    {id:'party-streamers',icon:'🎊',name:'Party Streamers',rarity:'classic',weight:10,family:'rain',text:'Curling streamers sweep over the board.'},
+
+    {id:'checker-dominoes',icon:'🁢',name:'Checker Domino Chain',rarity:'special',weight:7,family:'domino',text:'All 15 checkers line up and topple in sequence.'},
+    {id:'checker-race',icon:'🏁',name:'Checker Grand Prix',rarity:'special',weight:7,family:'race',text:'Your checkers race around the screen toward a photo finish.'},
+    {id:'checker-trophy',icon:'🏆',name:'Build-a-Trophy',rarity:'special',weight:7,family:'checkerTrophy',text:'The actual checkers assemble into a giant trophy.'},
+    {id:'checker-crown',icon:'👑',name:'Checker Crown',rarity:'special',weight:7,family:'checkerCrown',text:'Your checkers form a royal crown above the board.'},
+    {id:'checker-heart',icon:'❤️',name:'Checker Heart',rarity:'special',weight:7,family:'checkerHeart',text:'The winning checkers arrange themselves into a heart.'},
+    {id:'checker-wave',icon:'🌊',name:'Checker Wave',rarity:'special',weight:7,family:'wave',text:'A rolling wave of checkers sweeps across the screen.'},
+    {id:'checker-salute',icon:'🫡',name:'15-Checker Salute',rarity:'special',weight:7,family:'salute',text:'All 15 checkers rise into formation and salute the winner.'},
+    {id:'checker-pinball',icon:'🕹️',name:'Checker Pinball',rarity:'special',weight:7,family:'pinball',text:'The checkers ricochet through bumpers like a pinball machine.'},
+    {id:'championship-trophy',icon:'🏆',name:'Championship Trophy',rarity:'special',weight:7,family:'center',text:'A gleaming trophy rises through checker confetti.'},
+    {id:'crowned-champion',icon:'👑',name:'Crowned Champion',rarity:'special',weight:7,family:'center',text:'A golden crown descends upon the champion.'},
+    {id:'fireworks-finale',icon:'🎆',name:'Fireworks Finale',rarity:'special',weight:7,family:'fireworks',text:'Checkers ignite a sky full of fireworks.'},
+    {id:'disco-victory',icon:'🪩',name:'Disco Victory',rarity:'special',weight:6,family:'center',text:'The checkers dance beneath a mirrored disco ball.'},
+    {id:'diamond-rain',icon:'💎',name:'Diamond Rain',rarity:'special',weight:6,family:'rain',text:'Sparkling diamonds tumble around the checkers.'},
+    {id:'champagne-pop',icon:'🍾',name:'Champagne Pop',rarity:'special',weight:6,family:'rise',text:'A cork pops and victory bubbles lift the checkers.'},
+    {id:'arcade-complete',icon:'🕹️',name:'Level Complete',rarity:'special',weight:6,family:'arcade',text:'Retro pixels announce LEVEL COMPLETE.'},
+    {id:'camera-flashes',icon:'📸',name:'Red Carpet Winner',rarity:'special',weight:5,family:'flash',text:'Spotlights and camera flashes honor the checkers.'},
+
+    {id:'checker-knockout',icon:'🥊',name:'Checker Knockout',rarity:'rare',weight:3,family:'knockout',text:'One heroic checker knocks the opponent’s checkers offscreen.'},
+    {id:'checker-stairway',icon:'🪜',name:'Checker Stairway to Victory',rarity:'rare',weight:3,family:'stairway',text:'The checkers build steps and climb to the winner’s platform.'},
+    {id:'checker-orbit',icon:'🪐',name:'Checker Solar System',rarity:'rare',weight:3,family:'orbit',text:'Your checkers become planets orbiting a golden doubling cube.'},
+    {id:'checker-fireworks',icon:'🎇',name:'Checker Firework Burst',rarity:'rare',weight:3,family:'checkerBurst',text:'The checkers themselves explode outward like fireworks.'},
+    {id:'penguin-slide',icon:'🐧',name:'Penguin Slide',rarity:'rare',weight:3,family:'slide',text:'Penguins slide while pushing checkers ahead of them.'},
+    {id:'rubber-duck-regatta',icon:'🦆',name:'Rubber Duck Regatta',rarity:'rare',weight:3,family:'slide',text:'Victory ducks tow checkers across the screen.'},
+    {id:'chicken-run',icon:'🐔',name:'Winner Chicken Run',rarity:'rare',weight:3,family:'slide',text:'A jubilant chicken chases a runaway checker.'},
+    {id:'squirrel-heist',icon:'🐿️',name:'Squirrel Checker Heist',rarity:'rare',weight:3,family:'slide',text:'A mischievous squirrel steals one of the actual checkers.'},
+    {id:'ufo-abduction',icon:'🛸',name:'UFO Checker Abduction',rarity:'rare',weight:3,family:'center',text:'A UFO beams up an opposing checker.'},
+    {id:'aurora-victory',icon:'🌌',name:'Aurora Victory',rarity:'rare',weight:3,family:'vortex',text:'Checkers spiral beneath shimmering northern lights.'},
+    {id:'movie-premiere',icon:'🎬',name:'Victory Premiere',rarity:'rare',weight:3,family:'credits',text:'The checkers receive full movie-premiere treatment.'},
+    {id:'lucky-clover',icon:'🍀',name:'Lucky Escape',rarity:'rare',weight:3,family:'rain',text:'Lucky clovers rain around the winning checkers.'},
+
+    {id:'golden-dice-formation',icon:'🎲',name:'Golden Dice Formation',rarity:'ultra-rare',weight:1,family:'diceFormation',text:'The 15 checkers form the pips of two enormous golden dice.'},
+    {id:'galaxy-grandmaster',icon:'🌠',name:'Galaxy Grandmaster',rarity:'ultra-rare',weight:1,family:'orbit',text:'The checkers form a grandmaster galaxy.'},
+    {id:'jackpot',icon:'🎰',name:'Victory Jackpot',rarity:'ultra-rare',weight:1,family:'rain',text:'Coins and jackpot lights erupt around checker 7-7-7.'},
+    {id:'royal-coronation',icon:'🏰',name:'Royal Coronation',rarity:'ultra-rare',weight:1,family:'checkerCrown',text:'A full checker-built coronation crowns the champion.'},
+    {id:'perfect-game',icon:'🌟',name:'Perfect Game',rarity:'ultra-rare',weight:1,family:'salute',text:'Every checker locks into a flawless star formation.'},
+    {id:'legendary-comeback',icon:'🔥',name:'Legendary Comeback',rarity:'ultra-rare',weight:1,family:'fountain',text:'The checkers rise through flames in a triumphant comeback.'}
   ];
   const CELEBRATION_SETTINGS_KEY='bg-celebration-vault-v1',CELEBRATION_STATS_KEY='bg-celebration-stats-v1';
   function loadCelebrationSettings(){try{const s=JSON.parse(localStorage.getItem(CELEBRATION_SETTINGS_KEY)||'{}');return{enabled:Array.isArray(s.enabled)?s.enabled:CELEBRATIONS.map(c=>c.id),favorites:Array.isArray(s.favorites)?s.favorites:[]}}catch{return{enabled:CELEBRATIONS.map(c=>c.id),favorites:[]}}}
@@ -1687,15 +1703,123 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   function recordCelebrationWin(){const s=loadCelebrationStats(),d=new Date().toISOString().slice(0,10);s.wins++;s.streak=(s.lastWinDay===d||!s.lastWinDay)?s.streak+1:1;s.bestStreak=Math.max(s.bestStreak,s.streak);s.lastWinDay=d;saveCelebrationStats(s)}
   function celebrationMessage(real){const s=loadCelebrationStats();if(!real)return'Celebration preview';if(s.wins===1)return'Achievement unlocked: First victory!';if([10,25,50,100].includes(s.wins))return`Achievement unlocked: ${s.wins} wins!`;if(state.off[AI]===0&&state.bar[AI]>0)return'Backgammon victory!';if(state.off[AI]===0)return'Gammon victory!';if(s.streak>=5)return`Winning streak: ${s.streak}!`;return['Brilliant finish!','Tactical victory!','Champion performance!','Beautifully played!'][s.wins%4]}
   function chooseCelebration(id=null){const s=loadCelebrationSettings();let pool=CELEBRATIONS.filter(c=>s.enabled.includes(c.id));if(!pool.length)pool=CELEBRATIONS;if(id)return CELEBRATIONS.find(c=>c.id===id)||pool[0];const w=[];for(const c of pool)for(let i=0;i<c.weight*(s.favorites.includes(c.id)?2:1);i++)w.push(c);const st=loadCelebrationStats();let c=w[Math.floor(Math.random()*w.length)];if(pool.length>1&&c.id===st.lastId)c=pool.find(x=>x.id!==st.lastId)||c;return c}
-  function renderCelebrationVault(){const s=loadCelebrationSettings(),st=loadCelebrationStats();UI.celebrationVaultStats.textContent=`${st.seen.length}/30 discovered • ${st.wins} wins • best streak ${st.bestStreak}`;UI.celebrationVaultGrid.innerHTML=CELEBRATIONS.map(c=>{const on=s.enabled.includes(c.id),fav=s.favorites.includes(c.id),seen=st.seen.includes(c.id);return`<article class="celebration-card ${on?'':'disabled'} ${fav?'favorite':''}"><div class="celebration-card-head"><div><span class="celebration-icon">${c.icon}</span><h3>${c.name}</h3></div><span class="rarity-pill">${c.rarity}</span></div><p>${seen?'Discovered':'Not discovered yet'}</p><div class="celebration-card-actions"><button class="primary preview-celebration" data-id="${c.id}">Preview</button><button class="secondary toggle-celebration" data-id="${c.id}">${on?'Disable':'Enable'}</button><button class="secondary favorite-btn" data-id="${c.id}">${fav?'⭐':'☆'}</button></div></article>`}).join('')}
+  function renderCelebrationVault(){const s=loadCelebrationSettings(),st=loadCelebrationStats();UI.celebrationVaultStats.textContent=`${st.seen.length}/${CELEBRATIONS.length} discovered • ${st.wins} wins • best streak ${st.bestStreak}`;UI.celebrationVaultGrid.innerHTML=CELEBRATIONS.map(c=>{const on=s.enabled.includes(c.id),fav=s.favorites.includes(c.id),seen=st.seen.includes(c.id);return`<article class="celebration-card ${on?'':'disabled'} ${fav?'favorite':''}"><div class="celebration-card-head"><div><span class="celebration-icon">${c.icon}</span><h3>${c.name}</h3></div><span class="rarity-pill">${c.rarity}</span></div><p>${c.text} • ${seen?'Discovered':'Not discovered yet'}</p><div class="celebration-card-actions"><button class="primary preview-celebration" data-id="${c.id}">Preview</button><button class="secondary toggle-celebration" data-id="${c.id}">${on?'Disable':'Enable'}</button><button class="secondary favorite-btn" data-id="${c.id}">${fav?'⭐':'☆'}</button></div></article>`}).join('')}
   function openCelebrationVault(){renderCelebrationVault();UI.celebrationVaultDialog.classList.add('open')} function closeCelebrationVault(){UI.celebrationVaultDialog.classList.remove('open')}
   function startVictoryCelebration(requestedId=null,options={}){
-    stopVictoryCelebration();const real=!!options.realWin;if(real)recordCelebrationWin();const theme=chooseCelebration(requestedId),st=loadCelebrationStats();st.lastId=theme.id;if(!st.seen.includes(theme.id))st.seen.push(theme.id);saveCelebrationStats(st);
-    const o=UI.victoryCelebration,c=UI.victoryCanvas,x=c.getContext('2d');o.hidden=false;requestAnimationFrame(()=>o.classList.add('active'));UI.victoryBanner.textContent=`${theme.icon} ${theme.name}`;UI.victorySubtitle.textContent=celebrationMessage(real);
-    const dpr=Math.min(2,devicePixelRatio||1),resize=()=>{c.width=innerWidth*dpr;c.height=innerHeight*dpr;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';x.setTransform(dpr,0,0,dpr,0,0)};resize();const start=performance.now(),rand=(a,b)=>a+Math.random()*(b-a),items=[];
-    for(let i=0;i<42;i++)items.push({x:rand(0,innerWidth),y:theme.family==='rise'?innerHeight+rand(0,400):rand(-innerHeight,0),vx:rand(-2,2),vy:theme.family==='rise'?rand(-5,-2):rand(1.5,5),size:rand(18,42),a:rand(0,6.28),r:rand(90,innerWidth*.48)});
-    function frame(now){if(!celebrationRun)return;const t=now-start;x.clearRect(0,0,innerWidth,innerHeight);x.textAlign='center';x.textBaseline='middle';for(const q of items){if(theme.family==='vortex'){q.a+=.018;q.r*=.997;q.x=innerWidth/2+Math.cos(q.a)*q.r;q.y=innerHeight/2+Math.sin(q.a)*q.r*.55}else if(theme.family==='slide'){q.x+=Math.abs(q.vx)+2.5;q.y=innerHeight*.68+Math.sin(t*.006+q.a)*24;if(q.x>innerWidth+50)q.x=-50}else{q.x+=q.vx;q.y+=q.vy;if(q.y>innerHeight+60)q.y=-60;if(q.y<-60)q.y=innerHeight+60}x.font=`${q.size}px sans-serif`;x.fillText(theme.icon,q.x,q.y)}if(['center','arcade','credits'].includes(theme.family)){x.font=`${Math.min(160,innerWidth*.17)}px sans-serif`;x.fillText(theme.icon,innerWidth/2,innerHeight*.42+Math.sin(t*.004)*10)}if(theme.family==='arcade'){x.fillStyle='rgba(10,20,16,.8)';x.fillRect(innerWidth*.2,innerHeight*.55,innerWidth*.6,90);x.fillStyle='#fff06a';x.font='bold 42px monospace';x.fillText('LEVEL COMPLETE',innerWidth/2,innerHeight*.55+45)}if(theme.family==='credits'){x.fillStyle='rgba(0,0,0,.7)';x.fillRect(innerWidth*.2,innerHeight*.3,innerWidth*.6,210);x.fillStyle='white';x.font='bold 42px serif';x.fillText('WINNER: YOU',innerWidth/2,innerHeight*.4);x.font='20px sans-serif';x.fillText('Directed by Excellent Dice™',innerWidth/2,innerHeight*.5)}if(t<9000)celebrationRun.raf=requestAnimationFrame(frame);else stopVictoryCelebration()}
-    celebrationRun={raf:requestAnimationFrame(frame),resize};addEventListener('resize',resize);renderCelebrationVault()
+    stopVictoryCelebration();
+    const real=!!options.realWin;
+    if(real)recordCelebrationWin();
+    const theme=chooseCelebration(requestedId),st=loadCelebrationStats();
+    st.lastId=theme.id;if(!st.seen.includes(theme.id))st.seen.push(theme.id);saveCelebrationStats(st);
+
+    const o=UI.victoryCelebration,c=UI.victoryCanvas,x=c.getContext('2d');
+    o.hidden=false;requestAnimationFrame(()=>o.classList.add('active'));
+    UI.victoryBanner.textContent=`${theme.icon} ${theme.name}`;
+    UI.victorySubtitle.textContent=celebrationMessage(real);
+
+    const dpr=Math.min(2,devicePixelRatio||1);
+    const resize=()=>{c.width=innerWidth*dpr;c.height=innerHeight*dpr;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';x.setTransform(dpr,0,0,dpr,0,0)};
+    resize();
+    const started=performance.now(),rand=(a,b)=>a+Math.random()*(b-a),checkers=[],extras=[];
+    const light='#d8c6a4',dark='#3a211b',gold='#d9a441';
+    const boardRect=canvas.getBoundingClientRect();
+    const origin={x:Math.min(innerWidth-50,Math.max(50,boardRect.right-55)),y:Math.min(innerHeight-50,Math.max(50,boardRect.bottom-52))};
+
+    for(let i=0;i<15;i++)checkers.push({
+      i,x:origin.x+rand(-18,18),y:origin.y+rand(-15,15),vx:rand(-6,6),vy:rand(-15,-9),
+      r:Math.max(11,Math.min(23,innerWidth/31)),rot:rand(0,6.28),spin:rand(-.13,.13),phase:rand(0,6.28),landed:false
+    });
+    for(let i=0;i<35;i++)extras.push({x:rand(0,innerWidth),y:rand(-innerHeight,0),vx:rand(-1,1),vy:rand(1.5,4.5),size:rand(18,38),phase:rand(0,6.28)});
+
+    function drawChecker(q,alpha=1,opponent=false){
+      x.save();x.globalAlpha=alpha;x.translate(q.x,q.y);x.rotate(q.rot);
+      x.beginPath();x.arc(0,0,q.r,0,6.28);x.fillStyle=opponent?dark:(q.i%2?light:'#f5ead4');x.fill();
+      x.lineWidth=3;x.strokeStyle=opponent?'#e8c78f':'#765331';x.stroke();
+      x.beginPath();x.arc(-q.r*.25,-q.r*.28,q.r*.18,0,6.28);x.fillStyle='rgba(255,255,255,.30)';x.fill();x.restore();
+    }
+    function bounce(q,gravity=.30,bounce=.84){
+      q.x+=q.vx;q.y+=q.vy;q.vy+=gravity;
+      if(q.x<q.r||q.x>innerWidth-q.r)q.vx*=-1;
+      if(q.y>innerHeight-q.r){q.y=innerHeight-q.r;q.vy=-Math.abs(q.vy)*bounce}
+      q.rot+=q.vx/q.r;drawChecker(q);
+    }
+    function targetFormation(points,t){
+      const ease=Math.min(1,t/1700);
+      checkers.forEach((q,i)=>{const target=points[i%points.length];q.x+=(target.x-q.x)*(.055+.045*ease);q.y+=(target.y-q.y)*(.055+.045*ease);q.rot+=q.spin;drawChecker(q)});
+    }
+    function hillPoints(){
+      const pts=[];for(let row=0;pts.length<15;row++)for(let pos=0;pos<=row&&pts.length<15;pos++)pts.push({x:innerWidth/2+(pos-row/2)*48,y:innerHeight*.76-row*39});return pts;
+    }
+    function crownPoints(){
+      return Array.from({length:15},(_,i)=>{const a=i/14*Math.PI;return{x:innerWidth*.25+i*(innerWidth*.5/14),y:innerHeight*.58-Math.sin(a)*120-(i%4===0?45:0)}});
+    }
+    function heartPoints(){
+      return Array.from({length:15},(_,i)=>{const a=i/15*6.28,scale=7;return{x:innerWidth/2+scale*16*Math.pow(Math.sin(a),3),y:innerHeight*.48-scale*(13*Math.cos(a)-5*Math.cos(2*a)-2*Math.cos(3*a)-Math.cos(4*a))}});
+    }
+    function trophyPoints(){
+      const pts=[];for(let i=0;i<7;i++)pts.push({x:innerWidth/2+(i-3)*42,y:innerHeight*.42+Math.abs(i-3)*10});for(let i=0;i<5;i++)pts.push({x:innerWidth/2,y:innerHeight*.48+i*38});for(let i=0;i<3;i++)pts.push({x:innerWidth/2+(i-1)*52,y:innerHeight*.70});return pts;
+    }
+    function dicePoints(){
+      const pip=[[-1,-1],[1,-1],[0,0],[-1,1],[1,1],[-1,0],[1,0]];
+      const pts=[];for(let d=0;d<2;d++)for(let i=0;i<(d?7:8);i++){const a=pip[i%7];pts.push({x:innerWidth*(d?0.68:0.32)+a[0]*58,y:innerHeight*.50+a[1]*58})}return pts;
+    }
+    function symbols(icon,t){
+      x.textAlign='center';x.textBaseline='middle';
+      for(const e of extras){e.x+=e.vx+Math.sin(t*.002+e.phase)*.3;e.y+=e.vy;if(e.y>innerHeight+50)e.y=-50;x.font=`${e.size}px sans-serif`;x.fillText(icon,e.x,e.y)}
+    }
+    function centerIcon(icon,t,size=.15){x.textAlign='center';x.textBaseline='middle';x.font=`${Math.min(165,innerWidth*size)}px sans-serif`;x.fillText(icon,innerWidth/2,innerHeight*.35+Math.sin(t*.004)*10)}
+
+    function animate(t){
+      if(theme.family==='rocket'){
+        checkers.forEach(q=>{const delay=q.i*115,lt=t-delay;if(lt<0)return;q.y=origin.y-lt*.40;q.x=origin.x+Math.sin(lt*.018+q.phase)*22;q.rot+=q.spin;drawChecker(q);if(q.y<-40)q.y=innerHeight+30});
+      }else if(theme.family==='hill') targetFormation(hillPoints(),t);
+      else if(theme.family==='classicBounce') checkers.forEach(q=>bounce(q,.28,.88));
+      else if(theme.family==='vortex'){
+        checkers.forEach(q=>{const phase=t<3000?t:3000,rad=(1-phase/3000)*Math.max(innerWidth,innerHeight)*.45+35,a=q.phase+phase*.0027*(q.i%2?1:-1);q.x=innerWidth/2+Math.cos(a)*rad;q.y=innerHeight/2+Math.sin(a)*rad*.55;q.rot+=.09;drawChecker(q);if(t>3000){q.x+=Math.cos(a)*(t-3000)*.006;q.y+=Math.sin(a)*(t-3000)*.006}});
+      }else if(theme.family==='fountain'){
+        checkers.forEach(q=>{if(!q.landed){q.x=innerWidth/2+rand(-35,35);q.y=innerHeight+25;q.vx=rand(-6,6);q.vy=rand(-16,-11);q.landed=true}bounce(q,.34,.70)});
+      }else if(theme.family==='domino'){
+        const pts=Array.from({length:15},(_,i)=>({x:innerWidth*.15+i*(innerWidth*.70/14),y:innerHeight*.62}));
+        targetFormation(pts,t);checkers.forEach((q,i)=>{if(t>2100+i*90)q.rot=Math.min(1.45,(t-2100-i*90)/300*1.45)});
+      }else if(theme.family==='race'){
+        checkers.forEach(q=>{q.x=(t*.22*(1+q.i*.018)+q.i*45)%(innerWidth+100)-50;q.y=innerHeight*.30+(q.i%5)*80+Math.sin(t*.01+q.phase)*10;q.rot+=.12;drawChecker(q)});symbols('🏁',t);
+      }else if(theme.family==='checkerTrophy')targetFormation(trophyPoints(),t);
+      else if(theme.family==='checkerCrown')targetFormation(crownPoints(),t);
+      else if(theme.family==='checkerHeart')targetFormation(heartPoints(),t);
+      else if(theme.family==='wave'){
+        checkers.forEach((q,i)=>{q.x=innerWidth*.12+i*(innerWidth*.76/14);q.y=innerHeight*.54+Math.sin(t*.006+i*.65)*105;q.rot+=.05;drawChecker(q)});
+      }else if(theme.family==='salute'){
+        const pts=Array.from({length:15},(_,i)=>({x:innerWidth*.18+(i%5)*(innerWidth*.64/4),y:innerHeight*.38+Math.floor(i/5)*80}));
+        targetFormation(pts,t);if(t>2300)checkers.forEach((q,i)=>{q.y-=Math.sin((t-2300)*.007+i)*4});
+      }else if(theme.family==='pinball'){
+        checkers.forEach(q=>bounce(q,.18,.96));symbols('✨',t);
+      }else if(theme.family==='knockout'){
+        checkers.slice(0,14).forEach((q,i)=>{q.x=innerWidth*.70+(i%4)*35;q.y=innerHeight*.30+Math.floor(i/4)*55;drawChecker(q,1,true)});
+        const hero=checkers[14];hero.x=Math.min(innerWidth*.66,innerWidth*.08+t*.18);hero.y=innerHeight*.55;hero.rot+=.18;drawChecker(hero);if(t>2500)checkers.slice(0,14).forEach((q,i)=>{q.x+=(t-2500)*.12*(i%2?1:-1);q.y-=(t-2500)*.05});
+      }else if(theme.family==='stairway'){
+        const pts=Array.from({length:15},(_,i)=>({x:innerWidth*.18+i*(innerWidth*.62/14),y:innerHeight*.78-i*28}));
+        targetFormation(pts,t);
+      }else if(theme.family==='orbit'){
+        checkers.forEach((q,i)=>{const ring=1+(i%3),a=q.phase+t*.0018*(ring%2?1:-1);q.x=innerWidth/2+Math.cos(a)*(75+ring*75);q.y=innerHeight/2+Math.sin(a)*(45+ring*45);q.rot+=.06;drawChecker(q)});centerIcon('🎲',t,.10);
+      }else if(theme.family==='checkerBurst'){
+        checkers.forEach(q=>{if(!q.landed){q.x=innerWidth/2;q.y=innerHeight/2;q.vx=Math.cos(q.phase)*rand(4,10);q.vy=Math.sin(q.phase)*rand(4,10);q.landed=true}q.x+=q.vx;q.y+=q.vy;q.rot+=.12;drawChecker(q)});
+      }else if(theme.family==='diceFormation')targetFormation(dicePoints(),t);
+      else {
+        checkers.forEach(q=>bounce(q,.24,.84));
+        const icon={rain:'✨',rise:'🎈',fireworks:'🎆',slide:theme.icon,center:theme.icon,arcade:'🟨',flash:'📸',credits:'🎬',confetti:'🎉'}[theme.family]||theme.icon;
+        symbols(icon,t);
+        if(['center','arcade','credits'].includes(theme.family))centerIcon(theme.icon,t);
+        if(theme.family==='arcade'){x.fillStyle='rgba(10,20,16,.82)';x.fillRect(innerWidth*.20,innerHeight*.55,innerWidth*.60,90);x.fillStyle='#fff06a';x.font='bold 42px monospace';x.fillText('LEVEL COMPLETE',innerWidth/2,innerHeight*.55+45)}
+        if(theme.family==='credits'){x.fillStyle='rgba(0,0,0,.72)';x.fillRect(innerWidth*.20,innerHeight*.30,innerWidth*.60,210);x.fillStyle='white';x.font='bold 42px serif';x.fillText('WINNER: YOU',innerWidth/2,innerHeight*.40);x.font='20px sans-serif';x.fillText('Directed by Excellent Dice™',innerWidth/2,innerHeight*.50)}
+      }
+    }
+
+    function frame(now){
+      if(!celebrationRun)return;
+      const t=now-started;x.clearRect(0,0,innerWidth,innerHeight);animate(t);
+      if(t<9500)celebrationRun.raf=requestAnimationFrame(frame);else stopVictoryCelebration();
+    }
+    celebrationRun={raf:requestAnimationFrame(frame),resize};addEventListener('resize',resize);renderCelebrationVault();
   }
 
   function stopVictoryCelebration(){

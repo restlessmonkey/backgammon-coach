@@ -1,4 +1,4 @@
-BACKGAMMON COACH v2.0.2.0
+BACKGAMMON COACH v2.0.2.1
 IPHONE GITHUB FLAT-UPLOAD DEPLOYMENT PACKAGE
 
 WHY THIS PACKAGE EXISTS
@@ -32,7 +32,7 @@ Because the prior service worker may remain cached:
 5. Reopen the Pages address and add it to the Home Screen again.
 
 EXPECTED VERSION
-v2.0.2.0
+v2.0.2.1
 
 COACH MODE
 Select:
@@ -42,13 +42,13 @@ WINDOWS
 No Windows computer is required for this local coach mode.
 
 
-DEFAULT BEHAVIOR IN v2.0.2.0
+DEFAULT BEHAVIOR IN v2.0.2.1
 - Coaching is ON for a fresh install.
 - Automatically Watch the Coach every turn is ON for a fresh install.
 - A user's previously saved choices are preserved.
 
 
-v2.0.2.0 GAMEPLAY REPAIR
+v2.0.2.1 GAMEPLAY REPAIR
 - Prevents duplicate factorial expansion for doubles.
 - Adds legal sequence caching.
 - Keeps opening 5-5 responsive.
@@ -56,7 +56,7 @@ v2.0.2.0 GAMEPLAY REPAIR
 - Reduces advanced doubles lookahead candidates from 6 to 3.
 
 
-v2.0.2.0 SAFE DEFAULTS RESET
+v2.0.2.1 SAFE DEFAULTS RESET
 - Coaching defaults ON.
 - Explain Every Move defaults ON.
 - Automatically Watch the Coach defaults OFF.
@@ -64,7 +64,7 @@ v2.0.2.0 SAFE DEFAULTS RESET
 - Automatic analysis cannot begin while a checker or destination is selected.
 
 
-v2.0.2.0 STACK AND DESTINATION-TAP REPAIR
+v2.0.2.1 STACK AND DESTINATION-TAP REPAIR
 - Prevents move-rating code from recursively launching full coach analysis.
 - Adds a recursion guard and safe static fallback.
 - Reduces mobile lookahead workload.
@@ -72,12 +72,21 @@ v2.0.2.0 STACK AND DESTINATION-TAP REPAIR
 - Gameplay continues even if advanced coach analysis fails.
 
 
-v2.0.2.0 CELEBRATION BUTTON RESTORE
+v2.0.2.1 CELEBRATION BUTTON RESTORE
 - Restores a visible 🎉 Celebration button in the top action area.
 - The button directly launches the existing random victory celebration.
 - Gameplay and the v2.0.1.1.6 stack/tap repair remain unchanged.
 
 
-v2.0.2.0 CELEBRATION VAULT
+v2.0.2.1 CELEBRATION VAULT
 - 30 celebrations, rarity tiers, preview gallery, favorites, enable/disable controls, discovery and win statistics, achievements, and streak messages.
 - Working gameplay repairs preserved.
+
+
+v2.0.2.1 CHECKER CELEBRATION EXPANSION
+- Restores all five original checker finales as distinct animations:
+  Rocket Checkers, Checker Hill, Classic Bounce, Victory Vortex, Checker Fountain.
+- Expands the Celebration Vault from 30 to 42 finales.
+- Adds 12 checker-centric celebrations using the actual game checker artwork.
+- Preserves all v2.0.2.0 Vault controls, rarity tiers, favorites, discovery, and statistics.
+- Preserves the certified working gameplay/tap and coach-recursion repairs.

@@ -1,5 +1,5 @@
 {
-  "version": "2.0.2.0",
+  "version": "2.0.2.1",
   "package_type": "GITHUB_IPHONE_FLAT_UPLOAD",
   "upload_location": "repository root",
   "required_app_files": [
@@ -16,8 +16,8 @@
     "VALIDATION_REPORT.txt",
     "SHA256SUMS.txt"
   ],
-  "created_utc": "2026-07-22T15:06:10.004893+00:00",
-  "package_name": "v2.0.2.0_Backgammon_Coach_iPhone_GitHub_FLAT_CELEBRATION_VAULT.zip",
+  "created_utc": "2026-07-22T15:23:04.846772+00:00",
+  "package_name": "v2.0.2.1_Backgammon_Coach_iPhone_GitHub_FLAT_CHECKER_CELEBRATION_EXPANSION.zip",
   "default_settings": {
     "coaching_enabled": true,
     "explain_every_move": true,
@@ -30,8 +30,16 @@
     "gameplay_changes": "None"
   },
   "feature_release": {
-    "name": "Celebration Vault",
-    "celebration_count": 30,
+    "name": "Checker Celebration Expansion",
+    "celebration_count": 43,
+    "restored_originals": [
+      "Rocket Checkers",
+      "Checker Hill",
+      "Classic Bounce",
+      "Victory Vortex",
+      "Checker Fountain"
+    ],
+    "checker_centric_new_count": 12,
     "gameplay_changes": "None"
   }
 }

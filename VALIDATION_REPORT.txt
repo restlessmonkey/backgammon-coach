@@ -1,12 +1,18 @@
-Backgammon Coach v2.0.2.0 Celebration Vault Validation
-====================================================================
-PASS — JS syntax
-PASS — 30 celebrations
-PASS — Vault
-PASS — Real win
-PASS — Tap repair
-PASS — Stack guard
-PASS — Cache
+Backgammon Coach v2.0.2.1 Checker Celebration Expansion
+==========================================================================
+PASS — Version
+PASS — JavaScript syntax
+PASS — 43 celebrations
+PASS — All five originals restored
+PASS — Originals have distinct animation families
+PASS — Checker-centric formations
+PASS — Dynamic discovery count
+PASS — Vault controls retained
+PASS — Gameplay tap repair retained
+PASS — Coach recursion guard retained
+PASS — Cache updated
+PASS — Flat paths retained
 
+Celebrations inventoried: 43
 Automated result: PASS
 Manual iPad visual validation remains required.
