@@ -1,16 +1,14 @@
 # Backlog
 
-## Completed in v1.9.2
-- Watch the Coach Think.
-- Visual candidate comparison.
-- Candidate rejection explanations.
-- Final decision animation.
-- Stop and automatic cancellation.
+## Completed in v1.9.3
+- Persistent automatic Coach Think option.
+- Automatic analysis after every human roll.
+- Legal-move guard and cancellation behavior.
 
 ## Next candidates
-- Animate any ranked alternative on demand.
 - Slow, normal, and fast coaching speeds.
-- Voice narration for the thinking sequence.
-- Step backward and forward through the analysis.
+- “Now you try it” guided execution.
+- Voice narration.
+- Step controls for analysis.
 - Complete Move Journal and replay.
 - Engine-grade analysis integration.

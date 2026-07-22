@@ -1,10 +1,10 @@
-BACKGAMMON COACH v1.9.2 — WATCH THE COACH THINK
+BACKGAMMON COACH v1.9.3 — AUTOMATIC COACH THINK
 
-Test:
-1. Roll the dice.
-2. Tap “Rank and explain my moves.”
-3. Tap “Watch the Coach Think.”
-4. Observe the coach compare candidates, reject weaker choices, select the best turn, and animate it on the board.
+1. Open Coach settings.
+2. Enable “Automatically watch the coach every turn.”
+3. Roll the dice.
 
-The analysis is educational and uses the app's local teaching heuristic.
-The real board position does not change during previews.
+After every human roll, the app automatically compares legal turns, explains rejected options, chooses the best recommendation, and animates it on the board.
+
+The preference is saved on the device.
+The actual board does not change during previews.

@@ -1,17 +1,18 @@
 # Changelog
 
-## v1.9.2 — Watch the Coach Think
+## v1.9.3 — Automatic Coach Think
 
-- Added a Watch the Coach Think button.
-- The coach visually examines up to three complete legal candidate turns.
-- Each candidate is highlighted on the board before the coach evaluates it.
-- The coach explains what each candidate accomplishes.
-- Weaker candidates are explicitly rejected with plain-English reasons.
-- The final choice is marked as selected.
-- The chosen complete turn then animates directly on the board.
-- Added Stop thinking and Escape cancellation.
-- Thinking stops automatically when the player rolls, moves, or starts a new game.
-- Preserved non-destructive preview behavior.
+- Added “Automatically watch the coach every turn.”
+- The preference is saved on the device.
+- After each human roll, the app automatically ranks the legal turns and begins Watch the Coach Think.
+- The coach compares candidates, rejects weaker choices, selects the recommendation, and animates it.
+- Automatic coaching does not start when no legal move exists.
+- Turning the option off stops automatic coaching.
+- Manual Watch the Coach Think remains available.
+- All previews remain non-destructive.
+
+## v1.9.2 — Watch the Coach Think
+- Added visual candidate comparison, rejection reasons, and final move animation.
 
 ## v1.9.1 — Animated Board Hints
 - Added animated best-move previews directly on the board.
