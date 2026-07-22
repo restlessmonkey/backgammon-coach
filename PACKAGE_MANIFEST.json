@@ -1,5 +1,5 @@
 {
-  "version": "2.0.2.3",
+  "version": "2.0.2.4",
   "package_type": "GITHUB_IPHONE_FLAT_UPLOAD",
   "upload_location": "repository root",
   "required_app_files": [
@@ -16,8 +16,8 @@
     "VALIDATION_REPORT.txt",
     "SHA256SUMS.txt"
   ],
-  "created_utc": "2026-07-22T16:35:36.095783+00:00",
-  "package_name": "v2.0.2.3_Backgammon_Coach_iPhone_GitHub_FLAT_INDEPENDENT_SIDE_PANEL_SCROLLING.zip",
+  "created_utc": "2026-07-22T16:45:34.774145+00:00",
+  "package_name": "v2.0.2.4_Backgammon_Coach_iPhone_GitHub_FLAT_COLLAPSIBLE_SIDE_PANELS.zip",
   "default_settings": {
     "coaching_enabled": true,
     "explain_every_move": true,
@@ -52,13 +52,20 @@
     }
   },
   "release": {
-    "name": "Independent Side Panel Scrolling",
-    "desktop_tablet_breakpoint": "min-width 981px",
-    "board_behavior": "sticky and visually anchored",
-    "sidebar_behavior": "independent vertical scrolling",
-    "phone_behavior": "normal page scrolling",
+    "name": "Collapsible Side Panels",
+    "scope": "Right-side interface panels",
+    "collapse_button_size": "50 x 50 CSS pixels",
+    "default_state": "Expanded",
+    "coach_drawer": "Preserved and enlarged",
+    "independent_scrolling": "Preserved",
+    "accessibility": [
+      "aria-expanded",
+      "aria-controls",
+      "dynamic expand/collapse labels",
+      "visible keyboard focus"
+    ],
     "gameplay_changes": "None",
-    "coach_changes": "None",
+    "coach_logic_changes": "None",
     "celebration_count": 44
   },
   "github_commit_message_file": "COMMIT_MESSAGE.txt"

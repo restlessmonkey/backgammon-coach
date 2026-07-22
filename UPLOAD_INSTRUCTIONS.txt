@@ -1,4 +1,4 @@
-BACKGAMMON COACH v2.0.2.3
+BACKGAMMON COACH v2.0.2.4
 IPHONE GITHUB FLAT-UPLOAD DEPLOYMENT PACKAGE
 
 WHY THIS PACKAGE EXISTS
@@ -32,7 +32,7 @@ Because the prior service worker may remain cached:
 5. Reopen the Pages address and add it to the Home Screen again.
 
 EXPECTED VERSION
-v2.0.2.3
+v2.0.2.4
 
 COACH MODE
 Select:
@@ -42,13 +42,13 @@ WINDOWS
 No Windows computer is required for this local coach mode.
 
 
-DEFAULT BEHAVIOR IN v2.0.2.3
+DEFAULT BEHAVIOR IN v2.0.2.4
 - Coaching is ON for a fresh install.
 - Automatically Watch the Coach every turn is ON for a fresh install.
 - A user's previously saved choices are preserved.
 
 
-v2.0.2.3 GAMEPLAY REPAIR
+v2.0.2.4 GAMEPLAY REPAIR
 - Prevents duplicate factorial expansion for doubles.
 - Adds legal sequence caching.
 - Keeps opening 5-5 responsive.
@@ -56,7 +56,7 @@ v2.0.2.3 GAMEPLAY REPAIR
 - Reduces advanced doubles lookahead candidates from 6 to 3.
 
 
-v2.0.2.3 SAFE DEFAULTS RESET
+v2.0.2.4 SAFE DEFAULTS RESET
 - Coaching defaults ON.
 - Explain Every Move defaults ON.
 - Automatically Watch the Coach defaults OFF.
@@ -64,7 +64,7 @@ v2.0.2.3 SAFE DEFAULTS RESET
 - Automatic analysis cannot begin while a checker or destination is selected.
 
 
-v2.0.2.3 STACK AND DESTINATION-TAP REPAIR
+v2.0.2.4 STACK AND DESTINATION-TAP REPAIR
 - Prevents move-rating code from recursively launching full coach analysis.
 - Adds a recursion guard and safe static fallback.
 - Reduces mobile lookahead workload.
@@ -72,18 +72,18 @@ v2.0.2.3 STACK AND DESTINATION-TAP REPAIR
 - Gameplay continues even if advanced coach analysis fails.
 
 
-v2.0.2.3 CELEBRATION BUTTON RESTORE
+v2.0.2.4 CELEBRATION BUTTON RESTORE
 - Restores a visible 🎉 Celebration button in the top action area.
 - The button directly launches the existing random victory celebration.
 - Gameplay and the v2.0.1.1.6 stack/tap repair remain unchanged.
 
 
-v2.0.2.3 CELEBRATION VAULT
+v2.0.2.4 CELEBRATION VAULT
 - 30 celebrations, rarity tiers, preview gallery, favorites, enable/disable controls, discovery and win statistics, achievements, and streak messages.
 - Working gameplay repairs preserved.
 
 
-v2.0.2.3 CHECKER CELEBRATION EXPANSION
+v2.0.2.4 CHECKER CELEBRATION EXPANSION
 - Restores all five original checker finales as distinct animations:
   Rocket Checkers, Checker Hill, Classic Bounce, Victory Vortex, Checker Fountain.
 - Expands the Celebration Vault from 30 to 42 finales.
@@ -92,7 +92,7 @@ v2.0.2.3 CHECKER CELEBRATION EXPANSION
 - Preserves the certified working gameplay/tap and coach-recursion repairs.
 
 
-v2.0.2.3 BOWLING ALLEY CELEBRATION
+v2.0.2.4 BOWLING ALLEY CELEBRATION
 - Adds Backgammon Bowling Alley to the Celebration Vault.
 - Ten checkers form a standard bowling-pin triangle.
 - Four checkers mark the bowling lane.
@@ -102,13 +102,26 @@ v2.0.2.3 BOWLING ALLEY CELEBRATION
 - All v2.0.2.1 celebrations and gameplay repairs remain intact.
 
 
-v2.0.2.3 INDEPENDENT SIDE-PANEL SCROLLING
+v2.0.2.4 INDEPENDENT SIDE-PANEL SCROLLING
 - On layouts wider than 980px, the right-side panel column scrolls independently.
 - The board remains visually anchored while Game, Coach, Move History, and other panels scroll.
 - Touch momentum scrolling is enabled for iPad and other touch devices.
 - Scroll chaining is contained so panel scrolling does not unexpectedly move the board.
 - Phone layouts retain normal page scrolling to avoid cramped nested scroll regions.
 - The available panel height is calculated from the actual header and control positions.
+- No gameplay, coaching, engine, or celebration logic was changed.
+
+A standalone COMMIT_MESSAGE.txt file is included for copying into GitHub.
+
+
+v2.0.2.4 COLLAPSIBLE SIDE PANELS
+- Every standard panel in the right-side column can now be collapsed or expanded.
+- Each panel has a large 50 x 50 pixel collapse button for easier tapping.
+- The collapse button includes a large rotating chevron and accessible labels.
+- The existing Coach drawer remains intact and its toggle is enlarged.
+- Panels open expanded by default so no information is hidden unexpectedly.
+- Independent right-side scrolling from v2.0.2.3 remains intact.
+- Phone and tablet touch behavior remains supported.
 - No gameplay, coaching, engine, or celebration logic was changed.
 
 A standalone COMMIT_MESSAGE.txt file is included for copying into GitHub.

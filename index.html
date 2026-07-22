@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v2.0.2.3</title>
+  <title>Backgammon Coach iPhone v2.0.2.4</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -50,7 +50,7 @@ canvas { width: 100%; height: auto; display: block; touch-action: manipulation; 
 .sidebar { display: grid; gap: 14px; }
 
 /*
-  v2.0.2.3 — Independent side-panel scrolling
+  v2.0.2.4 — Independent side-panel scrolling
   On wide layouts, the board remains visually anchored while the right panel
   column gets its own touch-friendly vertical scroll area. Phone layouts keep
   normal page scrolling to avoid cramped nested scrolling.
@@ -85,6 +85,75 @@ canvas { width: 100%; height: auto; display: block; touch-action: manipulation; 
 }
 .panel { background: var(--panel); color: var(--ink); border-radius: 18px; padding: 16px; box-shadow: 0 12px 28px rgba(0,0,0,.24); }
 .panel h2 { margin: 0 0 12px; font-family: Georgia, serif; font-size: 1.25rem; }
+.sidebar-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -4px -4px 10px;
+}
+.sidebar-panel-title {
+  flex: 1;
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 1.25rem;
+}
+.panel-collapse-toggle {
+  width: 50px;
+  min-width: 50px;
+  height: 50px;
+  min-height: 50px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #ead8bb;
+  color: var(--ink);
+  border: 2px solid #c9ae82;
+  box-shadow: none;
+  font-size: 1.45rem;
+  line-height: 1;
+  touch-action: manipulation;
+}
+.panel-collapse-toggle:hover {
+  background: #e0c79f;
+}
+.panel-collapse-toggle:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+.panel-collapse-toggle .panel-chevron {
+  display: block;
+  transition: transform .2s ease;
+}
+.panel.is-collapsed .panel-collapse-toggle .panel-chevron {
+  transform: rotate(-90deg);
+}
+.sidebar-panel-body {
+  overflow: hidden;
+}
+.panel.is-collapsed {
+  padding-bottom: 10px;
+}
+.panel.is-collapsed .sidebar-panel-header {
+  margin-bottom: 0;
+}
+.panel.is-collapsed .sidebar-panel-body {
+  display: none;
+}
+
+/* Existing Coach drawer receives the same larger, easier-to-tap treatment. */
+.coach-drawer-toggle {
+  min-height: 50px !important;
+  padding: 10px 14px !important;
+  border-radius: 14px !important;
+  font-size: 1.08rem !important;
+}
+.coach-drawer-toggle .coach-chevron {
+  min-width: 28px;
+  font-size: 1.35rem;
+  text-align: center;
+}
+
 .score-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #dfd2bf; }
 .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 13px; }
 .status-grid div { background: #ede0ce; border-radius: 12px; padding: 10px; }
@@ -138,7 +207,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 @media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
 
 
-/* v2.0.2.3 Immersive Play */
+/* v2.0.2.4 Immersive Play */
 .topbar,.play-controls,.coach-panel{transition:all .22s ease}
 body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
 body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
@@ -189,7 +258,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   
 
-/* v2.0.2.3 Victory Celebration */
+/* v2.0.2.4 Victory Celebration */
 .victory-celebration{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden;background:rgba(8,12,10,.08);opacity:0;transition:opacity .18s ease}
 .victory-celebration.active{opacity:1}
 .victory-canvas{width:100%;height:100%;display:block}
@@ -199,7 +268,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media (prefers-reduced-motion:reduce){.victory-celebration,.victory-banner{transition:none}}
 
 
-/* v2.0.2.3 Explain Every Move */
+/* v2.0.2.4 Explain Every Move */
 .coach-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
 .coach-settings label{display:grid;gap:4px;color:var(--muted);font-size:.76rem;font-weight:800}
 .move-rating{margin:10px 0;padding:11px;border-radius:12px;border:1px solid #d6c4ae;background:#fffaf2}
@@ -227,7 +296,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.coach-settings{grid-template-columns:1fr}.risk-row{grid-template-columns:64px 1fr 30px}}
 
 
-/* v2.0.2.3 Animated Board Hints */
+/* v2.0.2.4 Animated Board Hints */
 .visual-hint-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .visual-hint-controls button{margin:0;box-shadow:none}
 .visual-hint-status{margin-top:8px;padding:8px 10px;border-radius:10px;background:#e7f0eb;color:#294f42;font-weight:800;font-size:.8rem}
@@ -235,7 +304,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.visual-hint-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.2.3 Watch the Coach Think */
+/* v2.0.2.4 Watch the Coach Think */
 .think-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .think-controls button{margin:0;box-shadow:none}
 .think-panel{margin-top:9px;padding:10px;border-radius:12px;background:#f6ead8;border:1px solid #d8c5ab}
@@ -250,7 +319,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.think-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.2.3 verified engine controls */
+/* v2.0.2.4 verified engine controls */
 .engine-panel{margin:10px 0;padding:10px;border-radius:12px;border:1px solid #d8c5ab;background:#fffaf2}
 .engine-panel h3{margin:0 0 8px;font-size:.95rem}
 .engine-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -292,10 +361,10 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v2.0.2.3</span>
+          <span class="version-badge" id="versionBadge">v2.0.2.4</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v2.0.2.3</div>
+        <div class="version-note">v2.0.2.4</div>
       </div>
       <div class="top-actions">
         <button id="headerCelebrationBtn" class="secondary celebration-header-btn" type="button">🎉 Celebration Vault</button>
@@ -408,7 +477,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
             <div id="favoriteLessons" class="favorite-list"></div>
           </details>
           <div id="coachReport" class="coach-report" hidden></div>
-          <div class="coach-disclaimer">v2.0.2.3 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. The local evaluator remains available solely as a clearly marked teaching fallback.</div>
+          <div class="coach-disclaimer">v2.0.2.4 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. The local evaluator remains available solely as a clearly marked teaching fallback.</div>
           </div>
         </section>
 
@@ -492,7 +561,66 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 (() => {
   'use strict';
 
-  function updateIndependentPanelViewport(){
+  
+function initializeCollapsibleSidePanels(){
+  const panels = Array.from(document.querySelectorAll('.sidebar > .panel'));
+
+  panels.forEach((panel, index)=>{
+    // The Coach panel already has a purpose-built drawer. Keep it intact,
+    // but enlarge its existing toggle through CSS.
+    if(panel.id === 'coachPanel') return;
+    if(panel.dataset.collapsibleReady === 'true') return;
+
+    const heading = panel.querySelector(':scope > h2');
+    if(!heading) return;
+
+    const title = heading.textContent.trim() || `Panel ${index + 1}`;
+    const body = document.createElement('div');
+    body.className = 'sidebar-panel-body';
+    body.id = `sidebarPanelBody${index + 1}`;
+
+    let node = heading.nextSibling;
+    while(node){
+      const next = node.nextSibling;
+      body.appendChild(node);
+      node = next;
+    }
+
+    const header = document.createElement('div');
+    header.className = 'sidebar-panel-header';
+
+    const titleNode = document.createElement('h2');
+    titleNode.className = 'sidebar-panel-title';
+    titleNode.textContent = title;
+
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'panel-collapse-toggle';
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-controls', body.id);
+    toggle.setAttribute('aria-label', `Collapse ${title} panel`);
+    toggle.title = `Collapse ${title}`;
+    toggle.innerHTML = '<span class="panel-chevron" aria-hidden="true">▼</span>';
+
+    header.append(titleNode, toggle);
+    heading.replaceWith(header);
+    panel.appendChild(body);
+    panel.dataset.collapsibleReady = 'true';
+
+    toggle.addEventListener('click', ()=>{
+      const collapsed = panel.classList.toggle('is-collapsed');
+      toggle.setAttribute('aria-expanded', String(!collapsed));
+      toggle.setAttribute(
+        'aria-label',
+        `${collapsed ? 'Expand' : 'Collapse'} ${title} panel`
+      );
+      toggle.title = `${collapsed ? 'Expand' : 'Collapse'} ${title}`;
+      window.requestAnimationFrame(updateIndependentPanelViewport);
+    });
+  });
+}
+
+function updateIndependentPanelViewport(){
   const layout = document.querySelector('.game-layout');
   if(!layout) return;
   const viewportTop = Math.max(16, Math.round(layout.getBoundingClientRect().top));
@@ -504,7 +632,10 @@ window.addEventListener('orientationchange', ()=>{
   window.setTimeout(updateIndependentPanelViewport, 180);
 });
 window.addEventListener('pageshow', updateIndependentPanelViewport);
-document.addEventListener('DOMContentLoaded', updateIndependentPanelViewport);
+document.addEventListener('DOMContentLoaded', ()=>{
+  initializeCollapsibleSidePanels();
+  updateIndependentPanelViewport();
+});
 window.setTimeout(updateIndependentPanelViewport, 0);
 
 const canvas = document.getElementById('board');
@@ -814,7 +945,7 @@ const canvas = document.getElementById('board');
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v2.0.2.3 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v2.0.2.4 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
