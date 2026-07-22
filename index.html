@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v2.0.2.1</title>
+  <title>Backgammon Coach iPhone v2.0.2.2</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -103,7 +103,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 @media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
 
 
-/* v2.0.2.1 Immersive Play */
+/* v2.0.2.2 Immersive Play */
 .topbar,.play-controls,.coach-panel{transition:all .22s ease}
 body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
 body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
@@ -154,7 +154,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   
 
-/* v2.0.2.1 Victory Celebration */
+/* v2.0.2.2 Victory Celebration */
 .victory-celebration{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden;background:rgba(8,12,10,.08);opacity:0;transition:opacity .18s ease}
 .victory-celebration.active{opacity:1}
 .victory-canvas{width:100%;height:100%;display:block}
@@ -164,7 +164,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media (prefers-reduced-motion:reduce){.victory-celebration,.victory-banner{transition:none}}
 
 
-/* v2.0.2.1 Explain Every Move */
+/* v2.0.2.2 Explain Every Move */
 .coach-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
 .coach-settings label{display:grid;gap:4px;color:var(--muted);font-size:.76rem;font-weight:800}
 .move-rating{margin:10px 0;padding:11px;border-radius:12px;border:1px solid #d6c4ae;background:#fffaf2}
@@ -192,7 +192,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.coach-settings{grid-template-columns:1fr}.risk-row{grid-template-columns:64px 1fr 30px}}
 
 
-/* v2.0.2.1 Animated Board Hints */
+/* v2.0.2.2 Animated Board Hints */
 .visual-hint-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .visual-hint-controls button{margin:0;box-shadow:none}
 .visual-hint-status{margin-top:8px;padding:8px 10px;border-radius:10px;background:#e7f0eb;color:#294f42;font-weight:800;font-size:.8rem}
@@ -200,7 +200,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.visual-hint-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.2.1 Watch the Coach Think */
+/* v2.0.2.2 Watch the Coach Think */
 .think-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .think-controls button{margin:0;box-shadow:none}
 .think-panel{margin-top:9px;padding:10px;border-radius:12px;background:#f6ead8;border:1px solid #d8c5ab}
@@ -215,7 +215,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.think-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.2.1 verified engine controls */
+/* v2.0.2.2 verified engine controls */
 .engine-panel{margin:10px 0;padding:10px;border-radius:12px;border:1px solid #d8c5ab;background:#fffaf2}
 .engine-panel h3{margin:0 0 8px;font-size:.95rem}
 .engine-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -257,10 +257,10 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v2.0.2.1</span>
+          <span class="version-badge" id="versionBadge">v2.0.2.2</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v2.0.2.1</div>
+        <div class="version-note">v2.0.2.2</div>
       </div>
       <div class="top-actions">
         <button id="headerCelebrationBtn" class="secondary celebration-header-btn" type="button">🎉 Celebration Vault</button>
@@ -373,7 +373,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
             <div id="favoriteLessons" class="favorite-list"></div>
           </details>
           <div id="coachReport" class="coach-report" hidden></div>
-          <div class="coach-disclaimer">v2.0.2.1 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. The local evaluator remains available solely as a clearly marked teaching fallback.</div>
+          <div class="coach-disclaimer">v2.0.2.2 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. The local evaluator remains available solely as a clearly marked teaching fallback.</div>
           </div>
         </section>
 
@@ -764,7 +764,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v2.0.2.1 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v2.0.2.2 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -1666,6 +1666,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     {id:'checker-wave',icon:'🌊',name:'Checker Wave',rarity:'special',weight:7,family:'wave',text:'A rolling wave of checkers sweeps across the screen.'},
     {id:'checker-salute',icon:'🫡',name:'15-Checker Salute',rarity:'special',weight:7,family:'salute',text:'All 15 checkers rise into formation and salute the winner.'},
     {id:'checker-pinball',icon:'🕹️',name:'Checker Pinball',rarity:'special',weight:7,family:'pinball',text:'The checkers ricochet through bumpers like a pinball machine.'},
+    {id:'checker-bowling',icon:'🎳',name:'Backgammon Bowling Alley',rarity:'rare',weight:3,family:'bowling',text:'Fifteen checkers line up like pins while one checker rolls in and bowls them over.'},
     {id:'championship-trophy',icon:'🏆',name:'Championship Trophy',rarity:'special',weight:7,family:'center',text:'A gleaming trophy rises through checker confetti.'},
     {id:'crowned-champion',icon:'👑',name:'Crowned Champion',rarity:'special',weight:7,family:'center',text:'A golden crown descends upon the champion.'},
     {id:'fireworks-finale',icon:'🎆',name:'Fireworks Finale',rarity:'special',weight:7,family:'fireworks',text:'Checkers ignite a sky full of fireworks.'},
@@ -1793,6 +1794,127 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
         targetFormation(pts,t);if(t>2300)checkers.forEach((q,i)=>{q.y-=Math.sin((t-2300)*.007+i)*4});
       }else if(theme.family==='pinball'){
         checkers.forEach(q=>bounce(q,.18,.96));symbols('✨',t);
+      }else if(theme.family==='bowling'){
+        // Ten checker-pins form the standard 1-2-3-4 triangle.
+        const pinIndexes=[0,1,2,3,4,5,6,7,8,9];
+        const pinTargets=[];
+        const baseY=innerHeight*.60;
+        const rowGap=Math.min(74,innerHeight*.09);
+        const colGap=Math.min(64,innerWidth*.075);
+        let n=0;
+        for(let row=0;row<4;row++){
+          for(let col=0;col<=row;col++){
+            pinTargets.push({
+              x:innerWidth*.66+(col-row/2)*colGap,
+              y:baseY-row*rowGap
+            });
+            n++;
+          }
+        }
+
+        // Four extra checkers become lane markers and one becomes the bowling ball.
+        const laneY=baseY+70;
+        const ball=checkers[14];
+        const impactTime=3600;
+        const approach=Math.min(1,t/impactTime);
+        const hook=Math.sin(approach*Math.PI)*34;
+
+        x.save();
+        x.strokeStyle='rgba(217,164,65,.72)';
+        x.lineWidth=5;
+        x.beginPath();
+        x.moveTo(innerWidth*.07,laneY-62);
+        x.lineTo(innerWidth*.90,laneY-62);
+        x.moveTo(innerWidth*.07,laneY+62);
+        x.lineTo(innerWidth*.90,laneY+62);
+        x.stroke();
+
+        // Bowling-lane arrows.
+        x.fillStyle='rgba(217,164,65,.50)';
+        for(let i=0;i<4;i++){
+          const ax=innerWidth*(.30+i*.09);
+          x.beginPath();
+          x.moveTo(ax,laneY);
+          x.lineTo(ax-12,laneY-18);
+          x.lineTo(ax+12,laneY-18);
+          x.closePath();
+          x.fill();
+        }
+
+        // Scoreboard.
+        x.fillStyle='rgba(18,29,24,.88)';
+        x.fillRect(innerWidth*.08,innerHeight*.15,Math.min(360,innerWidth*.42),120);
+        x.fillStyle='#fff';
+        x.textAlign='left';
+        x.font='bold 22px sans-serif';
+        x.fillText('BACKGAMMON LANES',innerWidth*.10,innerHeight*.15+34);
+        x.font='bold 18px monospace';
+        x.fillText('YOU        300',innerWidth*.10,innerHeight*.15+70);
+        x.fillText('COMPUTER     0',innerWidth*.10,innerHeight*.15+98);
+        x.restore();
+
+        pinIndexes.forEach((idx,i)=>{
+          const q=checkers[idx];
+          const target=pinTargets[i];
+
+          if(t<impactTime){
+            q.x+=(target.x-q.x)*.085;
+            q.y+=(target.y-q.y)*.085;
+            q.rot+=(0-q.rot)*.08;
+          }else{
+            const elapsed=t-impactTime;
+            if(!q.landed){
+              const dx=q.x-ball.x;
+              const dy=q.y-ball.y;
+              const magnitude=Math.max(1,Math.hypot(dx,dy));
+              q.vx=(dx/magnitude)*rand(4.5,9.5)+rand(-2,2);
+              q.vy=(dy/magnitude)*rand(3,8)-rand(2,5);
+              q.landed=true;
+            }
+            q.x+=q.vx;
+            q.y+=q.vy;
+            q.vy+=.28;
+            q.rot+=q.vx*.045;
+          }
+          drawChecker(q);
+        });
+
+        // Four checkers mark the lane edges.
+        checkers.slice(10,14).forEach((q,i)=>{
+          const tx=innerWidth*.20+i*(innerWidth*.27/3);
+          const ty=laneY+(i%2?44:-44);
+          q.x+=(tx-q.x)*.075;
+          q.y+=(ty-q.y)*.075;
+          q.rot+=.035;
+          drawChecker(q,.82);
+        });
+
+        // The 15th checker becomes the bowling ball.
+        if(t<impactTime){
+          ball.r=Math.max(ball.r,34);
+          ball.x=innerWidth*.10+(innerWidth*.54)*approach;
+          ball.y=laneY-hook;
+          ball.rot+=.22;
+          drawChecker(ball);
+        }else{
+          ball.x+=7;
+          ball.rot+=.25;
+          drawChecker(ball);
+          if(t>impactTime+550){
+            x.save();
+            x.textAlign='center';
+            x.fillStyle='#fff7d6';
+            x.strokeStyle='#3b2915';
+            x.lineWidth=8;
+            x.font=`bold ${Math.min(92,innerWidth*.12)}px sans-serif`;
+            x.strokeText('🎳 STRIKE!',innerWidth/2,innerHeight*.28);
+            x.fillText('🎳 STRIKE!',innerWidth/2,innerHeight*.28);
+            x.font='bold 25px sans-serif';
+            x.strokeText('You bowled them over!',innerWidth/2,innerHeight*.28+48);
+            x.fillText('You bowled them over!',innerWidth/2,innerHeight*.28+48);
+            x.restore();
+          }
+        }
       }else if(theme.family==='knockout'){
         checkers.slice(0,14).forEach((q,i)=>{q.x=innerWidth*.70+(i%4)*35;q.y=innerHeight*.30+Math.floor(i/4)*55;drawChecker(q,1,true)});
         const hero=checkers[14];hero.x=Math.min(innerWidth*.66,innerWidth*.08+t*.18);hero.y=innerHeight*.55;hero.rot+=.18;drawChecker(hero);if(t>2500)checkers.slice(0,14).forEach((q,i)=>{q.x+=(t-2500)*.12*(i%2?1:-1);q.y-=(t-2500)*.05});

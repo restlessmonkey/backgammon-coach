@@ -1,18 +1,21 @@
-Backgammon Coach v2.0.2.1 Checker Celebration Expansion
-==========================================================================
-PASS — Version
+Backgammon Coach v2.0.2.2 Bowling Alley Celebration Validation
+============================================================================
+PASS — Version updated
 PASS — JavaScript syntax
-PASS — 43 celebrations
-PASS — All five originals restored
-PASS — Originals have distinct animation families
-PASS — Checker-centric formations
-PASS — Dynamic discovery count
-PASS — Vault controls retained
+PASS — 44 celebrations
+PASS — Bowling catalog entry
+PASS — Bowling animation branch
+PASS — Ten checker pins
+PASS — Checker bowling ball
+PASS — Hook animation
+PASS — Strike finale
+PASS — Original five retained
 PASS — Gameplay tap repair retained
 PASS — Coach recursion guard retained
 PASS — Cache updated
 PASS — Flat paths retained
 
-Celebrations inventoried: 43
+Celebrations inventoried: 44
 Automated result: PASS
-Manual iPad visual validation remains required.
+Gameplay logic changes: none.
+Manual iPad animation validation remains required.

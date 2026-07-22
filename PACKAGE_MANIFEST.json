@@ -1,5 +1,5 @@
 {
-  "version": "2.0.2.1",
+  "version": "2.0.2.2",
   "package_type": "GITHUB_IPHONE_FLAT_UPLOAD",
   "upload_location": "repository root",
   "required_app_files": [
@@ -16,8 +16,8 @@
     "VALIDATION_REPORT.txt",
     "SHA256SUMS.txt"
   ],
-  "created_utc": "2026-07-22T15:23:04.846772+00:00",
-  "package_name": "v2.0.2.1_Backgammon_Coach_iPhone_GitHub_FLAT_CHECKER_CELEBRATION_EXPANSION.zip",
+  "created_utc": "2026-07-22T15:36:58.757307+00:00",
+  "package_name": "v2.0.2.2_Backgammon_Coach_iPhone_GitHub_FLAT_BOWLING_ALLEY_CELEBRATION.zip",
   "default_settings": {
     "coaching_enabled": true,
     "explain_every_move": true,
@@ -30,8 +30,8 @@
     "gameplay_changes": "None"
   },
   "feature_release": {
-    "name": "Checker Celebration Expansion",
-    "celebration_count": 43,
+    "name": "Bowling Alley Celebration",
+    "celebration_count": 44,
     "restored_originals": [
       "Rocket Checkers",
       "Checker Hill",
@@ -40,6 +40,15 @@
       "Checker Fountain"
     ],
     "checker_centric_new_count": 12,
-    "gameplay_changes": "None"
+    "gameplay_changes": "None",
+    "added_celebration": {
+      "id": "checker-bowling",
+      "name": "Backgammon Bowling Alley",
+      "rarity": "rare",
+      "uses_actual_checkers": true,
+      "pin_checkers": 10,
+      "lane_marker_checkers": 4,
+      "bowling_ball_checkers": 1
+    }
   }
 }
