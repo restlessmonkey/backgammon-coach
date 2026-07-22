@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v2.0.1.1.7</title>
+  <title>Backgammon Coach iPhone v2.0.2.0</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -103,7 +103,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 @media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
 
 
-/* v2.0.1.1.7 Immersive Play */
+/* v2.0.2.0 Immersive Play */
 .topbar,.play-controls,.coach-panel{transition:all .22s ease}
 body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
 body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
@@ -154,7 +154,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   
 
-/* v2.0.1.1.7 Victory Celebration */
+/* v2.0.2.0 Victory Celebration */
 .victory-celebration{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden;background:rgba(8,12,10,.08);opacity:0;transition:opacity .18s ease}
 .victory-celebration.active{opacity:1}
 .victory-canvas{width:100%;height:100%;display:block}
@@ -164,7 +164,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media (prefers-reduced-motion:reduce){.victory-celebration,.victory-banner{transition:none}}
 
 
-/* v2.0.1.1.7 Explain Every Move */
+/* v2.0.2.0 Explain Every Move */
 .coach-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
 .coach-settings label{display:grid;gap:4px;color:var(--muted);font-size:.76rem;font-weight:800}
 .move-rating{margin:10px 0;padding:11px;border-radius:12px;border:1px solid #d6c4ae;background:#fffaf2}
@@ -192,7 +192,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.coach-settings{grid-template-columns:1fr}.risk-row{grid-template-columns:64px 1fr 30px}}
 
 
-/* v2.0.1.1.7 Animated Board Hints */
+/* v2.0.2.0 Animated Board Hints */
 .visual-hint-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .visual-hint-controls button{margin:0;box-shadow:none}
 .visual-hint-status{margin-top:8px;padding:8px 10px;border-radius:10px;background:#e7f0eb;color:#294f42;font-weight:800;font-size:.8rem}
@@ -200,7 +200,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.visual-hint-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.1.1.7 Watch the Coach Think */
+/* v2.0.2.0 Watch the Coach Think */
 .think-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .think-controls button{margin:0;box-shadow:none}
 .think-panel{margin-top:9px;padding:10px;border-radius:12px;background:#f6ead8;border:1px solid #d8c5ab}
@@ -215,7 +215,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.think-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.1.1.7 verified engine controls */
+/* v2.0.2.0 verified engine controls */
 .engine-panel{margin:10px 0;padding:10px;border-radius:12px;border:1px solid #d8c5ab;background:#fffaf2}
 .engine-panel h3{margin:0 0 8px;font-size:.95rem}
 .engine-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -240,6 +240,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   }
   .celebration-header-btn:active{transform:translateY(1px);}
 
+.celebration-vault-dialog{padding:18px}.celebration-vault-content{width:min(1080px,96vw);max-height:92vh;overflow:auto}.vault-heading{display:flex;gap:18px;justify-content:space-between}.vault-stats{background:#eef6f1;border:1px solid #bfd3c8;border-radius:14px;padding:10px 14px;font-weight:750}.vault-toolbar,.rarity-legend{display:flex;flex-wrap:wrap;gap:9px;margin:15px 0}.rarity-legend span{font-size:.8rem;font-weight:800;padding:5px 9px;border-radius:999px;background:#f3eadb}.celebration-vault-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.celebration-card{border:2px solid #dfd1bb;background:#fffaf1;border-radius:16px;padding:13px;display:grid;gap:8px}.celebration-card.disabled{opacity:.52}.celebration-card.favorite{border-color:#d9a441}.celebration-card-head{display:flex;justify-content:space-between}.celebration-card h3{margin:0;font-size:1rem}.celebration-icon{font-size:1.6rem}.rarity-pill{font-size:.7rem;text-transform:uppercase;font-weight:900;background:#eee1ca;padding:4px 7px;border-radius:999px}.celebration-card p{font-size:.84rem;margin:0;color:#665a4b}.celebration-card-actions{display:grid;grid-template-columns:1fr 1fr auto;gap:6px}.celebration-card-actions button{font-size:.78rem;padding:8px 6px}.victory-copy{position:fixed;top:8vh;left:50%;transform:translateX(-50%);z-index:3;text-align:center;width:min(92vw,760px);pointer-events:none}.victory-copy .victory-banner{position:static;transform:none;display:inline-block}.victory-subtitle{margin:8px auto 0;background:rgba(24,38,31,.88);color:white;padding:8px 15px;border-radius:999px;font-weight:750;max-width:max-content}@media(max-width:700px){.vault-heading{display:block}.vault-stats{display:inline-block;margin-top:8px}}
 </style>
 
   <meta name="theme-color" content="#382719">
@@ -256,13 +257,14 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v2.0.1.1.7</span>
+          <span class="version-badge" id="versionBadge">v2.0.2.0</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v2.0.1.1.7</div>
+        <div class="version-note">v2.0.2.0</div>
       </div>
       <div class="top-actions">
-        <button id="headerCelebrationBtn" class="secondary celebration-header-btn" type="button">🎉 Celebration</button>
+        <button id="headerCelebrationBtn" class="secondary celebration-header-btn" type="button">🎉 Celebration Vault</button>
+        <button id="surpriseCelebrationBtn" class="secondary celebration-header-btn" type="button">✨ Surprise me</button>
         <button id="newGameBtn">New game</button>
         <button id="rulesBtn" class="secondary">How to play</button>
       </div>
@@ -371,7 +373,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
             <div id="favoriteLessons" class="favorite-list"></div>
           </details>
           <div id="coachReport" class="coach-report" hidden></div>
-          <div class="coach-disclaimer">v2.0.1.1.7 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. The local evaluator remains available solely as a clearly marked teaching fallback.</div>
+          <div class="coach-disclaimer">v2.0.2.0 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. The local evaluator remains available solely as a clearly marked teaching fallback.</div>
           </div>
         </section>
 
@@ -443,9 +445,11 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
 
 
+  <div id="celebrationVaultDialog" class="modal celebration-vault-dialog" role="dialog" aria-modal="true" aria-labelledby="celebrationVaultTitle"><div class="dialog-content celebration-vault-content"><button id="closeCelebrationVaultBtn" class="close-modal" aria-label="Close">×</button><div class="vault-heading"><div><h2 id="celebrationVaultTitle">🎉 Celebration Vault</h2><p>Preview finales, choose favorites, and control what can appear after a win.</p></div><div id="celebrationVaultStats" class="vault-stats"></div></div><div class="vault-toolbar"><button id="previewRandomCelebrationBtn" class="primary">✨ Preview random</button><button id="enableAllCelebrationsBtn" class="secondary">Enable all</button><button id="favoritesOnlyCelebrationsBtn" class="secondary">Favorites only</button><button id="resetCelebrationVaultBtn" class="secondary">Reset vault</button></div><div class="rarity-legend"><span>Classic</span><span>Special</span><span>Rare</span><span>Ultra-rare</span></div><div id="celebrationVaultGrid" class="celebration-vault-grid"></div><p class="vault-note">Real wins use an enabled celebration. Rare finales appear less often; favorites receive a small selection boost.</p></div></div>
+
   <div id="victoryCelebration" class="victory-celebration" hidden aria-live="polite" aria-label="Victory celebration">
     <canvas id="victoryCanvas" class="victory-canvas" aria-hidden="true"></canvas>
-    <div id="victoryBanner" class="victory-banner">🎉 You won!</div>
+    <div class="victory-copy"><div id="victoryBanner" class="victory-banner">🎉 You won!</div><div id="victorySubtitle" class="victory-subtitle"></div></div>
     <button id="stopCelebrationBtn" class="stop-celebration" type="button">Stop celebration</button>
   </div>
 
@@ -467,7 +471,17 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     'humanPips','aiPips','humanBar','aiBar','humanOff','aiOff','turnBanner','coachText','hintBtn',
     'coachToggle','coachLevel','coachVerbosity','engineMode','engineEndpoint','testEngineBtn','clearEngineBtn','engineStatus','explainEveryMove','autoWatchCoach','animateBestHintBtn','stopHintAnimationBtn','watchCoachThinkBtn','stopCoachThinkBtn','coachThinkPanel','coachThinkStage','coachThinkDetail','coachThinkCandidates','visualHintStatus','lastMoveRating','favoriteLessonsPanel','favoriteLessons','coachReport','victoryCelebration','victoryCanvas','victoryBanner','stopCelebrationBtn','testCelebrationBtn','coachDrawerToggle','coachDrawerBody','coachPanel','appHeader','playControls','handMode','floatRollToggle','lockRollToggle','resetRollPositionBtn','focusModeBtn','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode',
     'headerCelebrationBtn'
-  ].map(id => [id, document.getElementById(id)]));
+  ,
+    'surpriseCelebrationBtn',
+    'celebrationVaultDialog',
+    'closeCelebrationVaultBtn',
+    'celebrationVaultGrid',
+    'celebrationVaultStats',
+    'previewRandomCelebrationBtn',
+    'enableAllCelebrationsBtn',
+    'favoritesOnlyCelebrationsBtn',
+    'resetCelebrationVaultBtn',
+    'victorySubtitle'].map(id => [id, document.getElementById(id)]));
 
   const W = canvas.width, H = canvas.height;
   const margin = 54, barW = 72, trayW = 82;
@@ -750,7 +764,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v2.0.1.1.7 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v2.0.2.0 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -1370,7 +1384,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       state.winner=HUMAN;
       setCoach('You won! Enjoy the celebration — then review the Coach Report for your strongest moves and improvement areas.');
       renderCoachReport();
-      if(!celebrationShownForGame){celebrationShownForGame=true;startVictoryCelebration();}
+      if(!celebrationShownForGame){celebrationShownForGame=true;startVictoryCelebration(null,{realWin:true});}
     }
     if (state.off[AI]===15) {state.winner=AI; setCoach('The computer won. Try again and focus on reducing exposed blots and building connected points.');}
   }
@@ -1633,38 +1647,57 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   }
 
 
-  function startVictoryCelebration() {
-    stopVictoryCelebration();
-    const overlay=UI.victoryCelebration, c=UI.victoryCanvas, x=c.getContext('2d');
-    overlay.hidden=false;
-    requestAnimationFrame(()=>overlay.classList.add('active'));
-    const dpr=Math.min(2,window.devicePixelRatio||1);
-    const resize=()=>{c.width=Math.round(innerWidth*dpr);c.height=Math.round(innerHeight*dpr);c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';x.setTransform(dpr,0,0,dpr,0,0)};
-    resize();
-    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const effectNames=['Rocket Checkers','Checker Hill','Classic Bounce','Victory Vortex','Checker Fountain'];
-    const effect=Math.floor(Math.random()*effectNames.length);
-    UI.victoryBanner.textContent=`🎉 You won! • ${effectNames[effect]}`;
-    const particles=[]; const sparks=[]; const started=performance.now();
-    const boardRect=canvas.getBoundingClientRect();
-    const origin={x:Math.min(innerWidth-40,Math.max(40,boardRect.right-48)),y:Math.min(innerHeight-40,Math.max(40,boardRect.bottom-46))};
-    const rand=(a,b)=>a+Math.random()*(b-a);
-    const colors=['#f7efe1','#d9a441','#9e3f37','#e8c78f','#294f42'];
-    function checker(i){return {i,x:origin.x+rand(-24,24),y:origin.y+rand(-18,18),vx:0,vy:0,r:Math.max(11,Math.min(22,innerWidth/30)),rot:rand(0,Math.PI*2),spin:rand(-.12,.12),trail:[],phase:rand(0,Math.PI*2),landed:false};}
-    for(let i=0;i<15;i++)particles.push(checker(i));
-    function firework(cx,cy,color,count=34){for(let i=0;i<count;i++){const a=Math.PI*2*i/count+rand(-.05,.05),sp=rand(2.2,6.2);sparks.push({x:cx,y:cy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:rand(42,72),max:72,color,size:rand(1.5,3.5)})}}
-    for(let i=0;i<(reduced?2:6);i++)setTimeout(()=>{if(celebrationRun)firework(rand(innerWidth*.14,innerWidth*.86),rand(innerHeight*.12,innerHeight*.48),colors[i%colors.length],reduced?18:40)},i*230);
-    function drawChecker(p,alpha=1){x.save();x.globalAlpha=alpha;x.translate(p.x,p.y);x.rotate(p.rot);x.beginPath();x.arc(0,0,p.r,0,Math.PI*2);x.fillStyle=p.i%2?'#d8c6a4':'#3a211b';x.fill();x.lineWidth=2;x.strokeStyle=p.i%2?'#6a4b2e':'#e8c78f';x.stroke();x.beginPath();x.arc(-p.r*.25,-p.r*.28,p.r*.19,0,Math.PI*2);x.fillStyle='rgba(255,255,255,.22)';x.fill();x.restore()}
-    function updateSparks(){for(let i=sparks.length-1;i>=0;i--){const p=sparks[i];p.x+=p.vx;p.y+=p.vy;p.vy+=.055;p.vx*=.992;p.life--;x.globalAlpha=Math.max(0,p.life/p.max);x.fillStyle=p.color;x.beginPath();x.arc(p.x,p.y,p.size,0,Math.PI*2);x.fill();if(p.life<=0)sparks.splice(i,1)}x.globalAlpha=1}
-    function rocket(p,t){const delay=p.i*105,lt=t-delay;if(lt<0)return;if(lt<1500){p.x=origin.x+Math.sin(lt*.018+p.i)*18;p.y=origin.y-lt*.42-p.i*2;p.trail.push({x:p.x,y:p.y,a:1});if(p.trail.length>12)p.trail.shift();p.trail.forEach((q,j)=>{x.globalAlpha=(j/p.trail.length)*.35;x.fillStyle=p.i%2?'#e8c78f':'#9e3f37';x.beginPath();x.arc(q.x,q.y,Math.max(1,p.r*j/p.trail.length*.45),0,Math.PI*2);x.fill()});x.globalAlpha=1;drawChecker(p)}else if(!p.landed){p.landed=true;firework(p.x,p.y,colors[p.i%colors.length],20)}}
-    function hill(p,t){const targetRow=Math.floor((Math.sqrt(8*p.i+1)-1)/2),first=targetRow*(targetRow+1)/2,pos=p.i-first;const tx=innerWidth/2+(pos-targetRow/2)*(p.r*2.05),ty=innerHeight*.78-targetRow*(p.r*1.72);if(t<2200){const q=Math.min(1,(t-p.i*55)/1100);if(q>0){p.x+=(tx-p.x)*.075;p.y+=(ty-p.y)*.075;p.rot+=p.spin;drawChecker(p)}}else{const roll=t-2200;p.vx=p.vx||((p.i%2?1:-1)*rand(3.2,6.2));p.x+=p.vx;p.y=ty+Math.abs(Math.sin(roll*.012+p.phase))*22;p.rot+=p.vx/p.r;drawChecker(p)}}
-    function classicBounce(p,t){if(!p.landed){p.x=rand(40,innerWidth-40);p.y=rand(40,innerHeight*.38);p.vx=rand(3,8)*(p.i%2?1:-1);p.vy=rand(-2,3);p.landed=true}p.trail.push({x:p.x,y:p.y});if(p.trail.length>18)p.trail.shift();p.trail.forEach((q,j)=>{const ghost={...p,x:q.x,y:q.y};drawChecker(ghost,(j/p.trail.length)*.20)});p.x+=p.vx;p.y+=p.vy;p.vy+=.28;if(p.x<p.r||p.x>innerWidth-p.r)p.vx*=-1;if(p.y>innerHeight-p.r){p.y=innerHeight-p.r;p.vy=-Math.abs(p.vy)*.86}p.rot+=p.vx/p.r;drawChecker(p)}
-    function vortex(p,t){const q=Math.min(1,t/3000),rad=(1-q)*Math.max(innerWidth,innerHeight)*.48+24,ang=p.phase+t*.0026*(p.i%2?1:-1)+p.i*.42;p.x=innerWidth/2+Math.cos(ang)*rad;p.y=innerHeight/2+Math.sin(ang)*rad*.58;p.rot+=.08;drawChecker(p);if(q>=1&&!p.landed){p.landed=true;p.vx=Math.cos(ang)*rand(4,9);p.vy=Math.sin(ang)*rand(4,9)}if(t>3000){p.x+=p.vx;p.y+=p.vy;p.vy+=.08;drawChecker(p,.9)}}
-    function fountain(p,t){const delay=p.i*90,lt=t-delay;if(lt<0)return;if(!p.landed){p.x=innerWidth/2+rand(-35,35);p.y=innerHeight+30;p.vx=rand(-5.5,5.5);p.vy=rand(-15,-10);p.landed=true}p.x+=p.vx;p.y+=p.vy;p.vy+=.34;if(p.y>innerHeight-p.r){p.y=innerHeight-p.r;p.vy=-Math.abs(p.vy)*.68;p.vx*=.92}if(p.x<p.r||p.x>innerWidth-p.r)p.vx*=-1;p.rot+=p.spin;drawChecker(p)}
-    function frame(now){if(!celebrationRun)return;const t=now-started;x.clearRect(0,0,innerWidth,innerHeight);updateSparks();if(!reduced&&t>900){for(const p of particles){if(effect===0)rocket(p,t-900);else if(effect===1)hill(p,t-900);else if(effect===2)classicBounce(p,t-900);else if(effect===3)vortex(p,t-900);else fountain(p,t-900)}}if(reduced&&t>1100){particles.slice(0,5).forEach((p,i)=>{p.x=innerWidth/2+(i-2)*50;p.y=innerHeight*.68;drawChecker(p)})}if(t<9000)celebrationRun.raf=requestAnimationFrame(frame);else stopVictoryCelebration()}
-    celebrationRun={raf:requestAnimationFrame(frame),resize};
-    addEventListener('resize',resize);
+  const CELEBRATIONS=[
+    {id:'classic-confetti',icon:'🎉',name:'Classic Confetti',rarity:'classic',weight:18,family:'confetti'},
+    {id:'checker-fountain',icon:'⛲',name:'Checker Fountain',rarity:'classic',weight:14,family:'bounce'},
+    {id:'victory-vortex',icon:'🌀',name:'Victory Vortex',rarity:'classic',weight:12,family:'vortex'},
+    {id:'checker-hill',icon:'⛰️',name:'Checker Hill',rarity:'classic',weight:12,family:'hill'},
+    {id:'rocket-checkers',icon:'🚀',name:'Rocket Checkers',rarity:'classic',weight:12,family:'rocket'},
+    {id:'golden-stars',icon:'⭐',name:'Golden Stars',rarity:'classic',weight:10,family:'rain'},
+    {id:'balloon-parade',icon:'🎈',name:'Balloon Parade',rarity:'classic',weight:10,family:'rise'},
+    {id:'party-streamers',icon:'🎊',name:'Party Streamers',rarity:'classic',weight:10,family:'rain'},
+    {id:'championship-trophy',icon:'🏆',name:'Championship Trophy',rarity:'special',weight:7,family:'center'},
+    {id:'crowned-champion',icon:'👑',name:'Crowned Champion',rarity:'special',weight:7,family:'center'},
+    {id:'fireworks-finale',icon:'🎆',name:'Fireworks Finale',rarity:'special',weight:7,family:'fireworks'},
+    {id:'disco-victory',icon:'🪩',name:'Disco Victory',rarity:'special',weight:6,family:'center'},
+    {id:'diamond-rain',icon:'💎',name:'Diamond Rain',rarity:'special',weight:6,family:'rain'},
+    {id:'champagne-pop',icon:'🍾',name:'Champagne Pop',rarity:'special',weight:6,family:'rise'},
+    {id:'arcade-complete',icon:'🕹️',name:'Level Complete',rarity:'special',weight:6,family:'arcade'},
+    {id:'camera-flashes',icon:'📸',name:'Red Carpet Winner',rarity:'special',weight:5,family:'flash'},
+    {id:'penguin-slide',icon:'🐧',name:'Penguin Slide',rarity:'rare',weight:3,family:'slide'},
+    {id:'rubber-duck-regatta',icon:'🦆',name:'Rubber Duck Regatta',rarity:'rare',weight:3,family:'slide'},
+    {id:'chicken-run',icon:'🐔',name:'Winner Chicken Run',rarity:'rare',weight:3,family:'slide'},
+    {id:'squirrel-heist',icon:'🐿️',name:'Squirrel Checker Heist',rarity:'rare',weight:3,family:'slide'},
+    {id:'ufo-abduction',icon:'🛸',name:'UFO Checker Abduction',rarity:'rare',weight:3,family:'center'},
+    {id:'aurora-victory',icon:'🌌',name:'Aurora Victory',rarity:'rare',weight:3,family:'vortex'},
+    {id:'movie-premiere',icon:'🎬',name:'Victory Premiere',rarity:'rare',weight:3,family:'credits'},
+    {id:'lucky-clover',icon:'🍀',name:'Lucky Escape',rarity:'rare',weight:3,family:'rain'},
+    {id:'golden-dice',icon:'🎲',name:'Golden Dice',rarity:'ultra-rare',weight:1,family:'center'},
+    {id:'galaxy-grandmaster',icon:'🌠',name:'Galaxy Grandmaster',rarity:'ultra-rare',weight:1,family:'vortex'},
+    {id:'jackpot',icon:'🎰',name:'Victory Jackpot',rarity:'ultra-rare',weight:1,family:'rain'},
+    {id:'royal-coronation',icon:'🏰',name:'Royal Coronation',rarity:'ultra-rare',weight:1,family:'center'},
+    {id:'perfect-game',icon:'🌟',name:'Perfect Game',rarity:'ultra-rare',weight:1,family:'center'},
+    {id:'legendary-comeback',icon:'🔥',name:'Legendary Comeback',rarity:'ultra-rare',weight:1,family:'rise'}
+  ];
+  const CELEBRATION_SETTINGS_KEY='bg-celebration-vault-v1',CELEBRATION_STATS_KEY='bg-celebration-stats-v1';
+  function loadCelebrationSettings(){try{const s=JSON.parse(localStorage.getItem(CELEBRATION_SETTINGS_KEY)||'{}');return{enabled:Array.isArray(s.enabled)?s.enabled:CELEBRATIONS.map(c=>c.id),favorites:Array.isArray(s.favorites)?s.favorites:[]}}catch{return{enabled:CELEBRATIONS.map(c=>c.id),favorites:[]}}}
+  function saveCelebrationSettings(s){localStorage.setItem(CELEBRATION_SETTINGS_KEY,JSON.stringify(s))}
+  function loadCelebrationStats(){try{return{wins:0,streak:0,bestStreak:0,lastWinDay:'',seen:[],lastId:'',...JSON.parse(localStorage.getItem(CELEBRATION_STATS_KEY)||'{}')}}catch{return{wins:0,streak:0,bestStreak:0,lastWinDay:'',seen:[],lastId:''}}}
+  function saveCelebrationStats(s){localStorage.setItem(CELEBRATION_STATS_KEY,JSON.stringify(s))}
+  function recordCelebrationWin(){const s=loadCelebrationStats(),d=new Date().toISOString().slice(0,10);s.wins++;s.streak=(s.lastWinDay===d||!s.lastWinDay)?s.streak+1:1;s.bestStreak=Math.max(s.bestStreak,s.streak);s.lastWinDay=d;saveCelebrationStats(s)}
+  function celebrationMessage(real){const s=loadCelebrationStats();if(!real)return'Celebration preview';if(s.wins===1)return'Achievement unlocked: First victory!';if([10,25,50,100].includes(s.wins))return`Achievement unlocked: ${s.wins} wins!`;if(state.off[AI]===0&&state.bar[AI]>0)return'Backgammon victory!';if(state.off[AI]===0)return'Gammon victory!';if(s.streak>=5)return`Winning streak: ${s.streak}!`;return['Brilliant finish!','Tactical victory!','Champion performance!','Beautifully played!'][s.wins%4]}
+  function chooseCelebration(id=null){const s=loadCelebrationSettings();let pool=CELEBRATIONS.filter(c=>s.enabled.includes(c.id));if(!pool.length)pool=CELEBRATIONS;if(id)return CELEBRATIONS.find(c=>c.id===id)||pool[0];const w=[];for(const c of pool)for(let i=0;i<c.weight*(s.favorites.includes(c.id)?2:1);i++)w.push(c);const st=loadCelebrationStats();let c=w[Math.floor(Math.random()*w.length)];if(pool.length>1&&c.id===st.lastId)c=pool.find(x=>x.id!==st.lastId)||c;return c}
+  function renderCelebrationVault(){const s=loadCelebrationSettings(),st=loadCelebrationStats();UI.celebrationVaultStats.textContent=`${st.seen.length}/30 discovered • ${st.wins} wins • best streak ${st.bestStreak}`;UI.celebrationVaultGrid.innerHTML=CELEBRATIONS.map(c=>{const on=s.enabled.includes(c.id),fav=s.favorites.includes(c.id),seen=st.seen.includes(c.id);return`<article class="celebration-card ${on?'':'disabled'} ${fav?'favorite':''}"><div class="celebration-card-head"><div><span class="celebration-icon">${c.icon}</span><h3>${c.name}</h3></div><span class="rarity-pill">${c.rarity}</span></div><p>${seen?'Discovered':'Not discovered yet'}</p><div class="celebration-card-actions"><button class="primary preview-celebration" data-id="${c.id}">Preview</button><button class="secondary toggle-celebration" data-id="${c.id}">${on?'Disable':'Enable'}</button><button class="secondary favorite-btn" data-id="${c.id}">${fav?'⭐':'☆'}</button></div></article>`}).join('')}
+  function openCelebrationVault(){renderCelebrationVault();UI.celebrationVaultDialog.classList.add('open')} function closeCelebrationVault(){UI.celebrationVaultDialog.classList.remove('open')}
+  function startVictoryCelebration(requestedId=null,options={}){
+    stopVictoryCelebration();const real=!!options.realWin;if(real)recordCelebrationWin();const theme=chooseCelebration(requestedId),st=loadCelebrationStats();st.lastId=theme.id;if(!st.seen.includes(theme.id))st.seen.push(theme.id);saveCelebrationStats(st);
+    const o=UI.victoryCelebration,c=UI.victoryCanvas,x=c.getContext('2d');o.hidden=false;requestAnimationFrame(()=>o.classList.add('active'));UI.victoryBanner.textContent=`${theme.icon} ${theme.name}`;UI.victorySubtitle.textContent=celebrationMessage(real);
+    const dpr=Math.min(2,devicePixelRatio||1),resize=()=>{c.width=innerWidth*dpr;c.height=innerHeight*dpr;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';x.setTransform(dpr,0,0,dpr,0,0)};resize();const start=performance.now(),rand=(a,b)=>a+Math.random()*(b-a),items=[];
+    for(let i=0;i<42;i++)items.push({x:rand(0,innerWidth),y:theme.family==='rise'?innerHeight+rand(0,400):rand(-innerHeight,0),vx:rand(-2,2),vy:theme.family==='rise'?rand(-5,-2):rand(1.5,5),size:rand(18,42),a:rand(0,6.28),r:rand(90,innerWidth*.48)});
+    function frame(now){if(!celebrationRun)return;const t=now-start;x.clearRect(0,0,innerWidth,innerHeight);x.textAlign='center';x.textBaseline='middle';for(const q of items){if(theme.family==='vortex'){q.a+=.018;q.r*=.997;q.x=innerWidth/2+Math.cos(q.a)*q.r;q.y=innerHeight/2+Math.sin(q.a)*q.r*.55}else if(theme.family==='slide'){q.x+=Math.abs(q.vx)+2.5;q.y=innerHeight*.68+Math.sin(t*.006+q.a)*24;if(q.x>innerWidth+50)q.x=-50}else{q.x+=q.vx;q.y+=q.vy;if(q.y>innerHeight+60)q.y=-60;if(q.y<-60)q.y=innerHeight+60}x.font=`${q.size}px sans-serif`;x.fillText(theme.icon,q.x,q.y)}if(['center','arcade','credits'].includes(theme.family)){x.font=`${Math.min(160,innerWidth*.17)}px sans-serif`;x.fillText(theme.icon,innerWidth/2,innerHeight*.42+Math.sin(t*.004)*10)}if(theme.family==='arcade'){x.fillStyle='rgba(10,20,16,.8)';x.fillRect(innerWidth*.2,innerHeight*.55,innerWidth*.6,90);x.fillStyle='#fff06a';x.font='bold 42px monospace';x.fillText('LEVEL COMPLETE',innerWidth/2,innerHeight*.55+45)}if(theme.family==='credits'){x.fillStyle='rgba(0,0,0,.7)';x.fillRect(innerWidth*.2,innerHeight*.3,innerWidth*.6,210);x.fillStyle='white';x.font='bold 42px serif';x.fillText('WINNER: YOU',innerWidth/2,innerHeight*.4);x.font='20px sans-serif';x.fillText('Directed by Excellent Dice™',innerWidth/2,innerHeight*.5)}if(t<9000)celebrationRun.raf=requestAnimationFrame(frame);else stopVictoryCelebration()}
+    celebrationRun={raf:requestAnimationFrame(frame),resize};addEventListener('resize',resize);renderCelebrationVault()
   }
+
   function stopVictoryCelebration(){
     if(celebrationRun){cancelAnimationFrame(celebrationRun.raf);removeEventListener('resize',celebrationRun.resize);celebrationRun=null;}
     if(UI.victoryCelebration){UI.victoryCelebration.classList.remove('active');setTimeout(()=>{if(!celebrationRun)UI.victoryCelebration.hidden=true},190);}
@@ -2213,7 +2246,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   }
 
   UI.stopCelebrationBtn.addEventListener('click',stopVictoryCelebration);
-  UI.testCelebrationBtn.addEventListener('click',startVictoryCelebration);
+  UI.testCelebrationBtn.addEventListener('click',()=>startVictoryCelebration());
   document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){stopVictoryCelebration();stopCoachThink();stopVisualHintAnimation();}});
   UI.rollBtn.addEventListener('click',(e)=>{if(!rollDrag.moved)rollDice();});
   UI.rollBtn.addEventListener('pointerdown',beginRollDrag);
@@ -2224,7 +2257,16 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   UI.undoBtn.addEventListener('click',undoHumanMove);
   UI.endTurnBtn.addEventListener('click',endTurn);
   UI.newGameBtn.addEventListener('click',newGame);
-  UI.headerCelebrationBtn.addEventListener('click',startVictoryCelebration);
+  UI.headerCelebrationBtn.addEventListener('click',openCelebrationVault);
+  UI.surpriseCelebrationBtn.addEventListener('click',()=>startVictoryCelebration());
+  UI.closeCelebrationVaultBtn.addEventListener('click',closeCelebrationVault);
+  UI.previewRandomCelebrationBtn.addEventListener('click',()=>startVictoryCelebration());
+  UI.enableAllCelebrationsBtn.addEventListener('click',()=>{const s=loadCelebrationSettings();s.enabled=CELEBRATIONS.map(c=>c.id);saveCelebrationSettings(s);renderCelebrationVault()});
+  UI.favoritesOnlyCelebrationsBtn.addEventListener('click',()=>{const s=loadCelebrationSettings();if(s.favorites.length)s.enabled=[...s.favorites];saveCelebrationSettings(s);renderCelebrationVault()});
+  UI.resetCelebrationVaultBtn.addEventListener('click',()=>{localStorage.removeItem(CELEBRATION_SETTINGS_KEY);renderCelebrationVault()});
+  UI.celebrationVaultGrid.addEventListener('click',e=>{const b=e.target.closest('button[data-id]');if(!b)return;const id=b.dataset.id,s=loadCelebrationSettings();if(b.classList.contains('preview-celebration')){startVictoryCelebration(id);return}if(b.classList.contains('toggle-celebration'))s.enabled=s.enabled.includes(id)?s.enabled.filter(x=>x!==id):[...s.enabled,id];if(b.classList.contains('favorite-btn'))s.favorites=s.favorites.includes(id)?s.favorites.filter(x=>x!==id):[...s.favorites,id];saveCelebrationSettings(s);renderCelebrationVault()});
+  UI.celebrationVaultDialog.addEventListener('click',e=>{if(e.target===UI.celebrationVaultDialog)closeCelebrationVault()});
+
   UI.hintBtn.addEventListener('click',()=>{showHint();setCoachDrawer(false);});
   UI.animateBestHintBtn.addEventListener('click',animateBestHint);
   UI.watchCoachThinkBtn.addEventListener('click',watchCoachThink);
