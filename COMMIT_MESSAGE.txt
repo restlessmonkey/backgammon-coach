@@ -1,1 +1,1 @@
-Backgammon Coach v2.0.2.4 — Collapsible Side Panels
+Backgammon Coach v2.0.2.5 — Replay Example Moves

@@ -1,15 +1,16 @@
-Backgammon Coach v2.0.2.4 Collapsible Side Panels Validation
-==========================================================================
+Backgammon Coach v2.0.2.5 Replay Example Moves Validation
+========================================================================
 PASS — Version updated
 PASS — JavaScript syntax
-PASS — Collapsible initializer
-PASS — Large 50px button
-PASS — Dynamic ARIA state
-PASS — Accessible dynamic labels
-PASS — Rotating chevron
-PASS — Collapsed body hidden
-PASS — Coach drawer preserved
-PASS — Coach toggle enlarged
+PASS — Replay button present
+PASS — Replay helper present
+PASS — Replay listener present
+PASS — Replay enabled with example
+PASS — Replay disabled during animation
+PASS — Preview safety message
+PASS — Three existing animation controls
+PASS — Collapsible panel initializer retained
+PASS — Large collapse button retained
 PASS — Independent scrolling retained
 PASS — Board sticky retained
 PASS — 44 celebrations retained
@@ -21,5 +22,6 @@ PASS — Standalone commit message
 
 Celebrations inventoried: 44
 Automated result: PASS
+Panel layout/collapse implementation changes: none.
 Gameplay logic changes: none.
-Manual iPad/desktop tap and visual validation remains required.
+Manual browser validation of repeated animations remains required.

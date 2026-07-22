@@ -1,5 +1,5 @@
 {
-  "version": "2.0.2.4",
+  "version": "2.0.2.5",
   "package_type": "GITHUB_IPHONE_FLAT_UPLOAD",
   "upload_location": "repository root",
   "required_app_files": [
@@ -16,8 +16,8 @@
     "VALIDATION_REPORT.txt",
     "SHA256SUMS.txt"
   ],
-  "created_utc": "2026-07-22T16:45:34.774145+00:00",
-  "package_name": "v2.0.2.4_Backgammon_Coach_iPhone_GitHub_FLAT_COLLAPSIBLE_SIDE_PANELS.zip",
+  "created_utc": "2026-07-22T17:05:48.453075+00:00",
+  "package_name": "v2.0.2.5_Backgammon_Coach_iPhone_GitHub_FLAT_REPLAY_EXAMPLE_MOVES.zip",
   "default_settings": {
     "coaching_enabled": true,
     "explain_every_move": true,
@@ -52,20 +52,16 @@
     }
   },
   "release": {
-    "name": "Collapsible Side Panels",
-    "scope": "Right-side interface panels",
-    "collapse_button_size": "50 x 50 CSS pixels",
-    "default_state": "Expanded",
-    "coach_drawer": "Preserved and enlarged",
-    "independent_scrolling": "Preserved",
-    "accessibility": [
-      "aria-expanded",
-      "aria-controls",
-      "dynamic expand/collapse labels",
-      "visible keyboard focus"
-    ],
+    "name": "Replay Example Moves",
+    "new_control": "Replay example",
+    "behavior": "Replays the saved recommended sequence from its beginning",
+    "board_mutation": "None; preview only",
+    "repeat_limit": "Unlimited while the example remains valid",
+    "panel_layout_changes": "None",
+    "collapsible_panels": "Preserved exactly",
+    "independent_panel_scrolling": "Preserved exactly",
     "gameplay_changes": "None",
-    "coach_logic_changes": "None",
+    "engine_ranking_changes": "None",
     "celebration_count": 44
   },
   "github_commit_message_file": "COMMIT_MESSAGE.txt"
