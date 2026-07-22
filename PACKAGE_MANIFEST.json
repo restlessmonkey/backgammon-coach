@@ -1,5 +1,5 @@
 {
-  "version": "2.0.3.0",
+  "version": "2.0.4.0",
   "package_type": "GITHUB_IPHONE_FLAT_UPLOAD",
   "upload_location": "repository root",
   "required_app_files": [
@@ -16,8 +16,8 @@
     "VALIDATION_REPORT.txt",
     "SHA256SUMS.txt"
   ],
-  "created_utc": "2026-07-22T18:35:57.192709+00:00",
-  "package_name": "v2.0.3.0_Backgammon_Coach_iPhone_GitHub_FLAT_PIP_POSITION_INTELLIGENCE.zip",
+  "created_utc": "2026-07-22T18:51:40.037142+00:00",
+  "package_name": "v2.0.4.0_Backgammon_Coach_iPhone_GitHub_FLAT_PIP_SETTINGS_HELPFUL_MODE.zip",
   "default_settings": {
     "coaching_enabled": true,
     "explain_every_move": true,
@@ -52,39 +52,35 @@
     }
   },
   "release": {
-    "name": "Pip Position Intelligence",
-    "coach_name": "Pip \u2014 Your Backgammon Coach",
-    "architecture": "Engine decides. Pip teaches.",
-    "grandmaster_label_rule": "Only verified GNU Backgammon",
-    "local_position_classes": [
-      "contact",
-      "race",
-      "bearoff",
-      "bar-contact",
-      "prime-contact",
-      "prime-versus-prime"
+    "name": "Pip Settings and Helpful Mode",
+    "settings_entry": "Fixed gear icon",
+    "pip_styles": [
+      "Boy Pip",
+      "Girl Pip"
     ],
-    "local_evaluation_components": [
-      "race efficiency",
-      "borne-off progress",
-      "bar pressure",
-      "home-board strength",
-      "primes",
-      "anchors",
-      "distribution",
-      "stacking",
-      "flexibility",
-      "number duplication",
-      "blot exposure",
-      "timing",
-      "opponent-board danger",
-      "back-checker escape difficulty",
-      "gammon pressure",
-      "bear-off wastage"
+    "skin_tones": 6,
+    "personalities": [
+      "Calm Coach",
+      "Friendly Coach",
+      "Cheerleader",
+      "Great Expectations",
+      "Helpful"
     ],
+    "helpful_mode": {
+      "intent": "Deliberately and comically overhelpful",
+      "triggers": [
+        "idle",
+        "roll",
+        "move",
+        "undo",
+        "replay"
+      ],
+      "intensity_meter": true,
+      "escape_action": "Pip\u2026 that\u2019s enough."
+    },
+    "persistence": "localStorage",
+    "gameplay_function_replacements": 0,
     "panel_changes": "None",
-    "playback_changes": "None",
-    "gnu_protocol_changes": "None",
     "celebration_count": 44
   },
   "github_commit_message_file": "COMMIT_MESSAGE.txt"

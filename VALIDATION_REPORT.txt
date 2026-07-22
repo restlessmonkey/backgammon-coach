@@ -1,31 +1,30 @@
-Backgammon Coach v2.0.3.0 Pip Position Intelligence Validation
-============================================================================
+Backgammon Coach v2.0.4.0 Pip Settings and Helpful Mode Validation
+================================================================================
 PASS — Version updated
 PASS — JavaScript syntax
-PASS — Pip branding present
-PASS — Position classifier present
-PASS — Transparent breakdown present
-PASS — Flexibility evaluator present
-PASS — Duplication evaluator present
-PASS — Timing evaluator present
-PASS — Opponent-board danger present
-PASS — Gammon pressure present
-PASS — Escape difficulty present
-PASS — Bear-off wastage retained
-PASS — Evaluator uses component total
-PASS — Breakdown attached to candidates
-PASS — Pip factor explanations present
-PASS — GNU Grandmaster distinction retained
-PASS — Watch Pip hotfix retained
-PASS — Replay retained
+PASS — Gear settings button
+PASS — Settings dialog
+PASS — Boy Pip option
+PASS — Girl Pip option
+PASS — Six skin tones
+PASS — Helpful mode option
+PASS — Great Expectations option
+PASS — Helpful interruption engine
+PASS — Enough escape action
+PASS — Settings persistence
+PASS — No gameplay replacement pattern
+PASS — Pip avatar present
 PASS — Collapsible panels retained
 PASS — Independent scrolling retained
+PASS — Replay retained
+PASS — Watch Pip retained
+PASS — Pip position intelligence retained
 PASS — 44 celebrations retained
 PASS — Cache updated
 PASS — Standalone commit message
 
 Celebrations inventoried: 44
 Automated result: PASS
-Panel implementation changes: none.
-GNU protocol changes: none.
-Manual validation recommended across race, contact, bar, prime, and bear-off positions.
+Gameplay function replacements: 0.
+Panel structure changes: none.
+Manual validation recommended on iPhone/iPad for gear placement, modal scrolling, and Helpful-mode timing.

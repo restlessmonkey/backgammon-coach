@@ -1,1 +1,1 @@
-Backgammon Coach v2.0.3.0 — Pip Position Intelligence
+Backgammon Coach v2.0.4.0 — Pip Settings and “Helpful” Mode
