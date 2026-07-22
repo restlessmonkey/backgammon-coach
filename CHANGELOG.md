@@ -1,28 +1,22 @@
-# Changelog
+# Backgammon Coach Change Log
 
-## v1.8 — Guided Full-Turn Hints
-- Added a prominent **Make this move now!** action that executes the complete recommended legal sequence.
-- Added **Show me, I’ll move** guided mode with step-by-step highlighting.
-- Added plain-English instructions for every checker step.
-- Added optional standard notation and point-number overlays: Off, My numbers, Computer numbers, or Both.
-- Added computer-turn summaries using the computer’s notation and the equivalent notation from the user’s perspective.
-- Added a second synchronized **Roll dice** control in the middle of the board while retaining the top control.
-- Preserved complete legal-sequence handling for both dice and four plays on doubles.
-- Updated offline cache to v1.8.
+## v1.8.2 — Immersive Play
 
-## v1.7 — Hint Foundation
-- Ranked complete legal move sequences.
-- Added top-three local heuristic choices and strategic explanations.
-- Added first-move highlighting.
-- Added project backlog, release checklist, changelog, and design record.
+Corrective release rebuilt from the original certified v1.8 source after the earlier v1.8.1 package failed to deliver the promised interaction changes.
 
-## v1.6 — Core Game Stabilization
-- Hardened legal move and turn handling.
-- Added user-only Undo and rules self-tests.
-- Improved iPhone status and dice layout.
+### Implemented
+- Header collapses automatically after the first human dice roll.
+- Mobile title, subtitle, and action controls compress to reclaim board space.
+- Coach becomes a fixed bottom drawer on iPhone-class layouts and remains persistent on larger iPad/desktop layouts.
+- Coach drawer starts collapsed and expands without pushing the board down.
+- Hint requests automatically open the Coach drawer.
+- Top and board Roll Dice buttons are larger, bold, and use a clear dice icon.
+- Optional floating Roll Dice control on mobile.
+- Floating control can be dragged with a finger or pointer and its position is saved locally.
+- Button position can be locked or reset.
+- Auto, right-handed, and left-handed control preferences.
+- Focus mode hides nonessential information panels.
+- Offline cache advanced to `backgammon-coach-v1-8-2`.
 
-
-## v1.8.1 - Immersive Play
-- Compact sticky header
-- More board space
-- Larger Roll Dice button
+### Historical correction
+- The two prior packages labeled v1.8.1 were incomplete and are not certified releases.

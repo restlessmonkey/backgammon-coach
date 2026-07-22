@@ -1,33 +1,30 @@
-# Backgammon Coach Backlog
+# Backgammon Coach Product Backlog
 
-## Product goal
-Build a learning-first backgammon app that teaches the player while remaining pleasant to use on iPhone and iPad.
+## Released — v1.8.2 Immersive Play
+- [x] Collapsing header after the first roll
+- [x] Maximum practical board space on mobile
+- [x] Fixed collapsible Coach drawer on iPhone-class layouts
+- [x] Persistent Coach panel on larger iPad/desktop layouts
+- [x] Larger and bolder Roll Dice controls
+- [x] Movable floating Roll Dice control
+- [x] Saved, resettable, and lockable Roll Dice position
+- [x] Auto, right-handed, and left-handed preferences
+- [x] Focus mode for hiding extra panels
+- [x] Preserve v1.8 full-turn hint execution and guided moves
 
-## Completed
-- [x] v1.6 Core Game Stabilization: turn flow, user-only undo, compact version label, legal-sequence enforcement, rules self-tests.
-- [x] v1.7 Hint Foundation: ranked complete legal sequences, highlighted first move, strategic explanations, transparent heuristic disclaimer.
-- [x] v1.8 Guided Full-Turn Hints: execute the complete recommended sequence; step-by-step guided play; plain-English directions; optional standard notation; user/computer/both point labels; top and center Roll Dice controls; computer move notation from both perspectives.
+## v1.9 — Complete Move Journal
+- Record every game event, roll, legal sequence, move, hint, undo, board state, and timestamp.
+- Use immutable event records as the foundation for replay and statistics.
+- Add export/import of game journals.
 
-## Next certified sequence
-- [ ] v1.9 Complete Move Journal: append-only record of every roll, complete legal sequences, chosen sequence, checker steps, before/after positions, hits, bar entries, bearing off, hints, recommendation-followed status, Undo events, timestamps, player/turn identity, and result.
-- [ ] v2.0 Replay and Branching Practice: replay from any recorded position; step forward/backward; branch into a separate practice session; reset or discard the branch without modifying the original game.
+## v2.0 — Replay and Branching Practice
+- Replay a saved game from any event.
+- Create an independent practice branch without changing the original game.
+- Compare alternate move sequences.
 
-## Later learning backlog
-- [ ] Beginner, Intermediate, and Tournament learning modes.
-- [ ] Move review before the computer turn.
-- [ ] Stronger AI and engine-grade evaluation using an appropriately licensed integration or server-side analysis.
-- [ ] Opening, bearing-off, and pip-count trainers; daily puzzles.
-- [ ] Post-game analysis, blunder detection, statistics, and progress tracking.
-- [ ] Doubling cube and match play.
-- [ ] Conversational Why? coach.
-- [ ] Optional animation, sound, and haptics.
-- [ ] Device profiles: Auto, iPhone, iPad, and future Desktop analysis layout.
-
-## Guardrails
-- Never describe the local heuristic as GNU Backgammon or world-class analysis.
-- Never recommend or execute a move until complete legal-sequence enumeration passes.
-- “Make this move now!” must execute the entire still-legal sequence, including two dice or four plays on doubles.
-- User Undo must never reverse computer moves.
-- Standard notation must always identify the perspective used.
-- Original saved games must remain immutable when replay branches are introduced.
-- Responsive changes must not degrade the successful iPad layout.
+## Later
+- Personal mistake-pattern detection
+- Targeted practice positions
+- Match and doubling-cube support
+- Engine-grade analysis integration
+- Coach personalities and accessibility expansion

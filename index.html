@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v1.8.1.1</title>
+  <title>Backgammon Coach iPhone v1.8.2</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -31,9 +31,9 @@ body {
 }
 button, select { font: inherit; }
 button { cursor: pointer; }
-.app-shell { max-width: 1500px; margin: 0 auto; padding: 10px 14px; }
-.topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 8px; position:sticky; top:0; z-index:20; background:rgba(27,33,28,.92); padding:4px 0; backdrop-filter:blur(6px); }
-h1 { margin: 0; font-size: clamp(1.2rem, 2vw, 1.6rem); font-family: Georgia, serif; }
+.app-shell { max-width: 1500px; margin: 0 auto; padding: 22px; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 16px; }
+h1 { margin: 0; font-size: clamp(1.8rem, 3vw, 3rem); font-family: Georgia, serif; }
 .title-row { display:flex; align-items:flex-start; gap:8px; flex-wrap:nowrap; }
 .version-badge { display:inline-block; margin-top:3px; color:#c7d0c9; font-size:.62rem; font-weight:700; letter-spacing:.02em; white-space:nowrap; opacity:.9; }
 .version-note { display:none; }
@@ -61,7 +61,7 @@ canvas { width: 100%; height: auto; display: block; touch-action: manipulation; 
 .die { width:52px; height:52px; border-radius:13px; background:white; display:grid; place-items:center; font-size:1.9rem; font-weight:900; box-shadow: inset 0 0 0 2px #d8c8b6, 0 5px 10px rgba(0,0,0,.15); transition:opacity .18s, transform .18s; }
 .die.used { opacity:.28; transform:scale(.9); }
 .remaining-note { color:var(--muted); font-size:.72rem; font-weight:800; min-width:52px; text-align:center; }
-.play-controls button { min-height:64px; padding:14px 26px; font-size:1.15rem; font-weight:900; position:relative; left:-10px;x; }
+.play-controls button { min-height:52px; padding:10px 18px; }
 .play-controls #endTurnBtn { display:none; }
 .play-controls #endTurnBtn.available { display:block; }
 .play-controls #undoBtn { background:#fff; color:var(--ink); border:1px solid #cdbda9; box-shadow:none; }
@@ -101,6 +101,54 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 .guided-status { margin-top:8px; padding:9px; border-radius:10px; background:#e7f0eb; color:#294f42; font-weight:800; font-size:.84rem; }
 @media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
 
+
+/* v1.8.2 Immersive Play */
+.topbar,.play-controls,.coach-panel{transition:all .22s ease}
+body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
+body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
+body.game-active .topbar p{display:none}
+body.game-active .version-badge{font-size:.52rem;margin-top:0}
+body.game-active .top-actions button{padding:7px 10px;font-size:.78rem}
+.roll-primary{font-size:1.05rem;letter-spacing:.025em;min-width:164px;min-height:58px;padding:13px 22px;transform:translateX(-10px);touch-action:none;user-select:none}
+.roll-primary.floating:disabled{display:none}
+.roll-primary.dragging{transform:none;opacity:.96;box-shadow:0 12px 28px rgba(0,0,0,.42);z-index:900}
+.coach-drawer-toggle{display:none;background:transparent;color:var(--ink);box-shadow:none;padding:0;width:100%;justify-content:space-between;align-items:center;text-align:left}
+.coach-drawer-body{display:block}
+.experience-switch{justify-content:space-between;padding:7px 0}
+body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .experience-panel,body.focus-mode .lesson-panel{display:none}
+@media (max-width:980px){
+ body{padding-bottom:62px}
+ .app-shell{padding-top:max(6px,env(safe-area-inset-top))}
+ .topbar{position:sticky;top:0;z-index:35;background:rgba(27,33,28,.94);backdrop-filter:blur(12px);padding:7px 2px;border-radius:0 0 12px 12px}
+ .game-layout{gap:8px}
+ .sidebar{display:block}
+ .sidebar>.panel:not(.coach-panel){margin-top:10px}
+ .coach-panel{position:fixed;left:8px;right:8px;bottom:max(8px,env(safe-area-inset-bottom));z-index:80;max-height:min(58vh,480px);overflow:auto;padding:12px;border:1px solid rgba(0,0,0,.12)}
+ .coach-panel.collapsed{max-height:52px;overflow:hidden}
+ .coach-panel.collapsed .coach-drawer-body,.coach-panel.collapsed .switch-label{display:none}
+ .coach-panel.collapsed .panel-heading{margin:0}
+ .coach-panel .coach-heading{display:none}
+ .coach-drawer-toggle{display:flex}
+ .coach-panel:not(.collapsed) .coach-chevron{transform:rotate(180deg)}
+ .coach-chevron{transition:transform .2s ease}
+ .play-controls{position:sticky;top:47px;z-index:30}
+ .roll-primary.floating{position:fixed;left:18px;bottom:78px;z-index:95;transform:none;margin:0}
+ body.hand-left .roll-primary:not(.floating){transform:translateX(10px)}
+ body.hand-left .play-controls{justify-content:flex-end}
+ body.hand-right .play-controls{justify-content:flex-start}
+}
+@media (max-width:620px){
+ body.game-active .topbar{flex-direction:row;gap:6px}
+ body.game-active .title-row{align-items:center}
+ body.game-active .top-actions{width:auto;margin-left:auto}
+ body.game-active .top-actions button{font-size:0;padding:8px;width:38px;min-width:38px}
+ body.game-active #newGameBtn::after{content:'↻';font-size:1rem}
+ body.game-active #rulesBtn::after{content:'?';font-size:1rem}
+ .roll-primary{font-size:1rem;min-width:156px;min-height:56px}
+ .board-roll-btn{font-weight:900;font-size:1rem;min-width:156px;padding:13px 16px}
+}
+@media (min-width:981px){.coach-panel{position:sticky;top:12px}.coach-drawer-toggle{display:none}}
+
 @media (display-mode: standalone) { #launchNote { display:none !important; } }
 
   </style>
@@ -115,14 +163,14 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 </head>
 <body>
   <main class="app-shell">
-    <section class="topbar">
+    <section class="topbar" id="appHeader">
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v1.8.1</span>
+          <span class="version-badge" id="versionBadge">v1.8.2</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v1.8.1</div>
+        <div class="version-note">v1.8.2</div>
       </div>
       <div class="top-actions">
         <button id="newGameBtn">New game</button>
@@ -130,7 +178,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
       </div>
     </section>
 
-    <section class="play-controls" aria-label="Dice and turn controls">
+    <section class="play-controls" id="playControls" aria-label="Dice and turn controls">
       <div id="turnBanner" class="turn-banner">Your turn</div>
       <span class="control-label">Dice</span>
       <div class="dice-row">
@@ -138,7 +186,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
         <div id="die2" class="die">–</div>
       </div>
       <span id="remainingNote" class="remaining-note"></span>
-      <button id="rollBtn" class="primary">Roll dice</button>
+      <button id="rollBtn" class="primary roll-primary" type="button" aria-label="Roll dice">🎲 ROLL DICE</button>
       <button id="undoBtn" disabled>Undo</button>
       <button id="endTurnBtn" class="secondary" disabled>Finish turn</button>
     </section>
@@ -146,7 +194,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     <section class="game-layout">
       <div class="board-wrap">
         <canvas id="board" width="1120" height="720" aria-label="Backgammon board"></canvas>
-        <button id="boardRollBtn" class="board-roll-btn" type="button">Roll dice</button>
+        <button id="boardRollBtn" class="board-roll-btn" type="button">🎲 ROLL DICE</button>
       </div>
 
       <aside class="sidebar">
@@ -163,18 +211,21 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
           </div>
         </section>
 
-        <section class="panel coach-panel">
+        <section class="panel coach-panel" id="coachPanel">
           <div class="panel-heading">
-            <h2>Coach</h2>
+            <button id="coachDrawerToggle" class="coach-drawer-toggle" type="button" aria-expanded="false" aria-controls="coachDrawerBody"><span>💡 Coach</span><span class="coach-chevron">▲</span></button>
+            <h2 class="coach-heading">Coach</h2>
             <label class="switch-label">
               <input id="coachToggle" type="checkbox" checked />
               <span>Hints</span>
             </label>
           </div>
+          <div id="coachDrawerBody" class="coach-drawer-body">
           <p id="coachText">Roll the dice. I’ll highlight legal checkers and explain useful ideas.</p>
           <button id="hintBtn" class="secondary wide">Rank my moves</button>
           <div id="hintResults" class="hint-results" aria-live="polite"></div>
-          <div class="coach-disclaimer">v1.8.1 ranks complete legal turn sequences with a transparent local teaching heuristic. Engine-grade analysis remains planned.</div>
+          <div class="coach-disclaimer">v1.8.2 ranks complete legal turn sequences with a transparent local teaching heuristic. Engine-grade analysis remains planned.</div>
+          </div>
         </section>
 
         <section class="panel settings-panel">
@@ -195,6 +246,23 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
                 <option value="standard">Standard notation only</option>
               </select>
             </label>
+          </div>
+        </section>
+
+        <section class="panel experience-panel">
+          <h2>Play experience</h2>
+          <div class="settings-grid">
+            <label>Primary-hand layout
+              <select id="handMode">
+                <option value="auto">Auto</option>
+                <option value="right">Right-handed</option>
+                <option value="left">Left-handed</option>
+              </select>
+            </label>
+            <label class="switch-label experience-switch"><input id="floatRollToggle" type="checkbox" checked><span>Floating Roll Dice</span></label>
+            <label class="switch-label experience-switch"><input id="lockRollToggle" type="checkbox"><span>Lock button position</span></label>
+            <button id="resetRollPositionBtn" class="secondary wide" type="button">Reset Roll Dice position</button>
+            <button id="focusModeBtn" class="secondary wide" type="button">Hide extra panels</button>
           </div>
         </section>
 
@@ -233,7 +301,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
   const UI = Object.fromEntries([
     'rollBtn','undoBtn','endTurnBtn','newGameBtn','rulesBtn','closeRulesBtn','rulesDialog','die1','die2',
     'humanPips','aiPips','humanBar','aiBar','humanOff','aiOff','turnBanner','coachText','hintBtn',
-    'coachToggle','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode'
+    'coachToggle','coachDrawerToggle','coachDrawerBody','coachPanel','appHeader','playControls','handMode','floatRollToggle','lockRollToggle','resetRollPositionBtn','focusModeBtn','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode'
   ].map(id => [id, document.getElementById(id)]));
 
   const W = canvas.width, H = canvas.height;
@@ -253,6 +321,9 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
   let guidedSequence = [];
   let guidedStep = 0;
   let executingSequence = false;
+  let rollDrag = {active:false, moved:false, dx:0, dy:0};
+  let focusMode = false;
+
 
   const lessons = {
     general: 'Keep checkers connected, avoid unnecessary blots, and fight for useful points.',
@@ -281,6 +352,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     selected = null; legalTargets = []; hintMove = null;
     humanMoveHistory = []; guidedSequence=[]; guidedStep=0; executingSequence=false;
     UI.hintResults.innerHTML='';
+    document.body.classList.remove('game-active');
     setCoach('Roll the dice. I’ll highlight legal checkers and explain useful ideas.');
     updateUI(); draw();
   }
@@ -429,7 +501,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v1.8.1 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v1.8.2 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -449,6 +521,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     if (state.winner || state.rolled || state.turn!==HUMAN) return;
     const a = 1 + Math.floor(Math.random()*6), b = 1 + Math.floor(Math.random()*6);
     state.dice=[a,b]; state.remaining = a===b ? [a,a,a,a] : [a,b]; state.rolled=true;
+    document.body.classList.add('game-active');
     humanMoveHistory=[];
     UI.hintResults.innerHTML='';
     selected=null; legalTargets=[]; hintMove=null;
@@ -781,6 +854,60 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     step();
   }
 
+  function setCoachDrawer(collapsed){
+    UI.coachPanel.classList.toggle('collapsed', collapsed);
+    UI.coachDrawerToggle.setAttribute('aria-expanded', String(!collapsed));
+    localStorage.setItem('bg-coach-collapsed', collapsed?'1':'0');
+  }
+  function applyHandMode(){
+    const mode=UI.handMode.value;
+    document.body.classList.toggle('hand-left',mode==='left');
+    document.body.classList.toggle('hand-right',mode==='right'||mode==='auto');
+    localStorage.setItem('bg-hand-mode',mode);
+    if(!UI.rollBtn.classList.contains('floating')) UI.rollBtn.style.cssText='';
+  }
+  function saveRollPosition(){
+    if(!UI.rollBtn.classList.contains('floating')) return;
+    localStorage.setItem('bg-roll-position',JSON.stringify({left:UI.rollBtn.style.left,top:UI.rollBtn.style.top}));
+  }
+  function applyRollPreference(){
+    const floating=UI.floatRollToggle.checked && window.innerWidth<=980;
+    UI.rollBtn.classList.toggle('floating',floating);
+    localStorage.setItem('bg-floating-roll',UI.floatRollToggle.checked?'1':'0');
+    if(floating){
+      const saved=JSON.parse(localStorage.getItem('bg-roll-position')||'null');
+      if(saved){UI.rollBtn.style.left=saved.left;UI.rollBtn.style.top=saved.top;UI.rollBtn.style.bottom='auto';}
+      else resetRollPosition(false);
+    } else UI.rollBtn.style.cssText='';
+  }
+  function resetRollPosition(save=true){
+    if(UI.rollBtn.classList.contains('floating')){
+      const left=UI.handMode.value==='left'?Math.max(10,window.innerWidth-190):18;
+      const top=Math.max(70,window.innerHeight-150);
+      UI.rollBtn.style.left=left+'px';UI.rollBtn.style.top=top+'px';UI.rollBtn.style.bottom='auto';
+      if(save) saveRollPosition();
+    }
+  }
+  function beginRollDrag(e){
+    if(!UI.rollBtn.classList.contains('floating')||UI.lockRollToggle.checked||UI.rollBtn.disabled)return;
+    const r=UI.rollBtn.getBoundingClientRect();
+    rollDrag={active:true,moved:false,dx:e.clientX-r.left,dy:e.clientY-r.top};
+    UI.rollBtn.classList.add('dragging');UI.rollBtn.setPointerCapture?.(e.pointerId);e.preventDefault();
+  }
+  function moveRollDrag(e){
+    if(!rollDrag.active)return;
+    rollDrag.moved=true;
+    const r=UI.rollBtn.getBoundingClientRect();
+    const left=Math.min(window.innerWidth-r.width-8,Math.max(8,e.clientX-rollDrag.dx));
+    const top=Math.min(window.innerHeight-r.height-8,Math.max(8,e.clientY-rollDrag.dy));
+    UI.rollBtn.style.left=left+'px';UI.rollBtn.style.top=top+'px';UI.rollBtn.style.bottom='auto';e.preventDefault();
+  }
+  function endRollDrag(e){
+    if(!rollDrag.active)return;
+    rollDrag.active=false;UI.rollBtn.classList.remove('dragging');saveRollPosition();
+    setTimeout(()=>{rollDrag.moved=false},40);e.preventDefault();
+  }
+
   function setCoach(text) { if (UI.coachToggle.checked) UI.coachText.textContent=text; }
 
   function pointCenter(index) {
@@ -963,12 +1090,22 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     if(hintMove){ const p=checkerTopPosition(hintMove.from);highlightCircle(p.x,p.y,'hint'); if(hintMove.to==='off'){drawRoundedRect(playRight+22,H/2+30,40,100,12,'rgba(255,224,109,.42)','#ffe06d');} else {const q=pointCenter(hintMove.to); const y=q.top?H/2-48:H/2+48; highlightCircle(q.x,y,'hint');} }
   }
 
-  UI.rollBtn.addEventListener('click',rollDice);
+  UI.rollBtn.addEventListener('click',(e)=>{if(!rollDrag.moved)rollDice();});
+  UI.rollBtn.addEventListener('pointerdown',beginRollDrag);
+  UI.rollBtn.addEventListener('pointermove',moveRollDrag);
+  UI.rollBtn.addEventListener('pointerup',endRollDrag);
+  UI.rollBtn.addEventListener('pointercancel',endRollDrag);
   UI.boardRollBtn.addEventListener('click',rollDice);
   UI.undoBtn.addEventListener('click',undoHumanMove);
   UI.endTurnBtn.addEventListener('click',endTurn);
   UI.newGameBtn.addEventListener('click',newGame);
-  UI.hintBtn.addEventListener('click',showHint);
+  UI.hintBtn.addEventListener('click',()=>{showHint();setCoachDrawer(false);});
+  UI.coachDrawerToggle.addEventListener('click',()=>setCoachDrawer(!UI.coachPanel.classList.contains('collapsed')));
+  UI.handMode.addEventListener('change',()=>{applyHandMode();resetRollPosition();});
+  UI.floatRollToggle.addEventListener('change',applyRollPreference);
+  UI.lockRollToggle.addEventListener('change',()=>localStorage.setItem('bg-lock-roll',UI.lockRollToggle.checked?'1':'0'));
+  UI.resetRollPositionBtn.addEventListener('click',()=>resetRollPosition());
+  UI.focusModeBtn.addEventListener('click',()=>{focusMode=!focusMode;document.body.classList.toggle('focus-mode',focusMode);UI.focusModeBtn.textContent=focusMode?'Show extra panels':'Hide extra panels';});
   UI.rulesBtn.addEventListener('click',()=>{ UI.rulesDialog.classList.add('open'); document.body.style.overflow='hidden'; });
   UI.closeRulesBtn.addEventListener('click',()=>{ UI.rulesDialog.classList.remove('open'); document.body.style.overflow=''; });
   UI.rulesDialog.addEventListener('click',(e)=>{ if(e.target===UI.rulesDialog){ UI.rulesDialog.classList.remove('open'); document.body.style.overflow=''; } });
@@ -976,9 +1113,14 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
   UI.pointLabelMode.addEventListener('change',()=>{localStorage.setItem('bg-point-label-mode',UI.pointLabelMode.value);draw();});
   UI.notationMode.addEventListener('change',()=>{localStorage.setItem('bg-notation-mode',UI.notationMode.value); if(state.rolled&&state.turn===HUMAN) showHint();});
   UI.coachToggle.addEventListener('change',()=>{ if(UI.coachToggle.checked) UI.coachText.textContent=explainPosition(state,HUMAN); else UI.coachText.textContent='Hints are off.'; });
-  window.addEventListener('resize',draw);
+  window.addEventListener('resize',()=>{draw();applyRollPreference();});
   UI.pointLabelMode.value=localStorage.getItem('bg-point-label-mode')||'off';
   UI.notationMode.value=localStorage.getItem('bg-notation-mode')||'both';
+  UI.handMode.value=localStorage.getItem('bg-hand-mode')||'auto';
+  UI.floatRollToggle.checked=localStorage.getItem('bg-floating-roll')!=='0';
+  UI.lockRollToggle.checked=localStorage.getItem('bg-lock-roll')==='1';
+  applyHandMode();applyRollPreference();
+  setCoachDrawer(localStorage.getItem('bg-coach-collapsed')!=='0');
   newGame();
   runCoreRulesTests();
 })();
