@@ -1,5 +1,5 @@
 {
-  "version": "2.0.5.2",
+  "version": "2.0.5.3",
   "package_type": "GITHUB_IPHONE_FLAT_UPLOAD",
   "upload_location": "repository root",
   "required_app_files": [
@@ -16,8 +16,8 @@
     "VALIDATION_REPORT.txt",
     "SHA256SUMS.txt"
   ],
-  "created_utc": "2026-07-22T19:42:48.554961+00:00",
-  "package_name": "v2.0.5.2_Backgammon_Coach_iPhone_GitHub_FLAT_SETTINGS_PANEL_RESTRUCTURE.zip",
+  "created_utc": "2026-07-22T20:00:19.606615+00:00",
+  "package_name": "v2.0.5.3_Backgammon_Coach_iPhone_GitHub_FLAT_PIP_DRAG_RESTORE_ROLL_FIX.zip",
   "default_settings": {
     "coaching_enabled": true,
     "explain_every_move": true,
@@ -132,5 +132,18 @@
     ],
     "moved_panel_count": 6,
     "engine_logic_changes": "None"
+  },
+  "pip_mobility": {
+    "draggable": true,
+    "position_persistence": "localStorage",
+    "dismiss_control": "X button on Pip and Settings control",
+    "restore_control": "Bring Pip back",
+    "viewport_clamping": true
+  },
+  "floating_roll_dice_fix": {
+    "all_viewport_widths": true,
+    "visible_while_disabled": true,
+    "drag_position_persistence": true,
+    "lock_and_reset_controls_preserved": true
   }
 }

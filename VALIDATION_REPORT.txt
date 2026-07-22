@@ -1,4 +1,4 @@
-Backgammon Coach v2.0.5.2 Pip Settings and Helpful Mode Validation
+Backgammon Coach v2.0.5.3 Pip Settings and Helpful Mode Validation
 ================================================================================
 PASS — Version updated
 PASS — JavaScript syntax
@@ -41,7 +41,7 @@ PASS — Project file includes playback and local-coach backlogs.
 PASS — Documentation-only update; runtime behavior unchanged.
 
 
-v2.0.5.2 Pip Character Studio Validation
+v2.0.5.3 Pip Character Studio Validation
 ============================================================
 PASS — Character studio exists
 PASS — Asset catalog exists
@@ -57,7 +57,7 @@ Runtime gameplay changes: none.
 Manual next step: open pip-studio.html and visually review every expression, pose, style, and tone.
 
 
-v2.0.5.2 Pip Character Studio Navigation Validation
+v2.0.5.3 Pip Character Studio Navigation Validation
 ============================================================
 PASS — Studio button in index
 PASS — Studio target linked
@@ -69,7 +69,7 @@ Automated result: PASS
 Runtime gameplay changes: none.
 
 
-v2.0.5.2 Settings Panel Restructure Validation
+v2.0.5.3 Settings Panel Restructure Validation
 ====================================================================
 PASS — Version updated
 PASS — Settings App Panels section
@@ -82,3 +82,21 @@ Detected panels: 7
 Moved into Settings: 6
 Automated result: PASS
 Manual next step: open index.html and verify only Game is visible before opening Settings.
+
+
+v2.0.5.3 Pip Mobility and Floating Roll Dice Validation
+========================================================================
+PASS — Pip dismiss button
+PASS — Pip return button
+PASS — Pip reset position
+PASS — Pip draggable handlers
+PASS — Pip position persistence
+PASS — Pip dismissed persistence
+PASS — Floating Roll all widths
+PASS — Disabled roll remains visible
+PASS — Roll drag handlers retained
+PASS — Roll preference controls retained
+PASS — Game panel retained
+PASS — Settings retained
+Automated result: PASS
+Manual next step: drag Pip, dismiss and restore him, then drag Roll Dice at desktop and mobile widths.

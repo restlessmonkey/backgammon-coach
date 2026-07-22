@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v2.0.5.2</title>
+  <title>Backgammon Coach iPhone v2.0.5.3</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -50,7 +50,7 @@ canvas { width: 100%; height: auto; display: block; touch-action: manipulation; 
 .sidebar { display: grid; gap: 14px; }
 
 /*
-  v2.0.5.2 — Independent side-panel scrolling
+  v2.0.5.3 — Independent side-panel scrolling
   On wide layouts, the board remains visually anchored while the right panel
   column gets its own touch-friendly vertical scroll area. Phone layouts keep
   normal page scrolling to avoid cramped nested scrolling.
@@ -207,7 +207,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 @media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
 
 
-/* v2.0.5.2 Immersive Play */
+/* v2.0.5.3 Immersive Play */
 .topbar,.play-controls,.coach-panel{transition:all .22s ease}
 body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
 body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
@@ -215,7 +215,7 @@ body.game-active .topbar p{display:none}
 body.game-active .version-badge{font-size:.52rem;margin-top:0}
 body.game-active .top-actions button{padding:7px 10px;font-size:.78rem}
 .roll-primary{font-size:1.05rem;letter-spacing:.025em;min-width:164px;min-height:58px;padding:13px 22px;transform:translateX(-10px);touch-action:none;user-select:none}
-.roll-primary.floating:disabled{display:none}
+.roll-primary.floating:disabled{display:block;opacity:.48;filter:grayscale(.25);cursor:not-allowed}
 .roll-primary.dragging{transform:none;opacity:.96;box-shadow:0 12px 28px rgba(0,0,0,.42);z-index:900}
 .coach-drawer-toggle{display:none;background:transparent;color:var(--ink);box-shadow:none;padding:0;width:100%;justify-content:space-between;align-items:center;text-align:left}
 .coach-drawer-body{display:block}
@@ -258,7 +258,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   
 
-/* v2.0.5.2 Victory Celebration */
+/* v2.0.5.3 Victory Celebration */
 .victory-celebration{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden;background:rgba(8,12,10,.08);opacity:0;transition:opacity .18s ease}
 .victory-celebration.active{opacity:1}
 .victory-canvas{width:100%;height:100%;display:block}
@@ -268,7 +268,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media (prefers-reduced-motion:reduce){.victory-celebration,.victory-banner{transition:none}}
 
 
-/* v2.0.5.2 Explain Every Move */
+/* v2.0.5.3 Explain Every Move */
 .coach-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
 .coach-settings label{display:grid;gap:4px;color:var(--muted);font-size:.76rem;font-weight:800}
 .move-rating{margin:10px 0;padding:11px;border-radius:12px;border:1px solid #d6c4ae;background:#fffaf2}
@@ -296,7 +296,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.coach-settings{grid-template-columns:1fr}.risk-row{grid-template-columns:64px 1fr 30px}}
 
 
-/* v2.0.5.2 Animated Board Hints */
+/* v2.0.5.3 Animated Board Hints */
 .visual-hint-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:8px}
 .visual-hint-controls button{margin:0;box-shadow:none}
 .visual-hint-status{margin-top:8px;padding:8px 10px;border-radius:10px;background:#e7f0eb;color:#294f42;font-weight:800;font-size:.8rem}
@@ -304,7 +304,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:760px){.visual-hint-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.5.2 Watch the Coach Think */
+/* v2.0.5.3 Watch the Coach Think */
 .think-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .think-controls button{margin:0;box-shadow:none}
 .think-panel{margin-top:9px;padding:10px;border-radius:12px;background:#f6ead8;border:1px solid #d8c5ab}
@@ -319,7 +319,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.think-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.5.2 verified engine controls */
+/* v2.0.5.3 verified engine controls */
 .engine-panel{margin:10px 0;padding:10px;border-radius:12px;border:1px solid #d8c5ab;background:#fffaf2}
 .engine-panel h3{margin:0 0 8px;font-size:.95rem}
 .engine-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -346,7 +346,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
 .celebration-vault-dialog{padding:18px}.celebration-vault-content{width:min(1080px,96vw);max-height:92vh;overflow:auto}.vault-heading{display:flex;gap:18px;justify-content:space-between}.vault-stats{background:#eef6f1;border:1px solid #bfd3c8;border-radius:14px;padding:10px 14px;font-weight:750}.vault-toolbar,.rarity-legend{display:flex;flex-wrap:wrap;gap:9px;margin:15px 0}.rarity-legend span{font-size:.8rem;font-weight:800;padding:5px 9px;border-radius:999px;background:#f3eadb}.celebration-vault-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.celebration-card{border:2px solid #dfd1bb;background:#fffaf1;border-radius:16px;padding:13px;display:grid;gap:8px}.celebration-card.disabled{opacity:.52}.celebration-card.favorite{border-color:#d9a441}.celebration-card-head{display:flex;justify-content:space-between}.celebration-card h3{margin:0;font-size:1rem}.celebration-icon{font-size:1.6rem}.rarity-pill{font-size:.7rem;text-transform:uppercase;font-weight:900;background:#eee1ca;padding:4px 7px;border-radius:999px}.celebration-card p{font-size:.84rem;margin:0;color:#665a4b}.celebration-card-actions{display:grid;grid-template-columns:1fr 1fr auto;gap:6px}.celebration-card-actions button{font-size:.78rem;padding:8px 6px}.victory-copy{position:fixed;top:8vh;left:50%;transform:translateX(-50%);z-index:3;text-align:center;width:min(92vw,760px);pointer-events:none}.victory-copy .victory-banner{position:static;transform:none;display:inline-block}.victory-subtitle{margin:8px auto 0;background:rgba(24,38,31,.88);color:white;padding:8px 15px;border-radius:999px;font-weight:750;max-width:max-content}@media(max-width:700px){.vault-heading{display:block}.vault-stats{display:inline-block;margin-top:8px}}
 
-/* v2.0.5.2 — Pip avatar, settings, and Helpful mode */
+/* v2.0.5.3 — Pip avatar, settings, and Helpful mode */
 .pip-settings-button{
   position:fixed;
   top:max(12px,env(safe-area-inset-top));
@@ -572,7 +572,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   .pip-avatar,.pip-helpful-meter span{transition:none!important;animation:none!important}
 }
 
-/* v2.0.5.2 — Move all non-Game panels into Settings */
+/* v2.0.5.3 — Move all non-Game panels into Settings */
 .settings-panel-library{
   display:grid;
   gap:14px;
@@ -621,6 +621,64 @@ body.game-panel-only-layout .panel-grid{
 body.game-panel-only-layout .main-layout{
   grid-template-columns:minmax(0,1fr)!important;
 }
+
+/* v2.0.5.3 — Movable, dismissible Pip and persistent floating Roll Dice */
+.pip-avatar{
+  touch-action:none;
+  cursor:grab;
+}
+.pip-avatar.pip-dragging{
+  cursor:grabbing;
+  transition:none!important;
+  z-index:1375;
+}
+.pip-dismiss-button{
+  position:absolute;
+  right:-8px;
+  top:8px;
+  z-index:8;
+  width:34px;
+  height:34px;
+  min-height:34px;
+  padding:0;
+  border-radius:50%;
+  border:2px solid #a78557;
+  background:#fff8ec;
+  color:#4b3524;
+  display:grid;
+  place-items:center;
+  font-size:1rem;
+  line-height:1;
+  box-shadow:0 5px 14px rgba(40,24,10,.2);
+  cursor:pointer;
+}
+.pip-dismiss-button:hover{background:#f4dfbd}
+.pip-return-button{
+  position:fixed;
+  right:max(14px,env(safe-area-inset-right));
+  bottom:max(14px,env(safe-area-inset-bottom));
+  z-index:1280;
+  min-height:48px;
+  border-radius:999px;
+  border:2px solid #b89562;
+  background:#fff7e8;
+  color:#3a2b20;
+  padding:10px 15px;
+  font-weight:850;
+  box-shadow:0 8px 24px rgba(55,36,16,.22);
+}
+.pip-return-button[hidden]{display:none}
+.pip-position-actions{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:10px;
+  margin-top:10px;
+}
+.roll-primary.floating{
+  touch-action:none;
+  cursor:grab;
+}
+.roll-primary.floating.dragging{cursor:grabbing}
 </style>
 
   <meta name="theme-color" content="#382719">
@@ -768,6 +826,16 @@ body.game-panel-only-layout .main-layout{
       </div>
     </div>
 
+
+    <div class="pip-setting-group">
+      <h3>Pip position</h3>
+      <p class="pip-settings-note">Drag Pip anywhere on the screen. His position is saved automatically.</p>
+      <div class="pip-position-actions">
+        <button id="pipResetPosition" class="secondary" type="button">Reset Pip position</button>
+        <button id="pipDismissFromSettings" class="secondary" type="button">Dismiss Pip</button>
+      </div>
+    </div>
+
 <div class="pip-setting-group">
       <h3>Pip Character Studio</h3>
       <p class="pip-settings-note">Preview every Pip style, skin tone, expression, and pose.</p>
@@ -789,6 +857,7 @@ body.game-panel-only-layout .main-layout{
 </div>
 
 <div id="pipAvatar" class="pip-avatar" data-style="boy" aria-label="Pip, your backgammon coach">
+  <button id="pipDismissButton" class="pip-dismiss-button" type="button" aria-label="Dismiss Pip" title="Dismiss Pip">✕</button>
   <div class="pip-cap"></div>
   <div class="pip-body">
     <div class="pip-inner-ring"></div>
@@ -802,16 +871,17 @@ body.game-panel-only-layout .main-layout{
   <div class="pip-leg left"></div><div class="pip-leg right"></div>
   <div class="pip-shoe left"></div><div class="pip-shoe right"></div>
 </div>
+<button id="pipReturnButton" class="pip-return-button" type="button" hidden>Bring Pip back</button>
 
   <main class="app-shell">
     <section class="topbar" id="appHeader">
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v2.0.5.2</span>
+          <span class="version-badge" id="versionBadge">v2.0.5.3</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v2.0.5.2</div>
+        <div class="version-note">v2.0.5.3</div>
       </div>
       <div class="top-actions">
         <button id="headerCelebrationBtn" class="secondary celebration-header-btn" type="button">🎉 Celebration Vault</button>
@@ -904,7 +974,7 @@ body.game-panel-only-layout .main-layout{
             <div id="favoriteLessons" class="favorite-list"></div>
           </details>
           <div id="coachReport" class="coach-report" hidden></div>
-          <div class="coach-disclaimer">v2.0.5.2 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. Pip’s local evaluator provides transparent offline teaching analysis and remains clearly distinguished from verified GNU Grandmaster analysis.</div>
+          <div class="coach-disclaimer">v2.0.5.3 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. Pip’s local evaluator provides transparent offline teaching analysis and remains clearly distinguished from verified GNU Grandmaster analysis.</div>
           </div>
         </section>
 
@@ -1329,7 +1399,7 @@ const canvas = document.getElementById('board');
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v2.0.5.2 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v2.0.5.3 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -2679,7 +2749,7 @@ const canvas = document.getElementById('board');
     localStorage.setItem('bg-roll-position',JSON.stringify({left:UI.rollBtn.style.left,top:UI.rollBtn.style.top}));
   }
   function applyRollPreference(){
-    const floating=UI.floatRollToggle.checked && window.innerWidth<=980;
+    const floating=UI.floatRollToggle.checked;
     UI.rollBtn.classList.toggle('floating',floating);
     localStorage.setItem('bg-floating-roll',UI.floatRollToggle.checked?'1':'0');
     if(floating){
@@ -3325,7 +3395,9 @@ const canvas = document.getElementById('board');
     personality:'friendly',
     visible:true,
     helpfulLevel:0,
-    helpfulActivations:0
+    helpfulActivations:0,
+    dismissed:false,
+    position:null
   };
   let pipSettings={...PIP_DEFAULTS};
   let pipHelpfulTimer=null;
@@ -3370,7 +3442,10 @@ const canvas = document.getElementById('board');
     if(!avatar)return;
     avatar.dataset.style=pipSettings.style;
     avatar.style.setProperty('--pip-skin',pipSettings.tone);
-    avatar.hidden=!pipSettings.visible;
+    avatar.hidden=!pipSettings.visible || pipSettings.dismissed;
+    const returnButton=document.getElementById('pipReturnButton');
+    if(returnButton)returnButton.hidden=!pipSettings.visible || !pipSettings.dismissed;
+    applySavedPipPosition();
     syncPipSettingButtons();
     updateHelpfulMeter();
     configureHelpfulMode();
@@ -3489,6 +3564,89 @@ const canvas = document.getElementById('board');
     pipSay('Oh… I thought I was helping. I’ll be quieter now.',{duration:5200,animation:'wiggle'});
   }
 
+
+  let pipDrag={active:false,moved:false,dx:0,dy:0,pointerId:null};
+
+  function clampPipPosition(left,top){
+    const avatar=document.getElementById('pipAvatar');
+    const rect=avatar.getBoundingClientRect();
+    return {
+      left:Math.max(4,Math.min(window.innerWidth-rect.width-4,left)),
+      top:Math.max(4,Math.min(window.innerHeight-rect.height-4,top))
+    };
+  }
+
+  function applySavedPipPosition(){
+    const avatar=document.getElementById('pipAvatar');
+    if(!avatar || !pipSettings.position)return;
+    const pos=clampPipPosition(Number(pipSettings.position.left)||0,Number(pipSettings.position.top)||0);
+    avatar.style.left=pos.left+'px';
+    avatar.style.top=pos.top+'px';
+    avatar.style.right='auto';
+    avatar.style.bottom='auto';
+  }
+
+  function resetPipPosition(announce=true){
+    const avatar=document.getElementById('pipAvatar');
+    pipSettings.position=null;
+    avatar.style.left='';
+    avatar.style.top='';
+    avatar.style.right='';
+    avatar.style.bottom='';
+    localStorage.setItem(PIP_SETTINGS_KEY,JSON.stringify(pipSettings));
+    if(announce)pipSay('Back to my usual spot!',{duration:3000,animation:'bounce'});
+  }
+
+  function dismissPip(){
+    pipSettings.dismissed=true;
+    localStorage.setItem(PIP_SETTINGS_KEY,JSON.stringify(pipSettings));
+    clearTimeout(pipSpeechTimer);
+    document.getElementById('pipSpeech').hidden=true;
+    applyPipSettings();
+  }
+
+  function restorePip(){
+    pipSettings.dismissed=false;
+    pipSettings.visible=true;
+    localStorage.setItem(PIP_SETTINGS_KEY,JSON.stringify(pipSettings));
+    applyPipSettings();
+    pipSay('I’m back! You can drag me wherever you like.',{duration:4300,animation:'bounce'});
+  }
+
+  function beginPipDrag(event){
+    if(event.target.closest('#pipDismissButton'))return;
+    const avatar=document.getElementById('pipAvatar');
+    const rect=avatar.getBoundingClientRect();
+    pipDrag={active:true,moved:false,dx:event.clientX-rect.left,dy:event.clientY-rect.top,pointerId:event.pointerId};
+    avatar.classList.add('pip-dragging');
+    avatar.setPointerCapture?.(event.pointerId);
+    event.preventDefault();
+  }
+
+  function movePipDrag(event){
+    if(!pipDrag.active)return;
+    const avatar=document.getElementById('pipAvatar');
+    const pos=clampPipPosition(event.clientX-pipDrag.dx,event.clientY-pipDrag.dy);
+    pipDrag.moved=true;
+    avatar.style.left=pos.left+'px';
+    avatar.style.top=pos.top+'px';
+    avatar.style.right='auto';
+    avatar.style.bottom='auto';
+    event.preventDefault();
+  }
+
+  function endPipDrag(event){
+    if(!pipDrag.active)return;
+    const avatar=document.getElementById('pipAvatar');
+    const rect=avatar.getBoundingClientRect();
+    pipDrag.active=false;
+    avatar.classList.remove('pip-dragging');
+    pipSettings.position={left:Math.round(rect.left),top:Math.round(rect.top)};
+    localStorage.setItem(PIP_SETTINGS_KEY,JSON.stringify(pipSettings));
+    setTimeout(()=>{pipDrag.moved=false},60);
+    event.preventDefault();
+  }
+
   function initializePip(){
     document.body.classList.add('game-panel-only-layout');
     loadPipSettings();
@@ -3533,10 +3691,35 @@ const canvas = document.getElementById('board');
     });
     document.getElementById('pipEnoughButton').addEventListener('click',turnOffHelpfulMode);
     document.getElementById('pipAvatar').addEventListener('click',()=>{
+      if(pipDrag.moved)return;
       if(pipSettings.personality==='helpful'){
         helpfulInterruption('idle');
       }else{
         pipSay(pipGreetingForPersonality(),{animation:'bounce'});
+      }
+    });
+
+    const pipAvatar=document.getElementById('pipAvatar');
+    pipAvatar.addEventListener('pointerdown',beginPipDrag);
+    pipAvatar.addEventListener('pointermove',movePipDrag);
+    pipAvatar.addEventListener('pointerup',endPipDrag);
+    pipAvatar.addEventListener('pointercancel',endPipDrag);
+    document.getElementById('pipDismissButton').addEventListener('click',event=>{
+      event.stopPropagation();
+      dismissPip();
+    });
+    document.getElementById('pipReturnButton').addEventListener('click',restorePip);
+    document.getElementById('pipResetPosition').addEventListener('click',()=>resetPipPosition(true));
+    document.getElementById('pipDismissFromSettings').addEventListener('click',()=>{
+      dismissPip();
+      closePipSettings();
+    });
+    window.addEventListener('resize',()=>{
+      if(pipSettings.position){
+        applySavedPipPosition();
+        const rect=document.getElementById('pipAvatar').getBoundingClientRect();
+        pipSettings.position={left:Math.round(rect.left),top:Math.round(rect.top)};
+        localStorage.setItem(PIP_SETTINGS_KEY,JSON.stringify(pipSettings));
       }
     });
 
@@ -3553,7 +3736,7 @@ const canvas = document.getElementById('board');
     const board=document.getElementById('board');
     if(board)board.addEventListener('click',()=>setTimeout(()=>helpfulInterruption('move'),700));
 
-    setTimeout(()=>pipSay(pipGreetingForPersonality(),{duration:4600,animation:'bounce'}),800);
+    if(!pipSettings.dismissed)setTimeout(()=>pipSay(pipGreetingForPersonality(),{duration:4600,animation:'bounce'}),800);
   }
 
 

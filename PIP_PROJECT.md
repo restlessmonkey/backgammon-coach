@@ -1,7 +1,7 @@
 # Pip — Your Backgammon Coach
 ## Project File
 Version 1.0
-Backgammon Coach package version: v2.0.5.2
+Backgammon Coach package version: v2.0.5.3
 
 ---
 
@@ -699,7 +699,7 @@ and, in the appropriate optional personality:
 
 ---
 
-## 20. Character Studio and Asset Catalog — v2.0.5.2
+## 20. Character Studio and Asset Catalog — v2.0.5.3
 
 The first reusable Pip character system is now defined.
 
@@ -718,7 +718,7 @@ This is a design and preview release. Gameplay event integration remains intenti
 
 ---
 
-## 21. Character Studio Navigation — v2.0.5.2
+## 21. Character Studio Navigation — v2.0.5.3
 
 The Pip Character Studio is now directly accessible from the main app.
 
@@ -734,7 +734,7 @@ This is a navigation-only update. Gameplay and Pip behavior are unchanged.
 
 ---
 
-## 22. Main Screen and Settings Panel Architecture — v2.0.5.2
+## 22. Main Screen and Settings Panel Architecture — v2.0.5.3
 
 The main app screen now keeps only the **Game** panel.
 
@@ -750,3 +750,26 @@ This is now the preferred interface rule:
 - Pip customization: Settings
 
 The implementation moved 6 detected non-Game panels while preserving their existing markup, IDs, and controls.
+
+
+---
+
+## 23. Pip Mobility, Dismissal, and Restoration — v2.0.5.3
+
+Pip is now directly movable and dismissible.
+
+Implemented:
+
+- drag Pip anywhere on screen
+- save Pip’s location locally
+- clamp Pip within the visible viewport
+- dismiss Pip using the X control
+- restore Pip using **Bring Pip back**
+- reset Pip to his normal position from Settings
+- dismiss Pip from Settings
+
+The floating Roll Dice control was also restored to its intended behavior:
+
+- floating mode now works at all viewport widths
+- it remains visible while temporarily disabled
+- its saved drag position, lock setting, and reset control remain supported
