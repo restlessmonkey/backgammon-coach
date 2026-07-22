@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v2.0.2.5.1</title>
+  <title>Backgammon Coach iPhone v2.0.3.0</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -50,7 +50,7 @@ canvas { width: 100%; height: auto; display: block; touch-action: manipulation; 
 .sidebar { display: grid; gap: 14px; }
 
 /*
-  v2.0.2.5.1 — Independent side-panel scrolling
+  v2.0.3.0 — Independent side-panel scrolling
   On wide layouts, the board remains visually anchored while the right panel
   column gets its own touch-friendly vertical scroll area. Phone layouts keep
   normal page scrolling to avoid cramped nested scrolling.
@@ -207,7 +207,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 @media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
 
 
-/* v2.0.2.5.1 Immersive Play */
+/* v2.0.3.0 Immersive Play */
 .topbar,.play-controls,.coach-panel{transition:all .22s ease}
 body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
 body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
@@ -258,7 +258,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   
 
-/* v2.0.2.5.1 Victory Celebration */
+/* v2.0.3.0 Victory Celebration */
 .victory-celebration{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden;background:rgba(8,12,10,.08);opacity:0;transition:opacity .18s ease}
 .victory-celebration.active{opacity:1}
 .victory-canvas{width:100%;height:100%;display:block}
@@ -268,7 +268,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media (prefers-reduced-motion:reduce){.victory-celebration,.victory-banner{transition:none}}
 
 
-/* v2.0.2.5.1 Explain Every Move */
+/* v2.0.3.0 Explain Every Move */
 .coach-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
 .coach-settings label{display:grid;gap:4px;color:var(--muted);font-size:.76rem;font-weight:800}
 .move-rating{margin:10px 0;padding:11px;border-radius:12px;border:1px solid #d6c4ae;background:#fffaf2}
@@ -296,7 +296,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.coach-settings{grid-template-columns:1fr}.risk-row{grid-template-columns:64px 1fr 30px}}
 
 
-/* v2.0.2.5.1 Animated Board Hints */
+/* v2.0.3.0 Animated Board Hints */
 .visual-hint-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:8px}
 .visual-hint-controls button{margin:0;box-shadow:none}
 .visual-hint-status{margin-top:8px;padding:8px 10px;border-radius:10px;background:#e7f0eb;color:#294f42;font-weight:800;font-size:.8rem}
@@ -304,7 +304,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:760px){.visual-hint-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.2.5.1 Watch the Coach Think */
+/* v2.0.3.0 Watch the Coach Think */
 .think-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .think-controls button{margin:0;box-shadow:none}
 .think-panel{margin-top:9px;padding:10px;border-radius:12px;background:#f6ead8;border:1px solid #d8c5ab}
@@ -319,7 +319,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.think-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.2.5.1 verified engine controls */
+/* v2.0.3.0 verified engine controls */
 .engine-panel{margin:10px 0;padding:10px;border-radius:12px;border:1px solid #d8c5ab;background:#fffaf2}
 .engine-panel h3{margin:0 0 8px;font-size:.95rem}
 .engine-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -361,10 +361,10 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v2.0.2.5.1</span>
+          <span class="version-badge" id="versionBadge">v2.0.3.0</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v2.0.2.5.1</div>
+        <div class="version-note">v2.0.3.0</div>
       </div>
       <div class="top-actions">
         <button id="headerCelebrationBtn" class="secondary celebration-header-btn" type="button">🎉 Celebration Vault</button>
@@ -409,8 +409,8 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
         <section class="panel coach-panel" id="coachPanel">
           <div class="panel-heading">
-            <button id="coachDrawerToggle" class="coach-drawer-toggle" type="button" aria-expanded="false" aria-controls="coachDrawerBody"><span>💡 Coach</span><span class="coach-chevron">▲</span></button>
-            <h2 class="coach-heading">Coach</h2>
+            <button id="coachDrawerToggle" class="coach-drawer-toggle" type="button" aria-expanded="false" aria-controls="coachDrawerBody"><span>💡 Pip</span><span class="coach-chevron">▲</span></button>
+            <h2 class="coach-heading">Pip — Your Backgammon Coach</h2>
             <label class="switch-label">
               <input id="coachToggle" type="checkbox" checked />
               <span>Hints</span>
@@ -419,7 +419,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
           <div id="coachDrawerBody" class="coach-drawer-body">
           <p id="coachText">Roll the dice. I’ll highlight legal checkers and explain useful ideas.</p>
           <div class="coach-settings">
-            <label>Coach level
+            <label>Pip’s coaching level
               <select id="coachLevel">
                 <option value="beginner">Beginner</option>
                 <option value="intermediate" selected>Intermediate</option>
@@ -437,7 +437,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
           <div class="engine-panel">
             <h3>Grandmaster analysis engine</h3>
             <div class="engine-grid">
-              <label>Coach source
+              <label>Pip’s analysis source
                 <select id="engineMode">
                   <option value="gnubg" selected>GNU Backgammon service — verified</option>
                   <option value="local">Advanced local coach — offline, not grandmaster</option>
@@ -454,7 +454,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
             <div id="engineStatus" class="engine-status bad" aria-live="polite">Grandmaster engine not connected. Recommendations are blocked unless you deliberately select the local fallback.</div>
           </div>
           <label class="switch-label experience-switch"><input id="explainEveryMove" type="checkbox" checked /><span>Explain after every move</span></label>
-          <label class="switch-label experience-switch"><input id="autoWatchCoach" type="checkbox" /><span>Automatically watch the coach every turn</span></label>
+          <label class="switch-label experience-switch"><input id="autoWatchCoach" type="checkbox" /><span>Automatically watch Pip every turn</span></label>
           <button id="hintBtn" class="secondary wide">Rank and explain my moves</button>
           <div class="visual-hint-controls">
             <button id="animateBestHintBtn" class="make-now" type="button" disabled>▶ Animate best move</button>
@@ -462,7 +462,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
             <button id="stopHintAnimationBtn" class="secondary" type="button" disabled>■ Stop animation</button>
           </div>
           <div class="think-controls">
-            <button id="watchCoachThinkBtn" class="primary" type="button" disabled>🧠 Watch the Coach Think</button>
+            <button id="watchCoachThinkBtn" class="primary" type="button" disabled>🧠 Watch Pip Think</button>
             <button id="stopCoachThinkBtn" class="secondary" type="button" disabled>■ Stop thinking</button>
           </div>
           <div id="coachThinkPanel" class="think-panel" aria-live="polite" hidden>
@@ -478,7 +478,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
             <div id="favoriteLessons" class="favorite-list"></div>
           </details>
           <div id="coachReport" class="coach-report" hidden></div>
-          <div class="coach-disclaimer">v2.0.2.5.1 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. The local evaluator remains available solely as a clearly marked teaching fallback.</div>
+          <div class="coach-disclaimer">v2.0.3.0 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. Pip’s local evaluator provides transparent offline teaching analysis and remains clearly distinguished from verified GNU Grandmaster analysis.</div>
           </div>
         </section>
 
@@ -946,7 +946,7 @@ const canvas = document.getElementById('board');
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v2.0.2.5.1 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v2.0.3.0 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -1238,30 +1238,161 @@ const canvas = document.getElementById('board');
     return waste+gaps*.35;
   }
 
+
+  function positionClass(s) {
+    if(allInHome(s,HUMAN) || allInHome(s,AI)) return 'bearoff';
+    if(!contactExists(s) && !s.bar[HUMAN] && !s.bar[AI]) return 'race';
+    const humanPrime=primeScore(s,HUMAN), aiPrime=primeScore(s,AI);
+    if(humanPrime>=5 && aiPrime>=5) return 'prime-versus-prime';
+    if(humanPrime>=4 || aiPrime>=4) return 'prime-contact';
+    if(s.bar[HUMAN] || s.bar[AI]) return 'bar-contact';
+    return 'contact';
+  }
+
+  function flexibleNumbersScore(s,player) {
+    let score=0;
+    for(let i=0;i<24;i++){
+      if(owner(s.points[i])!==player) continue;
+      const n=count(s.points[i]);
+      if(n===2) score+=1.2;
+      else if(n===3) score+=2.1;
+      else if(n===4) score+=1.3;
+      else if(n>=6) score-=1.6*(n-5);
+      const p=pointNumber(i,player);
+      if(n>=2 && p>=7 && p<=13) score+=.55;
+    }
+    return score;
+  }
+
+  function duplicatedBuildersPenalty(s,player) {
+    const destinations=new Map();
+    for(let i=0;i<24;i++){
+      if(owner(s.points[i])!==player || count(s.points[i])<1) continue;
+      for(let die=1;die<=6;die++){
+        const to=player===HUMAN?i-die:i+die;
+        if(to<0 || to>=24) continue;
+        if(owner(s.points[to])===-player && count(s.points[to])>=2) continue;
+        const key=String(to);
+        destinations.set(key,(destinations.get(key)||0)+1);
+      }
+    }
+    let penalty=0;
+    for(const n of destinations.values()) if(n>=3) penalty+=(n-2)*.28;
+    return penalty;
+  }
+
+  function timingScore(s,player) {
+    const pips=pipCount(s,player);
+    const back=backCheckerDistance(s,player);
+    const anchors=anchorValue(s,player);
+    const stacks=stackPenalty(s,player);
+    const contact=contactExists(s);
+    if(!contact) return -bearoffWastage(s,player)*.6;
+    return Math.min(15,pips/18) + Math.min(8,back/5) + anchors*.12 - stacks*.35;
+  }
+
+  function opponentBoardDanger(s,player) {
+    const opp=-player;
+    const closed=homeBoardPoints(s,opp);
+    const prime=primeScore(s,opp);
+    const onBar=s.bar[player];
+    const vulnerable=blotCount(s,player);
+    return closed*3.2 + prime*1.3 + onBar*(5+closed*3) + vulnerable*closed*.45;
+  }
+
+  function gammonPressure(s,player) {
+    const opp=-player;
+    let pressure=(s.off[player]-s.off[opp])*1.4;
+    if(s.off[opp]===0){
+      pressure += Math.max(0,15-pipCount(s,player)/12);
+      pressure += s.bar[opp]*2.5;
+      pressure += homeBoardPoints(s,player)*.8;
+    }
+    if(s.off[player]===0 && pipCount(s,player)>pipCount(s,opp)+35) pressure-=4;
+    return pressure;
+  }
+
+  function backCheckerEscapeDifficulty(s,player) {
+    if(s.bar[player]) return 12 + homeBoardPoints(s,-player)*4;
+    const distance=backCheckerDistance(s,player);
+    if(distance<=0) return 0;
+    let blocks=0;
+    for(let die=1;die<=6;die++){
+      const fromIndex=player===HUMAN?distance-1:24-distance;
+      const to=player===HUMAN?fromIndex-die:fromIndex+die;
+      if(to>=0&&to<24&&owner(s.points[to])===-player&&count(s.points[to])>=2) blocks++;
+    }
+    return distance*.35 + blocks*2.2;
+  }
+
+  function pipPositionBreakdown(s,player) {
+    const opp=-player;
+    const kind=positionClass(s);
+    const raceOnly=kind==='race' || kind==='bearoff';
+    const components={
+      positionClass:kind,
+      race:(pipCount(s,opp)-pipCount(s,player))*(raceOnly?1.7:.72),
+      borneOff:(s.off[player]-s.off[opp])*(raceOnly?60:42),
+      bar:(s.bar[opp]-s.bar[player])*(18+homeBoardPoints(s,player)*4),
+      homeBoard:homeBoardStrength(s,player)-homeBoardStrength(s,opp),
+      primes:(primeScore(s,player)**2-primeScore(s,opp)**2)*4.5,
+      anchors:anchorValue(s,player)-anchorValue(s,opp),
+      distribution:distributionScore(s,player)-distributionScore(s,opp),
+      flexibility:flexibleNumbersScore(s,player)-flexibleNumbersScore(s,opp),
+      duplication:duplicatedBuildersPenalty(s,opp)-duplicatedBuildersPenalty(s,player),
+      stacks:stackPenalty(s,opp)-stackPenalty(s,player),
+      exposure:blotExposureEstimate(s,opp)*2.2-blotExposureEstimate(s,player)*2.75,
+      timing:(timingScore(s,player)-timingScore(s,opp))*(raceOnly?.25:.8),
+      boardDanger:opponentBoardDanger(s,opp)-opponentBoardDanger(s,player),
+      escape:backCheckerEscapeDifficulty(s,opp)-backCheckerEscapeDifficulty(s,player),
+      gammon:gammonPressure(s,player)-gammonPressure(s,opp),
+      wastage:bearoffWastage(s,opp)*2.6-bearoffWastage(s,player)*3.1
+    };
+    if(!raceOnly){
+      const behind=pipCount(s,player)-pipCount(s,opp);
+      components.contactAdjustment=0;
+      if(behind>18) components.contactAdjustment += primeScore(s,player)*5 + anchorValue(s,player)*.7;
+      if(behind<-18) components.contactAdjustment -= blotCount(s,player)*4.5;
+    } else {
+      components.contactAdjustment=0;
+    }
+    components.total=Object.entries(components)
+      .filter(([k,v])=>k!=='positionClass' && k!=='total' && Number.isFinite(v))
+      .reduce((sum,[,v])=>sum+v,0);
+    return components;
+  }
+
+  function strongestPositionFactors(breakdown,limit=3) {
+    const labels={
+      race:'race efficiency',
+      borneOff:'checkers already borne off',
+      bar:'bar pressure',
+      homeBoard:'home-board strength',
+      primes:'prime structure',
+      anchors:'anchor quality',
+      distribution:'checker distribution',
+      flexibility:'flexible playable numbers',
+      duplication:'reduced number duplication',
+      stacks:'unstacking heavy points',
+      exposure:'blot and shot safety',
+      timing:'timing',
+      boardDanger:'opponent-board danger',
+      escape:'back-checker escape difficulty',
+      gammon:'gammon pressure',
+      wastage:'bear-off efficiency',
+      contactAdjustment:'contact strategy'
+    };
+    return Object.entries(breakdown)
+      .filter(([k,v])=>labels[k] && Number.isFinite(v) && Math.abs(v)>=.35)
+      .sort((a,b)=>Math.abs(b[1])-Math.abs(a[1]))
+      .slice(0,limit)
+      .map(([k,v])=>`${v>=0?'improves':'gives up'} ${labels[k]}`);
+  }
+
   function advancedStaticEvaluate(s,player) {
     if (s.off[player]===15) return 100000;
     if (s.off[-player]===15) return -100000;
-    const opp=-player;
-    const raceOnly=!contactExists(s) && !s.bar[player] && !s.bar[opp];
-    const pipEdge=pipCount(s,opp)-pipCount(s,player);
-    let score=pipEdge*(raceOnly?1.65:.72);
-    score+=(s.off[player]-s.off[opp])*(raceOnly?58:42);
-    score+=(s.bar[opp]-s.bar[player])*(18+homeBoardPoints(s,player)*4);
-    score+=homeBoardStrength(s,player)-homeBoardStrength(s,opp);
-    score+=(primeScore(s,player)**2-primeScore(s,opp)**2)*4.3;
-    score+=anchorValue(s,player)-anchorValue(s,opp);
-    score+=distributionScore(s,player)-distributionScore(s,opp);
-    score-=stackPenalty(s,player)-stackPenalty(s,opp);
-    score-=blotExposureEstimate(s,player)*2.7;
-    score+=blotExposureEstimate(s,opp)*2.15;
-    score-=bearoffWastage(s,player)*3;
-    score+=bearoffWastage(s,opp)*2.5;
-    if(!raceOnly){
-      const behind=pipCount(s,player)-pipCount(s,opp);
-      if(behind>18) score += primeScore(s,player)*5 + anchorValue(s,player)*.7;
-      if(behind<-18) score -= blotCount(s,player)*4.5;
-    }
-    return score;
+    return pipPositionBreakdown(s,player).total;
   }
 
   function evaluate(s,player) { return advancedStaticEvaluate(s,player); }
@@ -1288,7 +1419,13 @@ const canvas = document.getElementById('board');
       escapeGain:backCheckerDistance(s,player)-backCheckerDistance(cur,player),
       exposure:blotExposureEstimate(cur,player),
       anchorDelta:anchorValue(cur,player)-anchorValue(s,player),
-      stackDelta:stackPenalty(cur,player)-stackPenalty(s,player)
+      stackDelta:stackPenalty(cur,player)-stackPenalty(s,player),
+      flexibilityDelta:flexibleNumbersScore(cur,player)-flexibleNumbersScore(s,player),
+      duplicationDelta:duplicatedBuildersPenalty(s,player)-duplicatedBuildersPenalty(cur,player),
+      timingDelta:timingScore(cur,player)-timingScore(s,player),
+      dangerDelta:opponentBoardDanger(s,player)-opponentBoardDanger(cur,player),
+      escapeDifficultyDelta:backCheckerEscapeDifficulty(s,player)-backCheckerEscapeDifficulty(cur,player),
+      positionClass:positionClass(cur)
     };
     let score=advancedStaticEvaluate(cur,player);
     score += features.hits*(11+homeBoardPoints(cur,player)*2.5);
@@ -1296,7 +1433,8 @@ const canvas = document.getElementById('board');
     score += features.primeDelta*11 + features.anchorDelta*4;
     score -= Math.max(0,features.stackDelta)*4;
     score += openingBookBonus(s,player,seq);
-    return {seq,state:cur,score,staticScore:score,features,source:'advanced-local'};
+    const evaluationBreakdown=pipPositionBreakdown(cur,player);
+    return {seq,state:cur,score,staticScore:score,features,evaluationBreakdown,source:'advanced-local'};
   }
 
   function rankSequencesStatic(s, player, dice) {
@@ -1391,9 +1529,17 @@ const canvas = document.getElementById('board');
     if(f.homeDelta>0) reasons.push('strengthens your home board');
     if(f.primeDelta>0) reasons.push('extends your longest prime');
     if(f.anchorDelta>0) reasons.push('improves your anchor');
+    if(f.flexibilityDelta>1) reasons.push('creates more flexible numbers for later rolls');
+    if(f.duplicationDelta>.5) reasons.push('reduces duplicated builders');
+    if(f.timingDelta>1.5) reasons.push('improves your timing');
+    if(f.dangerDelta>2) reasons.push('reduces danger from the opponent’s home board');
+    if(f.escapeDifficultyDelta>2) reasons.push('makes the back checkers easier to escape');
     if(f.blotDelta<0) reasons.push(`removes ${Math.abs(f.blotDelta)} blot${f.blotDelta===-1?'':'s'}`);
     if(f.escapeGain>=6) reasons.push('advances a back checker');
     if(f.exposure>8) reasons.push('accepts some calculated shot risk');
+    if(!reasons.length && ranked.evaluationBreakdown){
+      reasons.push(...strongestPositionFactors(ranked.evaluationBreakdown,2));
+    }
     if(!reasons.length && f.pipGain>0) reasons.push(`uses ${f.pipGain} racing pips efficiently`);
     return reasons.slice(0,3);
   }
@@ -1463,7 +1609,7 @@ const canvas = document.getElementById('board');
     const localRanked=rankSequences(s,player,dice);
     if(engineMode==='local'){
       lastCoachSource='local';
-      updateEngineStatus('Advanced local coach active — stronger offline analysis, but not verified grandmaster.','bad');
+      updateEngineStatus('Pip’s advanced local analysis is active — transparent offline evaluation, not verified grandmaster.','bad');
       localRanked.forEach((r,i)=>{r.engineRank=i+1;r.engineExplanation=teachingReasons(r,s,player).join('; ');r.source='advanced-local';});
       return localRanked;
     }
@@ -1701,7 +1847,7 @@ const canvas = document.getElementById('board');
     const strong=counts.Perfect+counts.Excellent+counts.Good;
     const needs=counts.Mistake+counts.Blunder;
     UI.coachReport.hidden=false;
-    UI.coachReport.innerHTML=`<strong>Game Coach Report</strong>
+    UI.coachReport.innerHTML=`<strong>Pip’s Game Report</strong>
       <div class="coach-report-grid">
         <div><strong>${moveGrades.length}</strong><small>rated moves</small></div>
         <div><strong>${strong}</strong><small>strong moves</small></div>
@@ -1772,8 +1918,8 @@ const canvas = document.getElementById('board');
       UI.replayBestHintBtn.disabled=true;
       UI.watchCoachThinkBtn.disabled=true;
       UI.hintResults.innerHTML='';
-      setCoach(`Coach analysis unavailable: ${error.message}. Gameplay remains available. Connect a GNU Backgammon service, or deliberately choose the clearly labeled advanced local coach.`);
-      updateEngineStatus(`Coach analysis unavailable: ${error.message}. Gameplay remains available.`,'bad');
+      setCoach(`Pip’s analysis is unavailable: ${error.message}. Gameplay remains available. Connect a GNU Backgammon service, or deliberately choose the clearly labeled advanced local coach.`);
+      updateEngineStatus(`Pip’s analysis is unavailable: ${error.message}. Gameplay remains available.`,'bad');
       return [];
     }
     if (!ranked.length || !ranked[0].seq.length) { setCoach('There is no legal move with the remaining dice.'); UI.hintResults.innerHTML=''; return []; }
@@ -1784,9 +1930,9 @@ const canvas = document.getElementById('board');
     UI.watchCoachThinkBtn.disabled=false;
     UI.visualHintStatus.hidden=false;
     const verified=lastCoachSource==='gnubg';
-    UI.visualHintStatus.textContent=verified?'Verified GNU Backgammon move is ready to animate.':'Advanced local coach is ready to animate — offline analysis, not verified grandmaster.';
+    UI.visualHintStatus.textContent=verified?'Verified GNU Backgammon move is ready to animate.':'Pip’s local recommendation is ready to animate — offline analysis, not verified grandmaster.';
     const d=sequenceDirections(ranked[0].seq,HUMAN);
-    setCoach(`${verified?'Verified GNU Backgammon':'Advanced local coach'} complete turn: ${d.summary}. ${ranked[0].engineExplanation||''}`);
+    setCoach(`${verified?'Verified GNU Backgammon':'Pip’s local analysis'} complete turn: ${d.summary}. ${ranked[0].engineExplanation||''}`);
     renderHintCards(ranked);
     draw();
     return ranked;
@@ -2423,8 +2569,8 @@ const canvas = document.getElementById('board');
       }
       ranked=availableRankings.slice(0,3);
     }catch(error){
-      setCoach(`Coach analysis unavailable: ${error.message}. Gameplay remains available.`);
-      updateEngineStatus(`Coach analysis unavailable: ${error.message}. Gameplay remains available.`,'bad');
+      setCoach(`Pip’s analysis is unavailable: ${error.message}. Gameplay remains available.`);
+      updateEngineStatus(`Pip’s analysis is unavailable: ${error.message}. Gameplay remains available.`,'bad');
       return;
     }
     if(!ranked.length){
@@ -2442,7 +2588,7 @@ const canvas = document.getElementById('board');
     renderThinkCandidates(ranked,-1,-1);
 
     UI.coachThinkStage.textContent='Step 1: Scan the legal candidates';
-    UI.coachThinkDetail.textContent=lastCoachSource==='gnubg'?'Verified GNU Backgammon rankings received. The teaching layer will now explain the engine’s ordering.':'Advanced local coach selected. This offline analysis checks strategic structure and the opponent’s best replies across all 21 dice combinations. It is much stronger than the old heuristic, but it is not a verified grandmaster engine.';
+    UI.coachThinkDetail.textContent=lastCoachSource==='gnubg'?'Verified GNU Backgammon rankings received. The teaching layer will now explain the engine’s ordering.':'Pip’s local analysis selected. Pip now scores race efficiency, blot exposure, point strength, anchors, primes, flexibility, timing, back-checker escape difficulty, opponent-board danger, gammon pressure, and bear-off wastage. It remains an offline teaching evaluator, not a verified grandmaster engine.';
     await new Promise(resolve=>{const t=setTimeout(resolve,900);coachThink.timers.push(t);});
     if(!coachThink.active)return;
 
@@ -2730,7 +2876,7 @@ const canvas = document.getElementById('board');
     localStorage.setItem('bg-engine-mode',engineMode);
     engineVerified=false;
     if(engineMode==='local'){
-      updateEngineStatus('Advanced local coach active — stronger offline analysis, but not verified grandmaster.','bad');
+      updateEngineStatus('Pip’s advanced local analysis is active — transparent offline evaluation, not verified grandmaster.','bad');
     }else{
       updateEngineStatus(engineEndpoint?'GNU Backgammon endpoint configured but not yet verified.':'Grandmaster engine not connected. Recommendations are blocked.','bad');
     }
@@ -2769,7 +2915,7 @@ const canvas = document.getElementById('board');
   window.addEventListener('resize',()=>{draw();applyRollPreference();});
   UI.engineMode.value=engineMode;
   UI.engineEndpoint.value=engineEndpoint;
-  updateEngineStatus(engineMode==='local'?'Advanced local coach active — stronger offline analysis, but not verified grandmaster.':(engineEndpoint?'GNU Backgammon endpoint configured; tap Test engine connection.':'Grandmaster engine not connected. Recommendations are blocked unless the local fallback is deliberately selected.'),'bad');
+  updateEngineStatus(engineMode==='local'?'Pip’s advanced local analysis is active — transparent offline evaluation, not verified grandmaster.':(engineEndpoint?'GNU Backgammon endpoint configured; tap Test engine connection.':'Grandmaster engine not connected. Recommendations are blocked unless the local fallback is deliberately selected.'),'bad');
   UI.coachLevel.value=localStorage.getItem('bg-coach-level')||'intermediate';
   UI.coachVerbosity.value=localStorage.getItem('bg-coach-verbosity')||'standard';
   UI.explainEveryMove.checked=localStorage.getItem('bg-explain-every-move')!=='0';

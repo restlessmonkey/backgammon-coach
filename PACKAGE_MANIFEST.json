@@ -1,5 +1,5 @@
 {
-  "version": "2.0.2.5.1",
+  "version": "2.0.3.0",
   "package_type": "GITHUB_IPHONE_FLAT_UPLOAD",
   "upload_location": "repository root",
   "required_app_files": [
@@ -16,8 +16,8 @@
     "VALIDATION_REPORT.txt",
     "SHA256SUMS.txt"
   ],
-  "created_utc": "2026-07-22T18:21:25.187061+00:00",
-  "package_name": "v2.0.2.5.1_Backgammon_Coach_iPhone_GitHub_FLAT_WATCH_COACH_LOCAL_HOTFIX.zip",
+  "created_utc": "2026-07-22T18:35:57.192709+00:00",
+  "package_name": "v2.0.3.0_Backgammon_Coach_iPhone_GitHub_FLAT_PIP_POSITION_INTELLIGENCE.zip",
   "default_settings": {
     "coaching_enabled": true,
     "explain_every_move": true,
@@ -52,17 +52,39 @@
     }
   },
   "release": {
-    "name": "Watch Coach Local Mode Hotfix",
-    "root_cause": "Browser click event was treated as the optional pre-ranked move array",
-    "fix": [
-      "Wrap direct click listener so watchCoachThink receives no MouseEvent",
-      "Accept preRanked only when Array.isArray(preRanked) is true",
-      "Validate coach ranking result before slicing"
+    "name": "Pip Position Intelligence",
+    "coach_name": "Pip \u2014 Your Backgammon Coach",
+    "architecture": "Engine decides. Pip teaches.",
+    "grandmaster_label_rule": "Only verified GNU Backgammon",
+    "local_position_classes": [
+      "contact",
+      "race",
+      "bearoff",
+      "bar-contact",
+      "prime-contact",
+      "prime-versus-prime"
     ],
-    "advanced_local_coach_without_gnu": "Supported",
+    "local_evaluation_components": [
+      "race efficiency",
+      "borne-off progress",
+      "bar pressure",
+      "home-board strength",
+      "primes",
+      "anchors",
+      "distribution",
+      "stacking",
+      "flexibility",
+      "number duplication",
+      "blot exposure",
+      "timing",
+      "opponent-board danger",
+      "back-checker escape difficulty",
+      "gammon pressure",
+      "bear-off wastage"
+    ],
     "panel_changes": "None",
-    "replay_changes": "None",
-    "gameplay_changes": "None",
+    "playback_changes": "None",
+    "gnu_protocol_changes": "None",
     "celebration_count": 44
   },
   "github_commit_message_file": "COMMIT_MESSAGE.txt"

@@ -1,27 +1,31 @@
-Backgammon Coach v2.0.2.5.1 Watch Coach Local Mode Hotfix Validation
-==============================================================================
+Backgammon Coach v2.0.3.0 Pip Position Intelligence Validation
+============================================================================
 PASS — Version updated
 PASS — JavaScript syntax
-PASS — Direct click event blocked
-PASS — Pre-ranked input array guarded
-PASS — Ranking response array validated
-PASS — Local coach path retained
-PASS — Watch Coach function retained
-PASS — Automatic Watch ranked-array path retained
-PASS — Replay control retained
-PASS — Collapsible panel initializer retained
-PASS — Large collapse controls retained
+PASS — Pip branding present
+PASS — Position classifier present
+PASS — Transparent breakdown present
+PASS — Flexibility evaluator present
+PASS — Duplication evaluator present
+PASS — Timing evaluator present
+PASS — Opponent-board danger present
+PASS — Gammon pressure present
+PASS — Escape difficulty present
+PASS — Bear-off wastage retained
+PASS — Evaluator uses component total
+PASS — Breakdown attached to candidates
+PASS — Pip factor explanations present
+PASS — GNU Grandmaster distinction retained
+PASS — Watch Pip hotfix retained
+PASS — Replay retained
+PASS — Collapsible panels retained
 PASS — Independent scrolling retained
 PASS — 44 celebrations retained
-PASS — Bowling celebration retained
-PASS — Gameplay tap repair retained
-PASS — Coach recursion guard retained
 PASS — Cache updated
 PASS — Standalone commit message
 
 Celebrations inventoried: 44
 Automated result: PASS
 Panel implementation changes: none.
-Replay implementation changes: none.
-Gameplay logic changes: none.
-Manual Safari validation: select Advanced local coach, roll dice, tap Watch the Coach Think.
+GNU protocol changes: none.
+Manual validation recommended across race, contact, bar, prime, and bear-off positions.

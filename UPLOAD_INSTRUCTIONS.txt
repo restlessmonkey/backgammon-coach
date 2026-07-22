@@ -1,4 +1,4 @@
-BACKGAMMON COACH v2.0.2.5.1
+BACKGAMMON COACH v2.0.3.0
 IPHONE GITHUB FLAT-UPLOAD DEPLOYMENT PACKAGE
 
 WHY THIS PACKAGE EXISTS
@@ -32,7 +32,7 @@ Because the prior service worker may remain cached:
 5. Reopen the Pages address and add it to the Home Screen again.
 
 EXPECTED VERSION
-v2.0.2.5.1
+v2.0.3.0
 
 COACH MODE
 Select:
@@ -42,13 +42,13 @@ WINDOWS
 No Windows computer is required for this local coach mode.
 
 
-DEFAULT BEHAVIOR IN v2.0.2.5.1
+DEFAULT BEHAVIOR IN v2.0.3.0
 - Coaching is ON for a fresh install.
 - Automatically Watch the Coach every turn is ON for a fresh install.
 - A user's previously saved choices are preserved.
 
 
-v2.0.2.5.1 GAMEPLAY REPAIR
+v2.0.3.0 GAMEPLAY REPAIR
 - Prevents duplicate factorial expansion for doubles.
 - Adds legal sequence caching.
 - Keeps opening 5-5 responsive.
@@ -56,7 +56,7 @@ v2.0.2.5.1 GAMEPLAY REPAIR
 - Reduces advanced doubles lookahead candidates from 6 to 3.
 
 
-v2.0.2.5.1 SAFE DEFAULTS RESET
+v2.0.3.0 SAFE DEFAULTS RESET
 - Coaching defaults ON.
 - Explain Every Move defaults ON.
 - Automatically Watch the Coach defaults OFF.
@@ -64,7 +64,7 @@ v2.0.2.5.1 SAFE DEFAULTS RESET
 - Automatic analysis cannot begin while a checker or destination is selected.
 
 
-v2.0.2.5.1 STACK AND DESTINATION-TAP REPAIR
+v2.0.3.0 STACK AND DESTINATION-TAP REPAIR
 - Prevents move-rating code from recursively launching full coach analysis.
 - Adds a recursion guard and safe static fallback.
 - Reduces mobile lookahead workload.
@@ -72,18 +72,18 @@ v2.0.2.5.1 STACK AND DESTINATION-TAP REPAIR
 - Gameplay continues even if advanced coach analysis fails.
 
 
-v2.0.2.5.1 CELEBRATION BUTTON RESTORE
+v2.0.3.0 CELEBRATION BUTTON RESTORE
 - Restores a visible 🎉 Celebration button in the top action area.
 - The button directly launches the existing random victory celebration.
 - Gameplay and the v2.0.1.1.6 stack/tap repair remain unchanged.
 
 
-v2.0.2.5.1 CELEBRATION VAULT
+v2.0.3.0 CELEBRATION VAULT
 - 30 celebrations, rarity tiers, preview gallery, favorites, enable/disable controls, discovery and win statistics, achievements, and streak messages.
 - Working gameplay repairs preserved.
 
 
-v2.0.2.5.1 CHECKER CELEBRATION EXPANSION
+v2.0.3.0 CHECKER CELEBRATION EXPANSION
 - Restores all five original checker finales as distinct animations:
   Rocket Checkers, Checker Hill, Classic Bounce, Victory Vortex, Checker Fountain.
 - Expands the Celebration Vault from 30 to 42 finales.
@@ -92,7 +92,7 @@ v2.0.2.5.1 CHECKER CELEBRATION EXPANSION
 - Preserves the certified working gameplay/tap and coach-recursion repairs.
 
 
-v2.0.2.5.1 BOWLING ALLEY CELEBRATION
+v2.0.3.0 BOWLING ALLEY CELEBRATION
 - Adds Backgammon Bowling Alley to the Celebration Vault.
 - Ten checkers form a standard bowling-pin triangle.
 - Four checkers mark the bowling lane.
@@ -102,7 +102,7 @@ v2.0.2.5.1 BOWLING ALLEY CELEBRATION
 - All v2.0.2.1 celebrations and gameplay repairs remain intact.
 
 
-v2.0.2.5.1 INDEPENDENT SIDE-PANEL SCROLLING
+v2.0.3.0 INDEPENDENT SIDE-PANEL SCROLLING
 - On layouts wider than 980px, the right-side panel column scrolls independently.
 - The board remains visually anchored while Game, Coach, Move History, and other panels scroll.
 - Touch momentum scrolling is enabled for iPad and other touch devices.
@@ -114,7 +114,7 @@ v2.0.2.5.1 INDEPENDENT SIDE-PANEL SCROLLING
 A standalone COMMIT_MESSAGE.txt file is included for copying into GitHub.
 
 
-v2.0.2.5.1 COLLAPSIBLE SIDE PANELS
+v2.0.3.0 COLLAPSIBLE SIDE PANELS
 - Every standard panel in the right-side column can now be collapsed or expanded.
 - Each panel has a large 50 x 50 pixel collapse button for easier tapping.
 - The collapse button includes a large rotating chevron and accessible labels.
@@ -127,7 +127,7 @@ v2.0.2.5.1 COLLAPSIBLE SIDE PANELS
 A standalone COMMIT_MESSAGE.txt file is included for copying into GitHub.
 
 
-v2.0.2.5.1 REPLAY EXAMPLE MOVES
+v2.0.3.0 REPLAY EXAMPLE MOVES
 - Added a dedicated “Replay example” button beside the existing animation controls.
 - The same recommended example move can be replayed as many times as needed.
 - Replay always starts from the beginning of the saved example sequence.
@@ -140,7 +140,7 @@ v2.0.2.5.1 REPLAY EXAMPLE MOVES
 A standalone COMMIT_MESSAGE.txt file is included for copying into GitHub.
 
 
-v2.0.2.5.1 WATCH COACH LOCAL-MODE HOTFIX
+v2.0.3.0 WATCH COACH LOCAL-MODE HOTFIX
 - Fixed the direct “Watch the Coach Think” button on Safari and other browsers.
 - Root cause: the browser click event was passed into watchCoachThink as though it were a pre-ranked move array.
 - The click handler now explicitly calls watchCoachThink with no event argument.
@@ -149,5 +149,36 @@ v2.0.2.5.1 WATCH COACH LOCAL-MODE HOTFIX
 - GNU mode behavior and honest source labeling remain unchanged.
 - Collapsible panels, panel scrolling, larger collapse controls, and Replay Example were not changed.
 - Gameplay, engine selection, celebrations, and board interaction were not changed.
+
+A standalone COMMIT_MESSAGE.txt file is included for copying into GitHub.
+
+
+v2.0.3.0 PIP POSITION INTELLIGENCE
+- Officially introduces “Pip — Your Backgammon Coach.”
+- Preserves the rule: Engine decides. Pip teaches.
+- Only verified GNU Backgammon analysis is labeled Grandmaster.
+- Strengthens Pip’s offline position evaluator with transparent components:
+  • race efficiency and pip lead
+  • checkers borne off
+  • bar pressure
+  • home-board point strength
+  • prime structure
+  • anchors
+  • checker distribution and stack penalties
+  • flexibility and playable-number potential
+  • duplicated-builder penalties
+  • blot exposure and shot danger
+  • timing
+  • opponent-board danger
+  • back-checker escape difficulty
+  • gammon pressure
+  • bear-off efficiency and wastage
+- Adds position classification for contact, race, bear-off, bar-contact,
+  prime-contact, and prime-versus-prime positions.
+- Pip’s explanations can now identify the strongest evaluation factors.
+- Existing panels, collapse buttons, independent scrolling, Replay Example,
+  Watch Pip Think, gameplay, GNU integration, and all celebrations are preserved.
+- This release does not add deeper search, rollouts, self-play, or neural models;
+  those remain on Pip’s documented backlog.
 
 A standalone COMMIT_MESSAGE.txt file is included for copying into GitHub.
