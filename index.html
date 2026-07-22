@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v1.9.1</title>
+  <title>Backgammon Coach iPhone v1.9.2</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -103,7 +103,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 @media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
 
 
-/* v1.9.1 Immersive Play */
+/* v1.9.2 Immersive Play */
 .topbar,.play-controls,.coach-panel{transition:all .22s ease}
 body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
 body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
@@ -154,7 +154,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   
 
-/* v1.9.1 Victory Celebration */
+/* v1.9.2 Victory Celebration */
 .victory-celebration{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden;background:rgba(8,12,10,.08);opacity:0;transition:opacity .18s ease}
 .victory-celebration.active{opacity:1}
 .victory-canvas{width:100%;height:100%;display:block}
@@ -164,7 +164,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media (prefers-reduced-motion:reduce){.victory-celebration,.victory-banner{transition:none}}
 
 
-/* v1.9.1 Explain Every Move */
+/* v1.9.2 Explain Every Move */
 .coach-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
 .coach-settings label{display:grid;gap:4px;color:var(--muted);font-size:.76rem;font-weight:800}
 .move-rating{margin:10px 0;padding:11px;border-radius:12px;border:1px solid #d6c4ae;background:#fffaf2}
@@ -192,12 +192,27 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.coach-settings{grid-template-columns:1fr}.risk-row{grid-template-columns:64px 1fr 30px}}
 
 
-/* v1.9.1 Animated Board Hints */
+/* v1.9.2 Animated Board Hints */
 .visual-hint-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .visual-hint-controls button{margin:0;box-shadow:none}
 .visual-hint-status{margin-top:8px;padding:8px 10px;border-radius:10px;background:#e7f0eb;color:#294f42;font-weight:800;font-size:.8rem}
 .visual-hint-status[hidden]{display:none}
 @media(max-width:620px){.visual-hint-controls{grid-template-columns:1fr}}
+
+
+/* v1.9.2 Watch the Coach Think */
+.think-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+.think-controls button{margin:0;box-shadow:none}
+.think-panel{margin-top:9px;padding:10px;border-radius:12px;background:#f6ead8;border:1px solid #d8c5ab}
+.think-panel[hidden]{display:none}
+.think-stage{font-weight:900;margin-bottom:5px}
+.think-detail{font-size:.84rem;line-height:1.35;color:#51473e}
+.think-candidates{display:grid;gap:6px;margin-top:8px}
+.think-candidate{padding:8px;border-radius:9px;background:#fffaf2;border:1px solid #decdb7;font-size:.78rem}
+.think-candidate.active{border:2px solid #c48b21;background:#fff1cc}
+.think-candidate.rejected{opacity:.7;text-decoration:none}
+.think-candidate.chosen{border:2px solid #2f6c4f;background:#e8f0eb}
+@media(max-width:620px){.think-controls{grid-template-columns:1fr}}
 
 </style>
 
@@ -215,10 +230,10 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v1.9.1</span>
+          <span class="version-badge" id="versionBadge">v1.9.2</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v1.9.1</div>
+        <div class="version-note">v1.9.2</div>
       </div>
       <div class="top-actions">
         <button id="newGameBtn">New game</button>
@@ -292,6 +307,15 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
             <button id="animateBestHintBtn" class="make-now" type="button" disabled>▶ Animate best move</button>
             <button id="stopHintAnimationBtn" class="secondary" type="button" disabled>■ Stop animation</button>
           </div>
+          <div class="think-controls">
+            <button id="watchCoachThinkBtn" class="primary" type="button" disabled>🧠 Watch the Coach Think</button>
+            <button id="stopCoachThinkBtn" class="secondary" type="button" disabled>■ Stop thinking</button>
+          </div>
+          <div id="coachThinkPanel" class="think-panel" aria-live="polite" hidden>
+            <div id="coachThinkStage" class="think-stage"></div>
+            <div id="coachThinkDetail" class="think-detail"></div>
+            <div id="coachThinkCandidates" class="think-candidates"></div>
+          </div>
           <div id="visualHintStatus" class="visual-hint-status" aria-live="polite" hidden></div>
           <div id="lastMoveRating" aria-live="polite"></div>
           <div id="hintResults" class="hint-results" aria-live="polite"></div>
@@ -300,7 +324,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
             <div id="favoriteLessons" class="favorite-list"></div>
           </details>
           <div id="coachReport" class="coach-report" hidden></div>
-          <div class="coach-disclaimer">v1.9.1 explains and compares complete legal turn sequences with a transparent local teaching heuristic. Engine-grade analysis remains planned.</div>
+          <div class="coach-disclaimer">v1.9.2 explains and compares complete legal turn sequences with a transparent local teaching heuristic. Engine-grade analysis remains planned.</div>
           </div>
         </section>
 
@@ -387,7 +411,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   const UI = Object.fromEntries([
     'rollBtn','undoBtn','endTurnBtn','newGameBtn','rulesBtn','closeRulesBtn','rulesDialog','die1','die2',
     'humanPips','aiPips','humanBar','aiBar','humanOff','aiOff','turnBanner','coachText','hintBtn',
-    'coachToggle','coachLevel','coachVerbosity','explainEveryMove','animateBestHintBtn','stopHintAnimationBtn','visualHintStatus','lastMoveRating','favoriteLessonsPanel','favoriteLessons','coachReport','victoryCelebration','victoryCanvas','victoryBanner','stopCelebrationBtn','testCelebrationBtn','coachDrawerToggle','coachDrawerBody','coachPanel','appHeader','playControls','handMode','floatRollToggle','lockRollToggle','resetRollPositionBtn','focusModeBtn','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode'
+    'coachToggle','coachLevel','coachVerbosity','explainEveryMove','animateBestHintBtn','stopHintAnimationBtn','watchCoachThinkBtn','stopCoachThinkBtn','coachThinkPanel','coachThinkStage','coachThinkDetail','coachThinkCandidates','visualHintStatus','lastMoveRating','favoriteLessonsPanel','favoriteLessons','coachReport','victoryCelebration','victoryCanvas','victoryBanner','stopCelebrationBtn','testCelebrationBtn','coachDrawerToggle','coachDrawerBody','coachPanel','appHeader','playControls','handMode','floatRollToggle','lockRollToggle','resetRollPositionBtn','focusModeBtn','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode'
   ].map(id => [id, document.getElementById(id)]));
 
   const W = canvas.width, H = canvas.height;
@@ -410,6 +434,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   let favoriteLessons = JSON.parse(localStorage.getItem('bg-favorite-lessons') || '[]');
   let bestHintSequence = [];
   let visualHint = {active:false, step:0, progress:0, timer:null, previewState:null, move:null};
+  let coachThink = {active:false, timers:[], ranked:[], candidateIndex:0};
   let executingSequence = false;
   let rollDrag = {active:false, moved:false, dx:0, dy:0};
   let focusMode = false;
@@ -595,7 +620,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v1.9.1 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v1.9.2 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -618,6 +643,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     document.body.classList.add('game-active');
     humanMoveHistory=[];
     UI.hintResults.innerHTML='';
+    stopCoachThink('');
     stopVisualHintAnimation('');
     bestHintSequence=[];
     selected=null; legalTargets=[]; hintMove=null;
@@ -628,6 +654,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   }
 
   function doHumanMove(move, options={}) {
+    stopCoachThink('');
     stopVisualHintAnimation('');
     bestHintSequence=[];
     clearTimeout(aiTimer);
@@ -1064,6 +1091,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     hintMove=ranked[0].seq[0];
     bestHintSequence=ranked[0].seq.map(m=>({...m}));
     UI.animateBestHintBtn.disabled=false;
+    UI.watchCoachThinkBtn.disabled=false;
     UI.visualHintStatus.hidden=false;
     UI.visualHintStatus.textContent='Best move is ready to animate directly on the board.';
     const d=sequenceDirections(ranked[0].seq,HUMAN);
@@ -1299,6 +1327,124 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   }
 
 
+
+  function clearCoachThinkTimers() {
+    coachThink.timers.forEach(t=>clearTimeout(t));
+    coachThink.timers=[];
+  }
+
+  function stopCoachThink(message='Thinking sequence stopped.') {
+    clearCoachThinkTimers();
+    coachThink.active=false;
+    UI.stopCoachThinkBtn.disabled=true;
+    UI.watchCoachThinkBtn.disabled=!bestHintSequence.length;
+    if(message){
+      UI.coachThinkPanel.hidden=false;
+      UI.coachThinkStage.textContent='Coach paused';
+      UI.coachThinkDetail.textContent=message;
+    }
+    stopVisualHintAnimation('');
+  }
+
+  function candidateRejectionReason(candidate, best, before) {
+    let after=cloneState(before);
+    candidate.seq.forEach(m=>after=applyMove(after,HUMAN,m));
+    let bestAfter=cloneState(before);
+    best.seq.forEach(m=>bestAfter=applyMove(bestAfter,HUMAN,m));
+
+    const a=positionMetrics(after,HUMAN);
+    const b=positionMetrics(bestAfter,HUMAN);
+    const reasons=[];
+    if(a.blots>b.blots) reasons.push(`leaves ${a.blots-b.blots} more exposed blot${a.blots-b.blots===1?'':'s'}`);
+    if(a.made<b.made) reasons.push('makes fewer useful points');
+    if(a.homeMade<b.homeMade) reasons.push('builds a weaker home board');
+    if(a.pips>b.pips+4) reasons.push('is less efficient in the race');
+    if(a.builders<b.builders) reasons.push('creates fewer flexible builders');
+    if(!reasons.length) reasons.push('produces a less balanced overall position');
+    return coachTerm(reasons.slice(0,2).join(' and '));
+  }
+
+  function renderThinkCandidates(ranked, activeIndex=-1, chosenIndex=-1) {
+    UI.coachThinkCandidates.innerHTML=ranked.slice(0,3).map((r,i)=>{
+      const d=sequenceDirections(r.seq,HUMAN).summary;
+      const gap=Math.max(0,ranked[0].score-r.score);
+      const cls=i===chosenIndex?'chosen':(i<activeIndex?'rejected':(i===activeIndex?'active':''));
+      const label=i===0?'Candidate A':i===1?'Candidate B':'Candidate C';
+      return `<div class="think-candidate ${cls}">
+        <strong>${label}</strong> — ${d}<br>
+        <span>${i===0?'Top local score':`${gap.toFixed(1)} teaching points behind`}</span>
+      </div>`;
+    }).join('');
+  }
+
+  function previewCandidatePulse(candidate, duration=1150) {
+    return new Promise(resolve=>{
+      if(!coachThink.active){resolve();return;}
+      bestHintSequence=candidate.seq.map(m=>({...m}));
+      hintMove=bestHintSequence[0]||null;
+      draw();
+      const t=setTimeout(()=>resolve(),duration);
+      coachThink.timers.push(t);
+    });
+  }
+
+  async function watchCoachThink() {
+    if(state.turn!==HUMAN || !state.rolled){
+      setCoach('Roll the dice first, then ask me to rank the legal turns.');
+      return;
+    }
+    const ranked=rankSequences(state,HUMAN,state.remaining).slice(0,3);
+    if(!ranked.length){
+      setCoach('There is no legal move to analyze.');
+      return;
+    }
+
+    stopCoachThink('');
+    coachThink.active=true;
+    coachThink.ranked=ranked;
+    UI.watchCoachThinkBtn.disabled=true;
+    UI.stopCoachThinkBtn.disabled=false;
+    UI.coachThinkPanel.hidden=false;
+    UI.visualHintStatus.hidden=true;
+    renderThinkCandidates(ranked,-1,-1);
+
+    UI.coachThinkStage.textContent='Step 1: Scan the legal candidates';
+    UI.coachThinkDetail.textContent='The coach first compares complete legal turns, not just one checker step.';
+    await new Promise(resolve=>{const t=setTimeout(resolve,900);coachThink.timers.push(t);});
+    if(!coachThink.active)return;
+
+    for(let i=0;i<ranked.length;i++){
+      UI.coachThinkStage.textContent=`Step ${i+2}: Examine Candidate ${String.fromCharCode(65+i)}`;
+      UI.coachThinkDetail.textContent=explainSequence(ranked[i].seq,state,HUMAN);
+      renderThinkCandidates(ranked,i,-1);
+      await previewCandidatePulse(ranked[i],1100);
+      if(!coachThink.active)return;
+
+      if(i>0){
+        UI.coachThinkStage.textContent=`Reject Candidate ${String.fromCharCode(65+i)}`;
+        UI.coachThinkDetail.textContent=`This option ${candidateRejectionReason(ranked[i],ranked[0],state)}.`;
+        renderThinkCandidates(ranked,i+1,-1);
+        await new Promise(resolve=>{const t=setTimeout(resolve,1050);coachThink.timers.push(t);});
+        if(!coachThink.active)return;
+      }
+    }
+
+    bestHintSequence=ranked[0].seq.map(m=>({...m}));
+    hintMove=bestHintSequence[0]||null;
+    UI.coachThinkStage.textContent='Final decision';
+    UI.coachThinkDetail.textContent=`The coach selects ${sequenceDirections(ranked[0].seq,HUMAN).summary}. ${explainSequence(ranked[0].seq,state,HUMAN)}`;
+    renderThinkCandidates(ranked,-1,0);
+    await new Promise(resolve=>{const t=setTimeout(resolve,900);coachThink.timers.push(t);});
+    if(!coachThink.active)return;
+
+    UI.coachThinkStage.textContent='Demonstrating the final recommendation';
+    UI.coachThinkDetail.textContent='Now watch the chosen sequence animate directly on the board.';
+    coachThink.active=false;
+    UI.stopCoachThinkBtn.disabled=true;
+    UI.watchCoachThinkBtn.disabled=false;
+    animateBestHint();
+  }
+
   function moveScreenPosition(move, previewState, atDestination=false) {
     const source = move.from;
     const target = move.to;
@@ -1503,7 +1649,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   UI.stopCelebrationBtn.addEventListener('click',stopVictoryCelebration);
   UI.testCelebrationBtn.addEventListener('click',startVictoryCelebration);
-  document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){stopVictoryCelebration();stopVisualHintAnimation();}});
+  document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){stopVictoryCelebration();stopCoachThink();stopVisualHintAnimation();}});
   UI.rollBtn.addEventListener('click',(e)=>{if(!rollDrag.moved)rollDice();});
   UI.rollBtn.addEventListener('pointerdown',beginRollDrag);
   UI.rollBtn.addEventListener('pointermove',moveRollDrag);
@@ -1515,6 +1661,9 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   UI.newGameBtn.addEventListener('click',newGame);
   UI.hintBtn.addEventListener('click',()=>{showHint();setCoachDrawer(false);});
   UI.animateBestHintBtn.addEventListener('click',animateBestHint);
+  UI.watchCoachThinkBtn.addEventListener('click',watchCoachThink);
+  UI.stopCoachThinkBtn.addEventListener('click',()=>stopCoachThink());
+
   UI.stopHintAnimationBtn.addEventListener('click',()=>stopVisualHintAnimation());
 
   UI.coachDrawerToggle.addEventListener('click',()=>setCoachDrawer(!UI.coachPanel.classList.contains('collapsed')));

@@ -1,11 +1,13 @@
-Backgammon Coach v1.9.1 Validation Report
+Backgammon Coach v1.9.2 Validation Report
 ================================================
 PASS — version
-PASS — animate_button
+PASS — watch_button
 PASS — stop_button
-PASS — animation_function
-PASS — overlay_renderer
-PASS — non_destructive_clone
+PASS — watch_function
+PASS — rejection_reason
+PASS — candidate_renderer
+PASS — final_animation
+PASS — non_destructive
 PASS — cache
 PASS — js_syntax
 

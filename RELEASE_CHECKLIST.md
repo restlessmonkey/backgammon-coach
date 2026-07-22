@@ -1,20 +1,23 @@
-# v1.9.1 Release Checklist
+# v1.9.2 Release Checklist
 
 ## Automated
 - [x] HTML and JavaScript syntax validation.
 - [x] Version and cache identity updated.
-- [x] Animate best move control exists.
-- [x] Stop animation control exists.
-- [x] Curved board path renderer exists.
-- [x] Multi-step sequence animation exists.
-- [x] Preview uses cloned state and does not mutate the real board.
-- [x] Existing celebration test remains present.
+- [x] Watch the Coach Think button exists.
+- [x] Candidate sequence renderer exists.
+- [x] Rejection explanation function exists.
+- [x] Final candidate selection exists.
+- [x] Final recommendation calls the board animation.
+- [x] Stop thinking control exists.
+- [x] Preview remains non-destructive.
 
 ## iPhone/iPad
-- [ ] Roll dice and tap Rank and explain my moves.
-- [ ] Tap Animate best move.
-- [ ] Confirm the source checker, destination, curved path, and die value are clear.
-- [ ] Confirm a two-move sequence animates in order.
-- [ ] Confirm Stop animation works.
-- [ ] Confirm the actual board position does not change after preview.
-- [ ] Confirm making a real move cancels the preview.
+- [ ] Roll and tap Rank and explain my moves.
+- [ ] Tap Watch the Coach Think.
+- [ ] Confirm Candidate A, B, and C appear in order.
+- [ ] Confirm each candidate highlights on the board.
+- [ ] Confirm weaker options receive a rejection explanation.
+- [ ] Confirm the best option is selected.
+- [ ] Confirm the final sequence animates.
+- [ ] Confirm Stop thinking and Escape work.
+- [ ] Confirm the actual board state remains unchanged.

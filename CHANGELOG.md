@@ -1,18 +1,20 @@
 # Changelog
 
-## v1.9.1 — Animated Board Hints
+## v1.9.2 — Watch the Coach Think
 
-- Added an Animate best move button after the coach ranks a turn.
-- The recommended checker is highlighted directly on the board.
-- A dashed curved path shows the suggested route.
-- The checker animates from its current location to the destination.
-- Multi-step turns animate one checker move at a time.
-- The die value appears inside the animated checker.
-- The board preview is non-destructive: the real game state is unchanged.
-- Added a Stop animation button.
-- Escape stops both celebration and hint animations.
-- Moving a checker, rolling again, or starting a new game cancels the preview.
-- Preserved all v1.9 coaching, explanations, ratings, favorites, and reports.
+- Added a Watch the Coach Think button.
+- The coach visually examines up to three complete legal candidate turns.
+- Each candidate is highlighted on the board before the coach evaluates it.
+- The coach explains what each candidate accomplishes.
+- Weaker candidates are explicitly rejected with plain-English reasons.
+- The final choice is marked as selected.
+- The chosen complete turn then animates directly on the board.
+- Added Stop thinking and Escape cancellation.
+- Thinking stops automatically when the player rolls, moves, or starts a new game.
+- Preserved non-destructive preview behavior.
+
+## v1.9.1 — Animated Board Hints
+- Added animated best-move previews directly on the board.
 
 ## v1.9 — Explain Every Move
-- Added move explanations, ratings, comparisons, risk meters, favorites, and Coach Report.
+- Added ratings, explanations, risk meters, comparisons, favorites, and Coach Report.
