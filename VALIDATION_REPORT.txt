@@ -1,11 +1,12 @@
-Backgammon Coach v1.8.3 Validation Report
+Backgammon Coach v1.8.4 Validation Report
 
-PASS — HTML version
-PASS — overlay
-PASS — five effects
-PASS — stop control
-PASS — human trigger
-PASS — cache
-PASS — node syntax
+Static validation targets:
+- v1.8.4 identity present in HTML
+- v1.8.4 service-worker cache identity
+- testCelebrationBtn exists
+- test button is registered in the UI map
+- test button invokes startVictoryCelebration
+- Stop celebration remains wired
+- JavaScript syntax check PASS
 
-Static validation only. Final Safari/iPhone/iPad visual testing is required, especially each randomized effect and Stop behavior.
+Device validation still required in Safari for animation appearance and touch behavior.

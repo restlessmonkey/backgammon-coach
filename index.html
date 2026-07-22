@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v1.8.3</title>
+  <title>Backgammon Coach iPhone v1.8.4</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -92,6 +92,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 .board-roll-btn[hidden] { display:none; }
 .settings-grid { display:grid; gap:10px; }
 .settings-grid label { display:grid; gap:5px; color:var(--muted); font-size:.84rem; font-weight:800; }
+.setting-help{margin-top:-3px;color:var(--muted);font-size:.76rem;line-height:1.35;text-align:center}
 .hint-actions { display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:8px; }
 .hint-actions button { margin:0; }
 .hint-actions .make-now { background:var(--gold); color:#241a0e; }
@@ -102,7 +103,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 @media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
 
 
-/* v1.8.3 Immersive Play */
+/* v1.8.4 Immersive Play */
 .topbar,.play-controls,.coach-panel{transition:all .22s ease}
 body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
 body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
@@ -153,7 +154,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   
 
-/* v1.8.3 Victory Celebration */
+/* v1.8.4 Victory Celebration */
 .victory-celebration{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden;background:rgba(8,12,10,.08);opacity:0;transition:opacity .18s ease}
 .victory-celebration.active{opacity:1}
 .victory-canvas{width:100%;height:100%;display:block}
@@ -178,10 +179,10 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v1.8.3</span>
+          <span class="version-badge" id="versionBadge">v1.8.4</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v1.8.3</div>
+        <div class="version-note">v1.8.4</div>
       </div>
       <div class="top-actions">
         <button id="newGameBtn">New game</button>
@@ -235,7 +236,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
           <p id="coachText">Roll the dice. I’ll highlight legal checkers and explain useful ideas.</p>
           <button id="hintBtn" class="secondary wide">Rank my moves</button>
           <div id="hintResults" class="hint-results" aria-live="polite"></div>
-          <div class="coach-disclaimer">v1.8.3 ranks complete legal turn sequences with a transparent local teaching heuristic. Engine-grade analysis remains planned.</div>
+          <div class="coach-disclaimer">v1.8.4 ranks complete legal turn sequences with a transparent local teaching heuristic. Engine-grade analysis remains planned.</div>
           </div>
         </section>
 
@@ -273,6 +274,8 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
             <label class="switch-label experience-switch"><input id="floatRollToggle" type="checkbox" checked><span>Floating Roll Dice</span></label>
             <label class="switch-label experience-switch"><input id="lockRollToggle" type="checkbox"><span>Lock button position</span></label>
             <button id="resetRollPositionBtn" class="secondary wide" type="button">Reset Roll Dice position</button>
+            <button id="testCelebrationBtn" class="primary wide" type="button">🎉 Test random win celebration</button>
+            <div class="setting-help">Each tap randomly selects one of the five victory finales. Use Stop celebration at any time.</div>
             <button id="focusModeBtn" class="secondary wide" type="button">Hide extra panels</button>
           </div>
         </section>
@@ -320,7 +323,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   const UI = Object.fromEntries([
     'rollBtn','undoBtn','endTurnBtn','newGameBtn','rulesBtn','closeRulesBtn','rulesDialog','die1','die2',
     'humanPips','aiPips','humanBar','aiBar','humanOff','aiOff','turnBanner','coachText','hintBtn',
-    'coachToggle','victoryCelebration','victoryCanvas','victoryBanner','stopCelebrationBtn','coachDrawerToggle','coachDrawerBody','coachPanel','appHeader','playControls','handMode','floatRollToggle','lockRollToggle','resetRollPositionBtn','focusModeBtn','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode'
+    'coachToggle','victoryCelebration','victoryCanvas','victoryBanner','stopCelebrationBtn','testCelebrationBtn','coachDrawerToggle','coachDrawerBody','coachPanel','appHeader','playControls','handMode','floatRollToggle','lockRollToggle','resetRollPositionBtn','focusModeBtn','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode'
   ].map(id => [id, document.getElementById(id)]));
 
   const W = canvas.width, H = canvas.height;
@@ -524,7 +527,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v1.8.3 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v1.8.4 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -1156,6 +1159,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   }
 
   UI.stopCelebrationBtn.addEventListener('click',stopVictoryCelebration);
+  UI.testCelebrationBtn.addEventListener('click',startVictoryCelebration);
   document.addEventListener('keydown',(e)=>{if(e.key==='Escape')stopVictoryCelebration();});
   UI.rollBtn.addEventListener('click',(e)=>{if(!rollDrag.moved)rollDice();});
   UI.rollBtn.addEventListener('pointerdown',beginRollDrag);

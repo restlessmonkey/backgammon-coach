@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v1.8.4 — Celebration Test Control
+- Added a prominent **Test random win celebration** button under Play experience.
+- Each tap launches fireworks and randomly selects one of the five checker finales without requiring a completed game.
+- Test mode does not alter the game, score, turn, or board state.
+- The existing Stop celebration button and Escape-key stop remain available.
+
+
 ## v1.8.3 — Victory Celebration
 - Added fireworks after a human victory.
 - Added five randomized checker finales: Rocket Checkers, Checker Hill, Classic Bounce, Victory Vortex, and Checker Fountain.
