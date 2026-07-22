@@ -1,21 +1,15 @@
 # Changelog
 
-## v2.0 — Grandmaster Engine Architecture
+## v2.0.1.1 — Advanced Local Coach Strength Upgrade
 
-- Replaced the misleading assumption that the local heuristic is expert strength.
-- Added a strict GNU Backgammon HTTPS analysis adapter.
-- Added engine source selection:
-  - GNU Backgammon service — verified
-  - Local teaching fallback — not grandmaster
-- Grandmaster recommendations are blocked until a compliant engine service responds.
-- Added engine endpoint storage and connection testing.
-- Added engine identity verification.
-- Added request serialization for complete board state and every legal turn.
-- Added engine equity/error fields to the internal ranking model.
-- Watch the Coach Think now teaches from engine rankings when connected.
-- Automatic Coach Think now waits for verified engine analysis.
-- Preserved animation, candidate comparison, guided execution, and learning explanations.
-- Added an engine API contract and deployment documentation.
+- Replaced shallow local move scoring with reply-aware analysis.
+- Evaluates top candidate turns against the opponent's best replies for all 21 distinct dice combinations.
+- Weights outcomes as the full 36-roll distribution.
+- Added standard opening-book recommendations for all non-double opening rolls.
+- Added race/contact classification, key points, anchors, primes, blot exposure, stack penalties, distribution, escape, and bear-off efficiency.
+- Added mobile performance caps.
+- Renamed the mode Advanced local coach — offline, not grandmaster.
+- Added architecture and updated cumulative handoff/backlog documents.
 
-## v1.9.3
-- Added automatic Coach Think after every human roll.
+## v2.0.1
+- Added the Windows GNU Backgammon engine server foundation.

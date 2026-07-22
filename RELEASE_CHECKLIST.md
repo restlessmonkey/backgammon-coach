@@ -1,22 +1,21 @@
-# v2.0 Release Checklist
+# v2.0.1.1 Release Checklist
 
 ## Automated
-- [x] HTML and JavaScript syntax validation.
+- [x] JavaScript syntax passes.
 - [x] Version and cache identity updated.
-- [x] GNU Backgammon engine mode exists.
-- [x] Local fallback is explicitly labeled not grandmaster.
-- [x] Engine endpoint and health test exist.
-- [x] Engine response identity is verified.
-- [x] Position and legal candidates are serialized.
-- [x] Grandmaster flow blocks on engine failure.
-- [x] Watch the Coach Think accepts engine rankings.
-- [x] Automatic coaching waits for engine rankings.
-- [x] Engine API contract is included.
+- [x] Advanced local mode is explicitly non-grandmaster.
+- [x] All 21 distinct dice combinations are represented.
+- [x] Double/non-double probability weighting is implemented.
+- [x] Opponent best-response analysis is implemented.
+- [x] Opening book contains all 15 non-double opening rolls.
+- [x] Strategic evaluation features are present.
+- [x] Candidate cap protects mobile responsiveness.
+- [x] Architecture, backlog, handoff, and starter prompt updated.
+- [x] GNU Backgammon roadmap preserved.
 
-## Required before claiming live grandmaster play
-- [ ] Deploy a real GNU Backgammon service.
-- [ ] Test `/health`.
-- [ ] Test `/analyze`.
-- [ ] Validate benchmark positions.
-- [ ] Verify iPhone HTTPS/CORS behavior.
-- [ ] Review GNU GPL obligations.
+## Manual
+- [ ] Verify all 15 opening rolls on iPhone.
+- [ ] Test doubles responsiveness.
+- [ ] Play at least three complete games.
+- [ ] Record questionable recommendations.
+- [ ] Compare benchmark positions against GNU Backgammon when available.

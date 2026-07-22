@@ -1,0 +1,17 @@
+{
+  "product": "Backgammon Coach",
+  "version": "2.0.1.1",
+  "package_name": "v2.0.1.1_Backgammon_Coach_Advanced_Local_Coach_ROOT.zip",
+  "package_type": "ROOT",
+  "status": "ADVANCED_LOCAL_COACH_IMPLEMENTED_NOT_GRANDMASTER_CERTIFIED",
+  "created_utc": "2026-07-22T09:58:39.623190+00:00",
+  "immediate_next_version": "2.0.2",
+  "immediate_next_action": "Manually test the advanced local coach, then continue GNU Backgammon interface discovery.",
+  "confirmation_phrase": null,
+  "safety": [
+    "GNU Backgammon not bundled",
+    "analysis disabled by default",
+    "adapter fails closed",
+    "no grandmaster claim without validation"
+  ]
+}
