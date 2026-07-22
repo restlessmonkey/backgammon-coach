@@ -1,21 +1,24 @@
-Backgammon Coach v2.0.2.2 Bowling Alley Celebration Validation
-============================================================================
+Backgammon Coach v2.0.2.3 Independent Side Panel Scrolling Validation
+==============================================================================
 PASS — Version updated
 PASS — JavaScript syntax
-PASS — 44 celebrations
-PASS — Bowling catalog entry
-PASS — Bowling animation branch
-PASS — Ten checker pins
-PASS — Checker bowling ball
-PASS — Hook animation
-PASS — Strike finale
+PASS — Desktop breakpoint present
+PASS — Sidebar independent scrolling
+PASS — Touch momentum scrolling
+PASS — Scroll chaining contained
+PASS — Dynamic available height
+PASS — Board remains sticky
+PASS — Phone breakpoint retained
+PASS — 44 celebrations retained
+PASS — Bowling celebration retained
 PASS — Original five retained
 PASS — Gameplay tap repair retained
 PASS — Coach recursion guard retained
 PASS — Cache updated
+PASS — Standalone commit message
 PASS — Flat paths retained
 
 Celebrations inventoried: 44
 Automated result: PASS
 Gameplay logic changes: none.
-Manual iPad animation validation remains required.
+Manual iPad landscape/desktop scrolling validation remains required.
