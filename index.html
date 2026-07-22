@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v1.6</title>
+  <title>Backgammon Coach iPhone v1.7</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -75,6 +75,18 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 .dialog-close { position:absolute; right:12px; top:10px; background:transparent; box-shadow:none; font-size:1.7rem; }
 @media (max-width: 980px) { .game-layout { grid-template-columns:1fr; } .sidebar { grid-template-columns:repeat(2, minmax(0,1fr)); } }
 @media (max-width: 620px) { .version-badge{font-size:.55rem;margin-top:2px}.version-note{display:none}.app-shell{padding:8px}.topbar{align-items:flex-start; flex-direction:column;gap:10px;margin-bottom:10px}.topbar p{display:none}.topbar h1{font-size:2rem}.sidebar{grid-template-columns:1fr}.top-actions{width:100%}.top-actions button{flex:1;padding:10px}.turn-banner{font-size:.76rem;padding:7px 10px}.play-controls{position:sticky;top:0;z-index:20;gap:7px;padding:8px;margin-bottom:9px;flex-wrap:wrap}.play-controls .control-label{display:none}.die{width:46px;height:46px;font-size:1.65rem}.play-controls button{min-height:46px;padding:8px 12px;flex:1}.play-controls .turn-banner{flex:1 1 100%;text-align:center;order:-1}.board-wrap{border-radius:16px} }
+
+.hint-results { display:grid; gap:8px; margin-top:10px; }
+.hint-card { border:1px solid #d7c7b3; border-radius:12px; padding:10px; background:#fffaf2; }
+.hint-card.best { border:2px solid #c48b21; background:#fff4d8; }
+.hint-card .hint-head { display:flex; justify-content:space-between; gap:8px; align-items:center; font-weight:900; }
+.hint-card .hint-rank { color:#8a5b14; font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; }
+.hint-card .hint-move { font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:.93rem; }
+.hint-card p { margin:6px 0 0; font-size:.88rem; line-height:1.35; }
+.hint-card button { width:100%; margin-top:8px; padding:8px 10px; box-shadow:none; }
+.coach-disclaimer { margin-top:8px; color:var(--muted); font-size:.7rem; line-height:1.3; }
+@media (max-width:620px){ .hint-card{padding:9px}.hint-card p{font-size:.82rem}.coach-panel{padding:13px} }
+
 @media (display-mode: standalone) { #launchNote { display:none !important; } }
 
   </style>
@@ -93,10 +105,10 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v1.6</span>
+          <span class="version-badge" id="versionBadge">v1.7</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v1.6</div>
+        <div class="version-note">v1.7</div>
       </div>
       <div class="top-actions">
         <button id="newGameBtn">New game</button>
@@ -145,7 +157,9 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
             </label>
           </div>
           <p id="coachText">Roll the dice. I’ll highlight legal checkers and explain useful ideas.</p>
-          <button id="hintBtn" class="secondary wide">Show best move</button>
+          <button id="hintBtn" class="secondary wide">Rank my moves</button>
+          <div id="hintResults" class="hint-results" aria-live="polite"></div>
+          <div class="coach-disclaimer">v1.7 uses a transparent local teaching heuristic. Engine-grade GNU Backgammon analysis is planned, but is not yet embedded.</div>
         </section>
 
         <section class="panel lesson-panel">
@@ -183,7 +197,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
   const UI = Object.fromEntries([
     'rollBtn','undoBtn','endTurnBtn','newGameBtn','rulesBtn','closeRulesBtn','rulesDialog','die1','die2',
     'humanPips','aiPips','humanBar','aiBar','humanOff','aiOff','turnBanner','coachText','hintBtn',
-    'coachToggle','lessonSelect','lessonText','remainingNote'
+    'coachToggle','lessonSelect','lessonText','remainingNote','hintResults'
   ].map(id => [id, document.getElementById(id)]));
 
   const W = canvas.width, H = canvas.height;
@@ -227,6 +241,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     state.points[0] = -2; state.points[11] = -5; state.points[16] = -3; state.points[18] = -5;
     selected = null; legalTargets = []; hintMove = null;
     humanMoveHistory = [];
+    UI.hintResults.innerHTML='';
     setCoach('Roll the dice. I’ll highlight legal checkers and explain useful ideas.');
     updateUI(); draw();
   }
@@ -375,7 +390,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v1.6 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v1.7 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -396,6 +411,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     const a = 1 + Math.floor(Math.random()*6), b = 1 + Math.floor(Math.random()*6);
     state.dice=[a,b]; state.remaining = a===b ? [a,a,a,a] : [a,b]; state.rolled=true;
     humanMoveHistory=[];
+    UI.hintResults.innerHTML='';
     selected=null; legalTargets=[]; hintMove=null;
     const moves=availableMovesNow();
     setCoach(moves.length ? explainPosition(state, HUMAN) : 'No legal move is available. Your turn will pass automatically.');
@@ -409,7 +425,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     state = applyMove(state, HUMAN, move);
     const idx = state.remaining.indexOf(move.die);
     if (idx>=0) state.remaining.splice(idx,1);
-    selected=null; legalTargets=[]; hintMove=null;
+    selected=null; legalTargets=[]; hintMove=null; UI.hintResults.innerHTML='';
     checkWinner();
     const moves=availableMovesNow();
     if (!state.winner && state.remaining.length && !moves.length) setCoach('No more legal moves. The computer will play next.');
@@ -430,7 +446,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     if (state.turn !== HUMAN || !state.rolled || state.winner || !humanMoveHistory.length) return;
     clearTimeout(aiTimer);
     state = humanMoveHistory.pop();
-    selected = null; legalTargets = []; hintMove = null;
+    selected = null; legalTargets = []; hintMove = null; UI.hintResults.innerHTML='';
     setCoach('Move undone. Choose a different legal move, or tap the hint button for a suggestion.');
     updateUI(); draw();
   }
@@ -479,16 +495,94 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
     return best;
   }
 
-  function bestSequence(s, player, dice) {
-    const seqs=allSequences(s,player,dice);
-    let best=seqs[0]||[], bestScore=-Infinity;
-    for (const seq of seqs) {
-      let cur=s;
-      for (const m of seq) cur=applyMove(cur,player,m);
-      const score=evaluate(cur,player)+Math.random()*.25;
-      if (score>bestScore) {bestScore=score;best=seq;}
+  function moveNotation(move) {
+    const from = move.from === 'bar' ? 'bar' : String(move.from + 1);
+    const to = move.to === 'off' ? 'off' : String(move.to + 1);
+    return `${from}/${to}`;
+  }
+
+  function sequenceNotation(seq) { return seq.map(moveNotation).join(' '); }
+
+  function madePoints(s, player) {
+    return s.points.reduce((n,v)=>n+(owner(v)===player&&count(v)>=2?1:0),0);
+  }
+
+  function blotCount(s, player) {
+    return s.points.reduce((n,v)=>n+(owner(v)===player&&count(v)===1?1:0),0);
+  }
+
+  function homeBoardPoints(s, player) {
+    const [a,b]=homeRange(player); let n=0;
+    for(let i=a;i<=b;i++) if(owner(s.points[i])===player&&count(s.points[i])>=2)n++;
+    return n;
+  }
+
+  function backCheckerDistance(s, player) {
+    if (s.bar[player]) return 25;
+    if (player===HUMAN) {
+      for(let i=23;i>=0;i--) if(owner(s.points[i])===player) return i+1;
+    } else {
+      for(let i=0;i<24;i++) if(owner(s.points[i])===player) return 24-i;
     }
-    return best;
+    return 0;
+  }
+
+  function scoreSequence(s, player, seq) {
+    let cur=s, hits=0, bears=0;
+    for(const m of seq){
+      const oppBarBefore=cur.bar[-player];
+      const offBefore=cur.off[player];
+      cur=applyMove(cur,player,m);
+      hits += cur.bar[-player]-oppBarBefore;
+      bears += cur.off[player]-offBefore;
+    }
+    const features={
+      pipGain:pipCount(s,player)-pipCount(cur,player),
+      opponentPipAdded:pipCount(cur,-player)-pipCount(s,-player),
+      hits,
+      bears,
+      madeDelta:madePoints(cur,player)-madePoints(s,player),
+      homeDelta:homeBoardPoints(cur,player)-homeBoardPoints(s,player),
+      primeDelta:primeScore(cur,player)-primeScore(s,player),
+      blotDelta:blotCount(cur,player)-blotCount(s,player),
+      barRisk:cur.bar[player]-s.bar[player],
+      escapeGain:backCheckerDistance(s,player)-backCheckerDistance(cur,player)
+    };
+    let score=evaluate(cur,player);
+    score += features.hits*16 + features.bears*35 + features.madeDelta*13 + features.homeDelta*7;
+    score += features.primeDelta*10 - Math.max(0,features.blotDelta)*8 + Math.max(0,-features.blotDelta)*4;
+    score += Math.max(0,features.escapeGain)*1.4 - features.barRisk*30;
+    return {seq,state:cur,score,features};
+  }
+
+  function rankSequences(s, player, dice) {
+    const seqs=allSequences(s,player,dice);
+    const ranked=seqs.map(seq=>scoreSequence(s,player,seq));
+    ranked.sort((a,b)=>b.score-a.score || sequenceNotation(a.seq).localeCompare(sequenceNotation(b.seq)));
+    // Deduplicate equivalent textual sequences caused by identical dice permutations.
+    const seen=new Set();
+    return ranked.filter(r=>{const k=sequenceNotation(r.seq);if(seen.has(k))return false;seen.add(k);return true;});
+  }
+
+  function bestSequence(s, player, dice) {
+    return rankSequences(s,player,dice)[0]?.seq || [];
+  }
+
+  function teachingReasons(ranked, before, player) {
+    const f=ranked.features, reasons=[];
+    if(f.bears) reasons.push(`bears off ${f.bears} checker${f.bears===1?'':'s'}`);
+    if(f.hits) reasons.push(`hits ${f.hits} opposing blot${f.hits===1?'':'s'}`);
+    if(f.madeDelta>0) reasons.push(`makes ${f.madeDelta} new point${f.madeDelta===1?'':'s'}`);
+    if(f.homeDelta>0) reasons.push('strengthens your home board');
+    if(f.primeDelta>0) reasons.push('extends your longest prime');
+    if(f.blotDelta<0) reasons.push(`removes ${Math.abs(f.blotDelta)} blot${f.blotDelta===-1?'':'s'}`);
+    if(f.escapeGain>=6) reasons.push('advances a back checker');
+    if(f.blotDelta>0) reasons.push(`leaves ${f.blotDelta} extra blot${f.blotDelta===1?'':'s'}`);
+    if(!reasons.length && f.pipGain>0) reasons.push(`uses ${f.pipGain} racing pips efficiently`);
+    const race=pipCount(before,player)-pipCount(before,-player);
+    if(race<-20 && f.blotDelta<=0) reasons.push('protects a racing lead');
+    if(race>20 && (f.hits||f.primeDelta>0)) reasons.push('keeps useful contact while behind');
+    return reasons.slice(0,3);
   }
 
   function aiTurn() {
@@ -540,13 +634,28 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
   }
 
   function showHint() {
-    if (state.turn!==HUMAN || !state.rolled) { setCoach('Roll the dice first, then I can suggest a move.'); return; }
-    const seq=bestSequence(state,HUMAN,state.remaining);
-    if (!seq.length) { setCoach('There is no legal move with the remaining dice.'); return; }
-    hintMove=seq[0];
-    const fromText=hintMove.from==='bar'?'the bar':`point ${hintMove.from+1}`;
-    const toText=hintMove.to==='off'?'bear off':`point ${hintMove.to+1}`;
-    setCoach(`Suggested move: ${fromText} → ${toText} using ${hintMove.die}. It scores best for race, safety, made points, and hitting chances.`);
+    if (state.turn!==HUMAN || !state.rolled) { setCoach('Roll the dice first, then I can rank your legal choices.'); return; }
+    const ranked=rankSequences(state,HUMAN,state.remaining);
+    if (!ranked.length || !ranked[0].seq.length) { setCoach('There is no legal move with the remaining dice.'); UI.hintResults.innerHTML=''; return; }
+    hintMove=ranked[0].seq[0];
+    setCoach(`Best current sequence: ${sequenceNotation(ranked[0].seq)}. Tap a choice below to highlight its first move.`);
+    const labels=['Best move','Strong alternative','Another legal choice'];
+    UI.hintResults.innerHTML=ranked.slice(0,3).map((r,i)=>{
+      const reasons=teachingReasons(r,state,HUMAN);
+      const gap=i===0?'Top local score':`${Math.max(0,ranked[0].score-r.score).toFixed(1)} points behind`;
+      return `<div class="hint-card ${i===0?'best':''}">
+        <div class="hint-head"><span class="hint-rank">${labels[i]||`Choice ${i+1}`}</span><span class="hint-move">${sequenceNotation(r.seq)}</span></div>
+        <p>${reasons.length?reasons.join('; '):'Plays the maximum legal dice with a balanced result.'}.</p>
+        <p><strong>${gap}</strong></p>
+        <button type="button" data-hint-index="${i}">Highlight first move</button>
+      </div>`;
+    }).join('');
+    UI.hintResults.querySelectorAll('[data-hint-index]').forEach(btn=>btn.addEventListener('click',()=>{
+      const r=ranked[Number(btn.dataset.hintIndex)];
+      hintMove=r?.seq?.[0]||null;
+      selected=null;legalTargets=[];draw();
+      if(r) setCoach(`${sequenceNotation(r.seq)}: ${teachingReasons(r,state,HUMAN).join('; ') || 'a balanced legal sequence'}.`);
+    }));
     draw();
   }
 
@@ -716,7 +825,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
         else {const q=pointCenter(m.to); const y=q.top?H/2-48:H/2+48; highlightCircle(q.x,y,'hint'); ctx.fillStyle='#241a0e';ctx.font='bold 18px sans-serif';ctx.textAlign='center';ctx.fillText(m.die,q.x,y+6);}
       }
     }
-    if(hintMove){ const p=checkerTopPosition(hintMove.from);highlightCircle(p.x,p.y,'hint'); }
+    if(hintMove){ const p=checkerTopPosition(hintMove.from);highlightCircle(p.x,p.y,'hint'); if(hintMove.to==='off'){drawRoundedRect(playRight+22,H/2+30,40,100,12,'rgba(255,224,109,.42)','#ffe06d');} else {const q=pointCenter(hintMove.to); const y=q.top?H/2-48:H/2+48; highlightCircle(q.x,y,'hint');} }
   }
 
   UI.rollBtn.addEventListener('click',rollDice);

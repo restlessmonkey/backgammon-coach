@@ -1,22 +1,18 @@
-BACKGAMMON COACH v1.6 — CORE GAME STABILIZATION
+BACKGAMMON COACH v1.7 — HINT FOUNDATION
 
-Upload the CONTENTS of this folder to the root of your GitHub repository,
-replacing the existing files. Do not upload the ZIP itself.
+UPLOAD TO GITHUB
+1. Extract this ZIP.
+2. In the GitHub repository backgammon-coach, upload the CONTENTS of this folder to the repository root.
+3. Replace existing files and commit with: Release v1.7 Hint Foundation
+4. Open the Pages site in Safari, refresh, and confirm the tiny v1.7 label.
+5. Close and reopen the Home Screen app while online.
 
-Visible version marker: tiny "v1.6" beside the title.
+WHAT TO TEST
+- Roll dice and tap Rank my moves.
+- Confirm up to three legal sequences appear.
+- Highlight each option and verify its first source and destination.
+- Make a move, undo it, and request hints again.
+- Confirm the computer cannot be undone.
 
-Changes:
-- User-only Undo remains available briefly after the final move.
-- Turn status stays above the board and never covers pips/checkers.
-- Remaining usable moves are shown beside the dice.
-- Used dice fade visually.
-- Automatic turn passing is more deliberate and clearly announced.
-- Added an internal rules regression suite covering bar priority, blocked
-  points, hitting, bearing off, doubles, and forced-die behavior.
-- New offline cache name forces the update to v1.6.
-
-After committing on GitHub:
-1. Open the site in Safari while online.
-2. Refresh once.
-3. Close the Home Screen app completely.
-4. Reopen it and confirm the tiny v1.6 label appears.
+IMPORTANT
+The v1.7 ranking is a transparent local teaching heuristic, not embedded GNU Backgammon neural-network analysis. It emphasizes legal play, pip efficiency, hits, made points, home-board strength, primes, blot reduction, escaping back checkers, and bearing off.
