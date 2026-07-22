@@ -1,8 +1,8 @@
-# v1.8.2 Release Validation Checklist
+# v1.8.3 Release Validation Checklist
 
 ## Identity
-- [ ] Version badge reads v1.8.2
-- [ ] Page title reads v1.8.2
+- [ ] Version badge reads v1.8.3
+- [ ] Page title reads v1.8.3
 - [ ] Service-worker cache is backgammon-coach-v1-8-2
 
 ## Core gameplay regression
@@ -36,3 +36,13 @@
 - [ ] iPad portrait
 - [ ] iPad landscape
 - [ ] Desktop browser
+
+
+## Victory celebration checks
+- [ ] Human win triggers fireworks followed by exactly one random checker finale.
+- [ ] Repeated wins can select different finales.
+- [ ] Stop celebration immediately clears the overlay.
+- [ ] Escape stops the celebration on keyboard devices.
+- [ ] New Game stops an active celebration.
+- [ ] Computer win does not trigger the human victory celebration.
+- [ ] Reduced-motion preference produces a short low-motion result.

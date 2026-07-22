@@ -1,18 +1,11 @@
-Backgammon Coach v1.8.2 Validation Report
+Backgammon Coach v1.8.3 Validation Report
 
-Static validation:
-PASS - index.html parsed successfully.
-PASS - required Immersive Play controls are present.
-PASS - main application JavaScript passed `node --check` syntax validation.
-PASS - displayed version and page title identify v1.8.2.
-PASS - service-worker cache identifies backgammon-coach-v1-8-2.
-PASS - original v1.8 rules self-test remains embedded and is labeled v1.8.2.
+PASS — HTML version
+PASS — overlay
+PASS — five effects
+PASS — stop control
+PASS — human trigger
+PASS — cache
+PASS — node syntax
 
-Runtime validation still required after deployment:
-- iPhone/iPad visual review in Safari.
-- Touch drag behavior for floating Roll Dice.
-- Home Screen PWA cache refresh.
-- Full gameplay regression using RELEASE_CHECKLIST.md.
-
-Safety note:
-The backgammon rules engine was not intentionally modified. Changes are confined to layout, interaction preferences, release identity, and documentation.
+Static validation only. Final Safari/iPhone/iPad visual testing is required, especially each randomized effect and Stop behavior.

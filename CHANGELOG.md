@@ -1,3 +1,12 @@
+# CHANGELOG
+
+## v1.8.3 — Victory Celebration
+- Added fireworks after a human victory.
+- Added five randomized checker finales: Rocket Checkers, Checker Hill, Classic Bounce, Victory Vortex, and Checker Fountain.
+- Added a persistent Stop celebration control and Escape-key stop.
+- Added reduced-motion behavior.
+- Celebration is cancelled when a new game begins and never alters gameplay state.
+
 # Backgammon Coach Change Log
 
 ## v1.8.2 — Immersive Play

@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v1.8.2</title>
+  <title>Backgammon Coach iPhone v1.8.3</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -102,7 +102,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 @media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
 
 
-/* v1.8.2 Immersive Play */
+/* v1.8.3 Immersive Play */
 .topbar,.play-controls,.coach-panel{transition:all .22s ease}
 body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
 body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
@@ -151,7 +151,18 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
 @media (display-mode: standalone) { #launchNote { display:none !important; } }
 
-  </style>
+  
+
+/* v1.8.3 Victory Celebration */
+.victory-celebration{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden;background:rgba(8,12,10,.08);opacity:0;transition:opacity .18s ease}
+.victory-celebration.active{opacity:1}
+.victory-canvas{width:100%;height:100%;display:block}
+.victory-banner{position:absolute;top:max(16px,env(safe-area-inset-top));left:50%;transform:translateX(-50%) translateY(-18px);padding:12px 24px;border-radius:999px;background:rgba(247,239,225,.96);color:#2a251f;font-family:Georgia,serif;font-size:clamp(1.25rem,4vw,2.15rem);font-weight:900;box-shadow:0 12px 36px rgba(0,0,0,.35);opacity:0;transition:all .35s ease;white-space:nowrap}
+.victory-celebration.active .victory-banner{opacity:1;transform:translateX(-50%) translateY(0)}
+.stop-celebration{position:absolute;right:max(12px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));pointer-events:auto;background:rgba(247,239,225,.96);color:#2a251f;border:2px solid rgba(42,37,31,.18);box-shadow:0 8px 24px rgba(0,0,0,.35);min-height:48px;padding:10px 16px}
+@media (prefers-reduced-motion:reduce){.victory-celebration,.victory-banner{transition:none}}
+
+</style>
 
   <meta name="theme-color" content="#382719">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -167,10 +178,10 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v1.8.2</span>
+          <span class="version-badge" id="versionBadge">v1.8.3</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v1.8.2</div>
+        <div class="version-note">v1.8.3</div>
       </div>
       <div class="top-actions">
         <button id="newGameBtn">New game</button>
@@ -224,7 +235,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
           <p id="coachText">Roll the dice. I’ll highlight legal checkers and explain useful ideas.</p>
           <button id="hintBtn" class="secondary wide">Rank my moves</button>
           <div id="hintResults" class="hint-results" aria-live="polite"></div>
-          <div class="coach-disclaimer">v1.8.2 ranks complete legal turn sequences with a transparent local teaching heuristic. Engine-grade analysis remains planned.</div>
+          <div class="coach-disclaimer">v1.8.3 ranks complete legal turn sequences with a transparent local teaching heuristic. Engine-grade analysis remains planned.</div>
           </div>
         </section>
 
@@ -292,6 +303,14 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     </div>
   </div>
 
+
+
+  <div id="victoryCelebration" class="victory-celebration" hidden aria-live="polite" aria-label="Victory celebration">
+    <canvas id="victoryCanvas" class="victory-canvas" aria-hidden="true"></canvas>
+    <div id="victoryBanner" class="victory-banner">🎉 You won!</div>
+    <button id="stopCelebrationBtn" class="stop-celebration" type="button">Stop celebration</button>
+  </div>
+
   <script>
 (() => {
   'use strict';
@@ -301,7 +320,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   const UI = Object.fromEntries([
     'rollBtn','undoBtn','endTurnBtn','newGameBtn','rulesBtn','closeRulesBtn','rulesDialog','die1','die2',
     'humanPips','aiPips','humanBar','aiBar','humanOff','aiOff','turnBanner','coachText','hintBtn',
-    'coachToggle','coachDrawerToggle','coachDrawerBody','coachPanel','appHeader','playControls','handMode','floatRollToggle','lockRollToggle','resetRollPositionBtn','focusModeBtn','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode'
+    'coachToggle','victoryCelebration','victoryCanvas','victoryBanner','stopCelebrationBtn','coachDrawerToggle','coachDrawerBody','coachPanel','appHeader','playControls','handMode','floatRollToggle','lockRollToggle','resetRollPositionBtn','focusModeBtn','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode'
   ].map(id => [id, document.getElementById(id)]));
 
   const W = canvas.width, H = canvas.height;
@@ -323,6 +342,8 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   let executingSequence = false;
   let rollDrag = {active:false, moved:false, dx:0, dy:0};
   let focusMode = false;
+  let celebrationRun = null;
+  let celebrationShownForGame = false;
 
 
   const lessons = {
@@ -336,6 +357,8 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   function newGame() {
     clearTimeout(aiTimer);
+    stopVictoryCelebration();
+    celebrationShownForGame=false;
     state = {
       points: Array(24).fill(0),
       bar: { [HUMAN]: 0, [AI]: 0 },
@@ -501,7 +524,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v1.8.2 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v1.8.3 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -757,7 +780,11 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   }
 
   function checkWinner() {
-    if (state.off[HUMAN]===15) {state.winner=HUMAN; setCoach('You won! Review which made points and safe moves created the advantage.');}
+    if (state.off[HUMAN]===15) {
+      state.winner=HUMAN;
+      setCoach('You won! Enjoy the celebration — then review which made points and safe moves created the advantage.');
+      if(!celebrationShownForGame){celebrationShownForGame=true;startVictoryCelebration();}
+    }
     if (state.off[AI]===15) {state.winner=AI; setCoach('The computer won. Try again and focus on reducing exposed blots and building connected points.');}
   }
 
@@ -852,6 +879,44 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       }
     }
     step();
+  }
+
+
+  function startVictoryCelebration() {
+    stopVictoryCelebration();
+    const overlay=UI.victoryCelebration, c=UI.victoryCanvas, x=c.getContext('2d');
+    overlay.hidden=false;
+    requestAnimationFrame(()=>overlay.classList.add('active'));
+    const dpr=Math.min(2,window.devicePixelRatio||1);
+    const resize=()=>{c.width=Math.round(innerWidth*dpr);c.height=Math.round(innerHeight*dpr);c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';x.setTransform(dpr,0,0,dpr,0,0)};
+    resize();
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const effectNames=['Rocket Checkers','Checker Hill','Classic Bounce','Victory Vortex','Checker Fountain'];
+    const effect=Math.floor(Math.random()*effectNames.length);
+    UI.victoryBanner.textContent=`🎉 You won! • ${effectNames[effect]}`;
+    const particles=[]; const sparks=[]; const started=performance.now();
+    const boardRect=canvas.getBoundingClientRect();
+    const origin={x:Math.min(innerWidth-40,Math.max(40,boardRect.right-48)),y:Math.min(innerHeight-40,Math.max(40,boardRect.bottom-46))};
+    const rand=(a,b)=>a+Math.random()*(b-a);
+    const colors=['#f7efe1','#d9a441','#9e3f37','#e8c78f','#294f42'];
+    function checker(i){return {i,x:origin.x+rand(-24,24),y:origin.y+rand(-18,18),vx:0,vy:0,r:Math.max(11,Math.min(22,innerWidth/30)),rot:rand(0,Math.PI*2),spin:rand(-.12,.12),trail:[],phase:rand(0,Math.PI*2),landed:false};}
+    for(let i=0;i<15;i++)particles.push(checker(i));
+    function firework(cx,cy,color,count=34){for(let i=0;i<count;i++){const a=Math.PI*2*i/count+rand(-.05,.05),sp=rand(2.2,6.2);sparks.push({x:cx,y:cy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:rand(42,72),max:72,color,size:rand(1.5,3.5)})}}
+    for(let i=0;i<(reduced?2:6);i++)setTimeout(()=>{if(celebrationRun)firework(rand(innerWidth*.14,innerWidth*.86),rand(innerHeight*.12,innerHeight*.48),colors[i%colors.length],reduced?18:40)},i*230);
+    function drawChecker(p,alpha=1){x.save();x.globalAlpha=alpha;x.translate(p.x,p.y);x.rotate(p.rot);x.beginPath();x.arc(0,0,p.r,0,Math.PI*2);x.fillStyle=p.i%2?'#d8c6a4':'#3a211b';x.fill();x.lineWidth=2;x.strokeStyle=p.i%2?'#6a4b2e':'#e8c78f';x.stroke();x.beginPath();x.arc(-p.r*.25,-p.r*.28,p.r*.19,0,Math.PI*2);x.fillStyle='rgba(255,255,255,.22)';x.fill();x.restore()}
+    function updateSparks(){for(let i=sparks.length-1;i>=0;i--){const p=sparks[i];p.x+=p.vx;p.y+=p.vy;p.vy+=.055;p.vx*=.992;p.life--;x.globalAlpha=Math.max(0,p.life/p.max);x.fillStyle=p.color;x.beginPath();x.arc(p.x,p.y,p.size,0,Math.PI*2);x.fill();if(p.life<=0)sparks.splice(i,1)}x.globalAlpha=1}
+    function rocket(p,t){const delay=p.i*105,lt=t-delay;if(lt<0)return;if(lt<1500){p.x=origin.x+Math.sin(lt*.018+p.i)*18;p.y=origin.y-lt*.42-p.i*2;p.trail.push({x:p.x,y:p.y,a:1});if(p.trail.length>12)p.trail.shift();p.trail.forEach((q,j)=>{x.globalAlpha=(j/p.trail.length)*.35;x.fillStyle=p.i%2?'#e8c78f':'#9e3f37';x.beginPath();x.arc(q.x,q.y,Math.max(1,p.r*j/p.trail.length*.45),0,Math.PI*2);x.fill()});x.globalAlpha=1;drawChecker(p)}else if(!p.landed){p.landed=true;firework(p.x,p.y,colors[p.i%colors.length],20)}}
+    function hill(p,t){const targetRow=Math.floor((Math.sqrt(8*p.i+1)-1)/2),first=targetRow*(targetRow+1)/2,pos=p.i-first;const tx=innerWidth/2+(pos-targetRow/2)*(p.r*2.05),ty=innerHeight*.78-targetRow*(p.r*1.72);if(t<2200){const q=Math.min(1,(t-p.i*55)/1100);if(q>0){p.x+=(tx-p.x)*.075;p.y+=(ty-p.y)*.075;p.rot+=p.spin;drawChecker(p)}}else{const roll=t-2200;p.vx=p.vx||((p.i%2?1:-1)*rand(3.2,6.2));p.x+=p.vx;p.y=ty+Math.abs(Math.sin(roll*.012+p.phase))*22;p.rot+=p.vx/p.r;drawChecker(p)}}
+    function classicBounce(p,t){if(!p.landed){p.x=rand(40,innerWidth-40);p.y=rand(40,innerHeight*.38);p.vx=rand(3,8)*(p.i%2?1:-1);p.vy=rand(-2,3);p.landed=true}p.trail.push({x:p.x,y:p.y});if(p.trail.length>18)p.trail.shift();p.trail.forEach((q,j)=>{const ghost={...p,x:q.x,y:q.y};drawChecker(ghost,(j/p.trail.length)*.20)});p.x+=p.vx;p.y+=p.vy;p.vy+=.28;if(p.x<p.r||p.x>innerWidth-p.r)p.vx*=-1;if(p.y>innerHeight-p.r){p.y=innerHeight-p.r;p.vy=-Math.abs(p.vy)*.86}p.rot+=p.vx/p.r;drawChecker(p)}
+    function vortex(p,t){const q=Math.min(1,t/3000),rad=(1-q)*Math.max(innerWidth,innerHeight)*.48+24,ang=p.phase+t*.0026*(p.i%2?1:-1)+p.i*.42;p.x=innerWidth/2+Math.cos(ang)*rad;p.y=innerHeight/2+Math.sin(ang)*rad*.58;p.rot+=.08;drawChecker(p);if(q>=1&&!p.landed){p.landed=true;p.vx=Math.cos(ang)*rand(4,9);p.vy=Math.sin(ang)*rand(4,9)}if(t>3000){p.x+=p.vx;p.y+=p.vy;p.vy+=.08;drawChecker(p,.9)}}
+    function fountain(p,t){const delay=p.i*90,lt=t-delay;if(lt<0)return;if(!p.landed){p.x=innerWidth/2+rand(-35,35);p.y=innerHeight+30;p.vx=rand(-5.5,5.5);p.vy=rand(-15,-10);p.landed=true}p.x+=p.vx;p.y+=p.vy;p.vy+=.34;if(p.y>innerHeight-p.r){p.y=innerHeight-p.r;p.vy=-Math.abs(p.vy)*.68;p.vx*=.92}if(p.x<p.r||p.x>innerWidth-p.r)p.vx*=-1;p.rot+=p.spin;drawChecker(p)}
+    function frame(now){if(!celebrationRun)return;const t=now-started;x.clearRect(0,0,innerWidth,innerHeight);updateSparks();if(!reduced&&t>900){for(const p of particles){if(effect===0)rocket(p,t-900);else if(effect===1)hill(p,t-900);else if(effect===2)classicBounce(p,t-900);else if(effect===3)vortex(p,t-900);else fountain(p,t-900)}}if(reduced&&t>1100){particles.slice(0,5).forEach((p,i)=>{p.x=innerWidth/2+(i-2)*50;p.y=innerHeight*.68;drawChecker(p)})}if(t<9000)celebrationRun.raf=requestAnimationFrame(frame);else stopVictoryCelebration()}
+    celebrationRun={raf:requestAnimationFrame(frame),resize};
+    addEventListener('resize',resize);
+  }
+  function stopVictoryCelebration(){
+    if(celebrationRun){cancelAnimationFrame(celebrationRun.raf);removeEventListener('resize',celebrationRun.resize);celebrationRun=null;}
+    if(UI.victoryCelebration){UI.victoryCelebration.classList.remove('active');setTimeout(()=>{if(!celebrationRun)UI.victoryCelebration.hidden=true},190);}
   }
 
   function setCoachDrawer(collapsed){
@@ -1090,6 +1155,8 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     if(hintMove){ const p=checkerTopPosition(hintMove.from);highlightCircle(p.x,p.y,'hint'); if(hintMove.to==='off'){drawRoundedRect(playRight+22,H/2+30,40,100,12,'rgba(255,224,109,.42)','#ffe06d');} else {const q=pointCenter(hintMove.to); const y=q.top?H/2-48:H/2+48; highlightCircle(q.x,y,'hint');} }
   }
 
+  UI.stopCelebrationBtn.addEventListener('click',stopVictoryCelebration);
+  document.addEventListener('keydown',(e)=>{if(e.key==='Escape')stopVictoryCelebration();});
   UI.rollBtn.addEventListener('click',(e)=>{if(!rollDrag.moved)rollDice();});
   UI.rollBtn.addEventListener('pointerdown',beginRollDrag);
   UI.rollBtn.addEventListener('pointermove',moveRollDrag);
