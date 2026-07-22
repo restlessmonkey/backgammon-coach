@@ -1,5 +1,5 @@
 {
-  "version": "2.0.1.1.1",
+  "version": "2.0.1.1.2",
   "package_type": "GITHUB_IPHONE_FLAT_UPLOAD",
   "upload_location": "repository root",
   "required_app_files": [
@@ -16,5 +16,11 @@
     "VALIDATION_REPORT.txt",
     "SHA256SUMS.txt"
   ],
-  "created_utc": "2026-07-22T12:55:05.260429+00:00"
+  "created_utc": "2026-07-22T13:34:51.771002+00:00",
+  "package_name": "v2.0.1.1.2_Backgammon_Coach_iPhone_GitHub_FLAT_DEFAULT_COACHING.zip",
+  "default_settings": {
+    "coaching_enabled": true,
+    "automatic_watch_coach_every_turn": true,
+    "existing_saved_preferences_preserved": true
+  }
 }

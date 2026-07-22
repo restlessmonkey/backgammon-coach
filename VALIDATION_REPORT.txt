@@ -1,11 +1,12 @@
-Backgammon Coach v2.0.1.1.1 Flat Upload Validation
-============================================================
-PASS — Flat files present
-PASS — No icons directory references
-PASS — Manifest path remains valid
-PASS — Service worker path remains valid
+Backgammon Coach v2.0.1.1.2 Default Coaching Validation
+==================================================================
 PASS — Version updated
-PASS — Cache identity updated
+PASS — Cache updated
 PASS — JavaScript syntax
+PASS — Coach-related checkboxes found
+PASS — Coach-related checkboxes default checked
+PASS — Flat icon paths retained
 
 Automated result: PASS
+Fresh-install defaults: coaching ON; automatic Watch the Coach ON.
+Existing localStorage preferences remain authoritative when present.

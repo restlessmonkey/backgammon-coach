@@ -1,4 +1,4 @@
-BACKGAMMON COACH v2.0.1.1.1
+BACKGAMMON COACH v2.0.1.1.2
 IPHONE GITHUB FLAT-UPLOAD DEPLOYMENT PACKAGE
 
 WHY THIS PACKAGE EXISTS
@@ -32,7 +32,7 @@ Because the prior service worker may remain cached:
 5. Reopen the Pages address and add it to the Home Screen again.
 
 EXPECTED VERSION
-v2.0.1.1.1
+v2.0.1.1.2
 
 COACH MODE
 Select:
@@ -40,3 +40,9 @@ Advanced local coach — offline, not grandmaster
 
 WINDOWS
 No Windows computer is required for this local coach mode.
+
+
+DEFAULT BEHAVIOR IN v2.0.1.1.2
+- Coaching is ON for a fresh install.
+- Automatically Watch the Coach every turn is ON for a fresh install.
+- A user's previously saved choices are preserved.
