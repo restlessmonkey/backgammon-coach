@@ -1,5 +1,5 @@
 {
-  "version": "2.0.5.1",
+  "version": "2.0.5.2",
   "package_type": "GITHUB_IPHONE_FLAT_UPLOAD",
   "upload_location": "repository root",
   "required_app_files": [
@@ -16,8 +16,8 @@
     "VALIDATION_REPORT.txt",
     "SHA256SUMS.txt"
   ],
-  "created_utc": "2026-07-22T19:32:08.339461+00:00",
-  "package_name": "v2.0.5.1_Backgammon_Coach_iPhone_GitHub_FLAT_PIP_STUDIO_LINKED.zip",
+  "created_utc": "2026-07-22T19:42:48.554961+00:00",
+  "package_name": "v2.0.5.2_Backgammon_Coach_iPhone_GitHub_FLAT_SETTINGS_PANEL_RESTRUCTURE.zip",
   "default_settings": {
     "coaching_enabled": true,
     "explain_every_move": true,
@@ -117,5 +117,20 @@
       "from_index": "Pip Settings > Open Pip Character Studio",
       "return_link": "Back to Backgammon Coach"
     }
+  },
+  "panel_architecture": {
+    "main_screen": [
+      "Game"
+    ],
+    "settings": [
+      "Pip \u2014 Your Backgammon Coach",
+      "Grandmaster analysis engine",
+      "Panel",
+      "Board & notation",
+      "Play experience",
+      "Focus lesson"
+    ],
+    "moved_panel_count": 6,
+    "engine_logic_changes": "None"
   }
 }

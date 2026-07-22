@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v2.0.5.1</title>
+  <title>Backgammon Coach iPhone v2.0.5.2</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -50,7 +50,7 @@ canvas { width: 100%; height: auto; display: block; touch-action: manipulation; 
 .sidebar { display: grid; gap: 14px; }
 
 /*
-  v2.0.5.1 — Independent side-panel scrolling
+  v2.0.5.2 — Independent side-panel scrolling
   On wide layouts, the board remains visually anchored while the right panel
   column gets its own touch-friendly vertical scroll area. Phone layouts keep
   normal page scrolling to avoid cramped nested scrolling.
@@ -207,7 +207,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 @media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
 
 
-/* v2.0.5.1 Immersive Play */
+/* v2.0.5.2 Immersive Play */
 .topbar,.play-controls,.coach-panel{transition:all .22s ease}
 body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
 body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
@@ -258,7 +258,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   
 
-/* v2.0.5.1 Victory Celebration */
+/* v2.0.5.2 Victory Celebration */
 .victory-celebration{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden;background:rgba(8,12,10,.08);opacity:0;transition:opacity .18s ease}
 .victory-celebration.active{opacity:1}
 .victory-canvas{width:100%;height:100%;display:block}
@@ -268,7 +268,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media (prefers-reduced-motion:reduce){.victory-celebration,.victory-banner{transition:none}}
 
 
-/* v2.0.5.1 Explain Every Move */
+/* v2.0.5.2 Explain Every Move */
 .coach-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
 .coach-settings label{display:grid;gap:4px;color:var(--muted);font-size:.76rem;font-weight:800}
 .move-rating{margin:10px 0;padding:11px;border-radius:12px;border:1px solid #d6c4ae;background:#fffaf2}
@@ -296,7 +296,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.coach-settings{grid-template-columns:1fr}.risk-row{grid-template-columns:64px 1fr 30px}}
 
 
-/* v2.0.5.1 Animated Board Hints */
+/* v2.0.5.2 Animated Board Hints */
 .visual-hint-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:8px}
 .visual-hint-controls button{margin:0;box-shadow:none}
 .visual-hint-status{margin-top:8px;padding:8px 10px;border-radius:10px;background:#e7f0eb;color:#294f42;font-weight:800;font-size:.8rem}
@@ -304,7 +304,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:760px){.visual-hint-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.5.1 Watch the Coach Think */
+/* v2.0.5.2 Watch the Coach Think */
 .think-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .think-controls button{margin:0;box-shadow:none}
 .think-panel{margin-top:9px;padding:10px;border-radius:12px;background:#f6ead8;border:1px solid #d8c5ab}
@@ -319,7 +319,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.think-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.5.1 verified engine controls */
+/* v2.0.5.2 verified engine controls */
 .engine-panel{margin:10px 0;padding:10px;border-radius:12px;border:1px solid #d8c5ab;background:#fffaf2}
 .engine-panel h3{margin:0 0 8px;font-size:.95rem}
 .engine-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -346,7 +346,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
 .celebration-vault-dialog{padding:18px}.celebration-vault-content{width:min(1080px,96vw);max-height:92vh;overflow:auto}.vault-heading{display:flex;gap:18px;justify-content:space-between}.vault-stats{background:#eef6f1;border:1px solid #bfd3c8;border-radius:14px;padding:10px 14px;font-weight:750}.vault-toolbar,.rarity-legend{display:flex;flex-wrap:wrap;gap:9px;margin:15px 0}.rarity-legend span{font-size:.8rem;font-weight:800;padding:5px 9px;border-radius:999px;background:#f3eadb}.celebration-vault-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.celebration-card{border:2px solid #dfd1bb;background:#fffaf1;border-radius:16px;padding:13px;display:grid;gap:8px}.celebration-card.disabled{opacity:.52}.celebration-card.favorite{border-color:#d9a441}.celebration-card-head{display:flex;justify-content:space-between}.celebration-card h3{margin:0;font-size:1rem}.celebration-icon{font-size:1.6rem}.rarity-pill{font-size:.7rem;text-transform:uppercase;font-weight:900;background:#eee1ca;padding:4px 7px;border-radius:999px}.celebration-card p{font-size:.84rem;margin:0;color:#665a4b}.celebration-card-actions{display:grid;grid-template-columns:1fr 1fr auto;gap:6px}.celebration-card-actions button{font-size:.78rem;padding:8px 6px}.victory-copy{position:fixed;top:8vh;left:50%;transform:translateX(-50%);z-index:3;text-align:center;width:min(92vw,760px);pointer-events:none}.victory-copy .victory-banner{position:static;transform:none;display:inline-block}.victory-subtitle{margin:8px auto 0;background:rgba(24,38,31,.88);color:white;padding:8px 15px;border-radius:999px;font-weight:750;max-width:max-content}@media(max-width:700px){.vault-heading{display:block}.vault-stats{display:inline-block;margin-top:8px}}
 
-/* v2.0.5.1 — Pip avatar, settings, and Helpful mode */
+/* v2.0.5.2 — Pip avatar, settings, and Helpful mode */
 .pip-settings-button{
   position:fixed;
   top:max(12px,env(safe-area-inset-top));
@@ -571,6 +571,56 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(prefers-reduced-motion:reduce){
   .pip-avatar,.pip-helpful-meter span{transition:none!important;animation:none!important}
 }
+
+/* v2.0.5.2 — Move all non-Game panels into Settings */
+.settings-panel-library{
+  display:grid;
+  gap:14px;
+  margin-top:14px;
+}
+.settings-embedded-panel{
+  border:1px solid #dfc9a5;
+  border-radius:18px;
+  background:#fff;
+  padding:14px;
+  overflow:visible;
+}
+.settings-embedded-panel > h2,
+.settings-embedded-panel > h3{
+  margin-top:0;
+}
+.settings-embedded-panel .panel,
+.settings-embedded-panel .side-panel,
+.settings-embedded-panel .game-panel{
+  position:static!important;
+  width:auto!important;
+  max-width:none!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+  margin:0!important;
+  box-shadow:none!important;
+  border:0!important;
+  background:transparent!important;
+  padding:0!important;
+}
+.settings-panel-note{
+  color:#6c5a48;
+  line-height:1.45;
+  margin:0 0 10px;
+}
+@media(max-width:620px){
+  .settings-embedded-panel{padding:12px}
+}
+
+body.game-panel-only-layout .side-panels,
+body.game-panel-only-layout .panels,
+body.game-panel-only-layout .panel-grid{
+  grid-template-columns:minmax(0,1fr)!important;
+}
+body.game-panel-only-layout .main-layout{
+  grid-template-columns:minmax(0,1fr)!important;
+}
 </style>
 
   <meta name="theme-color" content="#382719">
@@ -633,7 +683,92 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     </div>
 
     
+    
     <div class="pip-setting-group">
+      <h3>App Panels</h3>
+      <p class="settings-panel-note">The main screen now keeps only the Game panel. All other panels are available here in Settings.</p>
+      <div id="settingsPanelLibrary" class="settings-panel-library">
+        <div class="settings-embedded-panel" data-original-panel-title="Pip — Your Backgammon Coach">
+          <section class="panel coach-panel" id="coachPanel">
+          <div class="panel-heading">
+            <button id="coachDrawerToggle" class="coach-drawer-toggle" type="button" aria-expanded="false" aria-controls="coachDrawerBody"><span>💡 Pip</span><span class="coach-chevron">▲</span></button>
+            <h2 class="coach-heading">Pip — Your Backgammon Coach</h2>
+            <label class="switch-label">
+              <input id="coachToggle" type="checkbox" checked />
+              <span>Hints</span>
+            </label>
+          </div>
+        </div><div class="settings-embedded-panel" data-original-panel-title="Grandmaster analysis engine">
+          <div class="engine-panel">
+            <h3>Grandmaster analysis engine</h3>
+            <div class="engine-grid">
+              <label>Pip’s analysis source
+                <select id="engineMode">
+                  <option value="gnubg" selected>GNU Backgammon service — verified</option>
+                  <option value="local">Advanced local coach — offline, not grandmaster</option>
+                </select>
+              </label>
+              <label>Engine endpoint
+                <input id="engineEndpoint" type="url" inputmode="url" placeholder="https://your-engine.example/analyze">
+              </label>
+            </div>
+        </div><div class="settings-embedded-panel" data-original-panel-title="Panel">
+          <div id="coachThinkPanel" class="think-panel" aria-live="polite" hidden>
+            <div id="coachThinkStage" class="think-stage"></div>
+        </div><div class="settings-embedded-panel" data-original-panel-title="Board & notation">
+          <section class="panel settings-panel">
+          <h2>Board & notation</h2>
+          <div class="settings-grid">
+            <label>Point labels
+              <select id="pointLabelMode">
+                <option value="off">Off</option>
+                <option value="human">My numbers</option>
+                <option value="ai">Computer numbers</option>
+                <option value="both">Both</option>
+              </select>
+            </label>
+            <label>Move directions
+              <select id="notationMode">
+                <option value="both">Plain English + notation</option>
+                <option value="plain">Plain English only</option>
+                <option value="standard">Standard notation only</option>
+              </select>
+            </label>
+          </div>
+        </div><div class="settings-embedded-panel" data-original-panel-title="Play experience">
+          <section class="panel experience-panel">
+          <h2>Play experience</h2>
+          <div class="settings-grid">
+            <label>Primary-hand layout
+              <select id="handMode">
+                <option value="auto">Auto</option>
+                <option value="right">Right-handed</option>
+                <option value="left">Left-handed</option>
+              </select>
+            </label>
+            <label class="switch-label experience-switch"><input id="floatRollToggle" type="checkbox" checked><span>Floating Roll Dice</span></label>
+            <label class="switch-label experience-switch"><input id="lockRollToggle" type="checkbox"><span>Lock button position</span></label>
+            <button id="resetRollPositionBtn" class="secondary wide" type="button">Reset Roll Dice position</button>
+            <button id="testCelebrationBtn" class="primary wide" type="button">🎉 Test random win celebration</button>
+            <div class="setting-help">Each tap randomly selects one of the five victory finales. Use Stop celebration at any time.</div>
+        </div><div class="settings-embedded-panel" data-original-panel-title="Focus lesson">
+          <section class="panel lesson-panel">
+          <h2>Focus lesson</h2>
+          <select id="lessonSelect">
+            <option value="general">General strategy</option>
+            <option value="opening">Opening moves</option>
+            <option value="safety">Checker safety</option>
+            <option value="prime">Building primes</option>
+            <option value="race">Racing and pip count</option>
+            <option value="bearing">Bearing off</option>
+          </select>
+          <p id="lessonText">Keep checkers connected, avoid unnecessary blots, and fight for useful points.</p>
+        </section>
+        </div>
+      </div>
+    </div>
+
+<div class="pip-setting-group">
       <h3>Pip Character Studio</h3>
       <p class="pip-settings-note">Preview every Pip style, skin tone, expression, and pose.</p>
       <button id="pipOpenStudio" class="make-now" type="button">Open Pip Character Studio</button>
@@ -673,10 +808,10 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v2.0.5.1</span>
+          <span class="version-badge" id="versionBadge">v2.0.5.2</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v2.0.5.1</div>
+        <div class="version-note">v2.0.5.2</div>
       </div>
       <div class="top-actions">
         <button id="headerCelebrationBtn" class="secondary celebration-header-btn" type="button">🎉 Celebration Vault</button>
@@ -719,15 +854,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
           </div>
         </section>
 
-        <section class="panel coach-panel" id="coachPanel">
-          <div class="panel-heading">
-            <button id="coachDrawerToggle" class="coach-drawer-toggle" type="button" aria-expanded="false" aria-controls="coachDrawerBody"><span>💡 Pip</span><span class="coach-chevron">▲</span></button>
-            <h2 class="coach-heading">Pip — Your Backgammon Coach</h2>
-            <label class="switch-label">
-              <input id="coachToggle" type="checkbox" checked />
-              <span>Hints</span>
-            </label>
-          </div>
+        
           <div id="coachDrawerBody" class="coach-drawer-body">
           <p id="coachText">Roll the dice. I’ll highlight legal checkers and explain useful ideas.</p>
           <div class="coach-settings">
@@ -746,19 +873,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
               </select>
             </label>
           </div>
-          <div class="engine-panel">
-            <h3>Grandmaster analysis engine</h3>
-            <div class="engine-grid">
-              <label>Pip’s analysis source
-                <select id="engineMode">
-                  <option value="gnubg" selected>GNU Backgammon service — verified</option>
-                  <option value="local">Advanced local coach — offline, not grandmaster</option>
-                </select>
-              </label>
-              <label>Engine endpoint
-                <input id="engineEndpoint" type="url" inputmode="url" placeholder="https://your-engine.example/analyze">
-              </label>
-            </div>
+          
             <div class="engine-actions">
               <button id="testEngineBtn" class="secondary" type="button">Test engine connection</button>
               <button id="clearEngineBtn" class="secondary" type="button">Clear endpoint</button>
@@ -777,8 +892,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
             <button id="watchCoachThinkBtn" class="primary" type="button" disabled>🧠 Watch Pip Think</button>
             <button id="stopCoachThinkBtn" class="secondary" type="button" disabled>■ Stop thinking</button>
           </div>
-          <div id="coachThinkPanel" class="think-panel" aria-live="polite" hidden>
-            <div id="coachThinkStage" class="think-stage"></div>
+          
             <div id="coachThinkDetail" class="think-detail"></div>
             <div id="coachThinkCandidates" class="think-candidates"></div>
           </div>
@@ -790,62 +904,19 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
             <div id="favoriteLessons" class="favorite-list"></div>
           </details>
           <div id="coachReport" class="coach-report" hidden></div>
-          <div class="coach-disclaimer">v2.0.5.1 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. Pip’s local evaluator provides transparent offline teaching analysis and remains clearly distinguished from verified GNU Grandmaster analysis.</div>
+          <div class="coach-disclaimer">v2.0.5.2 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. Pip’s local evaluator provides transparent offline teaching analysis and remains clearly distinguished from verified GNU Grandmaster analysis.</div>
           </div>
         </section>
 
-        <section class="panel settings-panel">
-          <h2>Board & notation</h2>
-          <div class="settings-grid">
-            <label>Point labels
-              <select id="pointLabelMode">
-                <option value="off">Off</option>
-                <option value="human">My numbers</option>
-                <option value="ai">Computer numbers</option>
-                <option value="both">Both</option>
-              </select>
-            </label>
-            <label>Move directions
-              <select id="notationMode">
-                <option value="both">Plain English + notation</option>
-                <option value="plain">Plain English only</option>
-                <option value="standard">Standard notation only</option>
-              </select>
-            </label>
-          </div>
+        
         </section>
 
-        <section class="panel experience-panel">
-          <h2>Play experience</h2>
-          <div class="settings-grid">
-            <label>Primary-hand layout
-              <select id="handMode">
-                <option value="auto">Auto</option>
-                <option value="right">Right-handed</option>
-                <option value="left">Left-handed</option>
-              </select>
-            </label>
-            <label class="switch-label experience-switch"><input id="floatRollToggle" type="checkbox" checked><span>Floating Roll Dice</span></label>
-            <label class="switch-label experience-switch"><input id="lockRollToggle" type="checkbox"><span>Lock button position</span></label>
-            <button id="resetRollPositionBtn" class="secondary wide" type="button">Reset Roll Dice position</button>
-            <button id="testCelebrationBtn" class="primary wide" type="button">🎉 Test random win celebration</button>
-            <div class="setting-help">Each tap randomly selects one of the five victory finales. Use Stop celebration at any time.</div>
+        
             <button id="focusModeBtn" class="secondary wide" type="button">Hide extra panels</button>
           </div>
         </section>
 
-        <section class="panel lesson-panel">
-          <h2>Focus lesson</h2>
-          <select id="lessonSelect">
-            <option value="general">General strategy</option>
-            <option value="opening">Opening moves</option>
-            <option value="safety">Checker safety</option>
-            <option value="prime">Building primes</option>
-            <option value="race">Racing and pip count</option>
-            <option value="bearing">Bearing off</option>
-          </select>
-          <p id="lessonText">Keep checkers connected, avoid unnecessary blots, and fight for useful points.</p>
-        </section>
+        
       </aside>
     </section>
   </main>
@@ -1258,7 +1329,7 @@ const canvas = document.getElementById('board');
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v2.0.5.1 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v2.0.5.2 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -3419,6 +3490,7 @@ const canvas = document.getElementById('board');
   }
 
   function initializePip(){
+    document.body.classList.add('game-panel-only-layout');
     loadPipSettings();
 
     document.getElementById('pipSettingsButton').addEventListener('click',openPipSettings);
