@@ -1,28 +1,22 @@
-BACKGAMMON COACH — IPHONE INSTALLABLE WEB APP
+BACKGAMMON COACH v1.6 — CORE GAME STABILIZATION
 
-This folder must be published as a website before iPhone Safari can install it.
-Do not open index.html directly from the Files app.
+Upload the CONTENTS of this folder to the root of your GitHub repository,
+replacing the existing files. Do not upload the ZIP itself.
 
-EASIEST PUBLISHING METHOD (computer recommended)
-1. Sign in to Netlify.
-2. Open https://app.netlify.com/drop
-3. Drag the entire Backgammon_Coach_iPhone_PWA folder into the drop area.
-4. Netlify will provide an https://...netlify.app address.
-5. Open that address in Safari on your iPhone.
-6. Tap Safari's Share button.
-7. Tap Add to Home Screen, then Add.
-8. Launch Backgammon Coach from its new Home Screen icon.
+Visible version marker: tiny "v1.6" beside the title.
 
-OFFLINE USE
-Open the installed app once while online. The included service worker then caches
-its files so it can ordinarily reopen without an internet connection.
+Changes:
+- User-only Undo remains available briefly after the final move.
+- Turn status stays above the board and never covers pips/checkers.
+- Remaining usable moves are shown beside the dice.
+- Used dice fade visually.
+- Automatic turn passing is more deliberate and clearly announced.
+- Added an internal rules regression suite covering bar priority, blocked
+  points, hitting, bearing off, doubles, and forced-die behavior.
+- New offline cache name forces the update to v1.6.
 
-UPDATING
-Edit or replace the files, then deploy the folder again in Netlify. The service
-worker cache name may be increased when releasing a changed version.
-
-
-VERSION 1.4 CHANGES
-- Added Undo for the human player during the current turn.
-- Undo is disabled during computer play.
-- Moved the turn-status banner above the board so it no longer covers pip/checker areas.
+After committing on GitHub:
+1. Open the site in Safari while online.
+2. Refresh once.
+3. Close the Home Screen app completely.
+4. Reopen it and confirm the tiny v1.6 label appears.
