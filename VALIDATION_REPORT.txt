@@ -1,16 +1,17 @@
-Backgammon Coach v2.0.1.1.6 Stack and Tap Repair
-================================================================
+Backgammon Coach v2.0.1.1.7 Celebration Button Restore
+====================================================================
 PASS — Version updated
 PASS — JavaScript syntax
-PASS — Score comparison is nonrecursive
-PASS — Analysis depth guard
-PASS — Safe static fallback
-PASS — Direct yellow target handler
-PASS — Generous iPad radius
+PASS — Header celebration button present
+PASS — Button included in UI map
+PASS — Button launches celebration
+PASS — Existing celebration function retained
+PASS — Gameplay tap repair retained
+PASS — Stack guard retained
 PASS — Cache updated
-PASS — Safe defaults retained
 PASS — Flat paths retained
 
 Automated result: PASS
-Automatic Watch the Coach remains OFF by default.
-Manual iPad move validation remains required.
+Celebration button location: top action area beside New game.
+Gameplay logic changes: none.
+Manual iPad visual confirmation remains required.

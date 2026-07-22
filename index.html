@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v2.0.1.1.6</title>
+  <title>Backgammon Coach iPhone v2.0.1.1.7</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -103,7 +103,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 @media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
 
 
-/* v2.0.1.1.6 Immersive Play */
+/* v2.0.1.1.7 Immersive Play */
 .topbar,.play-controls,.coach-panel{transition:all .22s ease}
 body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
 body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
@@ -154,7 +154,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   
 
-/* v2.0.1.1.6 Victory Celebration */
+/* v2.0.1.1.7 Victory Celebration */
 .victory-celebration{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden;background:rgba(8,12,10,.08);opacity:0;transition:opacity .18s ease}
 .victory-celebration.active{opacity:1}
 .victory-canvas{width:100%;height:100%;display:block}
@@ -164,7 +164,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media (prefers-reduced-motion:reduce){.victory-celebration,.victory-banner{transition:none}}
 
 
-/* v2.0.1.1.6 Explain Every Move */
+/* v2.0.1.1.7 Explain Every Move */
 .coach-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
 .coach-settings label{display:grid;gap:4px;color:var(--muted);font-size:.76rem;font-weight:800}
 .move-rating{margin:10px 0;padding:11px;border-radius:12px;border:1px solid #d6c4ae;background:#fffaf2}
@@ -192,7 +192,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.coach-settings{grid-template-columns:1fr}.risk-row{grid-template-columns:64px 1fr 30px}}
 
 
-/* v2.0.1.1.6 Animated Board Hints */
+/* v2.0.1.1.7 Animated Board Hints */
 .visual-hint-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .visual-hint-controls button{margin:0;box-shadow:none}
 .visual-hint-status{margin-top:8px;padding:8px 10px;border-radius:10px;background:#e7f0eb;color:#294f42;font-weight:800;font-size:.8rem}
@@ -200,7 +200,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.visual-hint-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.1.1.6 Watch the Coach Think */
+/* v2.0.1.1.7 Watch the Coach Think */
 .think-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .think-controls button{margin:0;box-shadow:none}
 .think-panel{margin-top:9px;padding:10px;border-radius:12px;background:#f6ead8;border:1px solid #d8c5ab}
@@ -215,7 +215,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.think-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.1.1.6 verified engine controls */
+/* v2.0.1.1.7 verified engine controls */
 .engine-panel{margin:10px 0;padding:10px;border-radius:12px;border:1px solid #d8c5ab;background:#fffaf2}
 .engine-panel h3{margin:0 0 8px;font-size:.95rem}
 .engine-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -229,6 +229,16 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 .engine-badge.verified{background:#dcece3;color:#25543d}
 .engine-badge.fallback{background:#f5e5c6;color:#664911}
 @media(max-width:620px){.engine-grid,.engine-actions{grid-template-columns:1fr}}
+
+
+  .celebration-header-btn{
+    background:#fff7e6;
+    border:1px solid rgba(105,75,25,.28);
+    color:#4a3513;
+    font-weight:800;
+    white-space:nowrap;
+  }
+  .celebration-header-btn:active{transform:translateY(1px);}
 
 </style>
 
@@ -246,12 +256,13 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v2.0.1.1.6</span>
+          <span class="version-badge" id="versionBadge">v2.0.1.1.7</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v2.0.1.1.6</div>
+        <div class="version-note">v2.0.1.1.7</div>
       </div>
       <div class="top-actions">
+        <button id="headerCelebrationBtn" class="secondary celebration-header-btn" type="button">🎉 Celebration</button>
         <button id="newGameBtn">New game</button>
         <button id="rulesBtn" class="secondary">How to play</button>
       </div>
@@ -360,7 +371,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
             <div id="favoriteLessons" class="favorite-list"></div>
           </details>
           <div id="coachReport" class="coach-report" hidden></div>
-          <div class="coach-disclaimer">v2.0.1.1.6 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. The local evaluator remains available solely as a clearly marked teaching fallback.</div>
+          <div class="coach-disclaimer">v2.0.1.1.7 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. The local evaluator remains available solely as a clearly marked teaching fallback.</div>
           </div>
         </section>
 
@@ -454,7 +465,8 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   const UI = Object.fromEntries([
     'rollBtn','undoBtn','endTurnBtn','newGameBtn','rulesBtn','closeRulesBtn','rulesDialog','die1','die2',
     'humanPips','aiPips','humanBar','aiBar','humanOff','aiOff','turnBanner','coachText','hintBtn',
-    'coachToggle','coachLevel','coachVerbosity','engineMode','engineEndpoint','testEngineBtn','clearEngineBtn','engineStatus','explainEveryMove','autoWatchCoach','animateBestHintBtn','stopHintAnimationBtn','watchCoachThinkBtn','stopCoachThinkBtn','coachThinkPanel','coachThinkStage','coachThinkDetail','coachThinkCandidates','visualHintStatus','lastMoveRating','favoriteLessonsPanel','favoriteLessons','coachReport','victoryCelebration','victoryCanvas','victoryBanner','stopCelebrationBtn','testCelebrationBtn','coachDrawerToggle','coachDrawerBody','coachPanel','appHeader','playControls','handMode','floatRollToggle','lockRollToggle','resetRollPositionBtn','focusModeBtn','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode'
+    'coachToggle','coachLevel','coachVerbosity','engineMode','engineEndpoint','testEngineBtn','clearEngineBtn','engineStatus','explainEveryMove','autoWatchCoach','animateBestHintBtn','stopHintAnimationBtn','watchCoachThinkBtn','stopCoachThinkBtn','coachThinkPanel','coachThinkStage','coachThinkDetail','coachThinkCandidates','visualHintStatus','lastMoveRating','favoriteLessonsPanel','favoriteLessons','coachReport','victoryCelebration','victoryCanvas','victoryBanner','stopCelebrationBtn','testCelebrationBtn','coachDrawerToggle','coachDrawerBody','coachPanel','appHeader','playControls','handMode','floatRollToggle','lockRollToggle','resetRollPositionBtn','focusModeBtn','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode',
+    'headerCelebrationBtn'
   ].map(id => [id, document.getElementById(id)]));
 
   const W = canvas.width, H = canvas.height;
@@ -738,7 +750,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v2.0.1.1.6 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v2.0.1.1.7 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -2212,6 +2224,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   UI.undoBtn.addEventListener('click',undoHumanMove);
   UI.endTurnBtn.addEventListener('click',endTurn);
   UI.newGameBtn.addEventListener('click',newGame);
+  UI.headerCelebrationBtn.addEventListener('click',startVictoryCelebration);
   UI.hintBtn.addEventListener('click',()=>{showHint();setCoachDrawer(false);});
   UI.animateBestHintBtn.addEventListener('click',animateBestHint);
   UI.watchCoachThinkBtn.addEventListener('click',watchCoachThink);

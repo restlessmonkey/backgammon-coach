@@ -1,5 +1,5 @@
 {
-  "version": "2.0.1.1.6",
+  "version": "2.0.1.1.7",
   "package_type": "GITHUB_IPHONE_FLAT_UPLOAD",
   "upload_location": "repository root",
   "required_app_files": [
@@ -16,8 +16,8 @@
     "VALIDATION_REPORT.txt",
     "SHA256SUMS.txt"
   ],
-  "created_utc": "2026-07-22T14:27:24.916895+00:00",
-  "package_name": "v2.0.1.1.6_Backgammon_Coach_iPhone_GitHub_FLAT_STACK_AND_TAP_FIX.zip",
+  "created_utc": "2026-07-22T14:52:41.579010+00:00",
+  "package_name": "v2.0.1.1.7_Backgammon_Coach_iPhone_GitHub_FLAT_CELEBRATION_BUTTON_RESTORE.zip",
   "default_settings": {
     "coaching_enabled": true,
     "explain_every_move": true,
@@ -25,16 +25,8 @@
     "prior_auto_watch_reset_once": true
   },
   "repair": {
-    "reported_errors": [
-      "Maximum call stack exceeded",
-      "yellow destination displayed but move not applied"
-    ],
-    "changes": [
-      "nonrecursive move scoring",
-      "analysis depth guard",
-      "safe static fallback",
-      "direct yellow-target hit testing",
-      "reduced mobile lookahead"
-    ]
+    "reported_issue": "Celebration test button was not visible anywhere in the rendered iPad interface.",
+    "change": "Added a persistent header Celebration button wired to the existing startVictoryCelebration function.",
+    "gameplay_changes": "None"
   }
 }
