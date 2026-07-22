@@ -1,18 +1,17 @@
-Backgammon Coach v2.0.2.5 Replay Example Moves Validation
-========================================================================
+Backgammon Coach v2.0.2.5.1 Watch Coach Local Mode Hotfix Validation
+==============================================================================
 PASS — Version updated
 PASS — JavaScript syntax
-PASS — Replay button present
-PASS — Replay helper present
-PASS — Replay listener present
-PASS — Replay enabled with example
-PASS — Replay disabled during animation
-PASS — Preview safety message
-PASS — Three existing animation controls
+PASS — Direct click event blocked
+PASS — Pre-ranked input array guarded
+PASS — Ranking response array validated
+PASS — Local coach path retained
+PASS — Watch Coach function retained
+PASS — Automatic Watch ranked-array path retained
+PASS — Replay control retained
 PASS — Collapsible panel initializer retained
-PASS — Large collapse button retained
+PASS — Large collapse controls retained
 PASS — Independent scrolling retained
-PASS — Board sticky retained
 PASS — 44 celebrations retained
 PASS — Bowling celebration retained
 PASS — Gameplay tap repair retained
@@ -22,6 +21,7 @@ PASS — Standalone commit message
 
 Celebrations inventoried: 44
 Automated result: PASS
-Panel layout/collapse implementation changes: none.
+Panel implementation changes: none.
+Replay implementation changes: none.
 Gameplay logic changes: none.
-Manual browser validation of repeated animations remains required.
+Manual Safari validation: select Advanced local coach, roll dice, tap Watch the Coach Think.
