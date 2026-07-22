@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>Backgammon Coach iPhone v1.1</title>
+  <style>
+:root {
+  --bg: #1b211c;
+  --panel: #f7efe1;
+  --ink: #2a251f;
+  --muted: #6e6257;
+  --wood: #8b5a35;
+  --wood-dark: #5f3922;
+  --cream: #e8c78f;
+  --red: #9e3f37;
+  --green: #294f42;
+  --gold: #d9a441;
+  --shadow: rgba(0,0,0,.28);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: white;
+  background: radial-gradient(circle at top, #344439 0, var(--bg) 55%);
+}
+button, select { font: inherit; }
+button { cursor: pointer; }
+.app-shell { max-width: 1500px; margin: 0 auto; padding: 22px; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 16px; }
+h1 { margin: 0; font-size: clamp(1.8rem, 3vw, 3rem); font-family: Georgia, serif; }
+.topbar p { margin: 5px 0 0; color: #ced8d0; }
+.top-actions { display: flex; gap: 10px; }
+button { border: 0; border-radius: 12px; padding: 11px 15px; background: var(--gold); color: #241a0e; font-weight: 800; box-shadow: 0 6px 16px var(--shadow); }
+button.secondary { background: rgba(255,255,255,.14); color: white; border: 1px solid rgba(255,255,255,.2); box-shadow: none; }
+button:disabled { opacity: .45; cursor: not-allowed; }
+button.wide { width: 100%; margin-top: 10px; }
+.game-layout { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 18px; align-items: start; }
+.board-wrap { position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 18px 50px rgba(0,0,0,.38); background: #3d291d; }
+canvas { width: 100%; height: auto; display: block; touch-action: manipulation; }
+.turn-banner { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); padding: 8px 18px; border-radius: 999px; background: rgba(19,25,21,.86); border: 1px solid rgba(255,255,255,.25); font-weight: 800; backdrop-filter: blur(8px); }
+.sidebar { display: grid; gap: 14px; }
+.panel { background: var(--panel); color: var(--ink); border-radius: 18px; padding: 16px; box-shadow: 0 12px 28px rgba(0,0,0,.24); }
+.panel h2 { margin: 0 0 12px; font-family: Georgia, serif; font-size: 1.25rem; }
+.score-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #dfd2bf; }
+.status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 13px; }
+.status-grid div { background: #ede0ce; border-radius: 12px; padding: 10px; }
+.status-grid small { display:block; color: var(--muted); }
+.status-grid strong { font-size: 1.25rem; }
+.dice-row { display:flex; gap:12px; justify-content:center; }
+.die { width:72px; height:72px; border-radius:16px; background:white; display:grid; place-items:center; font-size:2.4rem; font-weight:900; box-shadow: inset 0 0 0 2px #d8c8b6, 0 7px 15px rgba(0,0,0,.15); }
+.panel-heading { display:flex; justify-content:space-between; align-items:center; }
+.switch-label { display:flex; gap:7px; align-items:center; color:var(--muted); font-size:.9rem; }
+.coach-panel p, .lesson-panel p { line-height:1.45; color:#51473e; }
+select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9; background:white; color:var(--ink); }
+.modal { position:fixed; inset:0; z-index:1000; display:none; align-items:center; justify-content:center; padding:18px; background:rgba(0,0,0,.72); }
+.modal.open { display:flex; }
+.dialog-content { position:relative; width:min(560px,100%); max-height:85vh; overflow:auto; border-radius:18px; padding:28px; color:var(--ink); background:var(--panel); line-height:1.6; box-shadow:0 25px 80px rgba(0,0,0,.45); }
+.dialog-close { position:absolute; right:12px; top:10px; background:transparent; box-shadow:none; font-size:1.7rem; }
+@media (max-width: 980px) { .game-layout { grid-template-columns:1fr; } .sidebar { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+@media (max-width: 620px) { .app-shell{padding:10px}.topbar{align-items:flex-start; flex-direction:column}.sidebar{grid-template-columns:1fr}.top-actions{width:100%}.top-actions button{flex:1}.turn-banner{font-size:.8rem} }
+
+  </style>
+
+  <meta name="theme-color" content="#382719">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Backgammon Coach">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="topbar">
+      <div>
+        <h1>Backgammon Coach</h1>
+        <p>Play, learn, and see why a move is strong.</p><p id="launchNote" style="margin-top:7px;font-size:.85rem;color:#f5d889">For full play, open this file in Safari—not the Files preview.</p>
+      </div>
+      <div class="top-actions">
+        <button id="newGameBtn">New game</button>
+        <button id="rulesBtn" class="secondary">How to play</button>
+      </div>
+    </section>
+
+    <section class="game-layout">
+      <div class="board-wrap">
+        <canvas id="board" width="1120" height="720" aria-label="Backgammon board"></canvas>
+        <div id="turnBanner" class="turn-banner">Your turn</div>
+      </div>
+
+      <aside class="sidebar">
+        <section class="panel player-panel">
+          <h2>Game</h2>
+          <div class="score-row"><span>You</span><strong id="humanPips">167 pips</strong></div>
+          <div class="score-row"><span>Computer</span><strong id="aiPips">167 pips</strong></div>
+          <div class="status-grid">
+            <div><small>Your bar</small><strong id="humanBar">0</strong></div>
+            <div><small>AI bar</small><strong id="aiBar">0</strong></div>
+            <div><small>You off</small><strong id="humanOff">0</strong></div>
+            <div><small>AI off</small><strong id="aiOff">0</strong></div>
+          </div>
+        </section>
+
+        <section class="panel dice-panel">
+          <h2>Dice</h2>
+          <div class="dice-row">
+            <div id="die1" class="die">–</div>
+            <div id="die2" class="die">–</div>
+          </div>
+          <button id="rollBtn" class="primary wide">Roll dice</button>
+          <button id="endTurnBtn" class="secondary wide" disabled>End turn</button>
+        </section>
+
+        <section class="panel coach-panel">
+          <div class="panel-heading">
+            <h2>Coach</h2>
+            <label class="switch-label">
+              <input id="coachToggle" type="checkbox" checked />
+              <span>Hints</span>
+            </label>
+          </div>
+          <p id="coachText">Roll the dice. I’ll highlight legal checkers and explain useful ideas.</p>
+          <button id="hintBtn" class="secondary wide">Show best move</button>
+        </section>
+
+        <section class="panel lesson-panel">
+          <h2>Focus lesson</h2>
+          <select id="lessonSelect">
+            <option value="general">General strategy</option>
+            <option value="opening">Opening moves</option>
+            <option value="safety">Checker safety</option>
+            <option value="prime">Building primes</option>
+            <option value="race">Racing and pip count</option>
+            <option value="bearing">Bearing off</option>
+          </select>
+          <p id="lessonText">Keep checkers connected, avoid unnecessary blots, and fight for useful points.</p>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <div id="rulesDialog" class="modal" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
+    <div class="dialog-content">
+      <button id="closeRulesBtn" class="dialog-close" aria-label="Close">×</button>
+      <h2 id="rulesTitle">Backgammon basics</h2>
+      <p>You move your checkers in opposite directions around the board. Use both dice when legally possible. A single opposing checker is a blot and may be hit. Two or more opposing checkers make a closed point.</p>
+      <p>Checkers on the bar must re-enter before any other checker can move. Once all 15 checkers are in your home board, you may bear them off.</p>
+      <p>This trainer highlights legal starting points. Click a checker, then click a highlighted destination.</p>
+    </div>
+  </div>
+
+  <script>
+(() => {
+  'use strict';
+
+  const canvas = document.getElementById('board');
+  const ctx = canvas.getContext('2d');
+  const UI = Object.fromEntries([
+    'rollBtn','endTurnBtn','newGameBtn','rulesBtn','closeRulesBtn','rulesDialog','die1','die2',
+    'humanPips','aiPips','humanBar','aiBar','humanOff','aiOff','turnBanner','coachText','hintBtn',
+    'coachToggle','lessonSelect','lessonText'
+  ].map(id => [id, document.getElementById(id)]));
+
+  const W = canvas.width, H = canvas.height;
+  const margin = 54, barW = 72, trayW = 82;
+  const playLeft = margin, playRight = W - margin - trayW;
+  const midX = W / 2 - trayW / 2;
+  const pointW = (playRight - playLeft - barW) / 12;
+  const checkerR = Math.min(pointW * .42, 31);
+
+  const HUMAN = 1, AI = -1;
+  let state;
+  let selected = null;
+  let legalTargets = [];
+  let hintMove = null;
+  let aiTimer = null;
+
+  const lessons = {
+    general: 'Keep checkers connected, avoid unnecessary blots, and fight for useful points.',
+    opening: 'Opening rolls usually balance three goals: escape a back checker, build your home board, and avoid loose blots.',
+    safety: 'A blot is most dangerous when the opponent has many direct shots. Count how many dice numbers hit it.',
+    prime: 'A prime is a wall of consecutive made points. Four points are useful; five are powerful; six trap a checker completely.',
+    race: 'When contact is gone, compare pip counts. The lower total is ahead. Then prioritize efficient movement and clean bear-off distribution.',
+    bearing: 'Avoid wasting pips. A smooth spread across your home board usually bears off faster than stacking too many checkers on one point.'
+  };
+
+  function newGame() {
+    clearTimeout(aiTimer);
+    state = {
+      points: Array(24).fill(0),
+      bar: { [HUMAN]: 0, [AI]: 0 },
+      off: { [HUMAN]: 0, [AI]: 0 },
+      turn: HUMAN,
+      dice: [],
+      remaining: [],
+      rolled: false,
+      winner: null
+    };
+    // Human moves 24 -> 1 (high to low). AI moves 1 -> 24.
+    state.points[23] = 2; state.points[12] = 5; state.points[7] = 3; state.points[5] = 5;
+    state.points[0] = -2; state.points[11] = -5; state.points[16] = -3; state.points[18] = -5;
+    selected = null; legalTargets = []; hintMove = null;
+    setCoach('Roll the dice. I’ll highlight legal checkers and explain useful ideas.');
+    updateUI(); draw();
+  }
+
+  function owner(v) { return Math.sign(v); }
+  function count(v) { return Math.abs(v); }
+  function homeRange(player) { return player === HUMAN ? [0,5] : [18,23]; }
+  function allInHome(s, player) {
+    if (s.bar[player] > 0) return false;
+    const [a,b] = homeRange(player);
+    for (let i=0;i<24;i++) if (owner(s.points[i])===player && (i<a || i>b)) return false;
+    return true;
+  }
+  function pipCount(s, player) {
+    let p = s.bar[player] * 25;
+    for (let i=0;i<24;i++) if (owner(s.points[i])===player) {
+      const dist = player === HUMAN ? i + 1 : 24 - i;
+      p += count(s.points[i]) * dist;
+    }
+    return p;
+  }
+
+  function entryIndex(player, die) { return player === HUMAN ? 24 - die : die - 1; }
+  function destination(player, from, die) { return player === HUMAN ? from - die : from + die; }
+
+  function canLand(s, player, to) {
+    if (to < 0 || to > 23) return false;
+    const v = s.points[to];
+    return v === 0 || owner(v) === player || count(v) === 1;
+  }
+
+  function canBearOff(s, player, from, die) {
+    if (!allInHome(s, player)) return false;
+    const exact = player === HUMAN ? from + 1 : 24 - from;
+    if (die === exact) return true;
+    if (die < exact) return false;
+    // Oversized die allowed only if no checker farther from bear-off.
+    if (player === HUMAN) {
+      for (let i=from+1;i<=5;i++) if (owner(s.points[i])===player) return false;
+    } else {
+      for (let i=18;i<from;i++) if (owner(s.points[i])===player) return false;
+    }
+    return true;
+  }
+
+  function legalSingleMoves(s, player, die) {
+    const moves = [];
+    if (s.bar[player] > 0) {
+      const to = entryIndex(player, die);
+      if (canLand(s, player, to)) moves.push({from:'bar', to, die});
+      return moves;
+    }
+    for (let from=0; from<24; from++) {
+      if (owner(s.points[from]) !== player) continue;
+      const to = destination(player, from, die);
+      if (to >= 0 && to < 24 && canLand(s, player, to)) moves.push({from,to,die});
+      else if ((to < 0 || to > 23) && canBearOff(s, player, from, die)) moves.push({from,to:'off',die});
+    }
+    return moves;
+  }
+
+  function cloneState(s) {
+    return { points:[...s.points], bar:{...s.bar}, off:{...s.off}, turn:s.turn, dice:[...s.dice], remaining:[...s.remaining], rolled:s.rolled, winner:s.winner };
+  }
+
+  function applyMove(s, player, move) {
+    const n = cloneState(s);
+    if (move.from === 'bar') n.bar[player]--;
+    else n.points[move.from] -= player;
+    if (move.to === 'off') n.off[player]++;
+    else {
+      if (n.points[move.to] === -player) {
+        n.points[move.to] = 0;
+        n.bar[-player]++;
+      }
+      n.points[move.to] += player;
+    }
+    return n;
+  }
+
+  function allSequences(s, player, dice) {
+    const results = [];
+    function walk(cur, left, seq) {
+      if (!left.length) { results.push(seq); return; }
+      let progressed = false;
+      for (let i=0;i<left.length;i++) {
+        const die = left[i];
+        const moves = legalSingleMoves(cur, player, die);
+        for (const move of moves) {
+          progressed = true;
+          walk(applyMove(cur, player, move), left.filter((_,idx)=>idx!==i), [...seq, move]);
+        }
+      }
+      if (!progressed) results.push(seq);
+    }
+    walk(s, dice, []);
+    const maxLen = Math.max(0, ...results.map(r=>r.length));
+    let filtered = results.filter(r=>r.length===maxLen);
+    if (dice.length===2 && dice[0]!==dice[1] && maxLen===1) {
+      const high = Math.max(...dice);
+      if (filtered.some(seq=>seq[0]?.die===high)) filtered = filtered.filter(seq=>seq[0]?.die===high);
+    }
+    return filtered;
+  }
+
+  function availableMovesNow() {
+    if (!state.rolled || !state.remaining.length) return [];
+    const seqs = allSequences(state, state.turn, state.remaining);
+    const seen = new Set(), moves=[];
+    for (const seq of seqs) if (seq[0]) {
+      const m=seq[0], key=`${m.from}-${m.to}-${m.die}`;
+      if (!seen.has(key)) { seen.add(key); moves.push(m); }
+    }
+    return moves;
+  }
+
+  function rollDice() {
+    if (state.winner || state.rolled || state.turn!==HUMAN) return;
+    const a = 1 + Math.floor(Math.random()*6), b = 1 + Math.floor(Math.random()*6);
+    state.dice=[a,b]; state.remaining = a===b ? [a,a,a,a] : [a,b]; state.rolled=true;
+    selected=null; legalTargets=[]; hintMove=null;
+    const moves=availableMovesNow();
+    setCoach(moves.length ? explainPosition(state, HUMAN) : 'No legal move is available. End your turn.');
+    updateUI(); draw();
+  }
+
+  function doHumanMove(move) {
+    state = applyMove(state, HUMAN, move);
+    const idx = state.remaining.indexOf(move.die);
+    if (idx>=0) state.remaining.splice(idx,1);
+    selected=null; legalTargets=[]; hintMove=null;
+    checkWinner();
+    const moves=availableMovesNow();
+    if (!state.winner && state.remaining.length && !moves.length) setCoach('No more legal moves. End your turn.');
+    else if (!state.winner && state.remaining.length) setCoach(explainMove(move, state, HUMAN));
+    updateUI(); draw();
+  }
+
+  function endTurn() {
+    if (state.turn!==HUMAN || !state.rolled) return;
+    if (availableMovesNow().length) {
+      setCoach('You still have a legal move. Backgammon requires using as many dice as possible.');
+      return;
+    }
+    state.turn=AI; state.rolled=false; state.dice=[]; state.remaining=[]; selected=null; legalTargets=[];
+    updateUI(); draw();
+    aiTimer=setTimeout(aiTurn, 650);
+  }
+
+  function evaluate(s, player) {
+    if (s.off[player]===15) return 100000;
+    if (s.off[-player]===15) return -100000;
+    let score = (pipCount(s,-player)-pipCount(s,player))*1.15;
+    score += (s.off[player]-s.off[-player])*45;
+    score += (s.bar[-player]-s.bar[player])*18;
+    for (let i=0;i<24;i++) {
+      const v=s.points[i];
+      if (owner(v)===player) {
+        if (count(v)>=2) score += 4 + Math.min(3,count(v)-2);
+        if (count(v)===1) score -= blotRisk(s,player,i)*2.2;
+      }
+      if (owner(v)===-player && count(v)===1) score += blotRisk(s,-player,i)*.8;
+    }
+    score += primeScore(s,player)*4 - primeScore(s,-player)*4;
+    return score;
+  }
+
+  function blotRisk(s, player, idx) {
+    let hits=0;
+    for (let die=1;die<=6;die++) {
+      const from = player===HUMAN ? idx-die : idx+die;
+      if (from>=0&&from<24&&owner(s.points[from])===-player) hits++;
+    }
+    return hits;
+  }
+  function primeScore(s,player) {
+    let best=0, run=0;
+    for (let i=0;i<24;i++) { if (owner(s.points[i])===player && count(s.points[i])>=2) { run++; best=Math.max(best,run); } else run=0; }
+    return best;
+  }
+
+  function bestSequence(s, player, dice) {
+    const seqs=allSequences(s,player,dice);
+    let best=seqs[0]||[], bestScore=-Infinity;
+    for (const seq of seqs) {
+      let cur=s;
+      for (const m of seq) cur=applyMove(cur,player,m);
+      const score=evaluate(cur,player)+Math.random()*.25;
+      if (score>bestScore) {bestScore=score;best=seq;}
+    }
+    return best;
+  }
+
+  function aiTurn() {
+    if (state.winner) return;
+    const a=1+Math.floor(Math.random()*6), b=1+Math.floor(Math.random()*6);
+    state.dice=[a,b]; state.remaining=a===b?[a,a,a,a]:[a,b]; state.rolled=true;
+    updateUI(); draw();
+    const seq=bestSequence(state,AI,state.remaining);
+    let i=0;
+    function step() {
+      if (i>=seq.length) {
+        checkWinner();
+        if (!state.winner) {
+          state.turn=HUMAN; state.rolled=false; state.dice=[]; state.remaining=[];
+          setCoach('Your turn. Roll the dice and look for a move that improves safety, structure, or the race.');
+        }
+        updateUI(); draw(); return;
+      }
+      const m=seq[i++];
+      state=applyMove(state,AI,m);
+      const ix=state.remaining.indexOf(m.die); if(ix>=0) state.remaining.splice(ix,1);
+      updateUI(); draw();
+      aiTimer=setTimeout(step,420);
+    }
+    aiTimer=setTimeout(step,500);
+  }
+
+  function checkWinner() {
+    if (state.off[HUMAN]===15) {state.winner=HUMAN; setCoach('You won! Review which made points and safe moves created the advantage.');}
+    if (state.off[AI]===15) {state.winner=AI; setCoach('The computer won. Try again and focus on reducing exposed blots and building connected points.');}
+  }
+
+  function explainPosition(s, player) {
+    const p=pipCount(s,player), o=pipCount(s,-player);
+    const diff=p-o;
+    if (s.bar[player]) return 'You must enter from the bar first. Look for the safest entry point and avoid re-entering onto another vulnerable blot.';
+    if (allInHome(s,player)) return 'All your checkers are home. Bear off efficiently, but avoid creating gaps that waste large dice.';
+    if (diff < -18) return `You are ahead in the race by ${Math.abs(diff)} pips. Favor safe, efficient moves and avoid unnecessary contact.`;
+    if (diff > 18) return `You trail by ${diff} pips. Seek contact, build blocking points, and look for chances to hit.`;
+    return 'The race is close. Balance development with safety: make points, unstack heavy piles, and keep escaping back checkers in mind.';
+  }
+
+  function explainMove(move, s, player) {
+    if (move.to==='off') return 'Good: bearing off reduces your remaining workload. Keep an eye on checker distribution so future dice play cleanly.';
+    if (s.bar[-player]>0) return 'That move hit a blot. Hitting gains tempo because the opponent must re-enter before moving anything else.';
+    if (count(s.points[move.to])===2) return 'You made a point. Made points improve safety and can become part of a prime.';
+    if (count(s.points[move.to])===1) return 'That checker is now a blot. Check how many opponent dice combinations can hit it.';
+    return 'Solid move. Continue looking for connected checkers and useful made points.';
+  }
+
+  function showHint() {
+    if (state.turn!==HUMAN || !state.rolled) { setCoach('Roll the dice first, then I can suggest a move.'); return; }
+    const seq=bestSequence(state,HUMAN,state.remaining);
+    if (!seq.length) { setCoach('There is no legal move with the remaining dice.'); return; }
+    hintMove=seq[0];
+    const fromText=hintMove.from==='bar'?'the bar':`point ${hintMove.from+1}`;
+    const toText=hintMove.to==='off'?'bear off':`point ${hintMove.to+1}`;
+    setCoach(`Suggested move: ${fromText} → ${toText} using ${hintMove.die}. It scores best for race, safety, made points, and hitting chances.`);
+    draw();
+  }
+
+  function setCoach(text) { if (UI.coachToggle.checked) UI.coachText.textContent=text; }
+
+  function pointCenter(index) {
+    const top=index>=12;
+    const local=top ? 23-index : index;
+    const half=local<6?0:1;
+    const slot=local%6;
+    const x = half===0 ? playRight - pointW*(slot+.5) : playLeft + pointW*(5.5-slot);
+    return {x, top};
+  }
+
+  function hitTest(x,y) {
+    if (x>playRight && x<W-margin) return 'off';
+    if (x>midX-barW/2 && x<midX+barW/2) return 'bar';
+    for(let i=0;i<24;i++) {
+      const p=pointCenter(i);
+      if(Math.abs(x-p.x)<pointW/2 && (p.top?y<H/2:y>H/2)) return i;
+    }
+    return null;
+  }
+
+  let lastTouchAt = 0;
+  function handleBoardInput(clientX, clientY) {
+    if(state.turn!==HUMAN || !state.rolled || state.winner) return;
+    const r=canvas.getBoundingClientRect();
+    const x=(clientX-r.left)*W/r.width, y=(clientY-r.top)*H/r.height;
+    const target=hitTest(x,y), moves=availableMovesNow();
+    if(selected!==null) {
+      const match=legalTargets.find(m=>m.to===target || (m.to==='off'&&target==='off'));
+      if(match){ doHumanMove(match); return; }
+    }
+    if(target==='bar' && state.bar[HUMAN]>0) {
+      selected='bar'; legalTargets=moves.filter(m=>m.from==='bar'); draw(); return;
+    }
+    if(Number.isInteger(target) && owner(state.points[target])===HUMAN) {
+      const options=moves.filter(m=>m.from===target);
+      if(options.length){ selected=target; legalTargets=options; draw(); }
+      else setCoach('That checker has no legal move with the remaining dice.');
+    }
+  }
+
+  canvas.addEventListener('touchend', (e)=>{
+    if(!e.changedTouches || !e.changedTouches.length) return;
+    e.preventDefault();
+    lastTouchAt = Date.now();
+    const t=e.changedTouches[0];
+    handleBoardInput(t.clientX,t.clientY);
+  }, {passive:false});
+
+  canvas.addEventListener('click', (e)=>{
+    if(Date.now()-lastTouchAt<700) return;
+    handleBoardInput(e.clientX,e.clientY);
+  });
+
+  function updateUI() {
+    UI.humanPips.textContent=`${pipCount(state,HUMAN)} pips`;
+    UI.aiPips.textContent=`${pipCount(state,AI)} pips`;
+    UI.humanBar.textContent=state.bar[HUMAN]; UI.aiBar.textContent=state.bar[AI];
+    UI.humanOff.textContent=state.off[HUMAN]; UI.aiOff.textContent=state.off[AI];
+    UI.die1.textContent=state.dice[0]??'–'; UI.die2.textContent=state.dice[1]??'–';
+    UI.rollBtn.disabled=state.turn!==HUMAN||state.rolled||!!state.winner;
+    UI.endTurnBtn.disabled=state.turn!==HUMAN||!state.rolled||!!state.winner;
+    UI.turnBanner.textContent=state.winner ? (state.winner===HUMAN?'You win!':'Computer wins') : (state.turn===HUMAN?'Your turn':'Computer thinking…');
+  }
+
+  function roundedRectPath(x,y,w,h,r) {
+    r = Math.max(0, Math.min(r, Math.abs(w)/2, Math.abs(h)/2));
+    ctx.beginPath();
+    ctx.moveTo(x+r,y);
+    ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+    ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+    ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+    ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
+    ctx.closePath();
+  }
+
+  function drawRoundedRect(x,y,w,h,r,fill,stroke) {
+    roundedRectPath(x,y,w,h,r);
+    if(fill){ctx.fillStyle=fill;ctx.fill();}
+    if(stroke){ctx.strokeStyle=stroke;ctx.stroke();}
+  }
+
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    const grd=ctx.createLinearGradient(0,0,W,H); grd.addColorStop(0,'#9a6840'); grd.addColorStop(1,'#5d3822');
+    drawRoundedRect(8,8,W-16,H-16,28,grd,'#2d1a11');
+    drawRoundedRect(margin-16,margin-18,playRight-playLeft+32,H-2*margin+36,12,'#d9b77c','#3e2415');
+    // center bar and bear-off tray
+    ctx.fillStyle='#654027'; ctx.fillRect(midX-barW/2,margin-18,barW,H-2*margin+36);
+    ctx.fillStyle='#3f291d'; ctx.fillRect(playRight+10,margin-18,trayW-18,H-2*margin+36);
+    ctx.strokeStyle='rgba(255,255,255,.12)'; ctx.lineWidth=2; ctx.strokeRect(playRight+20,H/2-4,trayW-38,8);
+
+    for(let i=0;i<24;i++) drawPoint(i);
+    for(let i=0;i<24;i++) drawStack(i,state.points[i]);
+    drawBarCheckers(); drawOffCheckers(); drawHighlights();
+  }
+
+  function drawPoint(i) {
+    const p=pointCenter(i), alt=i%2===0;
+    const baseY=p.top?margin-12:H-margin+12, tipY=p.top?H/2-24:H/2+24;
+    ctx.beginPath(); ctx.moveTo(p.x-pointW/2+3,baseY); ctx.lineTo(p.x+pointW/2-3,baseY); ctx.lineTo(p.x,tipY); ctx.closePath();
+    ctx.fillStyle=alt?'#8f2f2f':'#2f5143'; ctx.fill();
+  }
+
+  function drawChecker(x,y,player,ghost=false) {
+    const g=ctx.createRadialGradient(x-checkerR*.35,y-checkerR*.35,4,x,y,checkerR);
+    if(player===HUMAN){g.addColorStop(0,'#fff9e9');g.addColorStop(1,'#c9b58e');}
+    else {g.addColorStop(0,'#69423c');g.addColorStop(1,'#241514');}
+    ctx.globalAlpha=ghost?.45:1; ctx.beginPath(); ctx.arc(x,y,checkerR,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
+    ctx.lineWidth=3;ctx.strokeStyle=player===HUMAN?'#806d4e':'#b18474';ctx.stroke();ctx.globalAlpha=1;
+  }
+
+  function drawStack(i,v) {
+    const n=count(v); if(!n)return; const p=pointCenter(i); const dir=p.top?1:-1; const start=p.top?margin+checkerR:H-margin-checkerR;
+    const spacing=Math.min(checkerR*1.72,(H/2-margin-40)/(Math.max(1,Math.min(n,5)-1)||1));
+    for(let k=0;k<Math.min(n,5);k++) drawChecker(p.x,start+dir*k*spacing,owner(v));
+    if(n>5){ctx.fillStyle=owner(v)===HUMAN?'#2b241c':'white';ctx.font='bold 22px sans-serif';ctx.textAlign='center';ctx.fillText(n,p.x,start+dir*4*spacing+7);}
+  }
+
+  function drawBarCheckers() {
+    const x=midX;
+    for(let k=0;k<state.bar[AI];k++) drawChecker(x,margin+checkerR+k*checkerR*1.25,AI);
+    for(let k=0;k<state.bar[HUMAN];k++) drawChecker(x,H-margin-checkerR-k*checkerR*1.25,HUMAN);
+  }
+  function drawOffCheckers() {
+    const x=playRight+trayW/2;
+    for(let k=0;k<state.off[AI];k++){ctx.fillStyle='#2b1816';drawRoundedRect(x-28,margin+k*12,56,9,4,'#2b1816');}
+    for(let k=0;k<state.off[HUMAN];k++){ctx.fillStyle='#d8c6a4';drawRoundedRect(x-28,H-margin-9-k*12,56,9,4,'#d8c6a4');}
+  }
+
+  function highlightCircle(x,y,kind='legal') {
+    ctx.beginPath();ctx.arc(x,y,checkerR+7,0,Math.PI*2);ctx.lineWidth=5;ctx.strokeStyle=kind==='hint'?'#ffe06d':'rgba(255,255,255,.9)';ctx.stroke();
+  }
+
+  function checkerTopPosition(from) {
+    if(from==='bar') return {x:midX,y:H-margin-checkerR-(state.bar[HUMAN]-1)*checkerR*1.25};
+    const p=pointCenter(from),n=count(state.points[from]),dir=p.top?1:-1,start=p.top?margin+checkerR:H-margin-checkerR;
+    const spacing=Math.min(checkerR*1.72,(H/2-margin-40)/(Math.max(1,Math.min(n,5)-1)||1));
+    return {x:p.x,y:start+dir*(Math.min(n,5)-1)*spacing};
+  }
+
+  function drawHighlights() {
+    if(state.turn===HUMAN&&state.rolled){
+      const moves=availableMovesNow(); const starts=[...new Set(moves.map(m=>m.from))];
+      for(const from of starts){const p=checkerTopPosition(from);highlightCircle(p.x,p.y);}
+    }
+    if(selected!==null){
+      const p=checkerTopPosition(selected);highlightCircle(p.x,p.y,'hint');
+      for(const m of legalTargets){
+        if(m.to==='off'){drawRoundedRect(playRight+22,H/2+30,40,100,12,'rgba(255,224,109,.42)','#ffe06d');}
+        else {const q=pointCenter(m.to); const y=q.top?H/2-48:H/2+48; highlightCircle(q.x,y,'hint'); ctx.fillStyle='#241a0e';ctx.font='bold 18px sans-serif';ctx.textAlign='center';ctx.fillText(m.die,q.x,y+6);}
+      }
+    }
+    if(hintMove){ const p=checkerTopPosition(hintMove.from);highlightCircle(p.x,p.y,'hint'); }
+  }
+
+  UI.rollBtn.addEventListener('click',rollDice);
+  UI.endTurnBtn.addEventListener('click',endTurn);
+  UI.newGameBtn.addEventListener('click',newGame);
+  UI.hintBtn.addEventListener('click',showHint);
+  UI.rulesBtn.addEventListener('click',()=>{ UI.rulesDialog.classList.add('open'); document.body.style.overflow='hidden'; });
+  UI.closeRulesBtn.addEventListener('click',()=>{ UI.rulesDialog.classList.remove('open'); document.body.style.overflow=''; });
+  UI.rulesDialog.addEventListener('click',(e)=>{ if(e.target===UI.rulesDialog){ UI.rulesDialog.classList.remove('open'); document.body.style.overflow=''; } });
+  UI.lessonSelect.addEventListener('change',()=>UI.lessonText.textContent=lessons[UI.lessonSelect.value]);
+  UI.coachToggle.addEventListener('change',()=>{ if(UI.coachToggle.checked) UI.coachText.textContent=explainPosition(state,HUMAN); else UI.coachText.textContent='Hints are off.'; });
+  window.addEventListener('resize',draw);
+  newGame();
+})();
+
+  </script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('./service-worker.js').catch(function (error) {
+      console.log('Offline setup unavailable:', error);
+    });
+  });
+}
+</script>
+</body>
+</html>
