@@ -1,4 +1,4 @@
-Backgammon Coach v2.0.4.0 Pip Settings and Helpful Mode Validation
+Backgammon Coach v2.0.4.1 Pip Settings and Helpful Mode Validation
 ================================================================================
 PASS — Version updated
 PASS — JavaScript syntax
@@ -28,3 +28,14 @@ Automated result: PASS
 Gameplay function replacements: 0.
 Panel structure changes: none.
 Manual validation recommended on iPhone/iPad for gear placement, modal scrolling, and Helpful-mode timing.
+
+PASS — PIP_PROJECT.md exists.
+PASS — Project file includes Engine decides. Pip teaches.
+PASS — Project file includes Boy Pip and Girl Pip.
+PASS — Project file includes inclusive skin-tone customization.
+PASS — Project file includes Settings architecture.
+PASS — Project file includes Great Expectations.
+PASS — Project file includes “Helpful” Mode and escape action.
+PASS — Project file includes expressions, poses, animation, voice, and asset library.
+PASS — Project file includes playback and local-coach backlogs.
+PASS — Documentation-only update; runtime behavior unchanged.

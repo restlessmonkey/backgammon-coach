@@ -1,1 +1,1 @@
-Backgammon Coach v2.0.4.0 — Pip Settings and “Helpful” Mode
+Backgammon Coach v2.0.4.1 — Add canonical Pip project file

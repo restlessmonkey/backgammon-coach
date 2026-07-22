@@ -1,5 +1,5 @@
 {
-  "version": "2.0.4.0",
+  "version": "2.0.4.1",
   "package_type": "GITHUB_IPHONE_FLAT_UPLOAD",
   "upload_location": "repository root",
   "required_app_files": [
@@ -16,8 +16,8 @@
     "VALIDATION_REPORT.txt",
     "SHA256SUMS.txt"
   ],
-  "created_utc": "2026-07-22T18:51:40.037142+00:00",
-  "package_name": "v2.0.4.0_Backgammon_Coach_iPhone_GitHub_FLAT_PIP_SETTINGS_HELPFUL_MODE.zip",
+  "created_utc": "2026-07-22T19:06:23.035383+00:00",
+  "package_name": "v2.0.4.1_Backgammon_Coach_iPhone_GitHub_FLAT_PIP_PROJECT_DOCUMENTED.zip",
   "default_settings": {
     "coaching_enabled": true,
     "explain_every_move": true,
@@ -83,5 +83,23 @@
     "panel_changes": "None",
     "celebration_count": 44
   },
-  "github_commit_message_file": "COMMIT_MESSAGE.txt"
+  "github_commit_message_file": "COMMIT_MESSAGE.txt",
+  "documentation_update": {
+    "canonical_project_file": "PIP_PROJECT.md",
+    "scope": [
+      "Pip identity and architecture",
+      "visual design and customization",
+      "settings structure",
+      "personality modes",
+      "Helpful Mode",
+      "expressions, poses, animation, voice",
+      "asset library",
+      "current implementation",
+      "playback backlog",
+      "local coach roadmap",
+      "safety and release rules",
+      "immediate next steps"
+    ],
+    "runtime_changes": "None"
+  }
 }
