@@ -1,5 +1,5 @@
 {
-  "version": "2.0.5.3",
+  "version": "2.0.6.0",
   "package_type": "GITHUB_IPHONE_FLAT_UPLOAD",
   "upload_location": "repository root",
   "required_app_files": [
@@ -16,8 +16,8 @@
     "VALIDATION_REPORT.txt",
     "SHA256SUMS.txt"
   ],
-  "created_utc": "2026-07-22T20:00:19.606615+00:00",
-  "package_name": "v2.0.5.3_Backgammon_Coach_iPhone_GitHub_FLAT_PIP_DRAG_RESTORE_ROLL_FIX.zip",
+  "created_utc": "2026-07-22T20:43:36.786228+00:00",
+  "package_name": "v2.0.6.0_Backgammon_Coach_iPhone_GitHub_FLAT_COMPUTER_STRENGTH_LEVELS.zip",
   "default_settings": {
     "coaching_enabled": true,
     "explain_every_move": true,
@@ -145,5 +145,18 @@
     "visible_while_disabled": true,
     "drag_position_persistence": true,
     "lock_and_reset_controls_preserved": true
+  },
+  "computer_player_levels": {
+    "settings_location": "Settings > Computer Player",
+    "default": "Advanced Local",
+    "levels": [
+      "Beginner",
+      "Intermediate",
+      "Advanced Local",
+      "GNU Grandmaster"
+    ],
+    "preference_storage": "localStorage",
+    "gnu_fallback": "Advanced Local",
+    "coaching_level_separate": true
   }
 }

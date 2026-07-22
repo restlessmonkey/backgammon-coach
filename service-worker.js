@@ -1,4 +1,4 @@
-const CACHE_NAME = 'backgammon-coach-v2-0-5-3';
+const CACHE_NAME = 'backgammon-coach-v2-0-6-0';
 const APP_FILES = [
   './',
   './index.html',

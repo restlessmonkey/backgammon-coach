@@ -1,6 +1,6 @@
 # Pip Character Asset Catalog
 Version 1.0
-Backgammon Coach package version: v2.0.5.3
+Backgammon Coach package version: v2.0.6.0
 
 ## Purpose
 
@@ -164,7 +164,7 @@ Reserved primarily for “Helpful” Mode and playful Easter eggs.
 
 ## Current Implementation Status
 
-v2.0.5.3 adds:
+v2.0.6.0 adds:
 
 - `pip-studio.html`, an interactive character preview page.
 - Twelve expression states.

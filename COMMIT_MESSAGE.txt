@@ -1,1 +1,1 @@
-Backgammon Coach v2.0.5.3 — Add movable dismissible Pip and restore floating Roll Dice
+Backgammon Coach v2.0.6.0 — Add configurable computer strength levels

@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v2.0.5.3</title>
+  <title>Backgammon Coach iPhone v2.0.6.0</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -50,7 +50,7 @@ canvas { width: 100%; height: auto; display: block; touch-action: manipulation; 
 .sidebar { display: grid; gap: 14px; }
 
 /*
-  v2.0.5.3 — Independent side-panel scrolling
+  v2.0.6.0 — Independent side-panel scrolling
   On wide layouts, the board remains visually anchored while the right panel
   column gets its own touch-friendly vertical scroll area. Phone layouts keep
   normal page scrolling to avoid cramped nested scrolling.
@@ -207,7 +207,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 @media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
 
 
-/* v2.0.5.3 Immersive Play */
+/* v2.0.6.0 Immersive Play */
 .topbar,.play-controls,.coach-panel{transition:all .22s ease}
 body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
 body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
@@ -258,7 +258,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   
 
-/* v2.0.5.3 Victory Celebration */
+/* v2.0.6.0 Victory Celebration */
 .victory-celebration{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden;background:rgba(8,12,10,.08);opacity:0;transition:opacity .18s ease}
 .victory-celebration.active{opacity:1}
 .victory-canvas{width:100%;height:100%;display:block}
@@ -268,7 +268,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media (prefers-reduced-motion:reduce){.victory-celebration,.victory-banner{transition:none}}
 
 
-/* v2.0.5.3 Explain Every Move */
+/* v2.0.6.0 Explain Every Move */
 .coach-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
 .coach-settings label{display:grid;gap:4px;color:var(--muted);font-size:.76rem;font-weight:800}
 .move-rating{margin:10px 0;padding:11px;border-radius:12px;border:1px solid #d6c4ae;background:#fffaf2}
@@ -296,7 +296,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.coach-settings{grid-template-columns:1fr}.risk-row{grid-template-columns:64px 1fr 30px}}
 
 
-/* v2.0.5.3 Animated Board Hints */
+/* v2.0.6.0 Animated Board Hints */
 .visual-hint-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:8px}
 .visual-hint-controls button{margin:0;box-shadow:none}
 .visual-hint-status{margin-top:8px;padding:8px 10px;border-radius:10px;background:#e7f0eb;color:#294f42;font-weight:800;font-size:.8rem}
@@ -304,7 +304,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:760px){.visual-hint-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.5.3 Watch the Coach Think */
+/* v2.0.6.0 Watch the Coach Think */
 .think-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .think-controls button{margin:0;box-shadow:none}
 .think-panel{margin-top:9px;padding:10px;border-radius:12px;background:#f6ead8;border:1px solid #d8c5ab}
@@ -319,7 +319,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.think-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.5.3 verified engine controls */
+/* v2.0.6.0 verified engine controls */
 .engine-panel{margin:10px 0;padding:10px;border-radius:12px;border:1px solid #d8c5ab;background:#fffaf2}
 .engine-panel h3{margin:0 0 8px;font-size:.95rem}
 .engine-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -346,7 +346,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
 .celebration-vault-dialog{padding:18px}.celebration-vault-content{width:min(1080px,96vw);max-height:92vh;overflow:auto}.vault-heading{display:flex;gap:18px;justify-content:space-between}.vault-stats{background:#eef6f1;border:1px solid #bfd3c8;border-radius:14px;padding:10px 14px;font-weight:750}.vault-toolbar,.rarity-legend{display:flex;flex-wrap:wrap;gap:9px;margin:15px 0}.rarity-legend span{font-size:.8rem;font-weight:800;padding:5px 9px;border-radius:999px;background:#f3eadb}.celebration-vault-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.celebration-card{border:2px solid #dfd1bb;background:#fffaf1;border-radius:16px;padding:13px;display:grid;gap:8px}.celebration-card.disabled{opacity:.52}.celebration-card.favorite{border-color:#d9a441}.celebration-card-head{display:flex;justify-content:space-between}.celebration-card h3{margin:0;font-size:1rem}.celebration-icon{font-size:1.6rem}.rarity-pill{font-size:.7rem;text-transform:uppercase;font-weight:900;background:#eee1ca;padding:4px 7px;border-radius:999px}.celebration-card p{font-size:.84rem;margin:0;color:#665a4b}.celebration-card-actions{display:grid;grid-template-columns:1fr 1fr auto;gap:6px}.celebration-card-actions button{font-size:.78rem;padding:8px 6px}.victory-copy{position:fixed;top:8vh;left:50%;transform:translateX(-50%);z-index:3;text-align:center;width:min(92vw,760px);pointer-events:none}.victory-copy .victory-banner{position:static;transform:none;display:inline-block}.victory-subtitle{margin:8px auto 0;background:rgba(24,38,31,.88);color:white;padding:8px 15px;border-radius:999px;font-weight:750;max-width:max-content}@media(max-width:700px){.vault-heading{display:block}.vault-stats{display:inline-block;margin-top:8px}}
 
-/* v2.0.5.3 — Pip avatar, settings, and Helpful mode */
+/* v2.0.6.0 — Pip avatar, settings, and Helpful mode */
 .pip-settings-button{
   position:fixed;
   top:max(12px,env(safe-area-inset-top));
@@ -572,7 +572,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   .pip-avatar,.pip-helpful-meter span{transition:none!important;animation:none!important}
 }
 
-/* v2.0.5.3 — Move all non-Game panels into Settings */
+/* v2.0.6.0 — Move all non-Game panels into Settings */
 .settings-panel-library{
   display:grid;
   gap:14px;
@@ -622,7 +622,7 @@ body.game-panel-only-layout .main-layout{
   grid-template-columns:minmax(0,1fr)!important;
 }
 
-/* v2.0.5.3 — Movable, dismissible Pip and persistent floating Roll Dice */
+/* v2.0.6.0 — Movable, dismissible Pip and persistent floating Roll Dice */
 .pip-avatar{
   touch-action:none;
   cursor:grab;
@@ -679,6 +679,52 @@ body.game-panel-only-layout .main-layout{
   cursor:grab;
 }
 .roll-primary.floating.dragging{cursor:grabbing}
+
+/* v2.0.6.0 — Computer player strength levels */
+.computer-strength-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px solid #eadcc8;
+}
+.computer-strength-row small{color:#74675b;font-weight:750}
+.computer-strength-badge{
+  display:inline-flex;
+  align-items:center;
+  min-height:30px;
+  padding:5px 10px;
+  border-radius:999px;
+  background:#f4e4c9;
+  border:1px solid #d7b985;
+  color:#513b28;
+  font-size:.75rem;
+  font-weight:900;
+  text-align:center;
+}
+.computer-config-grid{
+  display:grid;
+  gap:12px;
+}
+.computer-level-description{
+  margin:0;
+  padding:11px 12px;
+  border-radius:13px;
+  background:#fffaf1;
+  border:1px solid #ead5b3;
+  color:#5e5145;
+  line-height:1.45;
+  font-size:.83rem;
+}
+.computer-level-warning{
+  margin:0;
+  color:#7b372c;
+  font-size:.78rem;
+  line-height:1.4;
+  font-weight:750;
+}
 </style>
 
   <meta name="theme-color" content="#382719">
@@ -742,7 +788,28 @@ body.game-panel-only-layout .main-layout{
 
     
     
+    
     <div class="pip-setting-group">
+      <h3>Computer Player</h3>
+      <div class="computer-config-grid">
+        <label>Computer strength
+          <select id="computerStrength">
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced" selected>Advanced Local</option>
+            <option value="gnu">GNU Grandmaster</option>
+          </select>
+        </label>
+        <p id="computerStrengthDescription" class="computer-level-description"></p>
+        <label class="switch-label experience-switch">
+          <input id="computerAnnounceLevel" type="checkbox" checked>
+          <span>Show the active strength in the Game panel</span>
+        </label>
+        <p id="computerStrengthWarning" class="computer-level-warning" hidden></p>
+      </div>
+    </div>
+
+<div class="pip-setting-group">
       <h3>App Panels</h3>
       <p class="settings-panel-note">The main screen now keeps only the Game panel. All other panels are available here in Settings.</p>
       <div id="settingsPanelLibrary" class="settings-panel-library">
@@ -878,10 +945,10 @@ body.game-panel-only-layout .main-layout{
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v2.0.5.3</span>
+          <span class="version-badge" id="versionBadge">v2.0.6.0</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v2.0.5.3</div>
+        <div class="version-note">v2.0.6.0</div>
       </div>
       <div class="top-actions">
         <button id="headerCelebrationBtn" class="secondary celebration-header-btn" type="button">🎉 Celebration Vault</button>
@@ -915,6 +982,10 @@ body.game-panel-only-layout .main-layout{
           <h2>Game</h2>
           <div class="score-row"><span>You</span><strong id="humanPips">167 pips</strong></div>
           <div class="score-row"><span>Computer</span><strong id="aiPips">167 pips</strong></div>
+          <div class="computer-strength-row">
+            <small>Computer strength</small>
+            <span id="computerStrengthBadge" class="computer-strength-badge">Advanced Local</span>
+          </div>
           
           <div class="status-grid">
             <div><small>Your bar</small><strong id="humanBar">0</strong></div>
@@ -974,7 +1045,7 @@ body.game-panel-only-layout .main-layout{
             <div id="favoriteLessons" class="favorite-list"></div>
           </details>
           <div id="coachReport" class="coach-report" hidden></div>
-          <div class="coach-disclaimer">v2.0.5.3 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. Pip’s local evaluator provides transparent offline teaching analysis and remains clearly distinguished from verified GNU Grandmaster analysis.</div>
+          <div class="coach-disclaimer">v2.0.6.0 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. Pip’s local evaluator provides transparent offline teaching analysis and remains clearly distinguished from verified GNU Grandmaster analysis.</div>
           </div>
         </section>
 
@@ -1103,7 +1174,7 @@ const canvas = document.getElementById('board');
 
   const UI = Object.fromEntries([
     'rollBtn','undoBtn','endTurnBtn','newGameBtn','rulesBtn','closeRulesBtn','rulesDialog','die1','die2',
-    'humanPips','aiPips','humanBar','aiBar','humanOff','aiOff','turnBanner','coachText','hintBtn',
+    'humanPips','aiPips','computerStrengthBadge','computerStrength','computerStrengthDescription','computerAnnounceLevel','computerStrengthWarning','humanBar','aiBar','humanOff','aiOff','turnBanner','coachText','hintBtn',
     'coachToggle','coachLevel','coachVerbosity','engineMode','engineEndpoint','testEngineBtn','clearEngineBtn','engineStatus','explainEveryMove','autoWatchCoach','animateBestHintBtn','replayBestHintBtn','stopHintAnimationBtn','watchCoachThinkBtn','stopCoachThinkBtn','coachThinkPanel','coachThinkStage','coachThinkDetail','coachThinkCandidates','visualHintStatus','lastMoveRating','favoriteLessonsPanel','favoriteLessons','coachReport','victoryCelebration','victoryCanvas','victoryBanner','stopCelebrationBtn','testCelebrationBtn','coachDrawerToggle','coachDrawerBody','coachPanel','appHeader','playControls','handMode','floatRollToggle','lockRollToggle','resetRollPositionBtn','focusModeBtn','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode',
     'headerCelebrationBtn'
   ,
@@ -1137,6 +1208,34 @@ const canvas = document.getElementById('board');
   let moveGrades = [];
   let favoriteLessons = JSON.parse(localStorage.getItem('bg-favorite-lessons') || '[]');
   let autoWatchCoachEnabled = (localStorage.getItem('bg-auto-watch-coach') === 'true' || localStorage.getItem('bg-auto-watch-coach') === null);
+  let computerStrength = localStorage.getItem('bg-computer-strength') || 'advanced';
+  let computerAnnounceLevel = localStorage.getItem('bg-computer-announce-level') !== '0';
+  const COMPUTER_LEVELS = {
+    beginner:{
+      label:'Beginner',
+      description:'Chooses only legal, ranked moves, but often selects a reasonable lower-ranked candidate. It avoids deliberately absurd play.',
+      pool:6,
+      scoreWindow:48
+    },
+    intermediate:{
+      label:'Intermediate',
+      description:'Usually chooses one of the strongest few legal moves, with occasional controlled variation.',
+      pool:3,
+      scoreWindow:20
+    },
+    advanced:{
+      label:'Advanced Local',
+      description:'Always chooses the highest-ranked move found by the current offline evaluator. This is strong local play, but it is not certified grandmaster analysis.',
+      pool:1,
+      scoreWindow:0
+    },
+    gnu:{
+      label:'GNU Grandmaster',
+      description:'Uses a verified GNU Backgammon analysis service. When the service is not verified or unavailable, the computer safely falls back to Advanced Local.',
+      pool:1,
+      scoreWindow:0
+    }
+  };
   let engineMode = localStorage.getItem('bg-engine-mode') || 'gnubg';
   let engineEndpoint = localStorage.getItem('bg-engine-endpoint') || '';
   let engineVerified = false;
@@ -1399,7 +1498,7 @@ const canvas = document.getElementById('board');
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v2.0.5.3 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v2.0.6.0 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -2050,10 +2149,12 @@ const canvas = document.getElementById('board');
       engineVerified=true;
       localStorage.setItem('bg-engine-endpoint',engineEndpoint);
       updateEngineStatus(`Verified: ${data.engine}${data.version?' '+data.version:''}. Grandmaster recommendations are enabled.`,'ok');
+      updateComputerStrengthUI();
       return true;
     }catch(error){
       engineVerified=false;
       updateEngineStatus(`Grandmaster engine unavailable: ${error.message}. No engine move will be presented as verified.`,'bad');
+      updateComputerStrengthUI();
       return false;
     }
   }
@@ -2130,12 +2231,92 @@ const canvas = document.getElementById('board');
     return reasons.slice(0,3);
   }
 
-  function aiTurn() {
+
+  function computerLevelConfig(){
+    return COMPUTER_LEVELS[computerStrength] || COMPUTER_LEVELS.advanced;
+  }
+
+  function updateComputerStrengthUI(){
+    const cfg=computerLevelConfig();
+    if(UI.computerStrength)UI.computerStrength.value=computerStrength;
+    if(UI.computerStrengthDescription)UI.computerStrengthDescription.textContent=cfg.description;
+    if(UI.computerAnnounceLevel)UI.computerAnnounceLevel.checked=computerAnnounceLevel;
+    if(UI.computerStrengthBadge){
+      UI.computerStrengthBadge.textContent=cfg.label;
+      UI.computerStrengthBadge.hidden=!computerAnnounceLevel;
+    }
+    if(UI.computerStrengthWarning){
+      const needsGNU=computerStrength==='gnu' && !engineVerified;
+      UI.computerStrengthWarning.hidden=!needsGNU;
+      UI.computerStrengthWarning.textContent=needsGNU
+        ? 'GNU Grandmaster is selected, but no verified GNU service is connected. Games will use Advanced Local until verification succeeds.'
+        : '';
+    }
+  }
+
+  function weightedCandidateChoice(candidates){
+    if(candidates.length<=1)return candidates[0] || null;
+    // Stronger candidates remain more likely, while lower levels retain believable variation.
+    const weights=candidates.map((_,i)=>Math.max(1,(candidates.length-i)**2));
+    const total=weights.reduce((a,b)=>a+b,0);
+    let roll=Math.random()*total;
+    for(let i=0;i<candidates.length;i++){
+      roll-=weights[i];
+      if(roll<=0)return candidates[i];
+    }
+    return candidates[0];
+  }
+
+  function chooseLocalComputerCandidate(s,player,dice,strength){
+    const ranked=rankSequences(s,player,dice);
+    if(!ranked.length)return null;
+    if(strength==='advanced' || strength==='gnu')return ranked[0];
+
+    const cfg=COMPUTER_LEVELS[strength] || COMPUTER_LEVELS.advanced;
+    const bestScore=Number(ranked[0].score)||0;
+    let candidates=ranked
+      .slice(0,cfg.pool)
+      .filter((r,i)=>i===0 || bestScore-(Number(r.score)||0)<=cfg.scoreWindow);
+
+    // Never intentionally choose a candidate far below the evaluator's reasonable range.
+    if(!candidates.length)candidates=[ranked[0]];
+    return weightedCandidateChoice(candidates);
+  }
+
+  async function chooseComputerCandidate(s,player,dice){
+    if(computerStrength==='gnu'){
+      if(engineVerified && engineEndpoint){
+        try{
+          const previousMode=engineMode;
+          engineMode='gnubg';
+          const ranked=await getCoachRankings(s,player,dice);
+          engineMode=previousMode;
+          if(ranked.length)return {...ranked[0],computerLevelUsed:'gnu'};
+        }catch(error){
+          console.warn('GNU computer move unavailable; using Advanced Local.',error);
+          updateEngineStatus(`GNU move unavailable: ${error.message}. Computer used Advanced Local.`, 'bad');
+        }
+      }
+      const fallback=chooseLocalComputerCandidate(s,player,dice,'advanced');
+      return fallback ? {...fallback,computerLevelUsed:'advanced-fallback'} : null;
+    }
+    const selected=chooseLocalComputerCandidate(s,player,dice,computerStrength);
+    return selected ? {...selected,computerLevelUsed:computerStrength} : null;
+  }
+
+  function computerTurnLevelLabel(used){
+    if(used==='advanced-fallback')return 'Advanced Local fallback';
+    return (COMPUTER_LEVELS[used]||computerLevelConfig()).label;
+  }
+
+  async function aiTurn() {
     if (state.winner) return;
     const a=1+Math.floor(Math.random()*6), b=1+Math.floor(Math.random()*6);
     state.dice=[a,b]; state.remaining=a===b?[a,a,a,a]:[a,b]; state.rolled=true;
     updateUI(); draw();
-    const seq=bestSequence(state,AI,state.remaining);
+    const selectedCandidate=await chooseComputerCandidate(state,AI,state.remaining);
+    const seq=selectedCandidate?.seq || [];
+    const levelUsed=selectedCandidate?.computerLevelUsed || computerStrength;
     let i=0;
     function step() {
       if (i>=seq.length) {
@@ -2147,7 +2328,7 @@ const canvas = document.getElementById('board');
           const mode=UI.notationMode.value;
           const plain=seq.map((m,j)=>movePlain(m,j+1,AI)).join(' ');
           const notation=mode==='plain'?'':` Computer notation: ${aiNotation}. Your-board equivalent: ${yourView}.`;
-          setCoach(`Computer turn: ${mode==='standard'?'':plain}${notation} Your turn—roll the dice.`);
+          setCoach(`Computer turn (${computerTurnLevelLabel(levelUsed)}): ${mode==='standard'?'':plain}${notation} Your turn—roll the dice.`);
         }
         updateUI(); draw(); return;
       }
@@ -3324,6 +3505,18 @@ const canvas = document.getElementById('board');
     localStorage.removeItem('bg-engine-endpoint');
     updateEngineStatus('Grandmaster engine endpoint cleared. Verified recommendations are unavailable.','bad');
   });
+  UI.computerStrength.addEventListener('change',()=>{
+    computerStrength=UI.computerStrength.value;
+    localStorage.setItem('bg-computer-strength',computerStrength);
+    updateComputerStrengthUI();
+    const cfg=computerLevelConfig();
+    setCoach(`Computer strength set to ${cfg.label}. ${cfg.description}`);
+  });
+  UI.computerAnnounceLevel.addEventListener('change',()=>{
+    computerAnnounceLevel=UI.computerAnnounceLevel.checked;
+    localStorage.setItem('bg-computer-announce-level',computerAnnounceLevel?'1':'0');
+    updateComputerStrengthUI();
+  });
   UI.engineMode.addEventListener('change',()=>{
     engineMode=UI.engineMode.value;
     localStorage.setItem('bg-engine-mode',engineMode);
@@ -3379,7 +3572,8 @@ const canvas = document.getElementById('board');
   UI.handMode.value=localStorage.getItem('bg-hand-mode')||'auto';
   UI.floatRollToggle.checked=localStorage.getItem('bg-floating-roll')!=='0';
   UI.lockRollToggle.checked=localStorage.getItem('bg-lock-roll')==='1';
-  applyHandMode();applyRollPreference();
+  updateComputerStrengthUI();
+    applyHandMode();applyRollPreference();
   setCoachDrawer(localStorage.getItem('bg-coach-collapsed')!=='0');
   newGame();
   runCoreRulesTests();

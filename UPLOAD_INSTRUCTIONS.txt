@@ -1,4 +1,4 @@
-BACKGAMMON COACH v2.0.5.3
+BACKGAMMON COACH v2.0.6.0
 IPHONE GITHUB FLAT-UPLOAD DEPLOYMENT PACKAGE
 
 WHY THIS PACKAGE EXISTS
@@ -32,7 +32,7 @@ Because the prior service worker may remain cached:
 5. Reopen the Pages address and add it to the Home Screen again.
 
 EXPECTED VERSION
-v2.0.5.3
+v2.0.6.0
 
 COACH MODE
 Select:
@@ -42,13 +42,13 @@ WINDOWS
 No Windows computer is required for this local coach mode.
 
 
-DEFAULT BEHAVIOR IN v2.0.5.3
+DEFAULT BEHAVIOR IN v2.0.6.0
 - Coaching is ON for a fresh install.
 - Automatically Watch the Coach every turn is ON for a fresh install.
 - A user's previously saved choices are preserved.
 
 
-v2.0.5.3 GAMEPLAY REPAIR
+v2.0.6.0 GAMEPLAY REPAIR
 - Prevents duplicate factorial expansion for doubles.
 - Adds legal sequence caching.
 - Keeps opening 5-5 responsive.
@@ -56,7 +56,7 @@ v2.0.5.3 GAMEPLAY REPAIR
 - Reduces advanced doubles lookahead candidates from 6 to 3.
 
 
-v2.0.5.3 SAFE DEFAULTS RESET
+v2.0.6.0 SAFE DEFAULTS RESET
 - Coaching defaults ON.
 - Explain Every Move defaults ON.
 - Automatically Watch the Coach defaults OFF.
@@ -64,7 +64,7 @@ v2.0.5.3 SAFE DEFAULTS RESET
 - Automatic analysis cannot begin while a checker or destination is selected.
 
 
-v2.0.5.3 STACK AND DESTINATION-TAP REPAIR
+v2.0.6.0 STACK AND DESTINATION-TAP REPAIR
 - Prevents move-rating code from recursively launching full coach analysis.
 - Adds a recursion guard and safe static fallback.
 - Reduces mobile lookahead workload.
@@ -72,18 +72,18 @@ v2.0.5.3 STACK AND DESTINATION-TAP REPAIR
 - Gameplay continues even if advanced coach analysis fails.
 
 
-v2.0.5.3 CELEBRATION BUTTON RESTORE
+v2.0.6.0 CELEBRATION BUTTON RESTORE
 - Restores a visible 🎉 Celebration button in the top action area.
 - The button directly launches the existing random victory celebration.
 - Gameplay and the v2.0.1.1.6 stack/tap repair remain unchanged.
 
 
-v2.0.5.3 CELEBRATION VAULT
+v2.0.6.0 CELEBRATION VAULT
 - 30 celebrations, rarity tiers, preview gallery, favorites, enable/disable controls, discovery and win statistics, achievements, and streak messages.
 - Working gameplay repairs preserved.
 
 
-v2.0.5.3 CHECKER CELEBRATION EXPANSION
+v2.0.6.0 CHECKER CELEBRATION EXPANSION
 - Restores all five original checker finales as distinct animations:
   Rocket Checkers, Checker Hill, Classic Bounce, Victory Vortex, Checker Fountain.
 - Expands the Celebration Vault from 30 to 42 finales.
@@ -92,7 +92,7 @@ v2.0.5.3 CHECKER CELEBRATION EXPANSION
 - Preserves the certified working gameplay/tap and coach-recursion repairs.
 
 
-v2.0.5.3 BOWLING ALLEY CELEBRATION
+v2.0.6.0 BOWLING ALLEY CELEBRATION
 - Adds Backgammon Bowling Alley to the Celebration Vault.
 - Ten checkers form a standard bowling-pin triangle.
 - Four checkers mark the bowling lane.
@@ -102,7 +102,7 @@ v2.0.5.3 BOWLING ALLEY CELEBRATION
 - All v2.0.2.1 celebrations and gameplay repairs remain intact.
 
 
-v2.0.5.3 INDEPENDENT SIDE-PANEL SCROLLING
+v2.0.6.0 INDEPENDENT SIDE-PANEL SCROLLING
 - On layouts wider than 980px, the right-side panel column scrolls independently.
 - The board remains visually anchored while Game, Coach, Move History, and other panels scroll.
 - Touch momentum scrolling is enabled for iPad and other touch devices.
@@ -114,7 +114,7 @@ v2.0.5.3 INDEPENDENT SIDE-PANEL SCROLLING
 A standalone COMMIT_MESSAGE.txt file is included for copying into GitHub.
 
 
-v2.0.5.3 COLLAPSIBLE SIDE PANELS
+v2.0.6.0 COLLAPSIBLE SIDE PANELS
 - Every standard panel in the right-side column can now be collapsed or expanded.
 - Each panel has a large 50 x 50 pixel collapse button for easier tapping.
 - The collapse button includes a large rotating chevron and accessible labels.
@@ -127,7 +127,7 @@ v2.0.5.3 COLLAPSIBLE SIDE PANELS
 A standalone COMMIT_MESSAGE.txt file is included for copying into GitHub.
 
 
-v2.0.5.3 REPLAY EXAMPLE MOVES
+v2.0.6.0 REPLAY EXAMPLE MOVES
 - Added a dedicated “Replay example” button beside the existing animation controls.
 - The same recommended example move can be replayed as many times as needed.
 - Replay always starts from the beginning of the saved example sequence.
@@ -140,7 +140,7 @@ v2.0.5.3 REPLAY EXAMPLE MOVES
 A standalone COMMIT_MESSAGE.txt file is included for copying into GitHub.
 
 
-v2.0.5.3 WATCH COACH LOCAL-MODE HOTFIX
+v2.0.6.0 WATCH COACH LOCAL-MODE HOTFIX
 - Fixed the direct “Watch the Coach Think” button on Safari and other browsers.
 - Root cause: the browser click event was passed into watchCoachThink as though it were a pre-ranked move array.
 - The click handler now explicitly calls watchCoachThink with no event argument.
@@ -153,7 +153,7 @@ v2.0.5.3 WATCH COACH LOCAL-MODE HOTFIX
 A standalone COMMIT_MESSAGE.txt file is included for copying into GitHub.
 
 
-v2.0.5.3 PIP POSITION INTELLIGENCE
+v2.0.6.0 PIP POSITION INTELLIGENCE
 - Officially introduces “Pip — Your Backgammon Coach.”
 - Preserves the rule: Engine decides. Pip teaches.
 - Only verified GNU Backgammon analysis is labeled Grandmaster.
@@ -184,7 +184,7 @@ v2.0.5.3 PIP POSITION INTELLIGENCE
 A standalone COMMIT_MESSAGE.txt file is included for copying into GitHub.
 
 
-v2.0.5.3 PIP SETTINGS + “HELPFUL” MODE
+v2.0.6.0 PIP SETTINGS + “HELPFUL” MODE
 - Adds a standard gear icon that opens a dedicated Pip Settings dialog.
 - Adds a working CSS-rendered Pip avatar that remains crisp at different sizes.
 - Lets the user choose Boy Pip or Girl Pip.
@@ -211,7 +211,7 @@ v2.0.5.3 PIP SETTINGS + “HELPFUL” MODE
 A standalone COMMIT_MESSAGE.txt file is included for copying into GitHub.
 
 
-v2.0.5.3 PROJECT DOCUMENTATION UPDATE
+v2.0.6.0 PROJECT DOCUMENTATION UPDATE
 - Adds PIP_PROJECT.md as the cumulative canonical project file for Pip.
 - Preserves all discussed identity, visual design, settings, personalities,
   Helpful Mode behavior, dialogue, expressions, poses, animation language,
@@ -220,7 +220,7 @@ v2.0.5.3 PROJECT DOCUMENTATION UPDATE
 - No gameplay, engine, panel, or Pip runtime behavior changed in this update.
 
 
-v2.0.5.3 PIP CHARACTER STUDIO
+v2.0.6.0 PIP CHARACTER STUDIO
 - Adds pip-studio.html, a standalone interactive preview page.
 - Adds PIP_ASSET_CATALOG.md, the canonical v1 expression and pose catalog.
 - Includes 12 expressions and 8 poses.
@@ -230,14 +230,14 @@ v2.0.5.3 PIP CHARACTER STUDIO
 - Open pip-studio.html directly to review the character system.
 
 
-v2.0.5.3 PIP CHARACTER STUDIO NAVIGATION
+v2.0.6.0 PIP CHARACTER STUDIO NAVIGATION
 - Adds an “Open Pip Character Studio” button inside Pip Settings.
 - The main index.html now provides direct access to pip-studio.html.
 - Adds a “Back to Backgammon Coach” link on the Character Studio page.
 - No gameplay, engine, coaching, panel, or character behavior changed.
 
 
-v2.0.5.3 SETTINGS PANEL RESTRUCTURE
+v2.0.6.0 SETTINGS PANEL RESTRUCTURE
 - Keeps only the Game panel on the main app screen.
 - Moves every other detected app panel into Settings under “App Panels.”
 - Preserves each panel’s existing controls, IDs, and event bindings.
@@ -247,7 +247,7 @@ v2.0.5.3 SETTINGS PANEL RESTRUCTURE
 - No engine or move-legality logic changed.
 
 
-v2.0.5.3 PIP DRAG/DISMISS + FLOATING ROLL DICE RESTORATION
+v2.0.6.0 PIP DRAG/DISMISS + FLOATING ROLL DICE RESTORATION
 - Pip can now be dragged anywhere within the visible screen.
 - Pip’s position is saved locally and restored on reload.
 - Adds an X button directly on Pip to dismiss him.
@@ -256,3 +256,16 @@ v2.0.5.3 PIP DRAG/DISMISS + FLOATING ROLL DICE RESTORATION
 - Corrects Floating Roll Dice so it can float on every screen width, not only 980 px or narrower.
 - Corrects the floating Roll Dice button so disabled states remain visible instead of disappearing.
 - Existing “Floating Roll Dice,” “Lock button position,” and “Reset Roll Dice position” controls remain under Settings → App Panels → Play experience.
+
+
+v2.0.6.0 COMPUTER PLAYER STRENGTH LEVELS
+- Adds Settings → Computer Player.
+- Adds Beginner, Intermediate, Advanced Local, and GNU Grandmaster.
+- Beginner and Intermediate choose only from legal moves already ranked by the local evaluator.
+- Beginner uses a wider reasonable candidate pool; Intermediate uses a narrower strong candidate pool.
+- Advanced Local always chooses the top locally ranked move and preserves the previous computer-player behavior.
+- GNU Grandmaster uses a verified GNU Backgammon service only.
+- GNU Grandmaster safely falls back to Advanced Local when verification or analysis is unavailable.
+- Saves selected strength in localStorage.
+- Adds an optional active-strength badge to the Game panel.
+- Computer turn narration identifies the level actually used, including fallback.

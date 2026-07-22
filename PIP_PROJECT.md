@@ -1,7 +1,7 @@
 # Pip — Your Backgammon Coach
 ## Project File
 Version 1.0
-Backgammon Coach package version: v2.0.5.3
+Backgammon Coach package version: v2.0.6.0
 
 ---
 
@@ -699,7 +699,7 @@ and, in the appropriate optional personality:
 
 ---
 
-## 20. Character Studio and Asset Catalog — v2.0.5.3
+## 20. Character Studio and Asset Catalog — v2.0.6.0
 
 The first reusable Pip character system is now defined.
 
@@ -718,7 +718,7 @@ This is a design and preview release. Gameplay event integration remains intenti
 
 ---
 
-## 21. Character Studio Navigation — v2.0.5.3
+## 21. Character Studio Navigation — v2.0.6.0
 
 The Pip Character Studio is now directly accessible from the main app.
 
@@ -734,7 +734,7 @@ This is a navigation-only update. Gameplay and Pip behavior are unchanged.
 
 ---
 
-## 22. Main Screen and Settings Panel Architecture — v2.0.5.3
+## 22. Main Screen and Settings Panel Architecture — v2.0.6.0
 
 The main app screen now keeps only the **Game** panel.
 
@@ -754,7 +754,7 @@ The implementation moved 6 detected non-Game panels while preserving their exist
 
 ---
 
-## 23. Pip Mobility, Dismissal, and Restoration — v2.0.5.3
+## 23. Pip Mobility, Dismissal, and Restoration — v2.0.6.0
 
 Pip is now directly movable and dismissible.
 
@@ -773,3 +773,36 @@ The floating Roll Dice control was also restored to its intended behavior:
 - floating mode now works at all viewport widths
 - it remains visible while temporarily disabled
 - its saved drag position, lock setting, and reset control remain supported
+
+
+---
+
+## 24. Computer Player Strength Architecture — v2.0.6.0
+
+Computer strength is now independent from Pip’s coaching level.
+
+Available levels:
+
+1. **Beginner**
+   - legal moves only
+   - controlled selection among reasonable ranked candidates
+   - intentionally imperfect without absurd or nonsensical play
+
+2. **Intermediate**
+   - legal moves only
+   - usually selects from the strongest few ranked candidates
+   - less variation than Beginner
+
+3. **Advanced Local**
+   - always selects the top move found by the local evaluator
+   - not labeled grandmaster
+
+4. **GNU Grandmaster**
+   - requires a verified GNU Backgammon analysis service
+   - falls back visibly and safely to Advanced Local when unavailable
+
+Permanent separation:
+
+- Computer strength controls how the opponent plays.
+- Pip coaching level controls how Pip explains.
+- Engine verification controls whether “GNU Grandmaster” may be claimed.
