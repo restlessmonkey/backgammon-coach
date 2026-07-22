@@ -1,21 +1,21 @@
 # Changelog
 
-## v1.9.3 — Automatic Coach Think
+## v2.0 — Grandmaster Engine Architecture
 
-- Added “Automatically watch the coach every turn.”
-- The preference is saved on the device.
-- After each human roll, the app automatically ranks the legal turns and begins Watch the Coach Think.
-- The coach compares candidates, rejects weaker choices, selects the recommendation, and animates it.
-- Automatic coaching does not start when no legal move exists.
-- Turning the option off stops automatic coaching.
-- Manual Watch the Coach Think remains available.
-- All previews remain non-destructive.
+- Replaced the misleading assumption that the local heuristic is expert strength.
+- Added a strict GNU Backgammon HTTPS analysis adapter.
+- Added engine source selection:
+  - GNU Backgammon service — verified
+  - Local teaching fallback — not grandmaster
+- Grandmaster recommendations are blocked until a compliant engine service responds.
+- Added engine endpoint storage and connection testing.
+- Added engine identity verification.
+- Added request serialization for complete board state and every legal turn.
+- Added engine equity/error fields to the internal ranking model.
+- Watch the Coach Think now teaches from engine rankings when connected.
+- Automatic Coach Think now waits for verified engine analysis.
+- Preserved animation, candidate comparison, guided execution, and learning explanations.
+- Added an engine API contract and deployment documentation.
 
-## v1.9.2 — Watch the Coach Think
-- Added visual candidate comparison, rejection reasons, and final move animation.
-
-## v1.9.1 — Animated Board Hints
-- Added animated best-move previews directly on the board.
-
-## v1.9 — Explain Every Move
-- Added ratings, explanations, risk meters, comparisons, favorites, and Coach Report.
+## v1.9.3
+- Added automatic Coach Think after every human roll.

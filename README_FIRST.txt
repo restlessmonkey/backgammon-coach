@@ -1,10 +1,18 @@
-BACKGAMMON COACH v1.9.3 — AUTOMATIC COACH THINK
+BACKGAMMON COACH v2.0 — GRANDMASTER ENGINE ARCHITECTURE
 
-1. Open Coach settings.
-2. Enable “Automatically watch the coach every turn.”
-3. Roll the dice.
+IMPORTANT:
+v2.0 no longer pretends the built-in teaching heuristic is grandmaster strength.
 
-After every human roll, the app automatically compares legal turns, explains rejected options, chooses the best recommendation, and animates it on the board.
+For verified grandmaster recommendations:
+1. Open Coach.
+2. Keep “GNU Backgammon service — verified” selected.
+3. Enter a compliant HTTPS /analyze endpoint.
+4. Tap “Test engine connection.”
+5. Roll the dice.
 
-The preference is saved on the device.
-The actual board does not change during previews.
+Without a verified endpoint, grandmaster recommendations remain blocked.
+
+The old evaluator is available only by deliberately selecting:
+“Local teaching fallback — not grandmaster.”
+
+See engine/ENGINE_API_CONTRACT.md for integration details.

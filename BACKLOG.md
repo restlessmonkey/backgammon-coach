@@ -1,14 +1,22 @@
 # Backlog
 
-## Completed in v1.9.3
-- Persistent automatic Coach Think option.
-- Automatic analysis after every human roll.
-- Legal-move guard and cancellation behavior.
+## Completed in v2.0
+- Strict engine/teaching separation.
+- GNU Backgammon service adapter contract.
+- Engine identity verification.
+- No silent fallback under a grandmaster label.
+- Engine-grounded Watch the Coach Think flow.
+- Persistent endpoint and engine-mode controls.
 
-## Next candidates
-- Slow, normal, and fast coaching speeds.
-- “Now you try it” guided execution.
-- Voice narration.
-- Step controls for analysis.
+## Required next deployment work
+- Deploy a real GNU Backgammon HTTPS adapter.
+- Validate position conversion against GNU Backgammon.
+- Validate candidate ordering and equity values with known benchmark positions.
+- Complete GPL/source-distribution review for the chosen deployment model.
+- iPhone Safari network, CORS, timeout, and offline testing.
+
+## Later
+- Engine-powered AI opponent.
+- Cube decisions and match equity.
+- Rollouts and analysis depth controls.
 - Complete Move Journal and replay.
-- Engine-grade analysis integration.

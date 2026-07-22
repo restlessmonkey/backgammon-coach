@@ -1,14 +1,19 @@
-Backgammon Coach v1.9.3 Validation Report
-================================================
+Backgammon Coach v2.0 Validation Report
+====================================================
 PASS — version
-PASS — toggle
-PASS — persistent_load
-PASS — scheduler
-PASS — roll_trigger
-PASS — legal_guard
-PASS — automatic_watch
+PASS — engine_mode
+PASS — endpoint
+PASS — health_test
+PASS — engine_adapter
+PASS — strict_identity
+PASS — explicit_fallback
+PASS — async_hint
+PASS — engine_watch
+PASS — api_contract
 PASS — cache
 PASS — js_syntax
 
-Automated result: PASS
-Final functional and visual review is still required on iPhone/iPad Safari.
+Automated package result: PASS
+Grandmaster engine deployment status: NOT CONNECTED / NOT INCLUDED
+The app correctly blocks grandmaster-labeled recommendations until a compliant GNU Backgammon HTTPS service is connected.
+Final iPhone/iPad Safari and live-engine validation remain required.

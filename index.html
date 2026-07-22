@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v1.9.3</title>
+  <title>Backgammon Coach iPhone v2.0</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -103,7 +103,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 @media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
 
 
-/* v1.9.3 Immersive Play */
+/* v2.0 Immersive Play */
 .topbar,.play-controls,.coach-panel{transition:all .22s ease}
 body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
 body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
@@ -154,7 +154,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   
 
-/* v1.9.3 Victory Celebration */
+/* v2.0 Victory Celebration */
 .victory-celebration{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden;background:rgba(8,12,10,.08);opacity:0;transition:opacity .18s ease}
 .victory-celebration.active{opacity:1}
 .victory-canvas{width:100%;height:100%;display:block}
@@ -164,7 +164,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media (prefers-reduced-motion:reduce){.victory-celebration,.victory-banner{transition:none}}
 
 
-/* v1.9.3 Explain Every Move */
+/* v2.0 Explain Every Move */
 .coach-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
 .coach-settings label{display:grid;gap:4px;color:var(--muted);font-size:.76rem;font-weight:800}
 .move-rating{margin:10px 0;padding:11px;border-radius:12px;border:1px solid #d6c4ae;background:#fffaf2}
@@ -192,7 +192,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.coach-settings{grid-template-columns:1fr}.risk-row{grid-template-columns:64px 1fr 30px}}
 
 
-/* v1.9.3 Animated Board Hints */
+/* v2.0 Animated Board Hints */
 .visual-hint-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .visual-hint-controls button{margin:0;box-shadow:none}
 .visual-hint-status{margin-top:8px;padding:8px 10px;border-radius:10px;background:#e7f0eb;color:#294f42;font-weight:800;font-size:.8rem}
@@ -200,7 +200,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.visual-hint-controls{grid-template-columns:1fr}}
 
 
-/* v1.9.3 Watch the Coach Think */
+/* v2.0 Watch the Coach Think */
 .think-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .think-controls button{margin:0;box-shadow:none}
 .think-panel{margin-top:9px;padding:10px;border-radius:12px;background:#f6ead8;border:1px solid #d8c5ab}
@@ -213,6 +213,22 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 .think-candidate.rejected{opacity:.7;text-decoration:none}
 .think-candidate.chosen{border:2px solid #2f6c4f;background:#e8f0eb}
 @media(max-width:620px){.think-controls{grid-template-columns:1fr}}
+
+
+/* v2.0 verified engine controls */
+.engine-panel{margin:10px 0;padding:10px;border-radius:12px;border:1px solid #d8c5ab;background:#fffaf2}
+.engine-panel h3{margin:0 0 8px;font-size:.95rem}
+.engine-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.engine-grid label{font-size:.78rem;font-weight:800}
+.engine-grid select,.engine-grid input{width:100%;margin-top:4px}
+.engine-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+.engine-status{margin-top:8px;padding:8px 10px;border-radius:9px;font-size:.8rem;font-weight:800;background:#eee7dc}
+.engine-status.ok{background:#e7f0eb;color:#294f42}
+.engine-status.bad{background:#f5dfdc;color:#71372f}
+.engine-badge{display:inline-block;padding:3px 7px;border-radius:999px;font-size:.7rem;font-weight:900;background:#eee7dc}
+.engine-badge.verified{background:#dcece3;color:#25543d}
+.engine-badge.fallback{background:#f5e5c6;color:#664911}
+@media(max-width:620px){.engine-grid,.engine-actions{grid-template-columns:1fr}}
 
 </style>
 
@@ -230,10 +246,10 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v1.9.3</span>
+          <span class="version-badge" id="versionBadge">v2.0</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v1.9.3</div>
+        <div class="version-note">v2.0</div>
       </div>
       <div class="top-actions">
         <button id="newGameBtn">New game</button>
@@ -301,6 +317,25 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
               </select>
             </label>
           </div>
+          <div class="engine-panel">
+            <h3>Grandmaster analysis engine</h3>
+            <div class="engine-grid">
+              <label>Coach source
+                <select id="engineMode">
+                  <option value="gnubg" selected>GNU Backgammon service — verified</option>
+                  <option value="local">Local teaching fallback — not grandmaster</option>
+                </select>
+              </label>
+              <label>Engine endpoint
+                <input id="engineEndpoint" type="url" inputmode="url" placeholder="https://your-engine.example/analyze">
+              </label>
+            </div>
+            <div class="engine-actions">
+              <button id="testEngineBtn" class="secondary" type="button">Test engine connection</button>
+              <button id="clearEngineBtn" class="secondary" type="button">Clear endpoint</button>
+            </div>
+            <div id="engineStatus" class="engine-status bad" aria-live="polite">Grandmaster engine not connected. Recommendations are blocked unless you deliberately select the local fallback.</div>
+          </div>
           <label class="switch-label experience-switch"><input id="explainEveryMove" type="checkbox" checked><span>Explain after every move</span></label>
           <label class="switch-label experience-switch"><input id="autoWatchCoach" type="checkbox"><span>Automatically watch the coach every turn</span></label>
           <button id="hintBtn" class="secondary wide">Rank and explain my moves</button>
@@ -325,7 +360,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
             <div id="favoriteLessons" class="favorite-list"></div>
           </details>
           <div id="coachReport" class="coach-report" hidden></div>
-          <div class="coach-disclaimer">v1.9.3 explains and compares complete legal turn sequences with a transparent local teaching heuristic. Engine-grade analysis remains planned.</div>
+          <div class="coach-disclaimer">v2.0 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. The local evaluator remains available solely as a clearly marked teaching fallback.</div>
           </div>
         </section>
 
@@ -412,7 +447,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   const UI = Object.fromEntries([
     'rollBtn','undoBtn','endTurnBtn','newGameBtn','rulesBtn','closeRulesBtn','rulesDialog','die1','die2',
     'humanPips','aiPips','humanBar','aiBar','humanOff','aiOff','turnBanner','coachText','hintBtn',
-    'coachToggle','coachLevel','coachVerbosity','explainEveryMove','autoWatchCoach','animateBestHintBtn','stopHintAnimationBtn','watchCoachThinkBtn','stopCoachThinkBtn','coachThinkPanel','coachThinkStage','coachThinkDetail','coachThinkCandidates','visualHintStatus','lastMoveRating','favoriteLessonsPanel','favoriteLessons','coachReport','victoryCelebration','victoryCanvas','victoryBanner','stopCelebrationBtn','testCelebrationBtn','coachDrawerToggle','coachDrawerBody','coachPanel','appHeader','playControls','handMode','floatRollToggle','lockRollToggle','resetRollPositionBtn','focusModeBtn','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode'
+    'coachToggle','coachLevel','coachVerbosity','engineMode','engineEndpoint','testEngineBtn','clearEngineBtn','engineStatus','explainEveryMove','autoWatchCoach','animateBestHintBtn','stopHintAnimationBtn','watchCoachThinkBtn','stopCoachThinkBtn','coachThinkPanel','coachThinkStage','coachThinkDetail','coachThinkCandidates','visualHintStatus','lastMoveRating','favoriteLessonsPanel','favoriteLessons','coachReport','victoryCelebration','victoryCanvas','victoryBanner','stopCelebrationBtn','testCelebrationBtn','coachDrawerToggle','coachDrawerBody','coachPanel','appHeader','playControls','handMode','floatRollToggle','lockRollToggle','resetRollPositionBtn','focusModeBtn','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode'
   ].map(id => [id, document.getElementById(id)]));
 
   const W = canvas.width, H = canvas.height;
@@ -434,6 +469,10 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   let moveGrades = [];
   let favoriteLessons = JSON.parse(localStorage.getItem('bg-favorite-lessons') || '[]');
   let autoWatchCoachEnabled = localStorage.getItem('bg-auto-watch-coach') === 'true';
+  let engineMode = localStorage.getItem('bg-engine-mode') || 'gnubg';
+  let engineEndpoint = localStorage.getItem('bg-engine-endpoint') || '';
+  let engineVerified = false;
+  let lastCoachSource = 'none';
   let bestHintSequence = [];
   let visualHint = {active:false, step:0, progress:0, timer:null, previewState:null, move:null};
   let coachThink = {active:false, timers:[], ranked:[], candidateIndex:0};
@@ -622,7 +661,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v1.9.3 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v2.0 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -825,6 +864,109 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     score += features.primeDelta*10 - Math.max(0,features.blotDelta)*8 + Math.max(0,-features.blotDelta)*4;
     score += Math.max(0,features.escapeGain)*1.4 - features.barRisk*30;
     return {seq,state:cur,score,features};
+  }
+
+
+  function serializeCoachPosition(s, player, dice, rankedLocal) {
+    return {
+      protocol: 'backgammon-coach-engine-v1',
+      game: {
+        points: s.points,
+        bar: s.bar,
+        off: s.off,
+        turn: player,
+        dice: [...dice],
+        cube: s.cube || 1,
+        cubeOwner: s.cubeOwner || 0,
+        matchLength: s.matchLength || 0,
+        score: s.score || [0,0],
+        crawford: !!s.crawford
+      },
+      candidates: rankedLocal.map((r,index)=>({
+        id: `candidate-${index}`,
+        index,
+        notation: sequenceNotation(r.seq),
+        moves: r.seq.map(m=>({from:m.from,to:m.to,die:m.die}))
+      })),
+      requestedAnalysis: {
+        engine: 'GNU Backgammon',
+        strength: 'grandmaster',
+        includeEquity: true,
+        includeErrors: true
+      }
+    };
+  }
+
+  function updateEngineStatus(message, kind='bad') {
+    UI.engineStatus.textContent=message;
+    UI.engineStatus.classList.remove('ok','bad');
+    UI.engineStatus.classList.add(kind);
+  }
+
+  async function testEngineConnection() {
+    engineEndpoint=UI.engineEndpoint.value.trim();
+    if(!engineEndpoint){
+      engineVerified=false;
+      updateEngineStatus('Enter an HTTPS GNU Backgammon analysis endpoint first.','bad');
+      return false;
+    }
+    updateEngineStatus('Testing GNU Backgammon service…','');
+    try{
+      const base=engineEndpoint.replace(/\/analyze\/?$/,'');
+      const response=await fetch(base+'/health',{headers:{'Accept':'application/json'}});
+      if(!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data=await response.json();
+      if(data.engine!=='GNU Backgammon' || data.status!=='ok') throw new Error('Service did not identify itself as GNU Backgammon');
+      engineVerified=true;
+      localStorage.setItem('bg-engine-endpoint',engineEndpoint);
+      updateEngineStatus(`Verified: ${data.engine}${data.version?' '+data.version:''}. Grandmaster recommendations are enabled.`,'ok');
+      return true;
+    }catch(error){
+      engineVerified=false;
+      updateEngineStatus(`Grandmaster engine unavailable: ${error.message}. No engine move will be presented as verified.`,'bad');
+      return false;
+    }
+  }
+
+  async function getCoachRankings(s, player, dice) {
+    const localRanked=rankSequences(s,player,dice);
+    if(engineMode==='local'){
+      lastCoachSource='local';
+      updateEngineStatus('Local teaching fallback active — not grandmaster strength.','bad');
+      return localRanked;
+    }
+    if(!engineEndpoint) throw new Error('GNU Backgammon endpoint is not configured.');
+    const payload=serializeCoachPosition(s,player,dice,localRanked);
+    const response=await fetch(engineEndpoint,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    if(!response.ok) throw new Error(`GNU Backgammon service returned HTTP ${response.status}.`);
+    const data=await response.json();
+    if(data.engine!=='GNU Backgammon') throw new Error('The service response was not identified as GNU Backgammon.');
+    if(!Array.isArray(data.rankings) || !data.rankings.length) throw new Error('The engine returned no ranked candidates.');
+    const mapped=[];
+    for(const item of data.rankings){
+      const idx=Number.isInteger(item.index)?item.index:
+        localRanked.findIndex(r=>sequenceNotation(r.seq)===item.notation);
+      if(idx<0 || !localRanked[idx]) continue;
+      mapped.push({
+        ...localRanked[idx],
+        engineScore:Number(item.equity),
+        equity:Number(item.equity),
+        error:Number(item.error || 0),
+        engineRank:Number(item.rank || mapped.length+1),
+        engineExplanation:item.explanation || '',
+        source:'gnubg'
+      });
+    }
+    if(!mapped.length) throw new Error('The engine rankings could not be matched to legal moves.');
+    mapped.sort((a,b)=>(a.engineRank||99)-(b.engineRank||99));
+    engineVerified=true;
+    lastCoachSource='gnubg';
+    updateEngineStatus(`Verified GNU Backgammon analysis received for ${mapped.length} legal candidate${mapped.length===1?'':'s'}.`,'ok');
+    return mapped;
   }
 
   function rankSequences(s, player, dice) {
@@ -1087,20 +1229,33 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     }));
   }
 
-  function showHint() {
-    if (state.turn!==HUMAN || !state.rolled) { setCoach('Roll the dice first, then I can rank your complete legal turn.'); return; }
-    const ranked=rankSequences(state,HUMAN,state.remaining);
-    if (!ranked.length || !ranked[0].seq.length) { setCoach('There is no legal move with the remaining dice.'); UI.hintResults.innerHTML=''; return; }
+  async function showHint() {
+    if (state.turn!==HUMAN || !state.rolled) { setCoach('Roll the dice first, then I can rank your complete legal turn.'); return []; }
+    let ranked;
+    try{
+      ranked=await getCoachRankings(state,HUMAN,state.remaining);
+    }catch(error){
+      hintMove=null; bestHintSequence=[];
+      UI.animateBestHintBtn.disabled=true;
+      UI.watchCoachThinkBtn.disabled=true;
+      UI.hintResults.innerHTML='';
+      setCoach(`Grandmaster analysis unavailable: ${error.message} Connect a GNU Backgammon service, or deliberately choose the clearly labeled local teaching fallback.`);
+      updateEngineStatus(`Grandmaster analysis unavailable: ${error.message}`,'bad');
+      return [];
+    }
+    if (!ranked.length || !ranked[0].seq.length) { setCoach('There is no legal move with the remaining dice.'); UI.hintResults.innerHTML=''; return []; }
     hintMove=ranked[0].seq[0];
     bestHintSequence=ranked[0].seq.map(m=>({...m}));
     UI.animateBestHintBtn.disabled=false;
     UI.watchCoachThinkBtn.disabled=false;
     UI.visualHintStatus.hidden=false;
-    UI.visualHintStatus.textContent='Best move is ready to animate directly on the board.';
+    const verified=lastCoachSource==='gnubg';
+    UI.visualHintStatus.textContent=verified?'Verified GNU Backgammon move is ready to animate.':'Local teaching fallback is ready to animate — not grandmaster.';
     const d=sequenceDirections(ranked[0].seq,HUMAN);
-    setCoach(`Best complete turn: ${d.summary}. Choose “Make this move now!” or let me guide you one step at a time.`);
+    setCoach(`${verified?'Verified GNU Backgammon':'Local teaching fallback'} complete turn: ${d.summary}. ${ranked[0].engineExplanation||''}`);
     renderHintCards(ranked);
     draw();
+    return ranked;
   }
 
   function beginGuidedSequence(seq) {
@@ -1337,12 +1492,14 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     if(!availableMovesNow().length) return;
     const t=setTimeout(()=>{
       if(!autoWatchCoachEnabled || state.turn!==HUMAN || !state.rolled || coachThink.active || visualHint.active) return;
-      showHint();
-      const t2=setTimeout(()=>{
-        if(autoWatchCoachEnabled && state.turn===HUMAN && state.rolled && !coachThink.active && !visualHint.active) {
-          watchCoachThink();
-        }
-      },300);
+      showHint().then(ranked=>{
+        const t2=setTimeout(()=>{
+          if(ranked.length && autoWatchCoachEnabled && state.turn===HUMAN && state.rolled && !coachThink.active && !visualHint.active) {
+            watchCoachThink(ranked);
+          }
+        },300);
+        coachThink.timers.push(t2);
+      });
       coachThink.timers.push(t2);
     },450);
     coachThink.timers.push(t);
@@ -1408,12 +1565,19 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     });
   }
 
-  async function watchCoachThink() {
+  async function watchCoachThink(preRanked=null) {
     if(state.turn!==HUMAN || !state.rolled){
       setCoach('Roll the dice first, then ask me to rank the legal turns.');
       return;
     }
-    const ranked=rankSequences(state,HUMAN,state.remaining).slice(0,3);
+    let ranked;
+    try{
+      ranked=(preRanked || await getCoachRankings(state,HUMAN,state.remaining)).slice(0,3);
+    }catch(error){
+      setCoach(`Grandmaster analysis unavailable: ${error.message}`);
+      updateEngineStatus(`Grandmaster analysis unavailable: ${error.message}`,'bad');
+      return;
+    }
     if(!ranked.length){
       setCoach('There is no legal move to analyze.');
       return;
@@ -1429,7 +1593,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     renderThinkCandidates(ranked,-1,-1);
 
     UI.coachThinkStage.textContent='Step 1: Scan the legal candidates';
-    UI.coachThinkDetail.textContent='The coach first compares complete legal turns, not just one checker step.';
+    UI.coachThinkDetail.textContent=lastCoachSource==='gnubg'?'Verified GNU Backgammon rankings received. The teaching layer will now explain the engine’s ordering.':'Local teaching fallback selected. This demonstration is educational, not grandmaster analysis.';
     await new Promise(resolve=>{const t=setTimeout(resolve,900);coachThink.timers.push(t);});
     if(!coachThink.active)return;
 
@@ -1452,7 +1616,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     bestHintSequence=ranked[0].seq.map(m=>({...m}));
     hintMove=bestHintSequence[0]||null;
     UI.coachThinkStage.textContent='Final decision';
-    UI.coachThinkDetail.textContent=`The coach selects ${sequenceDirections(ranked[0].seq,HUMAN).summary}. ${explainSequence(ranked[0].seq,state,HUMAN)}`;
+    UI.coachThinkDetail.textContent=`${lastCoachSource==='gnubg'?'GNU Backgammon selects':'The local teaching fallback selects'} ${sequenceDirections(ranked[0].seq,HUMAN).summary}. ${ranked[0].engineExplanation||explainSequence(ranked[0].seq,state,HUMAN)}`;
     renderThinkCandidates(ranked,-1,0);
     await new Promise(resolve=>{const t=setTimeout(resolve,900);coachThink.timers.push(t);});
     if(!coachThink.active)return;
@@ -1682,6 +1846,22 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   UI.hintBtn.addEventListener('click',()=>{showHint();setCoachDrawer(false);});
   UI.animateBestHintBtn.addEventListener('click',animateBestHint);
   UI.watchCoachThinkBtn.addEventListener('click',watchCoachThink);
+  UI.testEngineBtn.addEventListener('click',testEngineConnection);
+  UI.clearEngineBtn.addEventListener('click',()=>{
+    engineEndpoint=''; engineVerified=false; UI.engineEndpoint.value='';
+    localStorage.removeItem('bg-engine-endpoint');
+    updateEngineStatus('Grandmaster engine endpoint cleared. Verified recommendations are unavailable.','bad');
+  });
+  UI.engineMode.addEventListener('change',()=>{
+    engineMode=UI.engineMode.value;
+    localStorage.setItem('bg-engine-mode',engineMode);
+    engineVerified=false;
+    if(engineMode==='local'){
+      updateEngineStatus('Local teaching fallback active — not grandmaster strength.','bad');
+    }else{
+      updateEngineStatus(engineEndpoint?'GNU Backgammon endpoint configured but not yet verified.':'Grandmaster engine not connected. Recommendations are blocked.','bad');
+    }
+  });
   UI.stopCoachThinkBtn.addEventListener('click',()=>stopCoachThink());
 
   UI.stopHintAnimationBtn.addEventListener('click',()=>stopVisualHintAnimation());
@@ -1714,6 +1894,9 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   UI.notationMode.addEventListener('change',()=>{localStorage.setItem('bg-notation-mode',UI.notationMode.value); if(state.rolled&&state.turn===HUMAN) showHint();});
   UI.coachToggle.addEventListener('change',()=>{ if(UI.coachToggle.checked) UI.coachText.textContent=explainPosition(state,HUMAN); else UI.coachText.textContent='Hints are off.'; });
   window.addEventListener('resize',()=>{draw();applyRollPreference();});
+  UI.engineMode.value=engineMode;
+  UI.engineEndpoint.value=engineEndpoint;
+  updateEngineStatus(engineMode==='local'?'Local teaching fallback active — not grandmaster strength.':(engineEndpoint?'GNU Backgammon endpoint configured; tap Test engine connection.':'Grandmaster engine not connected. Recommendations are blocked unless the local fallback is deliberately selected.'),'bad');
   UI.coachLevel.value=localStorage.getItem('bg-coach-level')||'intermediate';
   UI.coachVerbosity.value=localStorage.getItem('bg-coach-verbosity')||'standard';
   UI.explainEveryMove.checked=localStorage.getItem('bg-explain-every-move')!=='0';
