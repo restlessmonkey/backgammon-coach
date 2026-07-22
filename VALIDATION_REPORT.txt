@@ -1,12 +1,20 @@
-Backgammon Coach v1.8.4 Validation Report
+Backgammon Coach v1.9 Validation Report
+=============================================
+PASS — version_title
+PASS — coach_level
+PASS — verbosity
+PASS — explain_toggle
+PASS — move_rating
+PASS — why_not
+PASS — risk_meter
+PASS — favorites
+PASS — coach_report
+PASS — celebration_test
+PASS — cache_v19
+PASS — javascript_syntax
 
-Static validation targets:
-- v1.8.4 identity present in HTML
-- v1.8.4 service-worker cache identity
-- testCelebrationBtn exists
-- test button is registered in the UI map
-- test button invokes startVictoryCelebration
-- Stop celebration remains wired
-- JavaScript syntax check PASS
+JavaScript syntax output:
+PASS
 
-Device validation still required in Safari for animation appearance and touch behavior.
+Automated result: PASS
+Device visual and gameplay testing remains required on iPhone/iPad Safari.

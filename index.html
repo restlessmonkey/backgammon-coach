@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v1.8.4</title>
+  <title>Backgammon Coach iPhone v1.9</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -103,7 +103,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 @media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
 
 
-/* v1.8.4 Immersive Play */
+/* v1.9 Immersive Play */
 .topbar,.play-controls,.coach-panel{transition:all .22s ease}
 body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
 body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
@@ -154,7 +154,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   
 
-/* v1.8.4 Victory Celebration */
+/* v1.9 Victory Celebration */
 .victory-celebration{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden;background:rgba(8,12,10,.08);opacity:0;transition:opacity .18s ease}
 .victory-celebration.active{opacity:1}
 .victory-canvas{width:100%;height:100%;display:block}
@@ -162,6 +162,34 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 .victory-celebration.active .victory-banner{opacity:1;transform:translateX(-50%) translateY(0)}
 .stop-celebration{position:absolute;right:max(12px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));pointer-events:auto;background:rgba(247,239,225,.96);color:#2a251f;border:2px solid rgba(42,37,31,.18);box-shadow:0 8px 24px rgba(0,0,0,.35);min-height:48px;padding:10px 16px}
 @media (prefers-reduced-motion:reduce){.victory-celebration,.victory-banner{transition:none}}
+
+
+/* v1.9 Explain Every Move */
+.coach-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.coach-settings label{display:grid;gap:4px;color:var(--muted);font-size:.76rem;font-weight:800}
+.move-rating{margin:10px 0;padding:11px;border-radius:12px;border:1px solid #d6c4ae;background:#fffaf2}
+.move-rating[data-grade="Perfect"],.move-rating[data-grade="Excellent"]{border-left:7px solid #2d7a4d}
+.move-rating[data-grade="Good"]{border-left:7px solid #3978a8}
+.move-rating[data-grade="Playable"]{border-left:7px solid #c9a227}
+.move-rating[data-grade="Dubious"]{border-left:7px solid #d8782f}
+.move-rating[data-grade="Mistake"],.move-rating[data-grade="Blunder"]{border-left:7px solid #a63b35}
+.move-rating h3{margin:0 0 6px;font-family:Georgia,serif;font-size:1rem}
+.move-rating p{margin:4px 0!important}
+.risk-grid{display:grid;gap:7px;margin-top:10px}
+.risk-row{display:grid;grid-template-columns:74px 1fr 34px;align-items:center;gap:7px;font-size:.76rem}
+.risk-track{height:9px;border-radius:999px;background:#e4d7c5;overflow:hidden}
+.risk-fill{height:100%;background:var(--green);border-radius:inherit}
+.why-not{margin-top:8px;padding-top:8px;border-top:1px solid #dfd2bf}
+.why-not summary{cursor:pointer;font-weight:900;color:#5b421e}
+.lesson-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.lesson-actions button{box-shadow:none;padding:7px 9px;font-size:.78rem}
+.favorite-list{display:grid;gap:6px;margin-top:8px}
+.favorite-item{padding:8px;border-radius:10px;background:#ede0ce;font-size:.78rem}
+.coach-report{margin-top:10px;padding:10px;border-radius:12px;background:#e8f0eb}
+.coach-report-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:7px;text-align:center}
+.coach-report-grid div{padding:6px;border-radius:8px;background:white}
+.coach-report-grid strong{display:block;font-size:1.05rem}
+@media(max-width:620px){.coach-settings{grid-template-columns:1fr}.risk-row{grid-template-columns:64px 1fr 30px}}
 
 </style>
 
@@ -179,10 +207,10 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v1.8.4</span>
+          <span class="version-badge" id="versionBadge">v1.9</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v1.8.4</div>
+        <div class="version-note">v1.9</div>
       </div>
       <div class="top-actions">
         <button id="newGameBtn">New game</button>
@@ -234,9 +262,32 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
           </div>
           <div id="coachDrawerBody" class="coach-drawer-body">
           <p id="coachText">Roll the dice. I’ll highlight legal checkers and explain useful ideas.</p>
-          <button id="hintBtn" class="secondary wide">Rank my moves</button>
+          <div class="coach-settings">
+            <label>Coach level
+              <select id="coachLevel">
+                <option value="beginner">Beginner</option>
+                <option value="intermediate" selected>Intermediate</option>
+                <option value="advanced">Advanced</option>
+              </select>
+            </label>
+            <label>Explanation detail
+              <select id="coachVerbosity">
+                <option value="short">Short</option>
+                <option value="standard" selected>Standard</option>
+                <option value="detailed">Detailed</option>
+              </select>
+            </label>
+          </div>
+          <label class="switch-label experience-switch"><input id="explainEveryMove" type="checkbox" checked><span>Explain after every move</span></label>
+          <button id="hintBtn" class="secondary wide">Rank and explain my moves</button>
+          <div id="lastMoveRating" aria-live="polite"></div>
           <div id="hintResults" class="hint-results" aria-live="polite"></div>
-          <div class="coach-disclaimer">v1.8.4 ranks complete legal turn sequences with a transparent local teaching heuristic. Engine-grade analysis remains planned.</div>
+          <details class="why-not" id="favoriteLessonsPanel">
+            <summary>⭐ Favorite lessons</summary>
+            <div id="favoriteLessons" class="favorite-list"></div>
+          </details>
+          <div id="coachReport" class="coach-report" hidden></div>
+          <div class="coach-disclaimer">v1.9 explains and compares complete legal turn sequences with a transparent local teaching heuristic. Engine-grade analysis remains planned.</div>
           </div>
         </section>
 
@@ -323,7 +374,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   const UI = Object.fromEntries([
     'rollBtn','undoBtn','endTurnBtn','newGameBtn','rulesBtn','closeRulesBtn','rulesDialog','die1','die2',
     'humanPips','aiPips','humanBar','aiBar','humanOff','aiOff','turnBanner','coachText','hintBtn',
-    'coachToggle','victoryCelebration','victoryCanvas','victoryBanner','stopCelebrationBtn','testCelebrationBtn','coachDrawerToggle','coachDrawerBody','coachPanel','appHeader','playControls','handMode','floatRollToggle','lockRollToggle','resetRollPositionBtn','focusModeBtn','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode'
+    'coachToggle','coachLevel','coachVerbosity','explainEveryMove','lastMoveRating','favoriteLessonsPanel','favoriteLessons','coachReport','victoryCelebration','victoryCanvas','victoryBanner','stopCelebrationBtn','testCelebrationBtn','coachDrawerToggle','coachDrawerBody','coachPanel','appHeader','playControls','handMode','floatRollToggle','lockRollToggle','resetRollPositionBtn','focusModeBtn','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode'
   ].map(id => [id, document.getElementById(id)]));
 
   const W = canvas.width, H = canvas.height;
@@ -342,6 +393,8 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   let humanMoveHistory = [];
   let guidedSequence = [];
   let guidedStep = 0;
+  let moveGrades = [];
+  let favoriteLessons = JSON.parse(localStorage.getItem('bg-favorite-lessons') || '[]');
   let executingSequence = false;
   let rollDrag = {active:false, moved:false, dx:0, dy:0};
   let focusMode = false;
@@ -527,7 +580,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v1.8.4 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v1.9 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -559,8 +612,11 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   function doHumanMove(move, options={}) {
     clearTimeout(aiTimer);
+    const beforeMove=cloneState(state);
+    const comparison=firstMoveComparison(beforeMove,move);
     humanMoveHistory.push(cloneState(state));
     state = applyMove(state, HUMAN, move);
+    if(UI.explainEveryMove.checked && !executingSequence) renderMoveRating(beforeMove,move,comparison);
     const idx = state.remaining.indexOf(move.die);
     if (idx>=0) state.remaining.splice(idx,1);
     selected=null; legalTargets=[]; hintMove=null;
@@ -785,10 +841,150 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   function checkWinner() {
     if (state.off[HUMAN]===15) {
       state.winner=HUMAN;
-      setCoach('You won! Enjoy the celebration — then review which made points and safe moves created the advantage.');
+      setCoach('You won! Enjoy the celebration — then review the Coach Report for your strongest moves and improvement areas.');
+      renderCoachReport();
       if(!celebrationShownForGame){celebrationShownForGame=true;startVictoryCelebration();}
     }
     if (state.off[AI]===15) {state.winner=AI; setCoach('The computer won. Try again and focus on reducing exposed blots and building connected points.');}
+  }
+
+
+  function coachTerm(text) {
+    if (UI.coachLevel.value==='beginner') {
+      return text.replace(/prime/gi,'wall of points').replace(/builder/gi,'checker ready to help make a point').replace(/tempo/gi,'extra time').replace(/contact/gi,'chances to interact or hit');
+    }
+    if (UI.coachLevel.value==='advanced') return text;
+    return text.replace(/tempo/gi,'time advantage');
+  }
+
+  function positionMetrics(s, player) {
+    let blots=0, made=0, homeMade=0, builders=0;
+    for(let i=0;i<24;i++){
+      if(owner(s.points[i])===player){
+        const n=count(s.points[i]);
+        if(n===1) blots++;
+        if(n>=2){made++; if((player===HUMAN&&i<=5)||(player===AI&&i>=18)) homeMade++;}
+        if(n===1||n===2) builders++;
+      }
+    }
+    return {pips:pipCount(s,player),blots,made,homeMade,builders,bar:s.bar[player],off:s.off[player]};
+  }
+
+  function moveImpact(before, after, player) {
+    const a=positionMetrics(before,player), b=positionMetrics(after,player);
+    const oppA=positionMetrics(before,-player), oppB=positionMetrics(after,-player);
+    return {
+      pipGain:a.pips-b.pips,
+      blotChange:b.blots-a.blots,
+      pointChange:b.made-a.made,
+      homePointChange:b.homeMade-a.homeMade,
+      hitGain:oppB.bar-oppA.bar,
+      borneOff:b.off-a.off,
+      builderChange:b.builders-a.builders
+    };
+  }
+
+  function riskScores(before, after, player) {
+    const m=positionMetrics(after,player), opp=positionMetrics(after,-player);
+    const safety=Math.max(5,Math.min(100,88-m.blots*17-m.bar*20+m.made*3));
+    const attack=Math.max(5,Math.min(100,35+opp.bar*22+m.homeMade*9));
+    const flexibility=Math.max(5,Math.min(100,45+m.builders*7-Math.max(0,m.blots-2)*5));
+    const race=Math.max(5,Math.min(100,50+(opp.pips-m.pips)*1.2));
+    return {Safety:Math.round(safety),Attack:Math.round(attack),Flexibility:Math.round(flexibility),Race:Math.round(race)};
+  }
+
+  function explainSequence(seq, before, player) {
+    let after=cloneState(before);
+    seq.forEach(m=>after=applyMove(after,player,m));
+    const impact=moveImpact(before,after,player);
+    const reasons=[];
+    if(impact.hitGain>0) reasons.push(`hits ${impact.hitGain} opposing blot${impact.hitGain===1?'':'s'} and gains time`);
+    if(impact.homePointChange>0) reasons.push('strengthens your home board');
+    else if(impact.pointChange>0) reasons.push(`makes ${impact.pointChange} new point${impact.pointChange===1?'':'s'}`);
+    if(impact.borneOff>0) reasons.push(`bears off ${impact.borneOff} checker${impact.borneOff===1?'':'s'}`);
+    if(impact.blotChange<0) reasons.push(`reduces exposed blots by ${Math.abs(impact.blotChange)}`);
+    if(impact.blotChange>0) reasons.push(`creates ${impact.blotChange} additional exposed blot${impact.blotChange===1?'':'s'}`);
+    if(impact.builderChange>0) reasons.push('creates more useful builders');
+    if(!reasons.length) reasons.push('uses the dice efficiently while keeping the position balanced');
+    if(UI.coachVerbosity.value==='short') return coachTerm(reasons[0]+'.');
+    if(UI.coachVerbosity.value==='detailed') reasons.push(`advances ${impact.pipGain} pips this turn`);
+    return coachTerm(reasons.map((x,i)=>`${i===0?'It':'It also'} ${x}`).join('. ')+'.');
+  }
+
+  function gradeGap(gap) {
+    if(gap<=0.25) return 'Perfect';
+    if(gap<=1.25) return 'Excellent';
+    if(gap<=3.5) return 'Good';
+    if(gap<=7) return 'Playable';
+    if(gap<=12) return 'Dubious';
+    if(gap<=22) return 'Mistake';
+    return 'Blunder';
+  }
+
+  function firstMoveComparison(before, move) {
+    const ranked=rankSequences(before,HUMAN,before.remaining);
+    if(!ranked.length) return null;
+    const choices=ranked.filter(r=>r.seq[0] && r.seq[0].from===move.from && r.seq[0].to===move.to && r.seq[0].die===move.die);
+    const chosen=choices[0] || {score:evaluate(applyMove(before,HUMAN,move),HUMAN),seq:[move]};
+    const gap=Math.max(0,ranked[0].score-chosen.score);
+    return {best:ranked[0],chosen,gap,grade:gradeGap(gap)};
+  }
+
+  function riskHTML(scores) {
+    return `<div class="risk-grid">${Object.entries(scores).map(([k,v])=>`<div class="risk-row"><span>${k}</span><div class="risk-track"><div class="risk-fill" style="width:${v}%"></div></div><strong>${v}</strong></div>`).join('')}</div>`;
+  }
+
+  function saveFavoriteLesson(textValue) {
+    if(!textValue) return;
+    favoriteLessons.unshift({text:textValue,when:new Date().toLocaleDateString()});
+    favoriteLessons=favoriteLessons.slice(0,20);
+    localStorage.setItem('bg-favorite-lessons',JSON.stringify(favoriteLessons));
+    renderFavoriteLessons();
+  }
+
+  function renderFavoriteLessons() {
+    UI.favoriteLessons.innerHTML=favoriteLessons.length
+      ? favoriteLessons.map(x=>`<div class="favorite-item"><strong>${x.when}</strong><br>${x.text}</div>`).join('')
+      : '<div class="favorite-item">No saved lessons yet. Tap ⭐ Save lesson after a move explanation.</div>';
+  }
+
+  function renderMoveRating(before, move, comparison) {
+    if(!comparison) return;
+    let after=applyMove(before,HUMAN,move);
+    const explanation=explainSequence([move],before,HUMAN);
+    const bestSummary=sequenceDirections(comparison.best.seq,HUMAN).summary;
+    const chosenSummary=sequenceDirections(comparison.chosen.seq,HUMAN).summary;
+    const why=explainSequence(comparison.best.seq,before,HUMAN);
+    const risks=riskScores(before,after,HUMAN);
+    const id=`lesson-${Date.now()}`;
+    UI.lastMoveRating.innerHTML=`<section class="move-rating" data-grade="${comparison.grade}">
+      <h3>${comparison.grade}: ${chosenSummary}</h3>
+      <p>${explanation}</p>
+      ${riskHTML(risks)}
+      <details class="why-not"><summary>Why not another move?</summary>
+        <p><strong>Coach choice:</strong> ${bestSummary}</p>
+        <p>${comparison.gap<.3?'Your move matched the coach choice.':`The coach choice scored ${comparison.gap.toFixed(1)} teaching points better because ${why.toLowerCase()}`}</p>
+      </details>
+      <div class="lesson-actions"><button type="button" class="secondary" data-favorite="${id}">⭐ Save lesson</button></div>
+    </section>`;
+    const btn=UI.lastMoveRating.querySelector('[data-favorite]');
+    if(btn) btn.addEventListener('click',()=>{saveFavoriteLesson(`${comparison.grade}: ${chosenSummary}. ${explanation}`);btn.textContent='★ Saved';btn.disabled=true;});
+    moveGrades.push(comparison.grade);
+  }
+
+  function renderCoachReport() {
+    const names=['Perfect','Excellent','Good','Playable','Dubious','Mistake','Blunder'];
+    const counts=Object.fromEntries(names.map(n=>[n,moveGrades.filter(x=>x===n).length]));
+    const strong=counts.Perfect+counts.Excellent+counts.Good;
+    const needs=counts.Mistake+counts.Blunder;
+    UI.coachReport.hidden=false;
+    UI.coachReport.innerHTML=`<strong>Game Coach Report</strong>
+      <div class="coach-report-grid">
+        <div><strong>${moveGrades.length}</strong><small>rated moves</small></div>
+        <div><strong>${strong}</strong><small>strong moves</small></div>
+        <div><strong>${needs}</strong><small>mistakes</small></div>
+      </div>
+      <p>${needs===0?'Excellent control: no moves were rated as mistakes or blunders.':'Best next focus: review the orange and red move explanations saved during the game.'}</p>`;
   }
 
   function explainPosition(s, player) {
@@ -813,14 +1009,21 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
     const labels=['Best move','Strong alternative','Another legal choice'];
     UI.hintResults.innerHTML=ranked.slice(0,3).map((r,i)=>{
       const reasons=teachingReasons(r,state,HUMAN);
-      const gap=i===0?'Top local score':`${Math.max(0,ranked[0].score-r.score).toFixed(1)} points behind`;
+      const scoreGap=Math.max(0,ranked[0].score-r.score);
+      const gap=i===0?'Top local score':`${scoreGap.toFixed(1)} points behind`;
       const d=sequenceDirections(r.seq,HUMAN);
       const steps=d.steps.length?`<ol class="move-steps">${d.steps.map(x=>`<li>${x}</li>`).join('')}</ol>`:'';
+      let after=cloneState(state); r.seq.forEach(m=>after=applyMove(after,HUMAN,m));
+      const explanation=explainSequence(r.seq,state,HUMAN);
+      const risks=riskScores(state,after,HUMAN);
+      const whyNot=i===0?'This is the coach baseline.':`Compared with ${sequenceDirections(ranked[0].seq,HUMAN).summary}, this option gives up ${scoreGap.toFixed(1)} teaching points.`;
       return `<div class="hint-card ${i===0?'best':''}">
         <div class="hint-head"><span class="hint-rank">${labels[i]||`Choice ${i+1}`}</span><span class="hint-move">${d.summary}</span></div>
         ${steps}
-        <p>${reasons.length?reasons.join('; '):'Plays the maximum legal dice with a balanced result.'}.</p>
-        <p><strong>${gap}</strong></p>
+        <p>${explanation}</p>
+        ${riskHTML(risks)}
+        <details class="why-not"><summary>${i===0?'Why this move?':'Why not this move?'}</summary><p>${whyNot}</p></details>
+        <p><strong>${gap} • ${gradeGap(scoreGap)}</strong></p>
         <div class="hint-actions">
           <button type="button" class="make-now" data-make-index="${i}">Make this move now!</button>
           <button type="button" class="guide-me" data-guide-index="${i}">Show me, I’ll move</button>
@@ -1181,10 +1384,17 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   UI.closeRulesBtn.addEventListener('click',()=>{ UI.rulesDialog.classList.remove('open'); document.body.style.overflow=''; });
   UI.rulesDialog.addEventListener('click',(e)=>{ if(e.target===UI.rulesDialog){ UI.rulesDialog.classList.remove('open'); document.body.style.overflow=''; } });
   UI.lessonSelect.addEventListener('change',()=>UI.lessonText.textContent=lessons[UI.lessonSelect.value]);
+  UI.coachLevel.addEventListener('change',()=>localStorage.setItem('bg-coach-level',UI.coachLevel.value));
+  UI.coachVerbosity.addEventListener('change',()=>localStorage.setItem('bg-coach-verbosity',UI.coachVerbosity.value));
+  UI.explainEveryMove.addEventListener('change',()=>localStorage.setItem('bg-explain-every-move',UI.explainEveryMove.checked?'1':'0'));
   UI.pointLabelMode.addEventListener('change',()=>{localStorage.setItem('bg-point-label-mode',UI.pointLabelMode.value);draw();});
   UI.notationMode.addEventListener('change',()=>{localStorage.setItem('bg-notation-mode',UI.notationMode.value); if(state.rolled&&state.turn===HUMAN) showHint();});
   UI.coachToggle.addEventListener('change',()=>{ if(UI.coachToggle.checked) UI.coachText.textContent=explainPosition(state,HUMAN); else UI.coachText.textContent='Hints are off.'; });
   window.addEventListener('resize',()=>{draw();applyRollPreference();});
+  UI.coachLevel.value=localStorage.getItem('bg-coach-level')||'intermediate';
+  UI.coachVerbosity.value=localStorage.getItem('bg-coach-verbosity')||'standard';
+  UI.explainEveryMove.checked=localStorage.getItem('bg-explain-every-move')!=='0';
+  renderFavoriteLessons();
   UI.pointLabelMode.value=localStorage.getItem('bg-point-label-mode')||'off';
   UI.notationMode.value=localStorage.getItem('bg-notation-mode')||'both';
   UI.handMode.value=localStorage.getItem('bg-hand-mode')||'auto';

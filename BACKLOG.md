@@ -1,30 +1,18 @@
-# Backgammon Coach Product Backlog
+# Backlog
 
-## Released — v1.8.2 Immersive Play
-- [x] Collapsing header after the first roll
-- [x] Maximum practical board space on mobile
-- [x] Fixed collapsible Coach drawer on iPhone-class layouts
-- [x] Persistent Coach panel on larger iPad/desktop layouts
-- [x] Larger and bolder Roll Dice controls
-- [x] Movable floating Roll Dice control
-- [x] Saved, resettable, and lockable Roll Dice position
-- [x] Auto, right-handed, and left-handed preferences
-- [x] Focus mode for hiding extra panels
-- [x] Preserve v1.8 full-turn hint execution and guided moves
+## Completed in v1.9
+- Explain every manually selected move.
+- Move ratings.
+- Risk meters.
+- Why-this-move and why-not comparisons.
+- Coaching language levels and explanation detail.
+- Favorite lessons.
+- End-of-game Coach Report.
 
-## v1.9 — Complete Move Journal
-- Record every game event, roll, legal sequence, move, hint, undo, board state, and timestamp.
-- Use immutable event records as the foundation for replay and statistics.
-- Add export/import of game journals.
-
-## v2.0 — Replay and Branching Practice
-- Replay a saved game from any event.
-- Create an independent practice branch without changing the original game.
-- Compare alternate move sequences.
-
-## Later
-- Personal mistake-pattern detection
-- Targeted practice positions
-- Match and doubling-cube support
-- Engine-grade analysis integration
-- Coach personalities and accessibility expansion
+## Next candidates
+- v2.0 Complete Move Journal and animated replay.
+- Branch from any replayed position.
+- Engine-grade analysis integration.
+- Opening roll trainer.
+- Mistake-only review mode.
+- Match play and doubling cube.

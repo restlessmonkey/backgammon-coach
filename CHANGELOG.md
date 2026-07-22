@@ -1,38 +1,25 @@
-# CHANGELOG
+# Changelog
 
-## v1.8.4 — Celebration Test Control
-- Added a prominent **Test random win celebration** button under Play experience.
-- Each tap launches fireworks and randomly selects one of the five checker finales without requiring a completed game.
-- Test mode does not alter the game, score, turn, or board state.
-- The existing Stop celebration button and Escape-key stop remain available.
+## v1.9 — Explain Every Move
 
+- Added automatic move ratings: Perfect, Excellent, Good, Playable, Dubious, Mistake, and Blunder.
+- Added plain-English explanations after each manually selected move.
+- Added Beginner, Intermediate, and Advanced coach language.
+- Added Short, Standard, and Detailed explanation levels.
+- Added Safety, Attack, Flexibility, and Race meters.
+- Added “Why this move?” and “Why not this move?” comparisons.
+- Added an Explain after every move toggle.
+- Added Favorite Lessons stored locally on the device.
+- Added a Game Coach Report when the user wins.
+- Expanded ranked complete-turn hints with explanations, ratings, and risk meters.
+- Preserved v1.8.4 victory celebrations and the celebration test button.
+- Updated offline cache and package identity to v1.9.
 
-## v1.8.3 — Victory Celebration
-- Added fireworks after a human victory.
-- Added five randomized checker finales: Rocket Checkers, Checker Hill, Classic Bounce, Victory Vortex, and Checker Fountain.
-- Added a persistent Stop celebration control and Escape-key stop.
-- Added reduced-motion behavior.
-- Celebration is cancelled when a new game begins and never alters gameplay state.
+## v1.8.4
+- Added a test button for the random victory celebration.
 
-# Backgammon Coach Change Log
+## v1.8.3
+- Added fireworks and five random checker finales after a human win.
 
-## v1.8.2 — Immersive Play
-
-Corrective release rebuilt from the original certified v1.8 source after the earlier v1.8.1 package failed to deliver the promised interaction changes.
-
-### Implemented
-- Header collapses automatically after the first human dice roll.
-- Mobile title, subtitle, and action controls compress to reclaim board space.
-- Coach becomes a fixed bottom drawer on iPhone-class layouts and remains persistent on larger iPad/desktop layouts.
-- Coach drawer starts collapsed and expands without pushing the board down.
-- Hint requests automatically open the Coach drawer.
-- Top and board Roll Dice buttons are larger, bold, and use a clear dice icon.
-- Optional floating Roll Dice control on mobile.
-- Floating control can be dragged with a finger or pointer and its position is saved locally.
-- Button position can be locked or reset.
-- Auto, right-handed, and left-handed control preferences.
-- Focus mode hides nonessential information panels.
-- Offline cache advanced to `backgammon-coach-v1-8-2`.
-
-### Historical correction
-- The two prior packages labeled v1.8.1 were incomplete and are not certified releases.
+## v1.8.2
+- Added Immersive Play layout improvements.

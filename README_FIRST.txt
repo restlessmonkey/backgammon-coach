@@ -1,14 +1,13 @@
-BACKGAMMON COACH v1.8.4 — VICTORY CELEBRATION TEST CONTROL
+BACKGAMMON COACH v1.9 — EXPLAIN EVERY MOVE
 
-ROOT PACKAGE
-Upload all extracted files to the root of the GitHub Pages repository.
+Open index.html, or deploy the folder to any static web host.
 
-WHAT IS NEW
-A prominent “Test random win celebration” button is available in Play experience. Each tap launches the same randomized celebration used after a real win, without changing game state. Stop it with the on-screen Stop celebration button or Escape.
+Main test:
+1. Start a game and roll.
+2. Make a legal move manually.
+3. Confirm the Coach panel displays a rating, explanation, four risk meters, and a Why not comparison.
+4. Tap Rank and explain my moves to compare complete legal turns.
+5. Save a lesson with the star button.
+6. Use the existing celebration test button under Play experience.
 
-INSTALL / TEST
-1. Upload the full extracted package.
-2. Open the app online and refresh until the version badge reads v1.8.4.
-3. Open Play experience.
-4. Tap Test random win celebration several times.
-5. Confirm the board and current game remain unchanged.
+This analysis is an educational local heuristic, not an engine-grade equity calculation.
