@@ -1,20 +1,13 @@
-Backgammon Coach v1.9 Validation Report
-=============================================
-PASS — version_title
-PASS — coach_level
-PASS — verbosity
-PASS — explain_toggle
-PASS — move_rating
-PASS — why_not
-PASS — risk_meter
-PASS — favorites
-PASS — coach_report
-PASS — celebration_test
-PASS — cache_v19
-PASS — javascript_syntax
-
-JavaScript syntax output:
-PASS
+Backgammon Coach v1.9.1 Validation Report
+================================================
+PASS — version
+PASS — animate_button
+PASS — stop_button
+PASS — animation_function
+PASS — overlay_renderer
+PASS — non_destructive_clone
+PASS — cache
+PASS — js_syntax
 
 Automated result: PASS
-Device visual and gameplay testing remains required on iPhone/iPad Safari.
+Final visual gameplay review is still required on iPhone/iPad Safari.

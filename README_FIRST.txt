@@ -1,13 +1,10 @@
-BACKGAMMON COACH v1.9 — EXPLAIN EVERY MOVE
+BACKGAMMON COACH v1.9.1 — ANIMATED BOARD HINTS
 
-Open index.html, or deploy the folder to any static web host.
+Test:
+1. Open the app and roll the dice.
+2. Tap “Rank and explain my moves.”
+3. Tap “Animate best move.”
+4. Watch the recommended sequence play graphically over the board.
+5. Tap “Stop animation” at any time.
 
-Main test:
-1. Start a game and roll.
-2. Make a legal move manually.
-3. Confirm the Coach panel displays a rating, explanation, four risk meters, and a Why not comparison.
-4. Tap Rank and explain my moves to compare complete legal turns.
-5. Save a lesson with the star button.
-6. Use the existing celebration test button under Play experience.
-
-This analysis is an educational local heuristic, not an engine-grade equity calculation.
+The preview does not alter the real game state.
