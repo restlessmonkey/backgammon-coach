@@ -1,7 +1,7 @@
 # Pip — Your Backgammon Coach
 ## Project File
 Version 1.0
-Backgammon Coach package version: v2.0.6.0
+Backgammon Coach package version: v2.0.6.1
 
 ---
 
@@ -699,7 +699,7 @@ and, in the appropriate optional personality:
 
 ---
 
-## 20. Character Studio and Asset Catalog — v2.0.6.0
+## 20. Character Studio and Asset Catalog — v2.0.6.1
 
 The first reusable Pip character system is now defined.
 
@@ -718,7 +718,7 @@ This is a design and preview release. Gameplay event integration remains intenti
 
 ---
 
-## 21. Character Studio Navigation — v2.0.6.0
+## 21. Character Studio Navigation — v2.0.6.1
 
 The Pip Character Studio is now directly accessible from the main app.
 
@@ -734,7 +734,7 @@ This is a navigation-only update. Gameplay and Pip behavior are unchanged.
 
 ---
 
-## 22. Main Screen and Settings Panel Architecture — v2.0.6.0
+## 22. Main Screen and Settings Panel Architecture — v2.0.6.1
 
 The main app screen now keeps only the **Game** panel.
 
@@ -754,7 +754,7 @@ The implementation moved 6 detected non-Game panels while preserving their exist
 
 ---
 
-## 23. Pip Mobility, Dismissal, and Restoration — v2.0.6.0
+## 23. Pip Mobility, Dismissal, and Restoration — v2.0.6.1
 
 Pip is now directly movable and dismissible.
 
@@ -777,7 +777,7 @@ The floating Roll Dice control was also restored to its intended behavior:
 
 ---
 
-## 24. Computer Player Strength Architecture — v2.0.6.0
+## 24. Computer Player Strength Architecture — v2.0.6.1
 
 Computer strength is now independent from Pip’s coaching level.
 
@@ -806,3 +806,8 @@ Permanent separation:
 - Computer strength controls how the opponent plays.
 - Pip coaching level controls how Pip explains.
 - Engine verification controls whether “GNU Grandmaster” may be claimed.
+
+
+---
+## 25. Immersive Play and Pip Presence — v2.0.6.1
+Phone landscape is board-first with overlay controls. Pip Character and Pip Tutor are now independent presentation layers. Full Pip shows both; Tutor Pip hides only the graphic; Silent Coach hides graphic and speech bubbles while retaining analysis.

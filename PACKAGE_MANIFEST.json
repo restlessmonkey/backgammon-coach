@@ -1,5 +1,5 @@
 {
-  "version": "2.0.6.0",
+  "version": "2.0.6.1",
   "package_type": "GITHUB_IPHONE_FLAT_UPLOAD",
   "upload_location": "repository root",
   "required_app_files": [
@@ -16,8 +16,8 @@
     "VALIDATION_REPORT.txt",
     "SHA256SUMS.txt"
   ],
-  "created_utc": "2026-07-22T20:43:36.786228+00:00",
-  "package_name": "v2.0.6.0_Backgammon_Coach_iPhone_GitHub_FLAT_COMPUTER_STRENGTH_LEVELS.zip",
+  "created_utc": "2026-07-23T00:13:18.856334+00:00",
+  "package_name": "v2.0.6.1_Backgammon_Coach_iPhone_GitHub_FLAT_IMMERSIVE_PIP_PRESENCE.zip",
   "default_settings": {
     "coaching_enabled": true,
     "explain_every_move": true,
@@ -158,5 +158,18 @@
     "preference_storage": "localStorage",
     "gnu_fallback": "Advanced Local",
     "coaching_level_separate": true
-  }
+  },
+  "immersive_play": {
+    "phone_landscape_auto": true,
+    "floating_controls": [
+      "Settings",
+      "Game menu",
+      "Immersive toggle"
+    ]
+  },
+  "pip_presence_modes": [
+    "Full Pip",
+    "Tutor Pip",
+    "Silent Coach"
+  ]
 }

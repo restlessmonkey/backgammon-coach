@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Backgammon Coach iPhone v2.0.6.0</title>
+  <title>Backgammon Coach iPhone v2.0.6.1</title>
   <style>
 :root {
   --bg: #1b211c;
@@ -50,7 +50,7 @@ canvas { width: 100%; height: auto; display: block; touch-action: manipulation; 
 .sidebar { display: grid; gap: 14px; }
 
 /*
-  v2.0.6.0 — Independent side-panel scrolling
+  v2.0.6.1 — Independent side-panel scrolling
   On wide layouts, the board remains visually anchored while the right panel
   column gets its own touch-friendly vertical scroll area. Phone layouts keep
   normal page scrolling to avoid cramped nested scrolling.
@@ -207,7 +207,7 @@ select { width:100%; padding:10px; border-radius:10px; border:1px solid #cdbda9;
 @media (max-width:620px){ .board-roll-btn{min-width:132px;padding:9px 12px}.hint-actions{grid-template-columns:1fr}.settings-grid{gap:8px} }
 
 
-/* v2.0.6.0 Immersive Play */
+/* v2.0.6.1 Immersive Play */
 .topbar,.play-controls,.coach-panel{transition:all .22s ease}
 body.game-active .topbar{margin-bottom:8px;padding:4px 0;align-items:center}
 body.game-active .topbar h1{font-size:1.05rem;line-height:1.1}
@@ -258,7 +258,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
   
 
-/* v2.0.6.0 Victory Celebration */
+/* v2.0.6.1 Victory Celebration */
 .victory-celebration{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden;background:rgba(8,12,10,.08);opacity:0;transition:opacity .18s ease}
 .victory-celebration.active{opacity:1}
 .victory-canvas{width:100%;height:100%;display:block}
@@ -268,7 +268,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media (prefers-reduced-motion:reduce){.victory-celebration,.victory-banner{transition:none}}
 
 
-/* v2.0.6.0 Explain Every Move */
+/* v2.0.6.1 Explain Every Move */
 .coach-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
 .coach-settings label{display:grid;gap:4px;color:var(--muted);font-size:.76rem;font-weight:800}
 .move-rating{margin:10px 0;padding:11px;border-radius:12px;border:1px solid #d6c4ae;background:#fffaf2}
@@ -296,7 +296,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.coach-settings{grid-template-columns:1fr}.risk-row{grid-template-columns:64px 1fr 30px}}
 
 
-/* v2.0.6.0 Animated Board Hints */
+/* v2.0.6.1 Animated Board Hints */
 .visual-hint-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:8px}
 .visual-hint-controls button{margin:0;box-shadow:none}
 .visual-hint-status{margin-top:8px;padding:8px 10px;border-radius:10px;background:#e7f0eb;color:#294f42;font-weight:800;font-size:.8rem}
@@ -304,7 +304,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:760px){.visual-hint-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.6.0 Watch the Coach Think */
+/* v2.0.6.1 Watch the Coach Think */
 .think-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
 .think-controls button{margin:0;box-shadow:none}
 .think-panel{margin-top:9px;padding:10px;border-radius:12px;background:#f6ead8;border:1px solid #d8c5ab}
@@ -319,7 +319,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 @media(max-width:620px){.think-controls{grid-template-columns:1fr}}
 
 
-/* v2.0.6.0 verified engine controls */
+/* v2.0.6.1 verified engine controls */
 .engine-panel{margin:10px 0;padding:10px;border-radius:12px;border:1px solid #d8c5ab;background:#fffaf2}
 .engine-panel h3{margin:0 0 8px;font-size:.95rem}
 .engine-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -346,7 +346,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
 
 .celebration-vault-dialog{padding:18px}.celebration-vault-content{width:min(1080px,96vw);max-height:92vh;overflow:auto}.vault-heading{display:flex;gap:18px;justify-content:space-between}.vault-stats{background:#eef6f1;border:1px solid #bfd3c8;border-radius:14px;padding:10px 14px;font-weight:750}.vault-toolbar,.rarity-legend{display:flex;flex-wrap:wrap;gap:9px;margin:15px 0}.rarity-legend span{font-size:.8rem;font-weight:800;padding:5px 9px;border-radius:999px;background:#f3eadb}.celebration-vault-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.celebration-card{border:2px solid #dfd1bb;background:#fffaf1;border-radius:16px;padding:13px;display:grid;gap:8px}.celebration-card.disabled{opacity:.52}.celebration-card.favorite{border-color:#d9a441}.celebration-card-head{display:flex;justify-content:space-between}.celebration-card h3{margin:0;font-size:1rem}.celebration-icon{font-size:1.6rem}.rarity-pill{font-size:.7rem;text-transform:uppercase;font-weight:900;background:#eee1ca;padding:4px 7px;border-radius:999px}.celebration-card p{font-size:.84rem;margin:0;color:#665a4b}.celebration-card-actions{display:grid;grid-template-columns:1fr 1fr auto;gap:6px}.celebration-card-actions button{font-size:.78rem;padding:8px 6px}.victory-copy{position:fixed;top:8vh;left:50%;transform:translateX(-50%);z-index:3;text-align:center;width:min(92vw,760px);pointer-events:none}.victory-copy .victory-banner{position:static;transform:none;display:inline-block}.victory-subtitle{margin:8px auto 0;background:rgba(24,38,31,.88);color:white;padding:8px 15px;border-radius:999px;font-weight:750;max-width:max-content}@media(max-width:700px){.vault-heading{display:block}.vault-stats{display:inline-block;margin-top:8px}}
 
-/* v2.0.6.0 — Pip avatar, settings, and Helpful mode */
+/* v2.0.6.1 — Pip avatar, settings, and Helpful mode */
 .pip-settings-button{
   position:fixed;
   top:max(12px,env(safe-area-inset-top));
@@ -572,7 +572,7 @@ body.focus-mode .player-panel,body.focus-mode .settings-panel,body.focus-mode .e
   .pip-avatar,.pip-helpful-meter span{transition:none!important;animation:none!important}
 }
 
-/* v2.0.6.0 — Move all non-Game panels into Settings */
+/* v2.0.6.1 — Move all non-Game panels into Settings */
 .settings-panel-library{
   display:grid;
   gap:14px;
@@ -622,7 +622,7 @@ body.game-panel-only-layout .main-layout{
   grid-template-columns:minmax(0,1fr)!important;
 }
 
-/* v2.0.6.0 — Movable, dismissible Pip and persistent floating Roll Dice */
+/* v2.0.6.1 — Movable, dismissible Pip and persistent floating Roll Dice */
 .pip-avatar{
   touch-action:none;
   cursor:grab;
@@ -680,7 +680,7 @@ body.game-panel-only-layout .main-layout{
 }
 .roll-primary.floating.dragging{cursor:grabbing}
 
-/* v2.0.6.0 — Computer player strength levels */
+/* v2.0.6.1 — Computer player strength levels */
 .computer-strength-row{
   display:flex;
   align-items:center;
@@ -725,6 +725,9 @@ body.game-panel-only-layout .main-layout{
   line-height:1.4;
   font-weight:750;
 }
+
+/* v2.0.6.1 immersive play and Pip presence */
+.immersive-controls{position:fixed;z-index:1390;top:max(8px,env(safe-area-inset-top));right:max(8px,env(safe-area-inset-right));display:flex;gap:7px}.immersive-control{width:42px;height:42px;min-height:42px;padding:0;border-radius:50%;border:2px solid #c7a775;background:#fff7e8;color:#35261b;box-shadow:0 6px 18px rgba(35,22,10,.24);font-size:1.05rem;font-weight:900}.immersive-controls[hidden],.game-menu-sheet[hidden],.pip-tutor-indicator[hidden]{display:none!important}.game-menu-sheet{position:fixed;z-index:1400;inset:0;background:rgba(20,16,12,.48);display:grid;place-items:end center;padding:12px}.game-menu-card{width:min(560px,100%);max-height:82vh;overflow:auto;border-radius:24px;background:#fffaf1;border:2px solid #cfb17e;padding:18px}.game-menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.pip-presence-description{margin:0;padding:11px 12px;border:1px solid #ead5b4;border-radius:13px;background:#fffaf1;color:#5d5146;line-height:1.45;font-size:.83rem}.pip-tutor-indicator{position:fixed;z-index:1260;left:max(10px,env(safe-area-inset-left));bottom:max(10px,env(safe-area-inset-bottom));border:1px solid #c7a775;border-radius:999px;background:#fff7e8;color:#4a3828;padding:7px 11px;font-size:.75rem;font-weight:900;box-shadow:0 5px 16px rgba(40,24,10,.17);pointer-events:none}body.pip-silent-coach #pipSpeech,body.pip-silent-coach .pip-tutor-indicator{display:none!important}body.immersive-play header,body.immersive-play .hero,body.immersive-play .top-actions,body.immersive-play .app-header,body.landscape-auto-immersive header,body.landscape-auto-immersive .hero,body.landscape-auto-immersive .top-actions,body.landscape-auto-immersive .app-header{display:none!important}body.immersive-play,body.landscape-auto-immersive{overflow:hidden}body.immersive-play main,body.immersive-play .main-layout,body.immersive-play .game-shell,body.immersive-play .board-wrap,body.landscape-auto-immersive main,body.landscape-auto-immersive .main-layout,body.landscape-auto-immersive .game-shell,body.landscape-auto-immersive .board-wrap{margin:0!important;padding:0!important;width:100vw!important;max-width:none!important}body.immersive-play .pip-return-button,body.landscape-auto-immersive .pip-return-button{display:none!important}@media(max-width:520px){.game-menu-grid{grid-template-columns:1fr}}
 </style>
 
   <meta name="theme-color" content="#382719">
@@ -736,6 +739,8 @@ body.game-panel-only-layout .main-layout{
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
+<div id="immersiveControls" class="immersive-controls"><button id="immersiveSettingsButton" class="immersive-control" type="button" aria-label="Open Settings">⚙️</button><button id="immersiveMenuButton" class="immersive-control" type="button" aria-label="Open game menu">⋯</button><button id="immersiveToggleButton" class="immersive-control" type="button" aria-label="Enter Immersive Play">⛶</button></div><div id="gameMenuSheet" class="game-menu-sheet" hidden><div class="game-menu-card" role="dialog" aria-modal="true"><h2>Game menu</h2><div class="game-menu-grid"><button id="menuNewGame">New game</button><button id="menuHowToPlay">How to play</button><button id="menuCelebrations">Celebration Vault</button><button id="menuSurprise">Surprise me</button><button id="menuResetRoll">Reset Roll Dice position</button><button id="menuResetPip">Reset Pip position</button></div><button id="menuClose" class="secondary" style="margin-top:12px;width:100%">Close</button></div></div><div id="pipTutorIndicator" class="pip-tutor-indicator" hidden>Pip Tutor active</div>
+
 <button id="pipSettingsButton" class="pip-settings-button" type="button" aria-label="Open Pip settings" title="Pip settings">⚙️</button>
 
 <div id="pipSettingsBackdrop" class="pip-settings-backdrop" hidden>
@@ -789,6 +794,8 @@ body.game-panel-only-layout .main-layout{
     
     
     
+    <div class="pip-setting-group"><h3>Display</h3><label>Landscape layout<select id="landscapeLayout"><option value="auto" selected>Automatic Immersive Play</option><option value="compact">Compact</option><option value="dashboard">Full Dashboard</option></select></label><p class="pip-settings-note">Automatic Immersive Play maximizes the board in iPhone landscape while floating controls keep menus available.</p><label class="switch-label experience-switch"><input id="showImmersiveControls" type="checkbox" checked><span>Show floating Settings, menu, and Immersive controls</span></label></div>
+
     <div class="pip-setting-group">
       <h3>Computer Player</h3>
       <div class="computer-config-grid">
@@ -894,6 +901,8 @@ body.game-panel-only-layout .main-layout{
     </div>
 
 
+    <div class="pip-setting-group"><h3>Pip Presence</h3><label>Coach mode<select id="pipPresenceMode"><option value="full" selected>Full Pip</option><option value="tutor">Tutor Pip — graphic hidden</option><option value="silent">Silent Coach</option></select></label><p id="pipPresenceDescription" class="pip-presence-description"></p><label class="switch-label experience-switch"><input id="pipShowTutorIndicator" type="checkbox" checked><span>Show a small Pip Tutor active indicator</span></label></div>
+
     <div class="pip-setting-group">
       <h3>Pip position</h3>
       <p class="pip-settings-note">Drag Pip anywhere on the screen. His position is saved automatically.</p>
@@ -945,10 +954,10 @@ body.game-panel-only-layout .main-layout{
       <div>
         <div class="title-row">
           <h1>Backgammon Coach</h1>
-          <span class="version-badge" id="versionBadge">v2.0.6.0</span>
+          <span class="version-badge" id="versionBadge">v2.0.6.1</span>
         </div>
         <p>Play against the computer and learn why a move is strong.</p>
-        <div class="version-note">v2.0.6.0</div>
+        <div class="version-note">v2.0.6.1</div>
       </div>
       <div class="top-actions">
         <button id="headerCelebrationBtn" class="secondary celebration-header-btn" type="button">🎉 Celebration Vault</button>
@@ -1045,7 +1054,7 @@ body.game-panel-only-layout .main-layout{
             <div id="favoriteLessons" class="favorite-list"></div>
           </details>
           <div id="coachReport" class="coach-report" hidden></div>
-          <div class="coach-disclaimer">v2.0.6.0 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. Pip’s local evaluator provides transparent offline teaching analysis and remains clearly distinguished from verified GNU Grandmaster analysis.</div>
+          <div class="coach-disclaimer">v2.0.6.1 uses a strict “engine decides, coach teaches” architecture. Only responses returned by a connected GNU Backgammon analysis service are labeled grandmaster. Pip’s local evaluator provides transparent offline teaching analysis and remains clearly distinguished from verified GNU Grandmaster analysis.</div>
           </div>
         </section>
 
@@ -1174,7 +1183,7 @@ const canvas = document.getElementById('board');
 
   const UI = Object.fromEntries([
     'rollBtn','undoBtn','endTurnBtn','newGameBtn','rulesBtn','closeRulesBtn','rulesDialog','die1','die2',
-    'humanPips','aiPips','computerStrengthBadge','computerStrength','computerStrengthDescription','computerAnnounceLevel','computerStrengthWarning','humanBar','aiBar','humanOff','aiOff','turnBanner','coachText','hintBtn',
+    'humanPips','aiPips','computerStrengthBadge','computerStrength','computerStrengthDescription','computerAnnounceLevel','computerStrengthWarning','landscapeLayout','showImmersiveControls','pipPresenceMode','pipPresenceDescription','pipShowTutorIndicator','immersiveControls','immersiveSettingsButton','immersiveMenuButton','immersiveToggleButton','gameMenuSheet','menuNewGame','menuHowToPlay','menuCelebrations','menuSurprise','menuResetRoll','menuResetPip','menuClose','pipTutorIndicator','humanBar','aiBar','humanOff','aiOff','turnBanner','coachText','hintBtn',
     'coachToggle','coachLevel','coachVerbosity','engineMode','engineEndpoint','testEngineBtn','clearEngineBtn','engineStatus','explainEveryMove','autoWatchCoach','animateBestHintBtn','replayBestHintBtn','stopHintAnimationBtn','watchCoachThinkBtn','stopCoachThinkBtn','coachThinkPanel','coachThinkStage','coachThinkDetail','coachThinkCandidates','visualHintStatus','lastMoveRating','favoriteLessonsPanel','favoriteLessons','coachReport','victoryCelebration','victoryCanvas','victoryBanner','stopCelebrationBtn','testCelebrationBtn','coachDrawerToggle','coachDrawerBody','coachPanel','appHeader','playControls','handMode','floatRollToggle','lockRollToggle','resetRollPositionBtn','focusModeBtn','lessonSelect','lessonText','remainingNote','hintResults','boardRollBtn','pointLabelMode','notationMode',
     'headerCelebrationBtn'
   ,
@@ -1208,6 +1217,12 @@ const canvas = document.getElementById('board');
   let moveGrades = [];
   let favoriteLessons = JSON.parse(localStorage.getItem('bg-favorite-lessons') || '[]');
   let autoWatchCoachEnabled = (localStorage.getItem('bg-auto-watch-coach') === 'true' || localStorage.getItem('bg-auto-watch-coach') === null);
+  let landscapeLayout=localStorage.getItem('bg-landscape-layout')||'auto';
+  let showImmersiveControls=localStorage.getItem('bg-show-immersive-controls')!=='0';
+  let immersiveManual=localStorage.getItem('bg-immersive-manual')==='1';
+  let pipPresenceMode=localStorage.getItem('bg-pip-presence-mode')||'full';
+  let pipShowTutorIndicator=localStorage.getItem('bg-pip-tutor-indicator')!=='0';
+  const PIP_PRESENCE_MODES={full:{label:'Full Pip',description:'Pip graphic, movement, speech bubbles, and tutoring are active.'},tutor:{label:'Tutor Pip',description:'Pip graphic is hidden, but tutoring, explanations, and speech bubbles remain active.'},silent:{label:'Silent Coach',description:'Pip graphic and speech bubbles are hidden. Analysis and move-quality information remain active.'}};
   let computerStrength = localStorage.getItem('bg-computer-strength') || 'advanced';
   let computerAnnounceLevel = localStorage.getItem('bg-computer-announce-level') !== '0';
   const COMPUTER_LEVELS = {
@@ -1498,7 +1513,7 @@ const canvas = document.getElementById('board');
       return seqs.length>0&&seqs.every(q=>q.length===1&&q[0].die===5);
     });
     const passed=results.filter(([,ok])=>ok).length;
-    console.info(`Backgammon Coach v2.0.6.0 rules self-test: ${passed}/${results.length} PASS`,results);
+    console.info(`Backgammon Coach v2.0.6.1 rules self-test: ${passed}/${results.length} PASS`,results);
     document.documentElement.dataset.rulesTests=`${passed}/${results.length}`;
     return passed===results.length;
   }
@@ -2149,7 +2164,9 @@ const canvas = document.getElementById('board');
       engineVerified=true;
       localStorage.setItem('bg-engine-endpoint',engineEndpoint);
       updateEngineStatus(`Verified: ${data.engine}${data.version?' '+data.version:''}. Grandmaster recommendations are enabled.`,'ok');
-      updateComputerStrengthUI();
+      updatePipPresenceUI();
+  applyLandscapeLayout();
+  updateComputerStrengthUI();
       return true;
     }catch(error){
       engineVerified=false;
@@ -3505,6 +3522,7 @@ const canvas = document.getElementById('board');
     localStorage.removeItem('bg-engine-endpoint');
     updateEngineStatus('Grandmaster engine endpoint cleared. Verified recommendations are unavailable.','bad');
   });
+  UI.landscapeLayout.addEventListener('change',()=>{landscapeLayout=UI.landscapeLayout.value;localStorage.setItem('bg-landscape-layout',landscapeLayout);applyLandscapeLayout();});UI.showImmersiveControls.addEventListener('change',()=>{showImmersiveControls=UI.showImmersiveControls.checked;localStorage.setItem('bg-show-immersive-controls',showImmersiveControls?'1':'0');applyLandscapeLayout();});UI.pipPresenceMode.addEventListener('change',()=>setPipPresenceMode(UI.pipPresenceMode.value,true));UI.pipShowTutorIndicator.addEventListener('change',()=>{pipShowTutorIndicator=UI.pipShowTutorIndicator.checked;localStorage.setItem('bg-pip-tutor-indicator',pipShowTutorIndicator?'1':'0');updatePipPresenceUI();});UI.immersiveSettingsButton.addEventListener('click',openPipSettings);UI.immersiveMenuButton.addEventListener('click',openGameMenu);UI.immersiveToggleButton.addEventListener('click',toggleImmersivePlay);UI.menuClose.addEventListener('click',closeGameMenu);UI.gameMenuSheet.addEventListener('click',e=>{if(e.target===UI.gameMenuSheet)closeGameMenu();});UI.menuNewGame.addEventListener('click',()=>{closeGameMenu();if(!triggerExistingControl(['newGameBtn','newGame','startNewGame']))newGame();});UI.menuHowToPlay.addEventListener('click',()=>{closeGameMenu();triggerExistingControl(['howToPlayBtn','howToPlay','helpBtn']);});UI.menuCelebrations.addEventListener('click',()=>{closeGameMenu();triggerExistingControl(['celebrationVaultBtn','celebrationVault','openCelebrations']);});UI.menuSurprise.addEventListener('click',()=>{closeGameMenu();triggerExistingControl(['surpriseMeBtn','surpriseMe']);});UI.menuResetRoll.addEventListener('click',()=>{closeGameMenu();if(typeof resetRollPosition==='function')resetRollPosition();else if(UI.resetRollPositionBtn)UI.resetRollPositionBtn.click();});UI.menuResetPip.addEventListener('click',()=>{closeGameMenu();resetPipPosition(true);});window.addEventListener('resize',applyLandscapeLayout);window.addEventListener('orientationchange',()=>setTimeout(applyLandscapeLayout,120));
   UI.computerStrength.addEventListener('change',()=>{
     computerStrength=UI.computerStrength.value;
     localStorage.setItem('bg-computer-strength',computerStrength);
@@ -3631,6 +3649,8 @@ const canvas = document.getElementById('board');
     return greetings[pipSettings.personality]||greetings.friendly;
   }
 
+  function updatePipPresenceUI(){const c=PIP_PRESENCE_MODES[pipPresenceMode]||PIP_PRESENCE_MODES.full;if(UI.pipPresenceMode)UI.pipPresenceMode.value=pipPresenceMode;if(UI.pipPresenceDescription)UI.pipPresenceDescription.textContent=c.description;if(UI.pipShowTutorIndicator)UI.pipShowTutorIndicator.checked=pipShowTutorIndicator;document.body.classList.toggle('pip-silent-coach',pipPresenceMode==='silent');const a=document.getElementById('pipAvatar'),r=document.getElementById('pipReturnButton'),i=document.getElementById('pipTutorIndicator');if(a)a.hidden=!(pipPresenceMode==='full'&&pipSettings.visible&&!pipSettings.dismissed);if(r)r.hidden=!(pipPresenceMode==='full'&&pipSettings.visible&&pipSettings.dismissed);if(i)i.hidden=!(pipPresenceMode==='tutor'&&pipShowTutorIndicator);if(pipPresenceMode==='silent'){clearTimeout(pipSpeechTimer);const s=document.getElementById('pipSpeech');if(s)s.hidden=true;}}
+  function setPipPresenceMode(m,announce=true){pipPresenceMode=PIP_PRESENCE_MODES[m]?m:'full';localStorage.setItem('bg-pip-presence-mode',pipPresenceMode);if(pipPresenceMode==='full'){pipSettings.dismissed=false;localStorage.setItem(PIP_SETTINGS_KEY,JSON.stringify(pipSettings));}updatePipPresenceUI();applyPipSettings();if(announce)setCoach(`Pip presence set to ${PIP_PRESENCE_MODES[pipPresenceMode].label}. ${PIP_PRESENCE_MODES[pipPresenceMode].description}`);}
   function applyPipSettings(){
     const avatar=document.getElementById('pipAvatar');
     if(!avatar)return;
@@ -3640,6 +3660,7 @@ const canvas = document.getElementById('board');
     const returnButton=document.getElementById('pipReturnButton');
     if(returnButton)returnButton.hidden=!pipSettings.visible || !pipSettings.dismissed;
     applySavedPipPosition();
+    updatePipPresenceUI();
     syncPipSettingButtons();
     updateHelpfulMeter();
     configureHelpfulMode();
@@ -3841,6 +3862,11 @@ const canvas = document.getElementById('board');
     event.preventDefault();
   }
 
+  function isPhoneLandscape(){return window.matchMedia('(orientation: landscape) and (max-height: 600px)').matches;}
+  function applyLandscapeLayout(){const auto=landscapeLayout==='auto'&&isPhoneLandscape();document.body.classList.toggle('landscape-auto-immersive',auto&&!immersiveManual);document.body.classList.toggle('immersive-play',immersiveManual);if(UI.landscapeLayout)UI.landscapeLayout.value=landscapeLayout;if(UI.showImmersiveControls)UI.showImmersiveControls.checked=showImmersiveControls;if(UI.immersiveControls)UI.immersiveControls.hidden=!showImmersiveControls;if(UI.immersiveToggleButton)UI.immersiveToggleButton.textContent=(immersiveManual||auto)?'⤢':'⛶';}
+  function toggleImmersivePlay(){immersiveManual=!immersiveManual;localStorage.setItem('bg-immersive-manual',immersiveManual?'1':'0');applyLandscapeLayout();}
+  function openGameMenu(){UI.gameMenuSheet.hidden=false;} function closeGameMenu(){UI.gameMenuSheet.hidden=true;}
+  function triggerExistingControl(ids){for(const id of ids){const e=document.getElementById(id);if(e&&!e.closest('#gameMenuSheet')){e.click();return true;}}return false;}
   function initializePip(){
     document.body.classList.add('game-panel-only-layout');
     loadPipSettings();
