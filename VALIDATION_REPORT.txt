@@ -1,4 +1,4 @@
-Backgammon Coach v2.0.6.1 Pip Settings and Helpful Mode Validation
+Backgammon Coach v2.0.6.1.1.1 Pip Settings and Helpful Mode Validation
 ================================================================================
 PASS — Version updated
 PASS — JavaScript syntax
@@ -41,7 +41,7 @@ PASS — Project file includes playback and local-coach backlogs.
 PASS — Documentation-only update; runtime behavior unchanged.
 
 
-v2.0.6.1 Pip Character Studio Validation
+v2.0.6.1.1.1 Pip Character Studio Validation
 ============================================================
 PASS — Character studio exists
 PASS — Asset catalog exists
@@ -57,7 +57,7 @@ Runtime gameplay changes: none.
 Manual next step: open pip-studio.html and visually review every expression, pose, style, and tone.
 
 
-v2.0.6.1 Pip Character Studio Navigation Validation
+v2.0.6.1.1.1 Pip Character Studio Navigation Validation
 ============================================================
 PASS — Studio button in index
 PASS — Studio target linked
@@ -69,7 +69,7 @@ Automated result: PASS
 Runtime gameplay changes: none.
 
 
-v2.0.6.1 Settings Panel Restructure Validation
+v2.0.6.1.1.1 Settings Panel Restructure Validation
 ====================================================================
 PASS — Version updated
 PASS — Settings App Panels section
@@ -84,7 +84,7 @@ Automated result: PASS
 Manual next step: open index.html and verify only Game is visible before opening Settings.
 
 
-v2.0.6.1 Pip Mobility and Floating Roll Dice Validation
+v2.0.6.1.1.1 Pip Mobility and Floating Roll Dice Validation
 ========================================================================
 PASS — Pip dismiss button
 PASS — Pip return button
@@ -102,7 +102,7 @@ Automated result: PASS
 Manual next step: drag Pip, dismiss and restore him, then drag Roll Dice at desktop and mobile widths.
 
 
-v2.0.6.1 Computer Strength Validation
+v2.0.6.1.1.1 Computer Strength Validation
 ==============================================================
 PASS — Computer settings select
 PASS — Four strength levels
@@ -120,7 +120,7 @@ Automated result: PASS
 Manual next step: play at each level and verify variation, active badge, persistence, and GNU fallback messaging.
 
 
-v2.0.6.1 Validation
+v2.0.6.1.1.1 Validation
 ==================================================
 PASS — version
 PASS — immersive
@@ -133,3 +133,19 @@ PASS — pipdrag
 PASS — rolldrag
 Automated result: PASS
 Manual: test iPhone portrait/landscape and all Pip presence modes.
+
+
+v2.0.6.1.1 Gameplay Startup Repair Validation
+=================================================================
+PASS — JavaScript syntax
+PASS — Broken first-script listener removed
+PASS — Immediate openPipSettings reference removed
+PASS — newGame startup retained
+PASS — Core rules tests retained
+PASS — Feature wiring moved
+PASS — New Game proxy
+PASS — Tutor Pip retained
+PASS — Silent Coach retained
+PASS — Computer levels retained
+Automated result: PASS
+Manual next step: open index.html, roll dice, move a checker, rotate landscape, and test Pip Presence modes.

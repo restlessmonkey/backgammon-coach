@@ -1,5 +1,5 @@
 {
-  "version": "2.0.6.1",
+  "version": "2.0.6.1.1",
   "package_type": "GITHUB_IPHONE_FLAT_UPLOAD",
   "upload_location": "repository root",
   "required_app_files": [
@@ -16,8 +16,8 @@
     "VALIDATION_REPORT.txt",
     "SHA256SUMS.txt"
   ],
-  "created_utc": "2026-07-23T00:13:18.856334+00:00",
-  "package_name": "v2.0.6.1_Backgammon_Coach_iPhone_GitHub_FLAT_IMMERSIVE_PIP_PRESENCE.zip",
+  "created_utc": "2026-07-23T03:16:44.657484+00:00",
+  "package_name": "v2.0.6.1.1_Backgammon_Coach_iPhone_GitHub_FLAT_GAMEPLAY_STARTUP_REPAIR.zip",
   "default_settings": {
     "coaching_enabled": true,
     "explain_every_move": true,
@@ -25,9 +25,11 @@
     "prior_auto_watch_reset_once": true
   },
   "repair": {
-    "reported_issue": "Celebration test button was not visible anywhere in the rendered iPad interface.",
-    "change": "Added a persistent header Celebration button wired to the existing startVictoryCelebration function.",
-    "gameplay_changes": "None"
+    "source_version": "2.0.6.1",
+    "issue": "Gameplay script stopped before newGame()",
+    "root_cause": "Immediate references to functions defined later in a separate script",
+    "resolution": "Moved feature event wiring into initializePip after DOMContentLoaded",
+    "game_rules_changed": false
   },
   "feature_release": {
     "name": "Bowling Alley Celebration",
