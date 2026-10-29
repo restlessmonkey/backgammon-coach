@@ -4057,5 +4057,21 @@ if ('serviceWorker' in navigator) {
 
   document.addEventListener('DOMContentLoaded',initializePip);
 </script>
+
+<details style="max-width:1100px;margin:20px auto;padding:12px 20px;font:12px/1.6 system-ui;color:inherit"><summary style="cursor:pointer">Privacy &amp; site analytics</summary><p>Cloudflare Web Analytics provides aggregate visits and page-performance statistics without analytics cookies or local storage. This site does not send form entries, personal stories, or gameplay as custom analytics events.</p><p>Site analytics update v1.0 · October 29, 2026.</p></details>
+
+<!-- Restless Monkey Cloudflare Web Analytics · v1.0 · 2026-10-29 -->
+<script>
+(function () {
+  if (location.hostname !== "restlessmonkey.github.io" || !location.pathname.startsWith("/backgammon-coach/")) return;
+  if (document.querySelector("script[data-cf-beacon]")) return;
+  var beacon = document.createElement("script");
+  beacon.type = "module";
+  beacon.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  beacon.referrerPolicy = "strict-origin-when-cross-origin";
+  beacon.setAttribute("data-cf-beacon", '{"token":"66b71dd61ca746e39eb13105b9ee21fa","spa":false}');
+  document.body.appendChild(beacon);
+})();
+</script>
 </body>
 </html>
