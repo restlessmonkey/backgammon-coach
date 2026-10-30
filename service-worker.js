@@ -1,4 +1,4 @@
-const CACHE_NAME = 'backgammon-coach-v2-0-6-1-1-analytics-20261029';
+const CACHE_NAME = 'backgammon-coach-v2-0-6-1-1-2-release-20261030';
 const APP_FILES = [
   './',
   './index.html',
